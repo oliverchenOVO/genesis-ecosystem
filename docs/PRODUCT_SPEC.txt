@@ -1,0 +1,4324 @@
+這個專案很適合做成真正的「simulation product」，而且它的亮點不應只是「很多小生物在跑」，而是：
+
+> **每一個物種、每一項性狀、每一次滅絕，都能追溯到真實執行過的遺傳、競爭、環境與繁殖事件。**
+
+我會把它定位成 **Evolution Sandbox × Artificial Life × Interactive Natural History Museum**。
+
+---
+
+# 0. 產品定位
+
+暫定產品名可以先維持：
+
+**AI 生態箱 / Project GENESIS**
+
+產品的核心不是「操控單位」，而是：
+
+> **改變世界 → 形成選擇壓力 → 觀察族群適應 → 產生分化 → 建立演化歷史 → 回頭研究演化原因。**
+
+玩家扮演的更接近：
+
+**生態系統設計者 / 觀察者 / 實驗者。**
+
+不是上帝直接讓某隻動物變快。
+
+玩家只能改環境。
+
+例如：
+
+```text
+Generation 8,100
+平均氣溫：21°C
+主要食物：低矮植物
+
+↓ 玩家讓北方逐漸降溫
+
+Generation 11,400
+北方族群：
+- 體型 +17%
+- 基礎代謝 -8%
+- 視覺半徑 -11%
+- 脂肪儲備 +24%
+
+Generation 12,481
+
+Velocipodus ruber
+          │
+          ├── Southern lineage
+          │
+          └── Velocipodus borealis
+                ↑
+             新物種
+```
+
+重點是這些結果不是腳本。
+
+---
+
+# 1. 核心玩法與最重要差異化
+
+## 核心 gameplay loop
+
+完整循環應該是：
+
+```text
+建立世界
+   ↓
+放入最初生命
+   ↓
+模擬
+   ↓
+觀察
+   ↓
+改變環境
+   ↓
+形成新的 selection pressure
+   ↓
+突變 / 繁殖 / 死亡
+   ↓
+族群性狀改變
+   ↓
+生態位形成
+   ↓
+物種分化 / 滅絕
+   ↓
+查看 Evolution Tree
+   ↓
+分析「為什麼」
+   ↓
+再干預
+```
+
+### 玩家控制
+
+只允許控制環境層：
+
+- 溫度
+- 溫度梯度
+- 水域
+- 山地
+- 平原
+- 森林
+- 土壤
+- 食物密度
+- 食物類型
+- 日照
+- 季節
+- 天敵
+- 疾病
+- 火災
+- 洪水
+- 乾旱
+- 寒潮
+- 火山
+- 隕石等高階災難
+
+### 玩家不能做
+
+不能：
+
+```text
+把 Species A 的 speed 改成 50
+```
+
+不能：
+
+```text
+讓這個物種獲得夜視
+```
+
+不能：
+
+```text
+立即進化
+```
+
+玩家只能創造：
+
+```text
+因為環境變暗
+→ 視覺好的個體平均存活率提高
+→ 經過大量世代
+→ allele frequency 改變
+```
+
+這一點要非常嚴格。
+
+---
+
+# 2. 真正的產品差異化
+
+我會建立五個產品支柱。
+
+## Pillar A — Evolution is real
+
+所有：
+
+- mutation
+- heredity
+- crossover
+- metabolism
+- reproduction
+- survival
+- predation
+- migration
+- genetic drift
+- selection
+
+全部由 simulation 實際計算。
+
+不是：
+
+> AI 說這個動物進化了。
+
+而是：
+
+```text
+Genome
+   ↓
+Phenotype
+   ↓
+Behavior
+   ↓
+Survival / reproduction
+   ↓
+Allele frequency
+   ↓
+Population divergence
+```
+
+---
+
+# Pillar B — Evolution has provenance
+
+這會是專案真正讓人眼前一亮的地方。
+
+點一個物種：
+
+### Velocipodus borealis
+
+可以看到：
+
+```text
+Origin
+Generation 12,481
+
+Ancestor
+Velocipodus minor
+
+Founder population
+214 organisms
+
+Genetic distance from ancestor
+0.184
+
+Primary divergence
+
+Cold tolerance       +31%
+Body mass            +18%
+Energy storage       +24%
+Vision               -12%
+Speed                 -7%
+```
+
+以及：
+
+### Why did this species emerge?
+
+系統用真實數據回答：
+
+```text
+Generation 9,820–12,100
+
+Northern habitat temperature:
+21.2°C → 8.4°C
+
+Individuals carrying allele MTR-41A had:
+
++14.8% winter survival
++9.7% lifetime offspring
+
+Allele frequency:
+4.1% → 73.2%
+```
+
+這不是 LLM 推理世界真相。
+
+這是 simulation telemetry。
+
+---
+
+# Pillar C — Evolution Tree 是核心 UI
+
+不是附加功能。
+
+而是與世界地圖同等重要。
+
+例如：
+
+```text
+Proto Cell
+│
+├── Microvorus
+│    │
+│    ├── Microvorus minor
+│    │
+│    └── Velocipodus
+│           │
+│           ├── V. ruber
+│           │
+│           └── V. borealis
+│
+└── Photovorus
+     │
+     ├── P. alba
+     └── P. giganteus
+```
+
+可以拖動：
+
+```text
+Generation 0
+        ↓
+Generation 50,000
+```
+
+觀察演化樹形成。
+
+甚至可以點已經滅絕的物種。
+
+---
+
+# Pillar D — 生態歷史永遠存在
+
+世界本身要產生類似「地球自然史」。
+
+例如：
+
+```text
+Gen 4,188
+First predatory lineage appears
+
+Gen 7,920
+Great Northern Migration
+
+Gen 12,481
+Velocipodus borealis diverges
+
+Gen 18,204
+First major extinction event
+
+Gen 31,772
+Three independent forms of flight evolve
+```
+
+玩家最後得到的不只是模擬畫面。
+
+而是一個：
+
+**Procedural Natural History。**
+
+---
+
+# Pillar E — Replayable Science
+
+任何有趣結果都要可以：
+
+```text
+Seed: E6C8-92FA
+
+Replay
+```
+
+重新得到一樣的世界。
+
+甚至可以：
+
+```text
+Fork at Generation 10,000
+```
+
+建立：
+
+```text
+World A
+保持正常溫度
+
+World B
+降低 8°C
+```
+
+再比較：
+
+```text
+A:
+17 species
+
+B:
+26 species
+```
+
+這非常有研究感。
+
+---
+
+# 3. 整體系統架構
+
+我建議不要用一個巨大遊戲程式把全部東西揉在一起。
+
+做成：
+
+```text
+┌────────────────────────────┐
+│          Desktop UI         │
+│ React / TypeScript          │
+│                             │
+│ Map / Tree / Charts / UX    │
+└──────────────┬─────────────┘
+               │
+        Snapshot / Commands
+               │
+┌──────────────▼─────────────┐
+│       Application Layer     │
+│                             │
+│ Save / Replay / Experiment  │
+│ Export / Settings           │
+└──────────────┬─────────────┘
+               │
+┌──────────────▼─────────────┐
+│       Simulation Core       │
+│            Rust             │
+│                             │
+│ World                       │
+│ Organism                    │
+│ Genome                      │
+│ Ecology                     │
+│ Evolution                   │
+│ Species                     │
+│ Events                      │
+│ RNG                         │
+└──────────────┬─────────────┘
+               │
+┌──────────────▼─────────────┐
+│ Persistence / Telemetry     │
+│                             │
+│ Save                        │
+│ Checkpoint                  │
+│ Replay                      │
+│ Statistics                  │
+└────────────────────────────┘
+```
+
+再加：
+
+```text
+Optional AI Layer
+```
+
+但它永遠只能讀：
+
+```text
+SimulationSnapshot
+History
+SpeciesRecord
+Telemetry
+```
+
+不能修改 authoritative simulation state。
+
+---
+
+# 4. Simulation architecture
+
+simulation 不應跟 frame rate 綁定。
+
+必須：
+
+```text
+Render FPS
+≠
+Simulation ticks
+```
+
+結構：
+
+```text
+Wall clock
+     │
+     ▼
+SimulationScheduler
+     │
+     ├── tick 10001
+     ├── tick 10002
+     ├── tick 10003
+     └── ...
+```
+
+世界狀態：
+
+```text
+WorldState
+├─ tick
+├─ generation
+├─ environment
+├─ organisms
+├─ resources
+├─ species
+├─ lineages
+├─ events
+└─ rng_state
+```
+
+---
+
+# 5. Tick pipeline
+
+每一 tick 固定順序。
+
+非常重要。
+
+例如：
+
+```text
+1. Environment update
+2. Resource regeneration
+3. Spatial indexing
+4. Perception
+5. Intent calculation
+6. Movement
+7. Feeding
+8. Predation
+9. Combat
+10. Metabolism
+11. Damage
+12. Death
+13. Reproduction
+14. Mutation
+15. Birth
+16. Population statistics
+17. Species detection
+18. Historical events
+19. Telemetry
+```
+
+禁止 subsystem 隨便自己修改其他 subsystem。
+
+最好是：
+
+```text
+read state
+   ↓
+produce intent/event
+   ↓
+resolve
+   ↓
+commit
+```
+
+避免：
+
+```text
+Organism A update()
+  → immediately kills B
+  → B 沒有執行本 tick
+```
+
+造成 iteration-order-dependent simulation。
+
+---
+
+# 6. Genome model
+
+Genome 不應只是：
+
+```json
+{
+  "speed": 10
+}
+```
+
+那只是 RPG stats。
+
+建議：
+
+```text
+Genome
+├─ morphology genes
+├─ metabolism genes
+├─ sensory genes
+├─ locomotion genes
+├─ reproduction genes
+├─ behavior genes
+└─ regulatory genes
+```
+
+初期可以固定長度：
+
+```text
+Genome = 32 loci
+```
+
+每個 locus：
+
+```text
+Gene {
+    allele_a
+    allele_b
+}
+```
+
+Phase 1 暫時甚至可以 haploid / simplified diploid。
+
+但資料格式應允許未來擴充。
+
+---
+
+# 7. Genome → Phenotype
+
+所有 gameplay 性狀從 genome 算出。
+
+例如：
+
+```text
+base_speed =
+locomotion_gene * body_scale_modifier
+
+vision_radius =
+eye_gene *
+light_adaptation *
+energy_modifier
+
+metabolism =
+body_mass *
+activity_level *
+metabolism_gene
+```
+
+重要原則：
+
+> genome ≠ phenotype。
+
+環境也會影響 phenotype。
+
+---
+
+# 8. Phase 1 核心 traits
+
+第一階段不要一開始做 300 genes。
+
+先支援：
+
+```text
+body_size
+speed
+vision
+basal_metabolism
+food_efficiency
+reproduction_threshold
+offspring_count
+mutation_rate
+aggression
+social_affinity
+temperature_optimum
+temperature_tolerance
+energy_storage
+```
+
+約 12–16 個足夠。
+
+---
+
+# 9. 生物資料模型
+
+核心：
+
+```text
+OrganismId
+LineageId
+SpeciesId
+GenomeId
+```
+
+概念模型：
+
+```text
+Organism {
+    id
+    birth_tick
+
+    parent_a
+    parent_b
+
+    genome
+
+    position
+    velocity
+
+    energy
+    health
+
+    age
+
+    phenotype
+
+    species_id
+
+    behavior_state
+}
+```
+
+不要替每個 organism 保存大量字串。
+
+高數量 simulation 必須盡量：
+
+- ID
+- compact structures
+- contiguous memory
+- spatial indexing
+
+---
+
+# 10. Species 不是手動標籤
+
+這很關鍵。
+
+物種要由 simulation 判定。
+
+建議模型：
+
+```text
+Population cluster
++
+genetic distance
++
+gene flow
++
+persistence duration
+```
+
+例如：
+
+```text
+candidate lineage
+
+population >= 50
+
+AND
+
+genetic distance >= threshold
+
+AND
+
+cross-group reproduction
+< threshold
+
+AND
+
+condition persists
+> 500 generations
+
+→ speciation
+```
+
+不要一有 mutation 就：
+
+> New Species!
+
+否則很快會得到幾萬個「物種」。
+
+---
+
+# 11. Lineage ≠ Species
+
+要分開。
+
+```text
+Lineage
+```
+
+代表血統分支。
+
+```text
+Species
+```
+
+代表被正式認定的演化族群。
+
+例如：
+
+```text
+Species A
+
+├─ Lineage A1
+├─ Lineage A2
+└─ Lineage A3
+```
+
+A3 持續分化後：
+
+```text
+Species A
+│
+└── Species B
+```
+
+---
+
+# 12. 物種命名
+
+命名不能依賴 LLM。
+
+必須有 deterministic fallback。
+
+例如：
+
+```text
+genus stem
++
+morphology root
++
+ecological modifier
+```
+
+資料庫：
+
+```text
+velo    speed
+ruber   red
+alba    pale
+minor   small
+major   large
+borealis northern
+silva   forest
+aquaticus water
+```
+
+Seed + lineage ID 決定命名。
+
+例如：
+
+```text
+Velocipodus ruber
+```
+
+名字一旦建立：
+
+**永遠不變。**
+
+LLM 可以額外生成：
+
+```text
+Common name:
+Northern Ember Runner
+
+Description:
+...
+```
+
+但 scientific name 不依賴它。
+
+---
+
+# 13. Deterministic / LLM 邊界
+
+這條線我會畫得非常清楚。
+
+## 100% deterministic
+
+必須 deterministic：
+
+- RNG
+- mutation
+- crossover
+- reproduction
+- movement decisions
+- metabolism
+- death
+- temperature
+- resources
+- disasters
+- combat
+- predation
+- species detection
+- lineage tracking
+- extinction
+- statistics
+- world history
+- scientific name assignment
+- save
+- replay
+- event ordering
+
+---
+
+## 可以使用 LLM
+
+LLM 可以負責：
+
+### Naturalist description
+
+例如：
+
+> *Velocipodus borealis* is a compact cold-adapted descendant...
+
+---
+
+### 「Why did this evolve?」
+
+但不能讓模型自己猜。
+
+先由 simulation 建立：
+
+```json
+{
+  "temperature_change": -11.4,
+  "body_mass_change": 0.18,
+  "allele_survival_advantage": 0.148
+}
+```
+
+再讓 LLM 把數據解釋成人話。
+
+---
+
+### Natural history documentary
+
+例如：
+
+> 第 12,000 世代開始，北方冰原擴張……
+
+---
+
+### Species common names
+
+Scientific name：
+
+deterministic。
+
+Common name：
+
+可以 LLM。
+
+---
+
+### Scientist assistant
+
+玩家可以問：
+
+> 為什麼東岸的生物都變小？
+
+LLM 查 telemetry 再回答。
+
+---
+
+# 14. RNG 設計
+
+不要使用：
+
+```text
+rand()
+```
+
+到處亂抽。
+
+建立：
+
+```text
+SimulationRng
+```
+
+並將 RNG algorithm version 存入 save。
+
+例如：
+
+```text
+seed
+rng_algorithm
+rng_version
+rng_state
+```
+
+甚至更好：
+
+建立 RNG stream：
+
+```text
+WORLD
+MUTATION
+REPRODUCTION
+DISASTER
+RESOURCE
+```
+
+避免某個 UI 功能多呼叫一次 RNG，整個宇宙就完全改變。
+
+---
+
+# 15. 浮點 deterministic 問題
+
+如果你希望：
+
+> Windows A replay = Windows B replay
+
+simulation authoritative state 不應大量依賴 platform-sensitive floating point。
+
+建議核心數值：
+
+```text
+position        fixed point
+energy          integer/fixed
+temperature     fixed
+gene value      integer
+probability     integer range
+```
+
+例如：
+
+```text
+temperature:
+1842
+=
+18.42°C
+```
+
+rendering 才轉：
+
+```text
+f32
+```
+
+這會大幅提高 replay 穩定性。
+
+---
+
+# 16. 地圖 simulation
+
+Phase 1 建議：
+
+```text
+2D continuous world
++
+uniform spatial hash
+```
+
+例如：
+
+```text
+4096 × 4096 simulation units
+```
+
+Spatial Hash：
+
+```text
+cell 0,0
+├ organism 81
+├ organism 912
+└ food 18
+
+cell 0,1
+...
+```
+
+避免：
+
+```text
+每隻生物檢查所有其他生物
+```
+
+從：
+
+```text
+O(N²)
+```
+
+降到接近局部查詢。
+
+這是之後做到數千甚至數萬 organism 的關鍵。
+
+---
+
+# 17. Environment model
+
+世界用 layer 概念：
+
+```text
+TerrainLayer
+TemperatureLayer
+MoistureLayer
+FoodLayer
+HazardLayer
+BiomeLayer
+```
+
+例如：
+
+```text
+WorldCell {
+    elevation
+    temperature
+    moisture
+    fertility
+    food
+}
+```
+
+render 可以把這些 layer 分開開關。
+
+---
+
+# 18. Behavior architecture
+
+不要 Phase 1 就讓每隻生物跑 LLM agent。
+
+那會直接摧毀：
+
+- performance
+- deterministic
+- cost
+- replay
+
+Behavior 應是 utility AI。
+
+例如：
+
+```text
+hungry
+→ seek_food
+
+predator_detected
+→ flee
+
+energy_high
+→ seek_mate
+
+aggression_high
+→ challenge
+```
+
+計分：
+
+```text
+Eat       0.78
+Mate      0.62
+Flee      0.12
+Explore   0.31
+```
+
+取最高 intent。
+
+---
+
+# 19. Reproduction
+
+例如：
+
+```text
+energy >= threshold
+
+age >= maturity
+
+mate compatibility >= threshold
+
+distance <= range
+```
+
+產生 offspring：
+
+```text
+Parent A
+     \
+      crossover
+     /
+Parent B
+
+      ↓
+
+OffspringGenome
+      ↓
+mutation
+```
+
+mutation 至少：
+
+```text
+point mutation
+small additive mutation
+rare major mutation
+```
+
+未來再做：
+
+- duplication
+- deletion
+- regulatory changes
+
+---
+
+# 20. Selection 不需要特殊程式
+
+不要寫：
+
+```text
+if cold:
+   evolve cold resistance
+```
+
+這會是假演化。
+
+應該：
+
+```text
+cold
+↓
+high cold tolerance organism consumes less energy / survives longer
+↓
+has more offspring
+↓
+genes spread
+```
+
+Selection 自然產生。
+
+---
+
+# 21. Evolution event system
+
+核心 event：
+
+```text
+BirthEvent
+DeathEvent
+MutationEvent
+PredationEvent
+MatingEvent
+MigrationEvent
+
+SpeciesCandidateEvent
+SpeciationEvent
+ExtinctionEvent
+
+DisasterEvent
+ClimateEvent
+```
+
+但不能保存每一次 movement。
+
+否則 save 會爆炸。
+
+分：
+
+```text
+Ephemeral events
+
+Historical events
+```
+
+---
+
+# 22. Telemetry
+
+每隔固定 interval：
+
+```text
+PopulationSnapshot
+```
+
+例如每 100 generations：
+
+```text
+species population
+mean body size
+mean speed
+mean vision
+mean metabolism
+genetic diversity
+food abundance
+temperature
+birth rate
+death rate
+```
+
+這些資料支援：
+
+- chart
+- explanation
+- evolution analysis
+- LLM
+- historical timeline
+
+---
+
+# 23. Save architecture
+
+不要只 serialize 整個 process memory。
+
+建議格式：
+
+```text
+SaveManifest
+WorldState
+SpeciesRegistry
+LineageRegistry
+RngState
+History
+Telemetry
+SimulationConfig
+Version
+Checksum
+```
+
+例如：
+
+```text
+save/
+├─ manifest.json
+├─ world.bin.zst
+├─ species.bin
+├─ history.bin
+└─ telemetry.bin.zst
+```
+
+正式版可以包成單一副檔名：
+
+```text
+GenesisWorld.genesis
+```
+
+---
+
+# 24. Replay architecture
+
+我建議 **checkpoint + command log**。
+
+不是記錄每個 organism 每個 frame。
+
+例如：
+
+```text
+Seed
+│
+├ checkpoint 0
+│
+├ command: temperature +3
+│
+├ command: food ×0.8
+│
+├ checkpoint 10000
+│
+├ command: drought
+│
+└ checkpoint 20000
+```
+
+Replay：
+
+```text
+load checkpoint
++
+execute commands deterministically
+```
+
+---
+
+# 25. Replay checksum
+
+每 N ticks 計算：
+
+```text
+WorldHash
+```
+
+例如：
+
+```text
+Tick 1000
+7B2901...
+
+Tick 2000
+A9441D...
+```
+
+Replay 必須完全相同。
+
+這會變成 CI 測試。
+
+---
+
+# 26. Fork experiment
+
+建議未來直接支援：
+
+```text
+World 18342
+Generation 12000
+
+         ┌── Fork A
+─────────┤
+         └── Fork B
+```
+
+這非常有產品價值。
+
+甚至可以：
+
+```text
+Compare Worlds
+```
+
+比較：
+
+- population
+- diversity
+- extinctions
+- species
+- morphology
+
+---
+
+# 27. UI / UX
+
+我不建議工程感 dashboard。
+
+整體應該像：
+
+**現代自然歷史研究站。**
+
+主畫面：
+
+```text
+┌────────────────────────────────────────────────┐
+│ GENESIS     Gen 12,481     ×128    ▶ ❚❚       │
+├────────┬──────────────────────────────┬────────┤
+│        │                              │        │
+│ WORLD  │                              │SPECIES │
+│        │        ECOSYSTEM MAP         │        │
+│Temp    │                              │ V.ruber│
+│Food    │       ○   ·  ●               │ 8,421  │
+│Water   │     ● ○ ○                    │        │
+│Terrain │                              │traits  │
+│        │                              │lineage │
+├────────┴──────────────────────────────┴────────┤
+│ Population │ Diversity │ Temperature │ Events │
+└────────────────────────────────────────────────┘
+```
+
+---
+
+# 28. World rendering
+
+不要每隻生物只是同一個圓點。
+
+即使 Phase 1 仍然可以由 phenotype 控制：
+
+```text
+size
+shape ratio
+body tint
+movement animation
+eye indicator
+predator marker
+```
+
+例如：
+
+大：
+
+```text
+●
+```
+
+小：
+
+```text
+·
+```
+
+快速：
+
+有短 motion trail。
+
+Predator：
+
+不同 body silhouette。
+
+不需要精美 sprite 才能有生命感。
+
+---
+
+# 29. Inspect organism
+
+點任一生物：
+
+```text
+Individual #88421
+
+Species
+Velocipodus minor
+
+Age
+31
+
+Energy
+72%
+
+Parents
+#71044
+#71192
+
+Offspring
+7
+
+Genome
+██████░████░...
+
+Traits
+
+Speed          18.2
+Vision         41.9
+Body size       7.4
+Aggression     63%
+```
+
+再按：
+
+```text
+View ancestry
+```
+
+---
+
+# 30. Species page
+
+這應該非常漂亮。
+
+```text
+Velocipodus borealis
+
+Origin
+Generation 12,481
+
+Status
+Living
+
+Population
+8,271
+
+Ancestor
+Velocipodus minor
+
+──────────────────────
+
+Speed            ↓ 7%
+Body mass       ↑ 18%
+Cold tolerance  ↑ 31%
+
+──────────────────────
+
+Distribution
+[map]
+
+──────────────────────
+
+Population history
+[chart]
+```
+
+---
+
+# 31. Evolution Tree
+
+另一個主要 workspace：
+
+```text
+World | Evolution | History | Analytics
+```
+
+Evolution：
+
+```text
+                         V. borealis
+                       /
+Proto ─── V. minor ───
+                       \
+                         V. ruber
+```
+
+Zoom / pan。
+
+點 branch 顯示：
+
+```text
+split generation
+genetic distance
+population
+major trait changes
+```
+
+---
+
+# 32. Time controls
+
+至少：
+
+```text
+Pause
+
+×1
+×4
+×16
+×64
+×256
+
+MAX
+```
+
+MAX 可以：
+
+不 render organism movement，只跑 simulation。
+
+這是必要功能。
+
+否則幾萬世代會等死人。
+
+---
+
+# 33. MVP / Phase 路線
+
+我會分四層。
+
+---
+
+# MVP — Simulation Proof
+
+目標：
+
+> 證明這真的是演化，不是 scripted animation。
+
+只做 headless + minimal visualization。
+
+包括：
+
+- seeded world
+- genome
+- phenotype
+- metabolism
+- food
+- movement
+- perception
+- death
+- reproduction
+- mutation
+- simple inheritance
+- temperature
+- spatial hash
+- deterministic RNG
+- simulation hash
+- headless benchmark
+
+驗收：
+
+```text
+100 seeds
+×
+50,000 ticks
+
+0 crashes
+0 NaN
+0 invalid organism
+0 negative energy corruption
+```
+
+同 seed：
+
+```text
+hash exactly identical
+```
+
+---
+
+# Phase 1 — First Real Product Slice
+
+這就是我建議現在交給 Codex 的版本。
+
+目標：
+
+> 有一個真的可以打開展示，而且能看到演化發生的 Windows desktop application。
+
+加入：
+
+### Simulation
+
+- genome
+- inheritance
+- mutation
+- environment
+- temperature
+- food
+- herbivore organisms
+- predator organisms
+- metabolism
+- aggression
+- cooperation affinity
+- mating
+- reproduction
+- spatial hash
+- generations
+
+### Evolution
+
+- lineage tracking
+- genetic distance
+- species clustering
+- speciation
+- extinction
+- deterministic Latin-style names
+
+### UX
+
+- ecosystem view
+- organism inspector
+- species inspector
+- environment controls
+- charts
+- event feed
+- timeline
+- basic evolution tree
+
+### Infrastructure
+
+- save
+- load
+- replay
+- deterministic test
+- benchmark
+- Windows build
+- GitHub Actions
+
+---
+
+# Phase 2 — Deep Ecology
+
+把 simulation 做深。
+
+加入：
+
+- aquatic ecosystem
+- plant evolution
+- omnivores
+- scavengers
+- diseases
+- parasites
+- sexual selection
+- camouflage
+- herd behavior
+- pack hunting
+- territory
+- migration
+- seasons
+- day/night
+- multiple food types
+- environmental niches
+
+基因：
+
+- gene duplication
+- dominant/recessive traits
+- regulatory genes
+- structural mutations
+
+演化：
+
+- adaptive radiation
+- convergent evolution tracking
+- mass extinction
+- ecological succession
+
+UX：
+
+- fossil record
+- biome explorer
+- ancestry comparison
+- phenotype comparison
+- historical map
+
+---
+
+# Phase 3 — Natural History Machine
+
+產品完成度階段。
+
+加入：
+
+### AI Naturalist
+
+可以問：
+
+> 為什麼這個物種消失？
+
+> 為什麼飛行出現三次？
+
+AI 根據 deterministic telemetry 回答。
+
+---
+
+### Documentary Mode
+
+自動生成：
+
+```text
+The Age of Giants
+Generation 81,000–123,000
+```
+
+---
+
+### Experiment comparison
+
+```text
+World A / B
+```
+
+---
+
+### Full replay
+
+歷史播放。
+
+---
+
+### Export
+
+- PNG Evolution Tree
+- GIF
+- MP4 timelapse
+- Species card
+- Natural history report
+- JSON/CSV data
+
+---
+
+### Modding
+
+例如：
+
+```toml
+mutation_rate = 0.001
+world_size = 8192
+```
+
+---
+
+# 34. Benchmark 設計
+
+不要只做單元測試。
+
+建立：
+
+```text
+sim-benchmark
+```
+
+標準 scenario：
+
+### Small
+
+```text
+500 organisms
+256 × 256 environment
+10,000 ticks
+```
+
+### Medium
+
+```text
+2,000 organisms
+512 × 512
+50,000 ticks
+```
+
+### Stress
+
+```text
+10,000 organisms
+1024 × 1024
+```
+
+記錄：
+
+```text
+ticks/sec
+organism updates/sec
+peak population
+memory
+species count
+event count
+```
+
+Phase 1 gate 建議：
+
+```text
+100-seed stability benchmark
+
+crash           = 0
+deadlock        = 0
+invalid state   = 0
+replay mismatch = 0
+```
+
+---
+
+# 35. Property testing
+
+非常適合這類系統。
+
+例如：
+
+任何 tick：
+
+```text
+energy >= 0
+```
+
+或者：
+
+```text
+alive organism must have valid species
+```
+
+```text
+parent.birth_tick < child.birth_tick
+```
+
+```text
+species.population ==
+actual member count
+```
+
+```text
+population >= 0
+```
+
+```text
+NaN impossible
+```
+
+```text
+organism ID unique
+```
+
+---
+
+# 36. Golden replay test
+
+例如固定：
+
+```text
+seed 42
+
+ticks 100000
+```
+
+預期：
+
+```text
+hash:
+C4E90D...
+```
+
+CI 每次都跑。
+
+有人修改 simulation：
+
+如果 hash 改變：
+
+CI 會告訴你：
+
+> Simulation behavior changed.
+
+如果是刻意改規則：
+
+更新：
+
+```text
+SIMULATION_SCHEMA_VERSION
+```
+
+與 golden file。
+
+---
+
+# 37. Save versioning
+
+從第一天就加入：
+
+```text
+SAVE_FORMAT_VERSION
+SIMULATION_VERSION
+RNG_VERSION
+```
+
+例如：
+
+```json
+{
+  "save_version": 1,
+  "simulation_version": 3,
+  "rng_version": 1
+}
+```
+
+未來 migration：
+
+```text
+Save v1
+↓
+migration
+↓
+Save v2
+```
+
+不要等 Phase 3 才補。
+
+---
+
+# 38. Crash recovery
+
+正式產品應自動：
+
+```text
+autosave A
+autosave B
+autosave C
+```
+
+輪替。
+
+寫檔流程：
+
+```text
+new.tmp
+
+↓
+
+checksum
+
+↓
+
+atomic rename
+```
+
+避免程式被關掉後世界壞掉。
+
+---
+
+# 39. 技術棧
+
+這個專案我反而不會把 Godot 當第一選擇。
+
+Godot 目前穩定版已到 4.7.2，而 4.8 仍在開發線，因此如果走遊戲引擎路線，應鎖 4.7.2 而不是追 preview。[Godot Engine](https://godotengine.org/download/archive/?utm_source=chatgpt.com)
+
+但這個產品有大量：
+
+- charts
+- tree visualization
+- inspectors
+- data panels
+- timeline
+- experiment UI
+
+它其實很像：
+
+**simulation workstation + animated world。**
+
+所以我的首選是：
+
+## Rust + Tauri + React + TypeScript
+
+### Simulation
+
+```text
+Rust
+```
+
+Rust 在 2026 年 10 月 1 日已發布 stable 1.99.0。[Rust 博客](https://blog.rust-lang.org/2026/10/01/Rust-1.99.0/?utm_source=chatgpt.com)
+
+核心 workspace：
+
+```text
+crates/
+├─ sim-core
+├─ sim-model
+├─ sim-replay
+├─ sim-save
+├─ sim-benchmark
+└─ app-desktop
+```
+
+---
+
+### Desktop
+
+```text
+Tauri 2
+```
+
+目前官方 Tauri 2.12 在 2026 年 9 月 26 日發布，仍是成熟的 2.x desktop 路線，且與 Rust 架構很契合。[Tauri](https://tauri.app/blog/tauri-2.12/?utm_source=chatgpt.com)
+
+優點：
+
+- Windows EXE
+- Rust backend
+- Web UI
+- 小型 desktop shell
+- 好做檔案存取
+- 好做 updater
+- 好做 release packaging
+
+---
+
+### UI
+
+```text
+React
+TypeScript
+Vite
+```
+
+### Simulation render
+
+建議：
+
+```text
+Canvas/WebGL
+```
+
+先不要一開始自己寫完整 WebGPU renderer。
+
+Phase 1 只要做到：
+
+```text
+batched organism rendering
+```
+
+之後 profile 確認需要再升級。
+
+---
+
+### Charts
+
+例如：
+
+```text
+ECharts
+```
+
+或其他成熟 chart library。
+
+---
+
+### Tree
+
+建議自己建立：
+
+```text
+EvolutionTreeModel
+```
+
+render 可以用：
+
+```text
+SVG / Canvas
+```
+
+一開始不要把 lineage model 綁死在某個 visualization library。
+
+---
+
+# 40. 為什麼不是 Electron
+
+Electron 也能做。
+
+但這個產品本身 simulation 就需要 native backend。
+
+Rust 已經存在，所以：
+
+```text
+Tauri + Rust
+```
+
+非常自然。
+
+而不是：
+
+```text
+Electron
++
+Node
++
+native Rust addon
+```
+
+多一層。
+
+---
+
+# 41. 為什麼不是純 Godot
+
+Godot 適合：
+
+- entity-heavy visual game
+- animation
+- physics
+- gameplay
+
+但本產品後期非常重：
+
+- dataset
+- graphs
+- tree
+- dashboards
+- analytics
+- text
+- reports
+
+因此 Web UI ecosystem 更有利。
+
+如果未來我們發現：
+
+> 世界 visualization 已經變成遊戲本體 80%
+
+才值得重新評估 Godot。
+
+---
+
+# 42. Repository
+
+建議：
+
+```text
+ai-ecosystem/
+│
+├─ Cargo.toml
+├─ package.json
+│
+├─ crates/
+│   ├─ sim-core/
+│   ├─ sim-model/
+│   ├─ sim-replay/
+│   ├─ sim-save/
+│   └─ sim-benchmark/
+│
+├─ src/
+│   ├─ app/
+│   ├─ components/
+│   ├─ ecosystem/
+│   ├─ evolution/
+│   ├─ species/
+│   └─ charts/
+│
+├─ src-tauri/
+│
+├─ tests/
+│
+├─ benchmarks/
+│
+├─ fixtures/
+│
+├─ docs/
+│   ├─ ARCHITECTURE.md
+│   ├─ SIMULATION.md
+│   ├─ SAVE_FORMAT.md
+│   ├─ REPLAY.md
+│   └─ PHASE1_REPORT.md
+│
+└─ .github/
+    └─ workflows/
+```
+
+---
+
+# 43. Git 開發流程
+
+私人 GitHub repository：
+
+```text
+main
+```
+
+永遠保持：
+
+```text
+buildable
+tested
+launchable
+```
+
+功能 branch：
+
+```text
+feat/simulation-core
+feat/genome
+feat/reproduction
+feat/speciation
+feat/evolution-tree
+feat/save-replay
+```
+
+不建議累積：
+
+> Phase 1 finished
+
+然後一次 40,000 行 commit。
+
+---
+
+# 44. Commit 原則
+
+例如：
+
+```text
+chore: bootstrap Rust workspace and Tauri shell
+
+feat(sim): add deterministic RNG streams
+
+feat(sim): implement world grid and resources
+
+feat(genome): add inheritable genome representation
+
+feat(sim): implement metabolism and death
+
+feat(evolution): add lineage tracking
+
+feat(evolution): detect persistent species divergence
+
+feat(ui): add ecosystem renderer
+
+feat(ui): add organism inspector
+
+feat(replay): add command log and checkpoints
+
+test(sim): add deterministic golden replays
+
+perf(sim): add spatial hash benchmark
+```
+
+每個 commit：
+
+```text
+build
++
+tests pass
+```
+
+---
+
+# 45. GitHub Actions
+
+至少：
+
+```text
+Rust fmt
+Rust clippy
+Rust tests
+
+TypeScript lint
+TypeScript tests
+frontend build
+
+determinism test
+save/load roundtrip
+
+Windows desktop build
+```
+
+Phase release：
+
+```text
+v0.1.0
+v0.2.0
+...
+```
+
+---
+
+# 46. Phase 1 Done Definition
+
+我會設定下面這些硬 gate。
+
+### Simulation
+
+```text
+✓ genetic inheritance
+✓ mutation
+✓ metabolism
+✓ reproduction
+✓ predation
+✓ environment
+✓ population evolution
+✓ species divergence
+✓ extinction
+```
+
+### Determinism
+
+```text
+✓ same seed
+✓ same commands
+✓ same version
+→ same checkpoint hashes
+```
+
+### Stability
+
+至少：
+
+```text
+100 seeds
+×
+50,000 ticks
+```
+
+不能：
+
+```text
+crash
+panic
+NaN
+deadlock
+invalid lineage
+broken save
+```
+
+### UI
+
+至少有：
+
+```text
+World
+Species
+Evolution
+History
+```
+
+四大 view。
+
+### Persistence
+
+```text
+save
+load
+autosave
+replay
+```
+
+### Distribution
+
+```text
+Windows executable launches
+```
+
+### Repo
+
+```text
+working tree clean
+CI green
+Phase 1 report completed
+```
+
+---
+
+# 47. 一項很重要的產品原則
+
+我會把這條直接寫進 architecture：
+
+> **任何玩家看到的生物學事實，都必須可以由 simulation state 或 simulation history 證明。**
+
+例如 AI 說：
+
+> 「這個物種可能因寒冷而體型變大。」
+
+系統應能指向：
+
+```text
+temperature graph
+allele graph
+survival rate
+body mass trend
+lineage split
+```
+
+這樣它跟一般「AI 自動編故事」產品會完全不同。
+
+---
+
+# 48. Phase 1 Codex 完整開發 Prompt
+
+下面這份可以直接作為新 Codex session 的初始任務。我把架構約束、工作方式、測試 gate、Git 規則與驗收全部一起放進去。
+
+# AI 生態箱 / Project GENESIS — Phase 1 Development
+
+你現在要開始正式開發一個新的 Windows desktop software project。
+
+這不是 prototype、concept demo 或單純視覺模擬。
+
+目標是建立一個可以持續數年迭代的 deterministic artificial-life / evolutionary ecosystem simulation。
+
+---
+
+# 1. Product Concept
+
+專案暫名：
+
+AI 生態箱 / Project GENESIS
+
+核心概念：
+
+玩家不直接控制生物。
+
+玩家只能改變：
+
+- environment
+- terrain
+- temperature
+- food availability
+- predators
+- ecological pressure
+
+生物依靠真正的：
+
+- genome
+- inheritance
+- reproduction
+- mutation
+- metabolism
+- perception
+- movement
+- competition
+- predation
+- survival
+
+自行演化。
+
+系統最終必須能產生真正由 simulation data 支撐的：
+
+- species
+- lineage
+- speciation
+- extinction
+- evolution tree
+- natural history
+
+例如：
+
+Velocipodus borealis
+
+約在 Generation 12,481 從 Velocipodus minor 分化。
+
+這個資訊必須來自 simulation lineage / genome / species system，而不是 LLM 虛構。
+
+---
+
+# 2. Non-Negotiable Principles
+
+以下是架構硬性要求。
+
+## 2.1 Simulation must work without LLM
+
+Simulation core 不得依賴：
+
+- OpenAI
+- Claude
+- Gemini
+- local LLM
+- network
+- external AI API
+
+完全沒有網路時也必須正常 simulation。
+
+Phase 1 不需要實作 LLM。
+
+但 architecture 不得阻止未來加入 optional AI Naturalist。
+
+---
+
+## 2.2 Determinism is a first-class feature
+
+相同：
+
+- simulation version
+- seed
+- configuration
+- command sequence
+
+必須產生相同 simulation checkpoint hashes。
+
+所有 authoritative randomness 必須走統一 deterministic RNG system。
+
+禁止：
+
+- thread_rng
+- Math.random
+- JavaScript randomness
+- uncontrolled system time randomness
+
+進入 simulation truth。
+
+---
+
+## 2.3 Rendering must not affect simulation
+
+Simulation tick 必須與 render frame 完全分離。
+
+UI FPS 改變不能改變 simulation outcome。
+
+Pause / resize / minimize window 不能改變 simulation truth。
+
+---
+
+## 2.4 Simulation truth must be explainable
+
+任何：
+
+- species
+- extinction
+- population change
+- evolutionary trait change
+
+未來都必須可以從：
+
+- genome
+- lineage
+- historical events
+- telemetry
+
+追溯。
+
+不要建立不可解釋的 random scripted evolution。
+
+---
+
+## 2.5 Do not fake completed systems
+
+禁止為了完成畫面：
+
+- 使用假 species
+- hard-code evolution events
+- 使用 mock population history 當正式資料
+- 用 timer 偽造 speciation
+- 用 random name event 偽裝 evolution
+
+Demo UI 所看到的資料必須來自真正 simulation。
+
+Test fixtures 可以存在，但必須明確只存在 tests / fixtures。
+
+---
+
+# 3. Technology Direction
+
+首選 architecture：
+
+Simulation / backend:
+Rust
+
+Desktop:
+Tauri 2.x stable
+
+Frontend:
+React
+TypeScript
+Vite
+
+Rendering:
+Canvas/WebGL 或成熟 lightweight renderer
+
+Charts:
+可使用成熟 chart library
+
+Package manager:
+pnpm 優先
+
+Rust stable toolchain。
+
+Dependency 必須 pin / lock。
+
+必須 commit：
+
+Cargo.lock
+pnpm-lock.yaml
+
+不要採用 alpha / beta / nightly dependency，除非沒有合理替代，而且必須記錄原因。
+
+---
+
+# 4. Repository Architecture
+
+建立類似：
+
+ai-ecosystem/
+├── Cargo.toml
+├── Cargo.lock
+├── package.json
+├── pnpm-lock.yaml
+│
+├── crates/
+│   ├── sim-model/
+│   ├── sim-core/
+│   ├── sim-save/
+│   ├── sim-replay/
+│   └── sim-benchmark/
+│
+├── src/
+│   ├── app/
+│   ├── components/
+│   ├── ecosystem/
+│   ├── evolution/
+│   ├── species/
+│   └── charts/
+│
+├── src-tauri/
+│
+├── tests/
+├── fixtures/
+├── benchmarks/
+│
+├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── SIMULATION.md
+│   ├── DETERMINISM.md
+│   ├── SAVE_FORMAT.md
+│   ├── REPLAY.md
+│   └── PHASE1_REPORT.md
+│
+└── .github/
+    └── workflows/
+
+實際目錄可以在確認 Tauri layout 後合理調整。
+
+但 simulation-core 不得依賴 frontend。
+
+sim-core 必須可以獨立 headless execution。
+
+---
+
+# 5. Authoritative Simulation Numeric Model
+
+Simulation authoritative state 儘可能不要依賴 platform-sensitive floating-point behavior。
+
+優先使用：
+
+- integer
+- scaled integer
+- fixed-point style values
+
+例如：
+
+temperature_raw = 1842
+
+代表：
+
+18.42 °C
+
+rendering / visualization 可以轉成 f32 / f64。
+
+Simulation state 不應依賴 rendering floating point。
+
+---
+
+# 6. IDs
+
+建立強型別 ID，至少包括：
+
+OrganismId
+GenomeId
+SpeciesId
+LineageId
+EventId
+
+不要在 simulation 中大量使用 string ID。
+
+ID 必須 deterministic / monotonic，不得使用 UUID v4 等 nondeterministic ID。
+
+---
+
+# 7. World Model
+
+Phase 1 建立一個 2D ecosystem。
+
+世界至少包含：
+
+WorldState
+Environment
+Resources
+Organisms
+SpeciesRegistry
+LineageRegistry
+History
+SimulationClock
+RngState
+
+Environment 至少包含：
+
+temperature
+fertility
+food_density
+terrain / habitat information
+
+Phase 1 地圖可以先是固定大小，例如：
+
+512 × 512 logical units
+
+但尺寸必須 configurable。
+
+---
+
+# 8. Spatial Index
+
+不要讓 organisms 做全域 O(N²) neighborhood search。
+
+實作：
+
+uniform spatial hash / spatial grid
+
+支援：
+
+- food lookup
+- nearby organisms
+- mate lookup
+- predator/prey lookup
+
+Spatial system 必須有 unit tests。
+
+---
+
+# 9. Simulation Tick Pipeline
+
+建立 deterministic 固定 pipeline。
+
+建議順序：
+
+1. environment update
+2. resource regeneration
+3. rebuild/update spatial index
+4. perception
+5. intent evaluation
+6. movement resolution
+7. feeding
+8. predation/combat
+9. metabolism
+10. health/damage
+11. deaths
+12. mate matching
+13. reproduction
+14. crossover
+15. mutation
+16. births
+17. lineage/population accounting
+18. species detection
+19. historical events
+20. telemetry
+21. checkpoint hash if required
+
+實際順序可以因 implementation 調整。
+
+但：
+
+- 必須明確記錄
+- 必須 deterministic
+- iteration order 不得偷偷影響 outcome
+
+不要讓 entity update() 直接隨機修改整個 world。
+
+優先採用：
+
+read state
+→ generate intent/event
+→ deterministic resolution
+→ commit
+
+---
+
+# 10. Genome
+
+Phase 1 要建立真正 genome。
+
+不要把 genome 寫成直接 phenotype stats。
+
+建立可擴充 genome representation。
+
+至少支援影響：
+
+- body_size
+- speed
+- vision
+- basal_metabolism
+- food_efficiency
+- reproduction_threshold
+- offspring tendency
+- mutation tendency
+- aggression
+- social/cooperation affinity
+- temperature_optimum
+- temperature_tolerance
+- energy_storage
+
+Gene representation 要支援未來：
+
+- diploid
+- dominance
+- gene duplication
+- regulatory genes
+
+Phase 1 可以採 simplified diploid 或明確文件化的簡化模型。
+
+不要 over-engineer。
+
+---
+
+# 11. Genome → Phenotype
+
+Genome 和 Phenotype 必須分開。
+
+建立：
+
+derive_phenotype(genome, context)
+
+或等價 architecture。
+
+Phenotype 至少包含：
+
+body_size
+speed
+vision_range
+metabolic_rate
+food_efficiency
+reproduction_threshold
+aggression
+social_affinity
+temperature_optimum
+temperature_tolerance
+energy_capacity
+
+不要讓 UI 自己解讀 genome。
+
+所有 gameplay calculations 使用 authoritative phenotype。
+
+---
+
+# 12. Organism
+
+Organism 至少包含：
+
+id
+birth_tick
+parent_a
+parent_b
+genome
+position
+energy
+health / alive state
+age
+species_id
+lineage_id
+behavior state
+
+避免在每個 organism 上儲存：
+
+- descriptive strings
+- UI state
+- translated strings
+- narrative text
+
+---
+
+# 13. Metabolism
+
+每個 organism 每 tick 消耗 energy。
+
+消耗至少與：
+
+- basal metabolism
+- body size
+- movement
+- environmental temperature suitability
+
+相關。
+
+食物補充 energy。
+
+energy 不足：
+
+health / survival 受到影響。
+
+死亡必須有明確 DeathCause。
+
+至少：
+
+Starvation
+Age
+Predation
+Environment
+
+---
+
+# 14. Food
+
+建立 resource regeneration。
+
+Phase 1 至少一種植物性 food resource。
+
+不要每份食物建立 heavyweight entity。
+
+可使用 spatial resource field / grid resource quantities。
+
+食物：
+
+- 有 maximum capacity
+- regeneration rate
+- consumption
+- fertility modifier
+
+---
+
+# 15. Behavior
+
+不得使用 LLM。
+
+使用 deterministic Utility AI。
+
+至少支援：
+
+SeekFood
+SeekMate
+Flee
+Hunt
+Explore
+Rest
+
+每個 intent 根據 organism state 與附近 environment 計算 utility score。
+
+tie-break 必須 deterministic。
+
+---
+
+# 16. Predation
+
+Phase 1 應支援 herbivore / predator ecological interaction。
+
+Predatory tendency 由 genome / phenotype / configuration 影響。
+
+不得 hard-code 特定個體永遠是 predator。
+
+如果 Phase 1 genome architecture 暫時需要 dietary phenotype，也可以加入：
+
+dietary_strategy
+
+但要記錄設計理由。
+
+---
+
+# 17. Reproduction
+
+Phase 1 reproduction 必須真正產生 inherited genome。
+
+條件可以包括：
+
+- maturity
+- sufficient energy
+- proximity
+- compatibility
+
+Offspring genome：
+
+parents
+→ crossover/inheritance
+→ mutation
+→ genome
+→ phenotype
+
+Child 必須保存 parent IDs。
+
+parent birth_tick 必須早於 child birth_tick。
+
+---
+
+# 18. Mutation
+
+Phase 1 至少：
+
+small point mutation
+rare larger mutation
+
+Mutation rate configurable。
+
+Mutation RNG 必須走專屬 deterministic RNG stream。
+
+不得：
+
+if environment cold:
+    mutate cold_resistance upward
+
+Environment 不直接指定 mutation 方向。
+
+Selection 必須透過 survival / reproduction 自然形成。
+
+---
+
+# 19. Deterministic RNG
+
+建立 centralized RNG architecture。
+
+至少建立 logical streams：
+
+WORLD
+RESOURCE
+BEHAVIOR
+MATING
+MUTATION
+DISASTER
+
+不要讓一個 subsystem 多抽一次 RNG 導致所有其他 subsystem 的 random sequence 全部偏移。
+
+Save file 必須保存必要 RNG state / stream version。
+
+建立：
+
+RNG_VERSION
+
+未來若演算法改變必須 bump version。
+
+---
+
+# 20. Lineage
+
+Lineage 必須是一級 simulation entity。
+
+每次 population split / reproductive ancestry 至少可以追蹤來源。
+
+建立 LineageRegistry。
+
+至少記錄：
+
+lineage_id
+origin_tick
+ancestor_lineage
+founder information
+population
+genetic centroid / representative genome information
+
+不要等 Phase 2 才加入 lineage。
+
+---
+
+# 21. Species Detection
+
+Phase 1 建立第一版 deterministic species system。
+
+不要：
+
+每個 mutation = species
+
+建議根據：
+
+population clustering
+genetic distance
+gene flow / reproductive compatibility
+minimum population
+minimum persistence duration
+
+產生：
+
+SpeciesCandidate
+
+Candidate 必須持續達到 threshold 一段時間，才正式：
+
+SpeciationEvent
+
+SpeciesRecord 至少包含：
+
+species_id
+scientific_name
+origin_tick
+ancestor_species
+founding_lineage
+status
+extinction_tick optional
+representative genome / trait statistics
+
+Threshold 必須 configurable 並記錄在 SimulationConfig。
+
+---
+
+# 22. Scientific Naming
+
+Phase 1 不允許依賴 LLM 命名。
+
+建立 deterministic naming system。
+
+輸入可包含：
+
+species_id
+lineage characteristics
+seed
+phenotypic characteristics
+
+生成 Latin-style binomial name。
+
+例如：
+
+Velocipodus ruber
+Microvorus minor
+
+名字一旦 assign：
+
+永遠儲存在 SpeciesRecord。
+
+不得因為 population trait 後續改變而重新命名。
+
+避免生成重複名稱。
+
+建立 tests。
+
+---
+
+# 23. Extinction
+
+Species population 變為零並符合 extinction confirmation 規則後：
+
+建立：
+
+ExtinctionEvent
+
+SpeciesRecord status：
+
+Extinct
+
+Evolution tree 中仍永久存在。
+
+---
+
+# 24. History
+
+建立 HistoryEvent。
+
+至少：
+
+Speciation
+Extinction
+PopulationMilestone
+ClimateChange / user environment intervention
+
+History 不需要記錄每次吃東西或每次 movement。
+
+區分：
+
+ephemeral runtime events
+historical events
+
+---
+
+# 25. Telemetry
+
+定期收集 aggregate telemetry。
+
+例如每 N ticks / generations：
+
+WorldTelemetry
+
+至少：
+
+total population
+species count
+food abundance
+average temperature
+birth rate
+death rate
+genetic diversity approximation
+
+每 species：
+
+population
+mean body size
+mean speed
+mean vision
+mean metabolism
+mean temperature tolerance
+
+UI chart 必須使用 simulation telemetry。
+
+禁止 fake chart data。
+
+---
+
+# 26. Environment Commands
+
+UI 不能直接 mutate internal world fields。
+
+建立 explicit command interface。
+
+例如：
+
+SetTemperature
+SetFoodRegeneration
+CreateTemperatureRegion
+TriggerDrought
+
+Command 必須包含：
+
+tick
+type
+payload
+
+Command 必須可被 replay。
+
+Phase 1 UI 至少支援：
+
+temperature control
+food abundance control
+
+如果時間與架構允許，可加簡單 terrain painting。
+
+---
+
+# 27. Save System
+
+建立 versioned save system。
+
+至少包含：
+
+SAVE_FORMAT_VERSION
+SIMULATION_VERSION
+RNG_VERSION
+
+Save data 必須包含：
+
+simulation config
+current tick
+world state
+organisms
+genomes
+species
+lineages
+history
+rng state
+command history / replay metadata
+telemetry where appropriate
+
+可以使用 efficient binary serialization + compression。
+
+不要 JSON dump 整個大型 organism world 當正式方案。
+
+manifest 可以是 human-readable JSON。
+
+---
+
+# 28. Save Safety
+
+寫檔：
+
+temporary file
+→ complete write
+→ checksum
+→ atomic replacement
+
+至少建立：
+
+manual save
+manual load
+
+如果實作成本合理，加入 rotating autosave。
+
+Corrupted save 不得 crash application。
+
+要顯示清楚 error。
+
+---
+
+# 29. Replay
+
+Phase 1 建立：
+
+seed + commands + deterministic simulation
+
+replay mechanism。
+
+不要求錄製每一 frame。
+
+建立：
+
+ReplayHeader
+SimulationConfig
+Seed
+CommandLog
+CheckpointHash
+
+至少可以：
+
+建立 simulation
+執行 scripted commands
+記錄 hashes
+重新執行
+驗證完全一致
+
+---
+
+# 30. World Checksum
+
+建立 canonical simulation hash。
+
+Hash 必須：
+
+- 不包含 UI state
+- 不包含 timestamps
+- 不包含 memory address
+- 不包含 unstable map iteration ordering
+
+Canonicalize authoritative state。
+
+每指定 interval 計算：
+
+WorldHash
+
+用於 golden replay tests。
+
+---
+
+# 31. Headless Simulation
+
+sim-core 必須可以完全沒有 Tauri / browser 執行。
+
+建立 CLI / benchmark runner。
+
+例如：
+
+cargo run -p sim-benchmark -- --seed 42 --ticks 50000
+
+輸出：
+
+seed
+ticks
+elapsed time
+ticks/sec
+peak population
+final population
+species count
+world hash
+
+---
+
+# 32. Benchmarks
+
+建立至少：
+
+Small scenario:
+500 organisms target scale
+10,000 ticks
+
+Medium scenario:
+2,000 organism target scale
+50,000 ticks
+
+不要讓 benchmark 強制預先生成假 organism population；應使用合法 simulation initialization。
+
+記錄 performance。
+
+Phase 1 不要 premature optimization，但任何明顯 O(N²) architecture 必須先處理。
+
+---
+
+# 33. Stress / Seed Testing
+
+建立 automated multi-seed runner。
+
+Phase 1 final gate：
+
+至少 100 seeds。
+
+每 seed 至少足以覆蓋長期 simulation。
+
+理想目標：
+
+50,000 ticks。
+
+如果 CI 時間不合理：
+
+CI 可以跑縮短版；
+完整 benchmark 在 release validation 跑。
+
+必須統計：
+
+panic
+crash
+invalid state
+population corruption
+replay mismatch
+save corruption
+
+全部必須為 0。
+
+---
+
+# 34. Simulation Invariants
+
+建立 runtime debug checks / tests。
+
+至少：
+
+unique organism IDs
+
+alive organism:
+energy valid
+position valid
+genome valid
+
+species population >= 0
+
+lineage exists
+
+parent birth tick < child birth tick
+
+no NaN / infinity in authoritative state
+
+dead organism not updated as alive
+
+all referenced species IDs valid
+
+all referenced parent IDs either historical-valid or explicitly unavailable by retention policy
+
+---
+
+# 35. Unit / Integration / Property Tests
+
+至少：
+
+Genome inheritance tests
+Mutation determinism
+Phenotype derivation
+Metabolism
+Food regeneration
+Spatial hash
+Behavior deterministic tie-break
+Reproduction
+Predation
+Species detection
+Naming uniqueness
+Extinction
+Save/load roundtrip
+Replay equality
+World hash
+Command replay
+
+加入適合的 property testing。
+
+---
+
+# 36. Golden Replay
+
+建立固定 seed fixture。
+
+例如：
+
+Seed 42
+
+執行固定 tick 數與固定 commands。
+
+保存 checkpoint hashes。
+
+CI 中 verify。
+
+Simulation algorithm 被合法修改時：
+
+必須：
+
+- 更新 simulation version
+- 更新 golden fixture
+- 在 changelog / Phase report 記錄原因
+
+不要偷偷更新 golden test 讓它通過。
+
+---
+
+# 37. Desktop UI
+
+Phase 1 必須有完成品感。
+
+不要做成 debug window。
+
+主要導航：
+
+World
+Species
+Evolution
+History
+
+整體視覺：
+
+modern natural-history research station
+
+dark / neutral science interface 可以。
+
+避免：
+
+default browser buttons
+unformatted HTML tables
+raw debug JSON
+engineering-only UI
+
+---
+
+# 38. World View
+
+主畫面顯示：
+
+ecosystem canvas
+
+organisms
+food/resource visualization
+environment visualization
+
+上方：
+
+generation/tick
+population
+species count
+simulation speed
+pause/play
+
+時間：
+
+Pause
+1x
+4x
+16x
+64x
+MAX
+
+MAX mode 可以降低 rendering frequency，讓 simulation 優先跑。
+
+---
+
+# 39. Organism Visualization
+
+不需要 Phase 1 美術 sprite。
+
+但 organisms 不可以全部只是完全相同的 dot。
+
+至少 phenotype 可以影響：
+
+display size
+body proportion / simple shape
+movement impression
+predator/herbivore visual distinction
+
+render traits 只讀 phenotype。
+
+不能反過來影響 simulation。
+
+---
+
+# 40. Organism Inspector
+
+點擊 organism：
+
+顯示：
+
+ID
+species
+age
+energy
+parents
+offspring count if tracked
+lineage
+genome summary
+phenotype traits
+
+至少包括：
+
+speed
+vision
+body size
+metabolism
+aggression
+temperature tolerance
+
+---
+
+# 41. Species View
+
+Species list：
+
+Living / Extinct
+
+Species detail：
+
+scientific name
+origin generation
+ancestor
+population
+trait averages
+distribution summary
+population history
+major trait changes
+
+資料全部來自 simulation。
+
+---
+
+# 42. Evolution View
+
+建立 basic Evolution Tree。
+
+至少顯示：
+
+ancestor → descendant species
+
+node：
+
+species name
+origin generation
+extinct status
+
+支援：
+
+pan
+zoom
+select species
+
+點 species 可開 Species detail。
+
+Phase 1 不要求非常複雜 tree layout。
+
+但資料 model 必須是真實 lineage/speciation data。
+
+---
+
+# 43. History View
+
+Chronological feed：
+
+Generation / Tick
+Speciation
+Extinction
+environment interventions
+important population events
+
+支援點擊 species。
+
+---
+
+# 44. Charts
+
+至少：
+
+total population over time
+species count
+food abundance
+
+Species detail：
+
+population over time
+selected mean traits over time
+
+不得使用 fake series。
+
+---
+
+# 45. Application UX
+
+需要：
+
+New World
+Seed input
+Random Seed button
+Start
+Save
+Load
+Pause
+Speed control
+
+New World config 至少：
+
+seed
+world size preset
+starting population
+mutation rate preset
+
+advanced config 可以隱藏。
+
+---
+
+# 46. Seed UX
+
+畫面必須一直能看到目前 Seed。
+
+可以 Copy Seed。
+
+同 seed + same configuration 必須 reproducible。
+
+---
+
+# 47. Error Handling
+
+不要：
+
+unwrap production file operations
+
+不要：
+
+frontend crash on malformed save
+
+顯示 user-friendly errors。
+
+詳細 technical error 寫 log。
+
+---
+
+# 48. Logging
+
+使用 structured logging。
+
+至少：
+
+app startup
+simulation creation
+save/load
+replay mismatch
+critical invariant violation
+benchmark summary
+
+不要每 tick spam log。
+
+---
+
+# 49. Performance Architecture
+
+Simulation thread / worker 不應 block UI。
+
+Rust simulation 執行 authoritative state。
+
+Frontend 接收：
+
+render snapshot
+
+而不是每 frame serializing 完整 genome/world history。
+
+建立：
+
+SimulationSnapshot
+
+只包含 UI 當下需要的資料。
+
+例如：
+
+organism display positions
+display traits
+basic counters
+
+Inspector / species detail 可以按需 query。
+
+---
+
+# 50. Frontend Boundary
+
+TypeScript 不得成為第二套 simulation。
+
+Frontend 只能：
+
+send commands
+display snapshots
+request detail data
+
+不能計算 authoritative：
+
+species
+mutation
+survival
+speciation
+
+---
+
+# 51. CI
+
+GitHub Actions 至少執行：
+
+cargo fmt check
+cargo clippy
+cargo test
+
+frontend lint
+frontend test
+frontend production build
+
+deterministic replay test
+
+save/load roundtrip
+
+Windows build validation
+
+如果 Windows artifact build 過重，可以 release workflow 完整執行，但 PR/main 至少要有 compile/build gate。
+
+---
+
+# 52. Git Workflow
+
+Repository 必須是 private GitHub repository。
+
+如果目前目錄尚未建立 repository：
+
+初始化 Git。
+
+建立合理 .gitignore。
+
+main branch 永遠保持：
+
+buildable
+testable
+
+不要累積一個巨大 commit。
+
+請分階段提交。
+
+推薦 commit 類型：
+
+chore:
+feat:
+fix:
+test:
+perf:
+docs:
+refactor:
+
+例如：
+
+chore: bootstrap Rust workspace and Tauri application
+
+feat(sim): add deterministic RNG streams
+
+feat(sim): implement environment and food model
+
+feat(genome): add inheritance and mutation
+
+feat(sim): implement metabolism and organism lifecycle
+
+feat(sim): add deterministic utility behavior
+
+feat(sim): implement reproduction and predation
+
+feat(evolution): add lineage registry
+
+feat(evolution): implement species divergence tracking
+
+feat(evolution): add deterministic scientific naming
+
+feat(save): implement versioned save format
+
+feat(replay): add deterministic command replay
+
+feat(ui): build ecosystem world view
+
+feat(ui): add organism and species inspectors
+
+feat(ui): add evolution tree and history
+
+test(sim): add multi-seed stability suite
+
+perf(sim): add simulation benchmarks
+
+docs: complete phase 1 delivery report
+
+不要為了符合這份列表而硬拆不合理 commit；
+但必須保持 commit history 可理解。
+
+---
+
+# 53. GitHub Remote
+
+建立 / 使用私人 GitHub repository。
+
+不要建立 public repository。
+
+Push main 之前：
+
+tests 必須通過。
+
+如果環境沒有 GitHub authorization：
+
+完成所有本機 Git 工作；
+明確報告唯一阻塞點；
+不要假裝 push 成功。
+
+不要把 secrets commit。
+
+---
+
+# 54. Phase 1 Documentation
+
+建立：
+
+docs/ARCHITECTURE.md
+
+說明：
+
+frontend
+application
+simulation
+persistence
+data flow
+
+docs/SIMULATION.md
+
+說明：
+
+tick order
+genome
+phenotype
+metabolism
+behavior
+reproduction
+selection
+species
+
+docs/DETERMINISM.md
+
+說明：
+
+RNG
+fixed/scaled numbers
+iteration ordering
+hashing
+version policy
+
+docs/SAVE_FORMAT.md
+
+docs/REPLAY.md
+
+最後：
+
+docs/PHASE1_REPORT.md
+
+---
+
+# 55. Phase 1 Report
+
+最後報告必須明確列出：
+
+Implemented features
+
+Architecture
+
+Simulation rules
+
+Determinism strategy
+
+Tests
+
+Number of assertions/tests
+
+Seed stress test results
+
+Benchmark results
+
+Replay verification results
+
+Save/load results
+
+Windows build result
+
+Known limitations
+
+Deferred Phase 2 work
+
+Git commit list
+
+Repository state
+
+不要使用模糊：
+
+looks good
+seems stable
+
+要提供實際結果。
+
+---
+
+# 56. Windows Verification
+
+最終目標不是：
+
+cargo test works
+
+而是：
+
+Windows user can launch application.
+
+必須建立 production Windows build。
+
+實際啟動。
+
+至少手動/自動 smoke verify：
+
+New World
+simulation starts
+population moves
+food consumed
+organisms reproduce
+organisms die
+simulation speed changes
+species eventually tracked
+save
+load
+reopen
+continue simulation
+
+---
+
+# 57. Phase 1 Acceptance Gates
+
+以下全部通過才可以宣稱 Phase 1 complete。
+
+## Build
+
+Rust build PASS
+Frontend build PASS
+Tauri Windows build PASS
+
+## Tests
+
+All unit tests PASS
+All integration tests PASS
+Save roundtrip PASS
+Replay determinism PASS
+Golden replay PASS
+
+## Stability
+
+Multi-seed simulation:
+
+crash = 0
+panic = 0
+invalid state = 0
+replay mismatch = 0
+save corruption = 0
+
+## Simulation
+
+Real genome inheritance exists
+Real mutation exists
+Real metabolism exists
+Real reproduction exists
+Real death exists
+Real ecological interaction exists
+Real lineage tracking exists
+Real deterministic species system exists
+Real extinction tracking exists
+
+## UX
+
+World view works
+Organism inspector works
+Species view works
+Evolution tree works
+History works
+Charts use real simulation data
+
+## Persistence
+
+Save works
+Load works
+Seed retained
+Simulation continues correctly
+Replay verification exists
+
+## Distribution
+
+Windows executable/package launches successfully.
+
+## Git
+
+Working tree clean.
+All intended commits created.
+Private GitHub repository updated if authorization is available.
+
+---
+
+# 58. Important Scope Control
+
+Phase 1 should NOT implement:
+
+LLM integration
+cloud accounts
+multiplayer
+mobile
+3D
+complex genetics research simulator
+perfect biological realism
+hundreds of genes
+full disease system
+plant evolution
+aquatic life
+sexual selection
+mod marketplace
+video export
+
+Do not allow Phase 2 features to destabilize Phase 1.
+
+The objective is:
+
+a small but genuinely evolutionary ecosystem
+
+not:
+
+a huge collection of half-working features.
+
+---
+
+# 59. Biological Model Philosophy
+
+This is artificial life inspired by evolution.
+
+Do not claim scientific predictive accuracy.
+
+However, simulation mechanics should respect the fundamental causal chain:
+
+genome
+→ phenotype
+→ behavior / physiology
+→ survival / reproduction
+→ population genetics
+→ divergence
+
+Environment must not directly instruct genes how to mutate.
+
+Evolutionary adaptation must emerge from differential reproductive success.
+
+---
+
+# 60. Development Order
+
+Recommended implementation sequence:
+
+1. repository / toolchain / CI bootstrap
+2. deterministic numeric model
+3. RNG architecture
+4. world/environment
+5. spatial indexing
+6. genome
+7. phenotype
+8. organism lifecycle
+9. metabolism
+10. food/resource
+11. perception/behavior
+12. reproduction
+13. mutation
+14. predation
+15. telemetry
+16. lineage
+17. species detection
+18. species naming
+19. extinction/history
+20. world hashing
+21. save/load
+22. replay
+23. benchmark
+24. Tauri bridge
+25. ecosystem UI
+26. inspectors
+27. species UI
+28. charts
+29. evolution tree
+30. history
+31. UX polish
+32. Windows packaging
+33. stress tests
+34. final validation
+35. documentation
+36. Git clean-up / push / Phase 1 report
+
+Do not build most UI before simulation invariants exist.
+
+---
+
+# 61. Work Autonomously
+
+Do not stop after scaffolding.
+
+Do not ask for confirmation after every subsystem.
+
+Use reasonable engineering judgment.
+
+If a design decision is ambiguous:
+
+choose the option that best preserves:
+
+determinism
+testability
+maintainability
+performance
+clear subsystem boundaries
+
+Document important decisions.
+
+Continue until either:
+
+Phase 1 passes all acceptance gates
+
+or
+
+there is a genuine external blocker that cannot be solved in the local environment.
+
+If blocked, complete every non-blocked item and document the blocker precisely.
+
+---
+
+# 62. Quality Standard
+
+This project should feel like the beginning of a real product.
+
+Do not leave:
+
+placeholder pages
+Lorem Ipsum
+dead buttons
+fake charts
+fake data
+obvious debug controls
+unhandled TODO paths in core workflows
+
+Internal TODO comments are acceptable only for explicitly Phase 2 functionality.
+
+Phase 1 visible flows must be coherent and finished.
+
+---
+
+# 63. Final Deliverable
+
+When complete, provide a concise final summary including:
+
+Phase 1 completion status
+
+Windows executable/package location
+
+Private GitHub repository / branch / commit
+
+total automated tests
+
+multi-seed test result
+
+benchmark summary
+
+golden replay result
+
+save/load result
+
+known limitations
+
+and exact path to:
+
+docs/PHASE1_REPORT.md
+
+Do not claim completion unless the acceptance gates above actually passed.
+
+Begin by inspecting the development environment, initializing the project architecture, documenting the key deterministic simulation decisions, and then implement Phase 1 incrementally with tests and commits.
+
+這份 Prompt 我刻意把 **「畫面完成」和「simulation 完成」分開驗收**。這樣 Codex 比較不會出現「做了一個很漂亮的生態箱，但底下其實只是 random 小球」的情況。
+
+在這個專案裡，我認為最值得死守的三件事是：**determinism、evolution provenance、Evolution Tree**。只要這三個核心做好，Phase 2 後面加入寄生、群獵、遷徙、疾病、性擇、趨同演化時，整個專案會越來越有深度，而不是越來越像功能堆疊。

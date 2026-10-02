@@ -1,0 +1,4 @@
+[http]
+# The local network proxy stalls HTTP/2 streams; HTTP/1.1 retains verified HTTPS.
+multiplexing = false
+timeout = 60
