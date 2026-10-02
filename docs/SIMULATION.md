@@ -1,4 +1,4 @@
-# Simulation version 1
+# Simulation version 2
 
 ## Tick order
 
@@ -22,6 +22,8 @@ Utility order on equal scores: flee, hunt, mate, food, explore, rest. Distance t
 Births require two compatible, mature, nearby, energetic parents. Parents donate one third of energy each; the shared birth budget is divided over offspring. Organisms mature at 60 ticks with an 80-tick mating cooldown; aging depends on a metabolism allele. All parent records remain as compact archival records for provenance. No generation is fabricated from elapsed ticks: each organism stores its actual parental generation.
 
 Resources are a 16-unit grid with maximum 1000 per cell. Predatory dietary alleles (>650) reduce plant-food conversion and enable local hunting. Death causes are recorded as starvation, age, predation, or environment. Population capacity limits births, not survivor counts or telemetry.
+
+Predators hunt below 75% energy capacity. A bite requires proximity, has a 10-tick cooldown, costs 20 energy, and causes damage based on aggression and relative body size. Healthy prey are not killed instantly; fleeing and recovery can prevent death. Only a lethal bite yields prey energy. Simulation v2 corrects the unchecked v1 instant-kill model; v1 saves/replays are rejected explicitly rather than silently producing changed outcomes.
 
 ## Species heuristic
 

@@ -59,6 +59,7 @@ impl World {
                 lineage_id: LineageId(1),
                 offspring: 0,
                 last_mating: 0,
+                last_attack: 0,
                 behavior: Behavior::Explore,
                 genome,
                 phenotype,
@@ -238,7 +239,8 @@ impl World {
                     ));
                 }
                 let hunger = (p.energy_capacity - o.energy) * 1000 / p.energy_capacity;
-                if let Some((_, _, j)) = best_prey {
+                if let Some((_, _, j)) = best_prey.filter(|_| o.energy < p.energy_capacity * 3 / 4)
+                {
                     let t = &s.organisms[j];
                     choices.push((
                         hunger + 300 + p.aggression / 4,
@@ -366,12 +368,22 @@ impl World {
                 }
                 let predator = &s.organisms[i];
                 let prey = &s.organisms[j];
-                if distance_squared(predator.x, predator.y, prey.x, prey.y) <= 64 {
+                if distance_squared(predator.x, predator.y, prey.x, prey.y) <= 64
+                    && s.tick - predator.last_attack >= 10
+                {
                     let gain = prey.energy / 2;
-                    deaths.insert(j, DeathCause::Predation);
-                    s.organisms[i].energy = (s.organisms[i].energy + gain)
-                        .min(s.organisms[i].phenotype.energy_capacity);
-                    s.counters.predations += 1;
+                    let damage = 15
+                        + predator.phenotype.aggression / 40
+                        + (predator.phenotype.body_size - prey.phenotype.body_size).max(0) * 3;
+                    s.organisms[i].energy = (s.organisms[i].energy - 20).max(0);
+                    s.organisms[i].last_attack = s.tick;
+                    s.organisms[j].health -= damage;
+                    if s.organisms[j].health <= 0 {
+                        deaths.insert(j, DeathCause::Predation);
+                        s.organisms[i].energy = (s.organisms[i].energy + gain)
+                            .min(s.organisms[i].phenotype.energy_capacity);
+                        s.counters.predations += 1;
+                    }
                 }
             }
         }
@@ -543,6 +555,7 @@ impl World {
                     lineage_id,
                     offspring: 0,
                     last_mating: s.tick,
+                    last_attack: s.tick,
                     behavior: Behavior::Rest,
                 });
                 s.counters.births += 1;
@@ -1046,6 +1059,8 @@ mod tests {
         w.state.organisms[0].energy = 10;
         w.state.organisms[1].genome.0[13] = 0;
         w.state.organisms[1].phenotype = w.state.organisms[1].genome.phenotype();
+        w.state.organisms[1].health = 20;
+        w.state.tick = 10;
         w.step();
         assert_eq!(w.state.counters.predations, 1);
         assert_eq!(w.state.organisms.len(), 1);
@@ -1053,7 +1068,7 @@ mod tests {
         assert!(w.state.organisms[0].energy > 10);
         assert_eq!(
             w.state.ancestry[&OrganismId(2)].death,
-            Some((1, DeathCause::Predation))
+            Some((11, DeathCause::Predation))
         );
         w.validate().unwrap();
     }
@@ -1115,6 +1130,35 @@ mod tests {
             }
         }
         assert_eq!(w.state.counters.mutations, 0);
+        w.validate().unwrap();
+    }
+
+    #[test]
+    fn healthy_prey_survives_a_bite_and_attacks_have_cost_and_cooldown() {
+        let mut w = World::new(Config {
+            starting_population: 2,
+            ..Config::default()
+        })
+        .unwrap();
+        w.state.tick = 10;
+        for o in &mut w.state.organisms {
+            o.x = 100;
+            o.y = 100;
+            o.genome = Genome([500; LOCI]);
+            o.phenotype = o.genome.phenotype();
+            o.energy = 500;
+        }
+        w.state.organisms[0].genome.0[13] = 900;
+        w.state.organisms[0].phenotype = w.state.organisms[0].genome.phenotype();
+        w.state.organisms[1].genome.0[13] = 0;
+        w.state.organisms[1].phenotype = w.state.organisms[1].genome.phenotype();
+        w.step();
+        assert_eq!(w.state.organisms.len(), 2);
+        assert!(w.state.organisms[1].health < 100);
+        assert!(w.state.organisms[0].energy < 500);
+        assert_eq!(w.state.organisms[0].last_attack, 11);
+        w.step();
+        assert_eq!(w.state.organisms[0].last_attack, 11);
         w.validate().unwrap();
     }
 }

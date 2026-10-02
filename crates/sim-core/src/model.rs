@@ -5,7 +5,7 @@ use crate::{
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-pub const SIMULATION_VERSION: u32 = 1;
+pub const SIMULATION_VERSION: u32 = 2;
 pub const TELEMETRY_INTERVAL: u64 = 100;
 macro_rules! id {
     ($name:ident) => {
@@ -109,6 +109,7 @@ pub struct Organism {
     pub lineage_id: LineageId,
     pub offspring: u32,
     pub last_mating: u64,
+    pub last_attack: u64,
     pub behavior: Behavior,
 }
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
