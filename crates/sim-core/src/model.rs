@@ -5,7 +5,7 @@ use crate::{
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-pub const SIMULATION_VERSION: u32 = 2;
+pub const SIMULATION_VERSION: u32 = 3;
 pub const TELEMETRY_INTERVAL: u64 = 100;
 macro_rules! id {
     ($name:ident) => {

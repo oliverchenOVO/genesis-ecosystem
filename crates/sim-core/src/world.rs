@@ -209,7 +209,7 @@ impl World {
                         best_prey = Some(candidate);
                     }
                     if other.energy >= other.phenotype.reproduction_threshold
-                        && o.genome.distance(&other.genome) <= 220
+                        && o.genome.compatible(&other.genome)
                         && best_mate.is_none_or(|v| candidate < v)
                     {
                         best_mate = Some(candidate);
@@ -347,9 +347,7 @@ impl World {
         for o in &mut s.organisms {
             let cell =
                 &mut s.environment.cells[(o.y / CELL_SIZE * side + o.x / CELL_SIZE) as usize];
-            let efficiency = o.phenotype.food_efficiency
-                * if o.phenotype.carnivory > 650 { 30 } else { 100 }
-                / 100;
+            let efficiency = o.phenotype.food_efficiency * (1000 - o.phenotype.carnivory) / 1000;
             let amount = cell
                 .food
                 .min(15)
@@ -443,7 +441,7 @@ impl World {
                     let b = &s.organisms[*j];
                     eligible(b, s.tick)
                         && distance_squared(a.x, a.y, b.x, b.y) <= 24 * 24
-                        && a.genome.distance(&b.genome) <= 220
+                        && a.genome.compatible(&b.genome)
                 })
                 .min_by_key(|j| {
                     (

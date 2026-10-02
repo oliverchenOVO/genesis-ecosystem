@@ -61,6 +61,15 @@ impl Genome {
             / LOCI as u32
     }
 
+    pub fn compatible(&self, other: &Self) -> bool {
+        self.distance(other) <= 220
+            && self
+                .0
+                .iter()
+                .zip(other.0)
+                .all(|(a, b)| a.abs_diff(b) <= 400)
+    }
+
     pub fn child(
         a: &Self,
         b: &Self,
@@ -124,5 +133,17 @@ mod tests {
         assert_eq!(a.distance(&b), 1000);
         assert!(a.phenotype().body_size < b.phenotype().body_size);
         assert!(b.phenotype().reproduction_threshold < b.phenotype().energy_capacity);
+    }
+
+    #[test]
+    fn mating_requires_both_global_and_per_locus_compatibility() {
+        let a = Genome([500; LOCI]);
+        let mut b = a.clone();
+        b.0[13] = 0;
+        assert!(a.distance(&b) < 220);
+        assert!(!a.compatible(&b));
+        b.0[13] = 200;
+        assert!(a.compatible(&b));
+        assert!(!a.compatible(&Genome([900; LOCI])));
     }
 }
