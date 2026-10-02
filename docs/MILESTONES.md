@@ -20,3 +20,8 @@ Validation: release build, 23 unit + 2 golden/version tests, clippy (warnings de
 
 Mating now requires both mean genetic distance <=220 and every locus distance <=400. Plant conversion scales continuously with inherited carnivory. Added a generic per-locus compatibility regression; preserved v1/v2 fixtures and explicitly reject their versions. Release build, 24 unit + 3 golden tests, clippy and formatting pass. Both v3 seed42 benchmarks still become extinct; results are diagnostic and cannot establish sustained-population performance. Ecological balancing remains a Phase1 acceptance limitation, rather than forcing survival or weakening tests. Normal MSVC installation has now completed.
 
+
+## 4 — Permanent species origin generation and honest workload accounting (simulation v4)
+
+Species now permanently retain the minimum actual parental generation among their founding members. This schema/canonical-state change explicitly bumps simulation version; v1/v2/v3 fixtures remain incompatible historical records. Classifier fixture checks the stored cohort minimum and save roundtrip. Release build, 26 core unit tests, 1 worker integration test and 4 golden/version tests pass. Benchmark records exact occupied ticks and organism-ticks rather than implying every tick carried a large population. Seed42 small: occupied2515/10000; medium: occupied2264/50000. V4 biology is unchanged from v3. The first v4 timings were measured concurrently with the ongoing stress job; final isolated performance will be recorded separately.
+

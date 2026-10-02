@@ -95,6 +95,7 @@ impl World {
                 name: scientific_name(config.seed, 1),
                 ancestor: None,
                 origin_tick: 0,
+                origin_generation: 0,
                 extinct_tick: None,
                 founder: base,
                 founder_population: organisms.len(),
@@ -662,6 +663,11 @@ impl World {
                     name: scientific_name(self.state.config.seed, spid.0),
                     ancestor: Some(line.species_id),
                     origin_tick: self.state.tick,
+                    origin_generation: members
+                        .iter()
+                        .map(|i| self.state.organisms[*i].generation)
+                        .min()
+                        .unwrap_or(0),
                     extinct_tick: None,
                     founder: mean,
                     founder_population: members.len(),
@@ -1036,6 +1042,8 @@ mod tests {
             o.lineage_id = id;
             o.genome = genome.clone();
             o.phenotype = genome.phenotype();
+            // Synthetic classifier fixture: cohorts differ in generation as well as genome.
+            o.generation = 7 + o.id.0;
         }
         w.detect_species();
         assert_eq!(w.state.species.len(), 1);
@@ -1046,6 +1054,9 @@ mod tests {
         w.detect_species();
         assert_eq!(w.state.species.len(), 2);
         assert_eq!(w.state.species[&SpeciesId(2)].ancestor, Some(SpeciesId(1)));
+        assert_eq!(w.state.species[&SpeciesId(2)].origin_generation, 8);
+        let loaded = crate::persistence::decode(&crate::persistence::encode(&w).unwrap()).unwrap();
+        assert_eq!(loaded.state.species[&SpeciesId(2)].origin_generation, 8);
         assert!(matches!(
             w.state.history.last().unwrap().kind,
             HistoryKind::Speciation { .. }

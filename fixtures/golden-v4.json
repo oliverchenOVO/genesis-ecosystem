@@ -1,0 +1,50 @@
+{
+  "simulation_version": 4,
+  "rng_version": 1,
+  "config": {
+    "seed": 42,
+    "size": 512,
+    "starting_population": 50,
+    "population_limit": 300,
+    "mutation_multiplier": 100
+  },
+  "commands": [
+    {
+      "tick": 300,
+      "temperature": 1200,
+      "regeneration": 8
+    },
+    {
+      "tick": 1200,
+      "temperature": 2600,
+      "regeneration": 16
+    }
+  ],
+  "final_tick": 2000,
+  "checkpoints": [
+    {
+      "tick": 0,
+      "hash": "3e332f864f3bbf4aabfa3796161f6db1c121dbf1025c0c97173e4e22c7b14694"
+    },
+    {
+      "tick": 300,
+      "hash": "19b7b603f6b60dca4c45a96577b8367332ea3dd201d5ab67694dd81f3a4a3fe7"
+    },
+    {
+      "tick": 500,
+      "hash": "1361e0e21474d44c2c8e4b0de25ce5feb685f7ee8a903c3786f95ab922e8eac1"
+    },
+    {
+      "tick": 1000,
+      "hash": "338d1bbd15e2c034967372a5f833dd05d7b653ccabb9c9ed260ab59ff6601008"
+    },
+    {
+      "tick": 1200,
+      "hash": "045fd10b036b23950492f0c0300d181db01ecf8796a0b6367d87c402fbf62b60"
+    },
+    {
+      "tick": 2000,
+      "hash": "4bf65a03d68c92490503a287f9226e4bd8f3d90134520e7b493bbface50b2065"
+    }
+  ]
+}

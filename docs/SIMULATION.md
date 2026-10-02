@@ -1,4 +1,4 @@
-# Simulation version 3
+# Simulation version 4
 
 ## Tick order
 
@@ -29,5 +29,6 @@ Predators hunt below 75% energy capacity. A bite requires proximity, has a 10-ti
 
 Lineages are inheritance branches. Children diverging by mean absolute allele distance >=120 from the branch founder join a compatible sibling branch or create one. A branch becomes a species only with >=8 living members, >=100 genetic distance from its species founder, >=8 births, <=20% cross-branch mating, and sustained eligibility for 200 ticks (three 100-tick detection samples). A failed sample resets persistence. This is an explicitly approximate artificial-life classification, not a claim about biological species definitions.
 
-Species retain origin, ancestor, founder genome/population, measured genetic distance, deterministic unique name and extinction tick forever. Telemetry stores actual population, cumulative lifecycle counts, mean traits, distribution bounds and mean distance diversity approximation. No scripted evolution or fake chart data exists.
+Species retain origin tick and minimum actual parental generation among the founding members (origin_generation), ancestor, founder genome/population, measured genetic distance, deterministic unique name and extinction tick forever. Telemetry stores actual population, cumulative lifecycle counts, mean traits, distribution bounds and mean distance diversity approximation. No scripted evolution or fake chart data exists.
+
 

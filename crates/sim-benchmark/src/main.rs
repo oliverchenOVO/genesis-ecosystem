@@ -34,16 +34,22 @@ fn main() -> Result<(), String> {
         ..Config::default()
     })?;
     let start = Instant::now();
-    for _ in 0..ticks / 100 {
-        world.advance(100);
-        world.validate()?;
+    let mut organism_ticks = 0u128;
+    let mut occupied_ticks = 0u64;
+    for tick in 0..ticks {
+        let population = world.state.organisms.len();
+        organism_ticks += population as u128;
+        occupied_ticks += u64::from(population > 0);
+        world.step();
+        if tick % 100 == 99 {
+            world.validate()?;
+        }
     }
-    world.advance(ticks % 100);
     world.validate()?;
     let elapsed = start.elapsed().as_secs_f64();
     println!(
         "{}",
-        serde_json::json!({"seed":seed,"ticks":ticks,"initial_population":population,"elapsed_seconds":elapsed,"ticks_per_second":ticks as f64/elapsed,"peak_population":world.state.counters.peak_population,"final_population":world.state.organisms.len(),"species_count":world.state.species.len(),"births":world.state.counters.births,"deaths":world.state.counters.deaths,"mutations":world.state.counters.mutations,"predations":world.state.counters.predations,"world_hash":world.hash()})
+        serde_json::json!({"seed":seed,"ticks":ticks,"initial_population":population,"elapsed_seconds":elapsed,"ticks_per_second":ticks as f64/elapsed,"occupied_ticks":occupied_ticks,"organism_ticks":organism_ticks.to_string(),"mean_population":organism_ticks as f64/ticks.max(1) as f64,"peak_population":world.state.counters.peak_population,"final_population":world.state.organisms.len(),"species_count":world.state.species.len(),"births":world.state.counters.births,"deaths":world.state.counters.deaths,"mutations":world.state.counters.mutations,"predations":world.state.counters.predations,"world_hash":world.hash()})
     );
     Ok(())
 }
