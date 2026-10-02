@@ -5,3 +5,6 @@ Replay JSON contains simulation/RNG version, full initial configuration (includi
 The desktop can verify its current world by reconstructing from seed and command log. The headless validator verifies golden fixtures, multi-seed save continuation and replay equality. Replay is not a frame recording; no browser timing enters the result. External replay files are versioned and validated, with a 10-million-tick execution bound.
 
 No changes to golden hashes are allowed without a simulation version change and explicit documented algorithm reason.
+
+V4 changes permanent species origin-generation metadata and canonical serialization, retaining its own golden baseline. A final checkpoint at final_tick is mandatory, including tick zero. Earlier version fixtures are preserved and rejected. No fixture is refreshed to mask an assertion failure.
+

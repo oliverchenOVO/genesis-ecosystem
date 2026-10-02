@@ -1,0 +1,12 @@
+{
+  "simulation_version": 4,
+  "seed": "11",
+  "tick": 107504,
+  "generation": 127,
+  "population": 200,
+  "species": 2,
+  "world_hash": "9942ea1d1033f6db883e6830aa5489bf457db646eb3493a8139ffa54f28f659a",
+  "replay_verified": true,
+  "file_sha256": "9C40ACFD67BF3828A08AB930B8D6D03614D530170CBE36B912CAD411BE509041",
+  "source": "Actual UI world: seed11, 50 founders, capacity200, temperature20C, regeneration12; no scripted speciation."
+}

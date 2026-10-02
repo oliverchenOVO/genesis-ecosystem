@@ -6,7 +6,7 @@ Implemented seeded integer simulation, separate genetic/phenotype models, spatia
 
 Validation: 22 core unit tests; Rust release build; clippy with warnings denied; rustfmt. Golden v1 has six checkpoint hashes for seed 42 with two recorded interventions. Browser frontend is being developed separately.
 
-Initial performance measurements (`benchmarks/small.json`, `benchmarks/medium.json`) uncovered excessive predation: seed 42 at 2000 founders becomes extinct, so the large ticks/sec figure mostly measures an empty world. These values are diagnostic, not a claim of sustained-population throughput. Next milestone must fix the ecological attack model, bump simulation version, preserve v1 golden history, add regression coverage, and rerun benchmarks. Phase 1 is not complete at this milestone.
+Initial performance measurements (`benchmarks/v1-small.json`, `benchmarks/v1-medium.json`) uncovered excessive predation: seed 42 at 2000 founders becomes extinct, so the large ticks/sec figure mostly measures an empty world. These values are diagnostic, not a claim of sustained-population throughput. Next milestone must fix the ecological attack model, bump simulation version, preserve v1 golden history, add regression coverage, and rerun benchmarks. Phase 1 is not complete at this milestone.
 
 Local toolchain issue: Windows MSVC installer stalled downloading one CRT archive. Rust 1.99.0 and verified official Microsoft MSVC/SDK package contents were used from ignored `.tools/` to allow independent validation. `scripts/local-toolchain.ps1` activates that local fallback only when present. Normal installed toolchains remain supported. Cargo HTTP multiplexing was disabled because the local network proxy stalled downloads; HTTPS/checksums remain enabled.
 
@@ -24,4 +24,12 @@ Mating now requires both mean genetic distance <=220 and every locus distance <=
 ## 4 — Permanent species origin generation and honest workload accounting (simulation v4)
 
 Species now permanently retain the minimum actual parental generation among their founding members. This schema/canonical-state change explicitly bumps simulation version; v1/v2/v3 fixtures remain incompatible historical records. Classifier fixture checks the stored cohort minimum and save roundtrip. Release build, 26 core unit tests, 1 worker integration test and 4 golden/version tests pass. Benchmark records exact occupied ticks and organism-ticks rather than implying every tick carried a large population. Seed42 small: occupied2515/10000; medium: occupied2264/50000. V4 biology is unchanged from v3. The first v4 timings were measured concurrently with the ongoing stress job; final isolated performance will be recorded separately.
+
+
+
+## 5 — Desktop integration and final Phase1 gates
+
+The real 100-seed/50,000-tick v3 stress revealed stable lower-capacity habitats: all100 remain populated and9 form a second species. The final v4 stress reproduces the same biological counts, with zero failures, binary continuation and replay equality for every seed. The conservative app starter uses50 founders/capacity200; UI capacity remains configurable to5000. This is a parameter preset, not forced survival; 2000-founder benchmarks still use legal initialization and preserve actual extinction outcomes.
+
+Final gates pass: 32 Rust tests,8 frontend tests, release builds, ESLint/tsc/Prettier, clippy/rustfmt, Windows package and native page/worker startup, real-browser four-view flows, natural speciation and environment-driven extinction, three actual autosaves, and107504-tick save/replay hash agreement. A validation script reproduces checked exits and benchmarks. Details, limitations, artifact paths and exact timings are in PHASE1_REPORT.md. No Phase2 work or push.
 

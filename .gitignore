@@ -5,4 +5,5 @@
 /*.genesis
 /*.tmp
 /artifacts/
+/src-tauri/gen/
 *.log
