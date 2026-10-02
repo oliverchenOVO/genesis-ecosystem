@@ -149,6 +149,27 @@ mod tests {
         assert_eq!(load(&path).unwrap().hash(), w.hash());
     }
     #[test]
+    fn future_chronology_and_registry_counters_rejected() {
+        let world = World::new(Config::default()).unwrap();
+        let mut bad = world.clone();
+        bad.state.organisms[0].last_mating = 1;
+        assert!(encode(&bad).is_err());
+        let mut bad = world.clone();
+        bad.state
+            .lineages
+            .values_mut()
+            .next()
+            .unwrap()
+            .candidate_since = Some(1);
+        assert!(encode(&bad).is_err());
+        let mut bad = world.clone();
+        bad.state.next_species = 1;
+        assert!(encode(&bad).is_err());
+        let mut bad = world;
+        bad.state.tick = u64::MAX;
+        assert!(encode(&bad).is_err());
+    }
+    #[test]
     fn invalid_state_rejected_before_writing() {
         let mut w = World::new(Config::default()).unwrap();
         w.state.organisms[0].energy = -1;

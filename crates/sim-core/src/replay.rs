@@ -40,6 +40,13 @@ impl Replay {
         if self.final_tick > 10_000_000 {
             return Err("Replay tick limit exceeded".into());
         }
+        if self
+            .checkpoints
+            .last()
+            .is_none_or(|checkpoint| checkpoint.tick != self.final_tick)
+        {
+            return Err("Replay requires a final checkpoint".into());
+        }
         if self.commands.windows(2).any(|c| c[0].tick > c[1].tick)
             || self.commands.iter().any(|c| c.tick > self.final_tick)
         {
@@ -107,6 +114,16 @@ mod tests {
             Replay::from_world(&world).verify().unwrap().hash(),
             world.hash()
         );
+    }
+    #[test]
+    fn missing_or_incomplete_checkpoint_cannot_claim_verification() {
+        let world = World::new(Config::default()).unwrap();
+        let mut replay = Replay::from_world(&world);
+        replay.checkpoints.clear();
+        assert!(replay.verify().unwrap_err().contains("final checkpoint"));
+        let mut replay = Replay::from_world(&world);
+        replay.final_tick = 1;
+        assert!(replay.verify().unwrap_err().contains("final checkpoint"));
     }
     #[test]
     fn mismatch_and_invalid_order_rejected() {

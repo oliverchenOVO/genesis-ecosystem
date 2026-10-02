@@ -766,6 +766,13 @@ impl World {
     pub fn validate(&self) -> Result<(), String> {
         let s = &self.state;
         s.config.validate()?;
+        if s.tick == u64::MAX
+            || s.next_organism == u64::MAX
+            || s.next_species == u64::MAX
+            || s.next_lineage == u64::MAX
+        {
+            return Err("Exhausted simulation counters".into());
+        }
         if s.environment.cells.len() != (s.config.size / CELL_SIZE).pow(2) as usize {
             return Err("Invalid resource grid".into());
         }
@@ -811,6 +818,8 @@ impl World {
                 || record.birth_tick != o.birth_tick
                 || record.parents != o.parents
                 || o.birth_tick > s.tick
+                || o.last_mating > s.tick
+                || o.last_attack > s.tick
             {
                 return Err("Invalid ancestry".into());
             }
@@ -819,6 +828,12 @@ impl World {
         for (id, record) in &s.ancestry {
             if id.0 >= s.next_organism || record.birth_tick > s.tick {
                 return Err("Invalid historical ID".into());
+            }
+            if record
+                .death
+                .is_some_and(|(tick, _)| tick < record.birth_tick || tick > s.tick)
+            {
+                return Err("Invalid death chronology".into());
             }
             if let Some(parents) = record.parents {
                 for parent in parents {
@@ -831,6 +846,13 @@ impl World {
         }
         for (id, sp) in &s.species {
             if sp.id != *id
+                || id.0 == 0
+                || id.0 >= s.next_species
+                || sp.origin_tick > s.tick
+                || sp
+                    .extinct_tick
+                    .is_some_and(|tick| tick < sp.origin_tick || tick > s.tick)
+                || sp.founder.0.iter().any(|g| *g > 1000)
                 || sp.population != *counts.get(id).unwrap_or(&0)
                 || sp.population > 0 && sp.extinct_tick.is_some()
                 || sp
@@ -842,6 +864,14 @@ impl World {
         }
         for (id, line) in &s.lineages {
             if line.id != *id
+                || id.0 == 0
+                || id.0 >= s.next_lineage
+                || line.origin_tick > s.tick
+                || line
+                    .candidate_since
+                    .is_some_and(|tick| tick < line.origin_tick || tick > s.tick)
+                || line.cross_births > line.births
+                || line.founder.0.iter().any(|g| *g > 1000)
                 || !s.species.contains_key(&line.species_id)
                 || line
                     .parent
