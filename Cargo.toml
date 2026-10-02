@@ -1,5 +1,5 @@
 [workspace]
-members = ["crates/sim-core", "crates/sim-benchmark"]
+members = ["crates/sim-core", "crates/sim-benchmark", "crates/sim-app", "crates/sim-server", "src-tauri"]
 resolver = "2"
 
 [workspace.package]
