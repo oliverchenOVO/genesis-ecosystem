@@ -1,0 +1,67 @@
+{
+  "final_run": {
+    "starting_population": 50,
+    "regeneration": 4,
+    "seeds": "0-99",
+    "temperature": 2000,
+    "workers": 8,
+    "size": 512,
+    "ticks": 100000,
+    "limit": 2000,
+    "mutation": 100
+  },
+  "hashes": [
+    {
+      "sha256": "0C9C6825EA7C22E523C70ED6BE1E44FDCFEED7B1A2EDBB891BBB2B23711F09F0",
+      "path": "crates/sim-core/src/genetics.rs"
+    },
+    {
+      "sha256": "B783F4DE40CEC75B4826886DCB64018B472EC0875336C7B08887E29926F9E125",
+      "path": "crates/sim-core/src/morphology.rs"
+    },
+    {
+      "sha256": "7B7708E74099FD25C1623ECC0D889A02B59F3BF040234E7EBBEFA40C24BFF93B",
+      "path": "crates/sim-core/src/world.rs"
+    },
+    {
+      "sha256": "1DAA50F345C678C2DC8B7F4573CD3592FDD8CAFE074A8A16B62548CEAFF03B83",
+      "path": "crates/sim-core/src/analysis.rs"
+    },
+    {
+      "sha256": "BACF141BD813A7141D5B09F50F37F50FF0CF67CF9A801172E7BE3D529B598A83",
+      "path": "crates/sim-core/src/viability.rs"
+    },
+    {
+      "sha256": "999C53E3FA3401DA2DFF65188468AE1F95FBE68C78DDA22F1CED0AB6F06D97CF",
+      "path": "crates/sim-core/src/persistence.rs"
+    },
+    {
+      "sha256": "BC200FA7EBB20C869FA1B9FF0BFDFF025C9FDD8EA15FC84984B5B26C1C6B66D3",
+      "path": "crates/sim-core/src/replay.rs"
+    },
+    {
+      "sha256": "BAC0C46CC3B26D68721AA83FEBC18C61798C870AA8FEE0D8B45D349ED1B3F0C7",
+      "path": "crates/sim-benchmark/src/calibration.rs"
+    },
+    {
+      "sha256": "94A7BD7DC164D1C11E3A7CF905FEC585CCEA723876FF4B8F95BE66D739989A97",
+      "path": "fixtures/golden-v5.json"
+    },
+    {
+      "sha256": "E5CF59AF15E24E58FCC3DC0C8C7E77F6C7B13C2C9233D51C3283B00C42AFDF91",
+      "path": "artifacts/phase2-r2-calibration.exe"
+    },
+    {
+      "sha256": "63B913E80A964D2E5D7CCA3339AE0102CB38C86BB7B861B32691A070FF2D22DA",
+      "path": "target/release/sim-benchmark.exe"
+    }
+  ],
+  "source_commit": "57704c3d62cc67d8259ac1cef6d7f1f531742c29",
+  "simulation_version": 5,
+  "analysis_version": 4,
+  "notes": "Calibration executable is a frozen viability-feature copy outside cargo target. Normal desktop/performance executable excludes observer. Independent D checkpoints and first8 long hashes match; source rules remain frozen.",
+  "rng_version": 1,
+  "save_envelope": 1,
+  "rules_revision": 2,
+  "diagnostic_version": 4
+}

@@ -37,3 +37,5 @@ Final bounded comparison: phase2-dense-high-mutation.json/jsonl, seeds0–3×500
 ## Revision2 finalization checkpoint
 
 The earlier final100-seed evidence above is revision1 and remains unchanged. Bounded causal tuning and the selected revision2 candidate are documented in PHASE2_FINALIZATION.md. The new100*100000 run uses the same seeds0-99,50 founders,512 world,2000 ceiling,mutation100,20C/regen4; its output is separate phase2-final-calibration-v2, with analysis4/diagnostic4. No partial progress is presented as a final100-seed result. Performance must be rerun sequentially after this calibration completes.
+
+Revision2 complex showcase is now replay/continuation verified: examples/phase2-r2-seed7-tick40000.genesis, with actual multi-unit cohort262/703 and high-C lineage17 maintaining its unchanged sampled1000-tick criterion in a cloned continuation. It still has only one morphology/niche cluster and no predator-like population. See PHASE2_FINALIZATION.md and phase2-r2-showcase*. This is headless evidence, not native UAT or complete ecological acceptance.

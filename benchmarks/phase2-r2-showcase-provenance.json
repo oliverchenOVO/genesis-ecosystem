@@ -1,0 +1,12 @@
+{
+  "sha256": "F5C5A91AF0B3735F94A6E45C569BD963E20D11FB7F517FAE70F0E9DB94B2713C",
+  "analysis_version": 4,
+  "method": "Actual default ecology from seed, full replay and1000-tick continuation; independent inspector advances a clone and leaves the original save unchanged.",
+  "tick": 40000,
+  "source_code_commit": "57704c3d62cc67d8259ac1cef6d7f1f531742c29",
+  "path": "examples/phase2-r2-seed7-tick40000.genesis",
+  "seed": 7,
+  "inspector": "Recreate artifacts/showcase-inspector/{Cargo.toml,Cargo.lock,src/main.rs} from the three retained showcase-inspector files; cargo run --release --locked --manifest-path artifacts/showcase-inspector/Cargo.toml -- examples/phase2-r2-seed7-tick40000.genesis. Inspector dependencies are locked separately; resulting source and continuation hashes independently match the authoritative CLI.",
+  "simulation_version": 5,
+  "rules_revision": 2
+}

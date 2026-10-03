@@ -1,0 +1,12 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "48C910760397B8F0969BC78FA8199F7B99B72AB383F9D1A7F6273BCC723392FE",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\target\\phase2-r2-review\\release\\genesis-desktop.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "C0D15122019B63C587D28A0FC2878E90BEADA806EE8DC1526FD4EE237401EFFF",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\target\\phase2-r2-review\\release\\bundle\\nsis\\GENESIS_0.2.0_x64-setup.exe"
+  }
+]

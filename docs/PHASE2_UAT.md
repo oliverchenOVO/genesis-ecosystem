@@ -24,3 +24,5 @@ These final review binaries have not been controlled/launched for UAT after the 
 ## Rules revision2 pending native acceptance
 
 Old revision1 UAT above remains historical development evidence. Revision2 final-build UAT, five repeated restarts, save/load/continue/replay, legacy-v4 UX, MAX, resizing and dirty guards remain unverified. The finalization instruction orders native UAT after biological acceptance. Headless tests and packaging do not satisfy native gates. No revision2 native success is claimed while the formal biological results are pending.
+
+Revision2 production EXE/NSIS local builds have passed in the independent target/phase2-r2-review folder; hashes are in benchmarks/phase2-r2-production-hashes.json. Neither final-build native UAT nor interactive installer UAT has been performed. Biological differentiation gates still precede native acceptance. No native restart/save/load/replay or legacy UX result is inferred from these builds.
