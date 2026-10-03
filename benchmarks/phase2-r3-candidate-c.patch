@@ -1,0 +1,154 @@
+diff --git a/crates/sim-core/src/analysis.rs b/crates/sim-core/src/analysis.rs
+index 8e24f3b..ac9151b 100644
+--- a/crates/sim-core/src/analysis.rs
++++ b/crates/sim-core/src/analysis.rs
+@@ -1,7 +1,7 @@
+ //! Read-only, fixed-point species distances. Never consumes RNG or changes a world.
+ use crate::World;
+ use serde::Serialize;
+-pub const ANALYSIS_VERSION: u32 = 4;
++pub const ANALYSIS_VERSION: u32 = 5;
+ pub fn morphology_profile(m: [i32; 9]) -> [i32; 9] {
+     [
+         m[0] / 5,
+diff --git a/crates/sim-core/src/model.rs b/crates/sim-core/src/model.rs
+index 9f9d5f1..6ca7fd5 100644
+--- a/crates/sim-core/src/model.rs
++++ b/crates/sim-core/src/model.rs
+@@ -7,7 +7,7 @@ use std::collections::BTreeMap;
+ 
+ pub const SIMULATION_VERSION: u32 = 5;
+ /// Unreleased v5 revisions are isolated; published v4 remains immutable.
+-pub const SIMULATION_RULES_REVISION: u32 = 2;
++pub const SIMULATION_RULES_REVISION: u32 = 3;
+ pub const TELEMETRY_INTERVAL: u64 = 100;
+ macro_rules! id {
+     ($name:ident) => {
+diff --git a/crates/sim-core/src/persistence.rs b/crates/sim-core/src/persistence.rs
+index c217434..f256e87 100644
+--- a/crates/sim-core/src/persistence.rs
++++ b/crates/sim-core/src/persistence.rs
+@@ -15,7 +15,7 @@ pub const MAX_SAVE_BYTES: u64 = 128 * 1024 * 1024;
+ const MAGIC: &[u8; 8] = b"GENESIS1";
+ const HEADER: usize = 60;
+ // This cannot alias an old valid State: its bytes8..12 are not a valid world size.
+-const PAYLOAD_TAG: &[u8; 16] = b"GENESIS5RULES002";
++const PAYLOAD_TAG: &[u8; 16] = b"GENESIS5R3PROBEC";
+ 
+ pub fn encode(world: &World) -> Result<Vec<u8>, String> {
+     world.validate()?;
+@@ -73,7 +73,10 @@ pub fn decode(bytes: &[u8]) -> Result<World, String> {
+     if raw.len() as u64 != expected_len || blake3::hash(&raw).as_bytes() != &bytes[28..60] {
+         return Err("Save checksum or size mismatch".into());
+     }
+-    let payload = raw.strip_prefix(PAYLOAD_TAG).ok_or("Incompatible prerelease simulation v5 rules revision1 save. Use the preserved pre-final GENESIS build (phase2/pre-finalization-a3d8cc0); revision2 does not silently migrate earlier v5 worlds.")?;
++    let payload = raw.strip_prefix(PAYLOAD_TAG).ok_or_else(|| {
++        let revision=if raw.starts_with(b"GENESIS5RULES002") {2} else {1};
++        format!("Incompatible prerelease simulation v5 rules revision{revision} save. Use its preserved R2 or pre-final GENESIS build; revision3 candidate C does not migrate earlier worlds or other candidates.")
++    })?;
+     let state: State = bincode::DefaultOptions::new()
+         .with_fixint_encoding()
+         .with_limit(MAX_SAVE_BYTES)
+@@ -117,6 +120,14 @@ mod tests {
+     use super::*;
+     use crate::Config;
+     #[test]
++    fn real_revision2_save_cannot_be_reinterpreted() {
++        let error = decode(include_bytes!(
++            "../../../examples/phase2-r2-seed7-tick40000.genesis"
++        ))
++        .unwrap_err();
++        assert!(error.contains("revision2") && error.contains("revision3"));
++    }
++    #[test]
+     fn actual_baseline_save_has_clear_non_migrating_rejection() {
+         let bytes = include_bytes!("../../../examples/seed11-107504.genesis");
+         let error = decode(bytes).unwrap_err();
+diff --git a/crates/sim-core/src/spatial.rs b/crates/sim-core/src/spatial.rs
+index 12fb8d9..4965b11 100644
+--- a/crates/sim-core/src/spatial.rs
++++ b/crates/sim-core/src/spatial.rs
+@@ -38,6 +38,36 @@ pub fn distance_squared(ax: i32, ay: i32, bx: i32, by: i32) -> i32 {
+ mod tests {
+     use super::*;
+     #[test]
++    fn local_mating_queries_match_distance_oracle_at_cell_and_world_edges() {
++        let w = crate::World::new(crate::Config {
++            starting_population: 200,
++            ..crate::Config::default()
++        })
++        .unwrap();
++        let grid = Spatial::new(w.state.config.size, &w.state.organisms);
++        for (x, y) in [(0, 0), (15, 16), (256, 256), (511, 511)] {
++            for radius in [16, 24] {
++                let mut indexed = grid
++                    .nearby(x, y, radius)
++                    .filter(|i| {
++                        distance_squared(x, y, w.state.organisms[*i].x, w.state.organisms[*i].y)
++                            <= radius * radius
++                    })
++                    .collect::<Vec<_>>();
++                indexed.sort_unstable();
++                let oracle = w
++                    .state
++                    .organisms
++                    .iter()
++                    .enumerate()
++                    .filter(|(_, o)| distance_squared(x, y, o.x, o.y) <= radius * radius)
++                    .map(|(i, _)| i)
++                    .collect::<Vec<_>>();
++                assert_eq!(indexed, oracle);
++            }
++        }
++    }
++    #[test]
+     fn grid_edges_and_local_lookup() {
+         let mut grid = Spatial::new(256, &[]);
+         grid.buckets[0].push(1);
+diff --git a/crates/sim-core/src/world.rs b/crates/sim-core/src/world.rs
+index 83367fc..29b0020 100644
+--- a/crates/sim-core/src/world.rs
++++ b/crates/sim-core/src/world.rs
+@@ -599,12 +599,12 @@ impl World {
+                 continue;
+             }
+             let mate = mating_spatial
+-                .nearby(a.x, a.y, 24)
++                .nearby(a.x, a.y, 16)
+                 .filter(|j| *j != i && !deaths.contains_key(j) && !paired.contains(j))
+                 .filter(|j| {
+                     let b = &s.organisms[*j];
+                     eligible(b, s.tick)
+-                        && distance_squared(a.x, a.y, b.x, b.y) <= 24 * 24
++                        && distance_squared(a.x, a.y, b.x, b.y) <= 16 * 16
+                         && a.genome.compatible(&b.genome)
+                 })
+                 .min_by_key(|j| {
+@@ -616,12 +616,12 @@ impl World {
+             #[cfg(feature = "viability")]
+             {
+                 let mut candidates = [0; 9];
+-                for j in mating_spatial.nearby(a.x, a.y, 24) {
++                for j in mating_spatial.nearby(a.x, a.y, 16) {
+                     let b = &s.organisms[j];
+                     if j == i
+                         || deaths.contains_key(&j)
+                         || paired.contains(&j)
+-                        || distance_squared(a.x, a.y, b.x, b.y) > 24 * 24
++                        || distance_squared(a.x, a.y, b.x, b.y) > 16 * 16
+                     {
+                         continue;
+                     }
+diff --git a/scripts/summarize-ecological-diagnostics.mjs b/scripts/summarize-ecological-diagnostics.mjs
+index 96f09fe..d8b41be 100644
+--- a/scripts/summarize-ecological-diagnostics.mjs
++++ b/scripts/summarize-ecological-diagnostics.mjs
+@@ -10,7 +10,7 @@ export function summarizeEcology(run) {
+   if (run.failures !== 0 || run.results.length !== run.seeds || new Set(run.results.map(r=>r.seed)).size !== run.seeds) throw Error('Incomplete ecological run')
+   const mouths = Array.from({length:3},(_,mouth)=>({mouth,food_events:0,prey_events:0,food_energy:0,prey_energy:0,hardness:0,productivity:0,starvation_deaths:0,offspring:0,organism_ticks:0,channels:[0,0,0]}))
+   const worlds = run.results.map(r => {
+-    if (r.ticks !== run.ticks_per_seed || !r.phase2.save_load_replay_verified || ![1,2,3].includes(r.phase2.viability.ecology.version)) throw Error('Unverified ecological result')
++    if (r.ticks !== run.ticks_per_seed || !r.phase2.save_load_replay_verified || ![1,2,3,4].includes(r.phase2.viability.ecology.version)) throw Error('Unverified ecological result')
+     const e = r.phase2.viability.ecology, m = e.mating
+     if (m.lineage_edges.reduce((n,v)=>n+v.count,0) !== 2*m.pairs || m.child_edges.reduce((n,v)=>n+v.count,0) !== 2*r.births) throw Error('Mating event ledger mismatch')
+     if (e.version >= 2) {

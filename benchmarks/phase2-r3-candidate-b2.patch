@@ -1,0 +1,438 @@
+diff --git a/crates/sim-benchmark/src/calibration.rs b/crates/sim-benchmark/src/calibration.rs
+index fe708f8..3de5f2e 100644
+--- a/crates/sim-benchmark/src/calibration.rs
++++ b/crates/sim-benchmark/src/calibration.rs
+@@ -112,7 +112,7 @@ impl Measurements {
+             s.environment
+                 .cells
+                 .iter()
+-                .map(|c| f64::from(c.food))
++                .map(|c| f64::from(c.total_food()))
+                 .sum::<f64>()
+                 / s.environment.cells.len() as f64,
+         );
+diff --git a/crates/sim-core/src/analysis.rs b/crates/sim-core/src/analysis.rs
+index 8e24f3b..ac9151b 100644
+--- a/crates/sim-core/src/analysis.rs
++++ b/crates/sim-core/src/analysis.rs
+@@ -1,7 +1,7 @@
+ //! Read-only, fixed-point species distances. Never consumes RNG or changes a world.
+ use crate::World;
+ use serde::Serialize;
+-pub const ANALYSIS_VERSION: u32 = 4;
++pub const ANALYSIS_VERSION: u32 = 5;
+ pub fn morphology_profile(m: [i32; 9]) -> [i32; 9] {
+     [
+         m[0] / 5,
+diff --git a/crates/sim-core/src/ecological_diagnostics.rs b/crates/sim-core/src/ecological_diagnostics.rs
+index 34a62ce..6226e6b 100644
+--- a/crates/sim-core/src/ecological_diagnostics.rs
++++ b/crates/sim-core/src/ecological_diagnostics.rs
+@@ -190,6 +190,7 @@ pub fn feeding(
+     units: i32,
+     energy: i32,
+     prey_mass: i32,
++    hardness: i32,
+ ) {
+     if energy <= 0 {
+         return;
+@@ -219,8 +220,8 @@ pub fn feeding(
+                 f.food_events += 1;
+                 f.food_energy += energy as u64;
+                 f.units += units as u64;
+-                f.hardness += terrain.elevation as u64;
+-                f.hardness_bins[(terrain.elevation / 100).clamp(0, 9) as usize] += 1;
++                f.hardness += hardness as u64;
++                f.hardness_bins[(hardness / 100).clamp(0, 9) as usize] += 1;
+             }
+         }
+     });
+@@ -430,11 +431,11 @@ pub fn finish() -> serde_json::Value {
+             .map(|((a, b), n)| serde_json::json!({"a":a,"b":b,"count":n}))
+             .collect::<Vec<_>>()
+     };
+-    serde_json::json!({"version":3,"requested_hunting_movement_by_mouth":c.requested_hunting_movement_by_mouth,"requested_hunting_movement_by_lineage":c.requested_hunting_movement_by_lineage,"windows_5000_ticks":c.windows,"samples":c.samples,"lineages":exposure(&c.lineages),"species":exposure(&c.species),"mouth_budgets":c.mouth_budgets,"lineage_budgets":c.lineage_budgets,"gene_flow_matrix":matrix,
++    serde_json::json!({"version":4,"channel_names":["soft","hard","prey"],"requested_hunting_movement_by_mouth":c.requested_hunting_movement_by_mouth,"requested_hunting_movement_by_lineage":c.requested_hunting_movement_by_lineage,"windows_5000_ticks":c.windows,"samples":c.samples,"lineages":exposure(&c.lineages),"species":exposure(&c.species),"mouth_budgets":c.mouth_budgets,"lineage_budgets":c.lineage_budgets,"gene_flow_matrix":matrix,
+         "feeding":c.feeding.iter().map(|((lineage,species,mouth),f)| serde_json::json!({"lineage":lineage,"species":species,"mouth":mouth,"totals":f})).collect::<Vec<_>>(),
+         "mating":{"pairs":c.mating.pairs,"cross_lineage":c.mating.cross_lineage,"cross_species":c.mating.cross_species,"cross_habitat":c.mating.cross_habitat,"cross_mouth":c.mating.cross_mouth,"genetic_distance_sum":c.mating.genetic_distance_sum,"distance":distances(&c.mating.distance),"lineage_edges":edges(&c.mating.lineage_edges),"child_edges":edges(&c.mating.child_edges)},
+         "major_persistent_lineages":major.iter().map(|(id,_)| **id).collect::<Vec<_>>(),"overlap":overlaps,
+-        "definitions":"100-tick occupancy samples plus tick zero; 8x8 spatial regions; habitat bits elevation>=500/moisture>=500/fertility>=100 (R2 fertility range60..140). Productivity bins width20; hardness and prey mass bins width100, clipped to bin9. Persistence >=8 sampled residents for >=1000 ticks. Top16 persistent lineages by exposure then ID. Histogram intersection sum(min(normalized bins)); integer floor Euclidean distance in world units; nearest-rank p90. Origins retained only while alive; habitat switches sampled (lower bound); parent habitat means birth parent A cell. Feeding events require positive credited energy; channels 0=R2 shared environmental pool, 1=reserved hard, 2=prey. Matings counted once per successful pair; symmetric parent edges total twice pairs; child edges twice births. Temporal windows ticks1..5000 etc (tick-zero occupancy in first). No event archive or world mutations."})
++        "definitions":"100-tick occupancy samples plus tick zero; 8x8 spatial regions; habitat bits elevation>=500/moisture>=500/fertility>=100 (fertility range60..140). Productivity bins width20; hardness and prey mass bins width100, clipped to bin9. Physical resource processing hardness replaces the R2 elevation proxy: soft40..90, hard300..633. Persistence >=8 sampled residents for >=1000 ticks. Top16 persistent lineages by exposure then ID. Histogram intersection sum(min(normalized bins)); integer floor Euclidean distance in world units; nearest-rank p90. Origins retained only while alive; habitat switches sampled (lower bound); parent habitat means birth parent A cell. Feeding events require positive credited energy; channels 0=soft, 1=hard, 2=prey. Matings counted once per successful pair; symmetric parent edges total twice pairs; child edges twice births. Temporal windows ticks1..5000 etc (tick-zero occupancy in first). No event archive or world mutations."})
+ }
+ 
+ #[cfg(test)]
+diff --git a/crates/sim-core/src/lib.rs b/crates/sim-core/src/lib.rs
+index 0287144..3102ae5 100644
+--- a/crates/sim-core/src/lib.rs
++++ b/crates/sim-core/src/lib.rs
+@@ -8,6 +8,7 @@ pub mod persistence;
+ #[cfg(feature = "profile")]
+ pub mod profile;
+ pub mod replay;
++pub mod resources;
+ pub mod rng;
+ pub mod spatial;
+ #[cfg(feature = "viability")]
+diff --git a/crates/sim-core/src/model.rs b/crates/sim-core/src/model.rs
+index 9f9d5f1..bfbcc4c 100644
+--- a/crates/sim-core/src/model.rs
++++ b/crates/sim-core/src/model.rs
+@@ -7,7 +7,7 @@ use std::collections::BTreeMap;
+ 
+ pub const SIMULATION_VERSION: u32 = 5;
+ /// Unreleased v5 revisions are isolated; published v4 remains immutable.
+-pub const SIMULATION_RULES_REVISION: u32 = 2;
++pub const SIMULATION_RULES_REVISION: u32 = 3;
+ pub const TELEMETRY_INTERVAL: u64 = 100;
+ macro_rules! id {
+     ($name:ident) => {
+@@ -63,6 +63,8 @@ impl Config {
+ #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+ pub struct Cell {
+     pub food: i32,
++    pub hard_food: i32,
++    pub resource_remainders: [i64; 2],
+     pub fertility: i32,
+     pub temperature_offset: i32,
+     pub elevation: i32,
+diff --git a/crates/sim-core/src/persistence.rs b/crates/sim-core/src/persistence.rs
+index c217434..426019e 100644
+--- a/crates/sim-core/src/persistence.rs
++++ b/crates/sim-core/src/persistence.rs
+@@ -15,7 +15,7 @@ pub const MAX_SAVE_BYTES: u64 = 128 * 1024 * 1024;
+ const MAGIC: &[u8; 8] = b"GENESIS1";
+ const HEADER: usize = 60;
+ // This cannot alias an old valid State: its bytes8..12 are not a valid world size.
+-const PAYLOAD_TAG: &[u8; 16] = b"GENESIS5RULES002";
++const PAYLOAD_TAG: &[u8; 16] = b"GENESIS5R3PROBB2";
+ 
+ pub fn encode(world: &World) -> Result<Vec<u8>, String> {
+     world.validate()?;
+@@ -73,7 +73,10 @@ pub fn decode(bytes: &[u8]) -> Result<World, String> {
+     if raw.len() as u64 != expected_len || blake3::hash(&raw).as_bytes() != &bytes[28..60] {
+         return Err("Save checksum or size mismatch".into());
+     }
+-    let payload = raw.strip_prefix(PAYLOAD_TAG).ok_or("Incompatible prerelease simulation v5 rules revision1 save. Use the preserved pre-final GENESIS build (phase2/pre-finalization-a3d8cc0); revision2 does not silently migrate earlier v5 worlds.")?;
++    let payload = raw.strip_prefix(PAYLOAD_TAG).ok_or_else(|| {
++        let revision=if raw.starts_with(b"GENESIS5RULES002") {2} else {1};
++        format!("Incompatible prerelease simulation v5 rules revision{revision} save. Use its preserved R2 or pre-final GENESIS build; revision3 candidate B2 does not migrate earlier worlds or other candidates.")
++    })?;
+     let state: State = bincode::DefaultOptions::new()
+         .with_fixint_encoding()
+         .with_limit(MAX_SAVE_BYTES)
+@@ -117,6 +120,14 @@ mod tests {
+     use super::*;
+     use crate::Config;
+     #[test]
++    fn real_revision2_save_cannot_be_reinterpreted() {
++        let error = decode(include_bytes!(
++            "../../../examples/phase2-r2-seed7-tick40000.genesis"
++        ))
++        .unwrap_err();
++        assert!(error.contains("revision2") && error.contains("revision3"));
++    }
++    #[test]
+     fn actual_baseline_save_has_clear_non_migrating_rejection() {
+         let bytes = include_bytes!("../../../examples/seed11-107504.genesis");
+         let error = decode(bytes).unwrap_err();
+diff --git a/crates/sim-core/src/resources.rs b/crates/sim-core/src/resources.rs
+new file mode 100644
+index 0000000..2eb2d95
+--- /dev/null
++++ b/crates/sim-core/src/resources.rs
+@@ -0,0 +1,128 @@
++//! Independent renewable fields. Integer remainder accumulation avoids rounding
++//! slow renewable hard resources permanently to zero. No extra RNG or species rules.
++use crate::{Cell, Organism};
++pub const DENOMINATORS: [i64; 2] = [300_000, 300_000_000];
++impl Cell {
++    pub fn total_food(&self) -> i32 {
++        self.food + self.hard_food
++    }
++    pub fn initialize_channels(&mut self) {
++        let soft_fraction = (200 + self.moisture * 4 / 5 - self.elevation / 5).clamp(100, 900);
++        let soft = self.food * soft_fraction / 1000;
++        self.hard_food = ((self.food - soft) / 3).min(300);
++        self.food = soft;
++    }
++    pub fn regenerate_channels(&mut self, regeneration: i32) {
++        let rate = i64::from(regeneration) * i64::from(self.fertility);
++        let numerators = [
++            rate * i64::from(200 + self.moisture) * 2,
++            rate * i64::from(1200 - self.moisture) * i64::from(self.elevation),
++        ];
++        for channel in 0..2 {
++            let numerator = numerators[channel] + self.resource_remainders[channel];
++            let growth = (numerator / DENOMINATORS[channel]) as i32;
++            self.resource_remainders[channel] = numerator % DENOMINATORS[channel];
++            if channel == 0 {
++                self.food = (self.food + growth).min(1000);
++            } else {
++                self.hard_food = (self.hard_food + growth).min(300);
++            }
++        }
++    }
++    pub fn hardness(&self, channel: usize) -> i32 {
++        if channel == 0 {
++            40 + self.elevation / 20
++        } else {
++            300 + self.elevation / 3
++        }
++    }
++    pub fn feeding_efficiency(&self, o: &Organism, channel: usize) -> i32 {
++        let hardness = self.hardness(channel);
++        let m = &o.phenotype.morphology;
++        let processing = if channel == 0 {
++            1000
++        } else {
++            (m.bite_capacity * 20 * 1000 / hardness).min(1000)
++        };
++        o.phenotype.food_efficiency * (1000 - o.phenotype.carnivory) / 1000
++            * m.resource_efficiency(hardness)
++            / 100
++            * processing
++            / 1000
++            * if channel == 0 { 1 } else { 3 }
++    }
++    pub fn preferred_channel(&self, o: &Organism) -> usize {
++        let soft = self.food * self.feeding_efficiency(o, 0);
++        let hard = self.hard_food * self.feeding_efficiency(o, 1);
++        usize::from(hard > soft)
++    }
++}
++#[cfg(test)]
++mod tests {
++    use super::*;
++    use crate::{Config, World};
++    #[test]
++    fn slow_channels_are_renewable_spatially_distinct_and_bounded() {
++        let world = World::new(Config::default()).unwrap();
++        let mut dry = world.state.environment.cells[0].clone();
++        dry.food = 0;
++        dry.hard_food = 0;
++        dry.resource_remainders = [0; 2];
++        dry.elevation = 900;
++        dry.moisture = 100;
++        dry.fertility = 100;
++        let mut wet = dry.clone();
++        wet.elevation = 100;
++        wet.moisture = 900;
++        for _ in 0..100 {
++            dry.regenerate_channels(4);
++            wet.regenerate_channels(4);
++        }
++        assert!(dry.hard_food > wet.hard_food && wet.food > dry.food);
++        assert!(dry.hard_food > 0 && wet.hard_food > 0);
++        assert_eq!(
++            dry.resource_remainders[1],
++            (100 * 4 * 100 * 1100 * 900) % DENOMINATORS[1]
++        );
++        let paused = dry.clone();
++        dry.regenerate_channels(0);
++        assert_eq!(paused, dry);
++        for _ in 0..10000 {
++            dry.regenerate_channels(100);
++        }
++        assert!(dry.food <= 1000 && dry.hard_food <= 300);
++    }
++    #[test]
++    fn initial_chemical_budget_and_processing_costs_are_real() {
++        let w = World::new(Config::default()).unwrap();
++        assert!(w
++            .state
++            .environment
++            .cells
++            .iter()
++            .all(|c| c.food + 3 * c.hard_food <= 999));
++        let mut cell = w.state.environment.cells[0].clone();
++        cell.elevation = 900;
++        let mut grazer = w.state.organisms[0].clone();
++        grazer.genome.0[13] = 0;
++        grazer.genome.0[17] = 0;
++        grazer.phenotype = grazer.genome.phenotype();
++        let mut crusher = grazer.clone();
++        crusher.genome.0[17] = 500;
++        crusher.phenotype = crusher.genome.phenotype();
++        assert!(cell.feeding_efficiency(&grazer, 0) > cell.feeding_efficiency(&crusher, 0));
++        assert!(cell.feeding_efficiency(&crusher, 1) > cell.feeding_efficiency(&grazer, 1));
++        let mut massive = crusher.clone();
++        massive.genome.0[14] = 750;
++        massive.phenotype = massive.genome.phenotype();
++        assert!(cell.feeding_efficiency(&massive, 1) > cell.feeding_efficiency(&crusher, 1));
++        assert!(
++            massive.phenotype.morphology.reproduction_cost
++                > crusher.phenotype.morphology.reproduction_cost
++        );
++        assert!(
++            massive.phenotype.morphology.maintenance_cost
++                > crusher.phenotype.morphology.maintenance_cost
++        );
++    }
++}
+diff --git a/crates/sim-core/src/world.rs b/crates/sim-core/src/world.rs
+index 83367fc..b74d536 100644
+--- a/crates/sim-core/src/world.rs
++++ b/crates/sim-core/src/world.rs
+@@ -26,6 +26,8 @@ impl World {
+         let cells: Vec<Cell> = (0..side * side)
+             .map(|index| Cell {
+                 food: 300 + rng.world.below(700) as i32,
++                hard_food: 0,
++                resource_remainders: [0; 2],
+                 fertility: 60 + rng.world.below(81) as i32,
+                 temperature_offset: ((index / side / 4 + (config.seed % 7) as i32) % 5 - 2) * 250
+                     + rng.world.below(201) as i32
+@@ -35,6 +37,10 @@ impl World {
+                 moisture: ((index / side / 4 + index % side / 4) % 5) * 180
+                     + rng.world.below(201) as i32,
+             })
++            .map(|mut cell| {
++                cell.initialize_channels();
++                cell
++            })
+             .collect();
+         let mut base = Genome([500; LOCI]);
+         base.0[14..].copy_from_slice(&[200, 500, 125, 200, 100, 200, 300, 200]);
+@@ -209,9 +215,7 @@ impl World {
+             crate::viability::tick(o, eligible(o, s.tick));
+         }
+         for cell in &mut s.environment.cells {
+-            // Moisture and elevation define resource hardness/productivity; no species bonuses.
+-            let productivity = cell.fertility * (200 + cell.moisture) / 1000;
+-            cell.food = (cell.food + s.environment.regeneration * productivity / 100).min(1000);
++            cell.regenerate_channels(s.environment.regeneration);
+         }
+         #[cfg(feature = "profile")]
+         crate::profile::mark("resource regeneration", &mut profile_stamp);
+@@ -325,7 +329,10 @@ impl World {
+                         let fx = x * CELL_SIZE + CELL_SIZE / 2;
+                         let fy = y * CELL_SIZE + CELL_SIZE / 2;
+                         let d = distance_squared(o.x, o.y, fx, fy);
+-                        let score = s.environment.cells[idx].food * 4 - d / 16;
++                        let c = &s.environment.cells[idx];
++                        let channel = c.preferred_channel(o);
++                        let supply = if channel == 0 { c.food } else { c.hard_food };
++                        let score = supply * c.feeding_efficiency(o, channel) / 25 - d / 16;
+                         let candidate = (score, std::cmp::Reverse(idx), fx, fy);
+                         if food.is_none_or(|v| candidate > v) {
+                             food = Some(candidate);
+@@ -405,36 +412,44 @@ impl World {
+             }
+             let cell =
+                 &mut s.environment.cells[(o.y / CELL_SIZE * side + o.x / CELL_SIZE) as usize];
+-            let efficiency = o.phenotype.food_efficiency * (1000 - o.phenotype.carnivory) / 1000
+-                * o.phenotype.morphology.resource_efficiency(cell.elevation)
+-                / 100;
++            let channel = cell.preferred_channel(o);
++            let available = if channel == 0 {
++                cell.food
++            } else {
++                cell.hard_food
++            };
++            let efficiency = cell.feeding_efficiency(o, channel);
+             if efficiency <= 0 {
+                 #[cfg(feature = "viability")]
+-                crate::viability::food(o, cell.food, efficiency, 25, 0, 0);
++                crate::viability::food(o, available, efficiency, 25, 0, 0);
+                 continue;
+             }
+-            let amount = cell
+-                .food
++            let amount = available
+                 .min(25)
+                 .min((o.phenotype.energy_capacity - o.energy) * 100 / efficiency.max(1));
+             #[cfg(feature = "viability")]
+             crate::viability::food(
+                 o,
+-                cell.food,
++                available,
+                 efficiency,
+                 25,
+                 amount,
+                 (amount * efficiency / 100).min(o.phenotype.energy_capacity - o.energy),
+             );
+-            cell.food -= amount;
++            if channel == 0 {
++                cell.food -= amount;
++            } else {
++                cell.hard_food -= amount;
++            }
+             #[cfg(feature = "viability")]
+             crate::ecological_diagnostics::feeding(
+                 o,
+                 cell,
+-                0,
++                channel,
+                 amount,
+                 (amount * efficiency / 100).min(o.phenotype.energy_capacity - o.energy),
+                 0,
++                cell.hardness(channel),
+             );
+             s.species
+                 .get_mut(&o.species_id)
+@@ -498,6 +513,7 @@ impl World {
+                                 s.organisms[i].phenotype.energy_capacity - s.organisms[i].energy,
+                             ),
+                             prey_mass as i32,
++                            0,
+                         );
+                         deaths.insert(j, DeathCause::Predation);
+                         #[cfg(feature = "viability")]
+@@ -1084,7 +1100,7 @@ impl World {
+                 .environment
+                 .cells
+                 .iter()
+-                .map(|c| i64::from(c.food))
++                .map(|c| i64::from(c.total_food()))
+                 .sum(),
+             temperature: self.state.environment.temperature,
+             births: self.state.counters.births,
+@@ -1121,6 +1137,11 @@ impl World {
+         }
+         if s.environment.cells.iter().any(|c| {
+             !(0..=1000).contains(&c.food)
++                || !(0..=300).contains(&c.hard_food)
++                || c.resource_remainders
++                    .iter()
++                    .zip(crate::resources::DENOMINATORS)
++                    .any(|(n, d)| !(0..d).contains(n))
+                 || !(60..=140).contains(&c.fertility)
+                 || !(0..=1000).contains(&c.elevation)
+                 || !(0..=1000).contains(&c.moisture)
+@@ -1342,6 +1363,7 @@ mod tests {
+         w.state.environment.regeneration = 0;
+         for cell in &mut w.state.environment.cells {
+             cell.food = 0;
++            cell.hard_food = 0;
+             cell.temperature_offset = 0;
+         }
+         for o in &mut w.state.organisms {
+@@ -1486,6 +1508,7 @@ mod tests {
+         .unwrap();
+         for c in &mut w.state.environment.cells {
+             c.food = 0;
++            c.hard_food = 0;
+         }
+         w.state.environment.regeneration = 10;
+         w.step();
+@@ -1648,6 +1671,7 @@ mod tests {
+         normal.state.environment.regeneration = 0;
+         for cell in &mut normal.state.environment.cells {
+             cell.food = 0;
++            cell.hard_food = 0;
+             cell.temperature_offset = 0;
+         }
+         let optimum = normal.state.organisms[0].phenotype.temperature_optimum;
+diff --git a/scripts/summarize-ecological-diagnostics.mjs b/scripts/summarize-ecological-diagnostics.mjs
+index 96f09fe..d8b41be 100644
+--- a/scripts/summarize-ecological-diagnostics.mjs
++++ b/scripts/summarize-ecological-diagnostics.mjs
+@@ -10,7 +10,7 @@ export function summarizeEcology(run) {
+   if (run.failures !== 0 || run.results.length !== run.seeds || new Set(run.results.map(r=>r.seed)).size !== run.seeds) throw Error('Incomplete ecological run')
+   const mouths = Array.from({length:3},(_,mouth)=>({mouth,food_events:0,prey_events:0,food_energy:0,prey_energy:0,hardness:0,productivity:0,starvation_deaths:0,offspring:0,organism_ticks:0,channels:[0,0,0]}))
+   const worlds = run.results.map(r => {
+-    if (r.ticks !== run.ticks_per_seed || !r.phase2.save_load_replay_verified || ![1,2,3].includes(r.phase2.viability.ecology.version)) throw Error('Unverified ecological result')
++    if (r.ticks !== run.ticks_per_seed || !r.phase2.save_load_replay_verified || ![1,2,3,4].includes(r.phase2.viability.ecology.version)) throw Error('Unverified ecological result')
+     const e = r.phase2.viability.ecology, m = e.mating
+     if (m.lineage_edges.reduce((n,v)=>n+v.count,0) !== 2*m.pairs || m.child_edges.reduce((n,v)=>n+v.count,0) !== 2*r.births) throw Error('Mating event ledger mismatch')
+     if (e.version >= 2) {

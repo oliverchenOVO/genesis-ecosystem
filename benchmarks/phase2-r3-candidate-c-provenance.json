@@ -1,0 +1,47 @@
+{
+  "label": "C local mating only",
+  "mating_radius": 16,
+  "candidate_save_tag": "GENESIS5R3PROBEC",
+  "base_commit": "cc639813a48b6b3dea5bfa9df37f5061e808721c",
+  "files": [
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\artifacts\\phase2-r3-candidate-c.exe",
+      "sha256": "0A68E52BB3F07352ABC8BB4772CE5546A14AB83514D7BFEBD1D0594057C5A0FC"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\benchmarks\\phase2-r3-candidate-c.patch",
+      "sha256": "39FE1E50B108D4E79C0363AE051A2998EE8D4EDDAE59B24096FAF09BDABDB8F9"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\benchmarks\\phase2-r3-candidate-c-golden.json",
+      "sha256": "33630483D7EB329C9130A28B7E87D80A22C33DE0E888889094275F2C43BF45E5"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\world.rs",
+      "sha256": "6A9292846844C1A836131B9F5831AB863A520964EFC73CD512008A23E1E520A2"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\model.rs",
+      "sha256": "6D154D3058BAF394E3E85BFAF82DE256F4F41EB896009444E7D2ED0D29BECD5D"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\analysis.rs",
+      "sha256": "66357F53F73706E9B78A283D357773CF3DC9F357D62993AC0CD1EBD7A59C3485"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\persistence.rs",
+      "sha256": "43E13E091A01D0A4D4C963B6FB5AC145CADE850215DC1AF1B4157F57891CF2AC"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\ecological_diagnostics.rs",
+      "sha256": "491F8EDD9AD5B1351C7E77F966EA842E100F183E69F5C4709A88BB56B245CD4C"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\spatial.rs",
+      "sha256": "5773B74DE33F8446D91EE50675644050AF73C4E3BE681DCB4911442746128D6C"
+    }
+  ],
+  "simulation_version": 5,
+  "analysis_version": 5,
+  "rules_revision": 3
+}

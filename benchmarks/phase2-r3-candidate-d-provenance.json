@@ -1,0 +1,52 @@
+{
+  "mating_radius": 16,
+  "rules_revision": 3,
+  "hardness": "300 + elevation / 3",
+  "simulation_version": 5,
+  "files": [
+    {
+      "sha256": "CED883246875F46FD521222F4F0C64DCBB7697003932C758B69118DC3A9A783D",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\artifacts\\phase2-r3-candidate-d.exe"
+    },
+    {
+      "sha256": "237E227C1FE5D2098AE308D653E8FB2384FE0AE04E7F77C1F23E5EFA6149E051",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\benchmarks\\phase2-r3-candidate-d.patch"
+    },
+    {
+      "sha256": "39DFA4A9AAA9B650FC1F0D1BAD96BC19877A241D8826BDE7C42F2B9A3C95C35F",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\benchmarks\\phase2-r3-candidate-d-golden.json"
+    },
+    {
+      "sha256": "BF5C38F1CD5C23AA706C94501973259B3106D3F696D70D6AA5341911D514CE9D",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\world.rs"
+    },
+    {
+      "sha256": "B21AA09BE5A3067F7AEBEFF75BE33F4A2848B027508C937F7E2C56D7426062D2",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\resources.rs"
+    },
+    {
+      "sha256": "73CB3A927BAE56C8277C7ACB2A70BE1373C1234ED7DC5FD134936FAA094F195D",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\model.rs"
+    },
+    {
+      "sha256": "66357F53F73706E9B78A283D357773CF3DC9F357D62993AC0CD1EBD7A59C3485",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\analysis.rs"
+    },
+    {
+      "sha256": "241599863AD5752BA41CC8E03F960612A26E6875E618495B69F60D8373B6AE38",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\persistence.rs"
+    },
+    {
+      "sha256": "1901158111D0B7D989D25456DC0933E60E6F4C2131CECCFEB0D861CE49FACA9D",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\ecological_diagnostics.rs"
+    },
+    {
+      "sha256": "5773B74DE33F8446D91EE50675644050AF73C4E3BE681DCB4911442746128D6C",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\spatial.rs"
+    }
+  ],
+  "label": "D B2 resource channels plus local mating",
+  "base_commit": "cc639813a48b6b3dea5bfa9df37f5061e808721c",
+  "analysis_version": 5,
+  "candidate_save_tag": "GENESIS5R3PROBED"
+}

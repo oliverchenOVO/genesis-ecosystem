@@ -10,7 +10,7 @@ export function summarizeEcology(run) {
   if (run.failures !== 0 || run.results.length !== run.seeds || new Set(run.results.map(r=>r.seed)).size !== run.seeds) throw Error('Incomplete ecological run')
   const mouths = Array.from({length:3},(_,mouth)=>({mouth,food_events:0,prey_events:0,food_energy:0,prey_energy:0,hardness:0,productivity:0,starvation_deaths:0,offspring:0,organism_ticks:0,channels:[0,0,0]}))
   const worlds = run.results.map(r => {
-    if (r.ticks !== run.ticks_per_seed || !r.phase2.save_load_replay_verified || ![1,2,3].includes(r.phase2.viability.ecology.version)) throw Error('Unverified ecological result')
+    if (r.ticks !== run.ticks_per_seed || !r.phase2.save_load_replay_verified || r.phase2.rng_continuation_ticks !== 1000 || ![1,2,3,4].includes(r.phase2.viability.ecology.version)) throw Error('Unverified ecological result')
     const e = r.phase2.viability.ecology, m = e.mating
     if (m.lineage_edges.reduce((n,v)=>n+v.count,0) !== 2*m.pairs || m.child_edges.reduce((n,v)=>n+v.count,0) !== 2*r.births) throw Error('Mating event ledger mismatch')
     if (e.version >= 2) {

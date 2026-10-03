@@ -1,0 +1,49 @@
+{
+  "rules_revision": 3,
+  "normal_current_v5_golden": "Preserved R2; candidate golden stored separately; no release golden replacement before selection",
+  "files": [
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\artifacts\\phase2-r3-candidate-b.exe",
+      "sha256": "D5A23AD0E1D4F95B60C5D60D417A6D8C2E0EFA404F0636057F375D53D6E0E3A5"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\benchmarks\\phase2-r3-candidate-b.patch",
+      "sha256": "4EDED241B8E286AD984A0B70415C148C22259C3E152E757ED345601069420C3E"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\benchmarks\\phase2-r3-candidate-b-golden.json",
+      "sha256": "A62212DF6B003C21807F5DEA0A90F1C9DAB32EF928DDC0550694F00479F1E6BD"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\world.rs",
+      "sha256": "C9739A4330823F6433FB92040B996BAC72894FBF4D328FEB19D882AB6D6AC732"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\resources.rs",
+      "sha256": "A1E2340FE3F89F567E9A03A3D305B4B6359811687408FE7EE1B2BCE35971B454"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\model.rs",
+      "sha256": "73CB3A927BAE56C8277C7ACB2A70BE1373C1234ED7DC5FD134936FAA094F195D"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\genetics.rs",
+      "sha256": "0C9C6825EA7C22E523C70ED6BE1E44FDCFEED7B1A2EDBB891BBB2B23711F09F0"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\morphology.rs",
+      "sha256": "B783F4DE40CEC75B4826886DCB64018B472EC0875336C7B08887E29926F9E125"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\ecological_diagnostics.rs",
+      "sha256": "2BB43E092813430EA8F444F1478B8D95A070BD5C132AC049E33170B283C9DC25"
+    }
+  ],
+  "simulation_version": 5,
+  "base_commit": "cc639813a48b6b3dea5bfa9df37f5061e808721c",
+  "mating_radius": 24,
+  "label": "B resource channels only",
+  "candidate_save_tag": "GENESIS5R3PROBEB",
+  "analysis_version": 5,
+  "diagnostic_annotation_limitation": "Frozen probe retained R2 English channel definition string; structured channel_names and physical hardness counters correctly identify soft/hard/prey. Patch preserves that literal to match the compiled probe. Fix annotation before any selected production build."
+}

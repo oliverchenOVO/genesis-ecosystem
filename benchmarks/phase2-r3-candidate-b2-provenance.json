@@ -1,0 +1,49 @@
+{
+  "analysis_version": 5,
+  "mating_radius": 24,
+  "simulation_version": 5,
+  "files": [
+    {
+      "sha256": "46EBC3F1ED6984A393406FCC3F691A9AD566075C064AF6B8CEE46ADC01B5C754",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\artifacts\\phase2-r3-candidate-b2.exe"
+    },
+    {
+      "sha256": "B3F9F912EF0C13FF446EC08D20E1C3D65FEB1DFA6D15408C6CE3B09ED5A2EF51",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\benchmarks\\phase2-r3-candidate-b2.patch"
+    },
+    {
+      "sha256": "1505FB77AA4E669C13E6D9E8BD156691C336A50C7CF9DB3FF0A1BC439B19EC23",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\benchmarks\\phase2-r3-candidate-b2-golden.json"
+    },
+    {
+      "sha256": "C9739A4330823F6433FB92040B996BAC72894FBF4D328FEB19D882AB6D6AC732",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\world.rs"
+    },
+    {
+      "sha256": "B21AA09BE5A3067F7AEBEFF75BE33F4A2848B027508C937F7E2C56D7426062D2",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\resources.rs"
+    },
+    {
+      "sha256": "73CB3A927BAE56C8277C7ACB2A70BE1373C1234ED7DC5FD134936FAA094F195D",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\model.rs"
+    },
+    {
+      "sha256": "66357F53F73706E9B78A283D357773CF3DC9F357D62993AC0CD1EBD7A59C3485",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\analysis.rs"
+    },
+    {
+      "sha256": "34806ED430BA0A7444F1E4BE068E560FFC784C4E6ED78DE03B3A859C6BBFB7DD",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\persistence.rs"
+    },
+    {
+      "sha256": "1901158111D0B7D989D25456DC0933E60E6F4C2131CECCFEB0D861CE49FACA9D",
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\ecological_diagnostics.rs"
+    }
+  ],
+  "candidate_save_tag": "GENESIS5R3PROBB2",
+  "label": "B2 resource channels with R2-scaled hardness",
+  "base_commit": "cc639813a48b6b3dea5bfa9df37f5061e808721c",
+  "rules_revision": 3,
+  "hardness": "300 + elevation / 3",
+  "reason": "B1 paired high-C intake fell 8.785879903153099 to 6.210368594545999; cost/readiness/regeneration unchanged, only new hardness requirement rescaled"
+}

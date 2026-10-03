@@ -134,3 +134,29 @@ unchanged120-second limit; the existing release-profile test passes. Protected m
 v0.1.0 and Phase1 EXE/installer hashes remain unchanged. These are diagnostics,
 not completed Phase2 biological/native acceptance. Next: paired resource separation
 and local mating candidates, with no dispersal change until measured need.
+
+## Bounded ecological candidate evidence
+
+[Candidate matrix and provenance](PHASE2_ECOLOGY_CANDIDATES.md) records completed
+paired seeds0–7 ×50,000 probes A/B/C/B2/D. All completed worlds verify save/load,
+full replay and independent1000-tick continuation. JSONL and final JSON agree
+exactly. No cap contact or completed-run technical/replay failure is observed.
+B2 has one natural extinction. A has2 persistent multi-unit worlds and1 high-C;
+B has0/0, C1/0, B2 0/2 and D3/2. Every setting still has zero worlds with a second
+persistent morphology/niche cluster, second persistent realized feeding role or
+persistent prey-income cohort. Biological acceptance remains **INCOMPLETE**.
+
+Preserved probe implementations use separate revision3 experimental save tags
+and separate measured replay goldens. No candidate is selected by this evidence
+commit; branch authority and current golden remain R2. B and C are rejected
+standalone; B2 is one bounded correction to the newly introduced hard-channel
+processing range after B's measured complexity loss. D advances to paired
+8×100,000 against unchanged A; no dispersal adjustment is justified. A's initial
+long invocation aborted before a seed record with Windows allocation failure;
+its empty outputs/stderr are retained, and it is retried with one worker.
+
+Candidate core viability library tests pass: B53, B2 53, C52, D54. fmt and
+core/benchmark all-target/all-feature clippy pass. Node evidence checks now total
+11, including paired environment rejection, actual continuation requirement and
+recomputed energy closure. Frontend source remains unchanged. These probe tests
+do not substitute for a selected final rule set's full regression or final100×100k.
