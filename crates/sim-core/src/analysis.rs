@@ -6,6 +6,7 @@ use serde::Serialize;
 pub struct EcologyMetrics {
     pub morphology_mean_distance: i32,
     pub morphology_max_distance: i32,
+    pub morphology_clusters: usize,
     pub morphology_variance: [i64; 6],
     pub niche_mean_distance: i32,
     pub niche_max_distance: i32,
@@ -15,6 +16,25 @@ pub struct EcologyMetrics {
     pub multicellular_population: usize,
     pub maximum_complexity: i32,
     pub median_species_complexity: i32,
+    /// (SpeciesId, minimum occupied temperature, maximum occupied temperature), centidegrees.
+    pub occupied_temperature_ranges: Vec<(u64, i32, i32)>,
+}
+pub fn niche_cluster_representatives(world: &World) -> Vec<(u64, [i32; 6])> {
+    let mut representatives = Vec::<(u64, [i32; 6])>::new();
+    for s in world.state.species.values().filter(|s| s.population >= 8) {
+        if !representatives.iter().any(|(_, profile)| {
+            profile
+                .iter()
+                .zip(s.niche)
+                .map(|(a, b)| (a - b).abs())
+                .sum::<i32>()
+                / 6
+                < 150
+        }) {
+            representatives.push((s.id.0, s.niche));
+        }
+    }
+    representatives
 }
 fn distances<const N: usize>(values: &[[i32; N]]) -> (i32, i32, usize) {
     let mut total = 0i64;
@@ -60,7 +80,8 @@ pub fn ecology_metrics(world: &World) -> EcologyMetrics {
         complexities.push(m[6]);
     }
     complexities.sort();
-    let (morphology_mean_distance, morphology_max_distance, _) = distances(&morphology);
+    let (morphology_mean_distance, morphology_max_distance, morphology_clusters) =
+        distances(&morphology);
     let (niche_mean_distance, niche_max_distance, niche_clusters) = distances(&niche);
     let mut sums = [0i64; 6];
     let mut squares = [0i64; 6];
@@ -92,9 +113,23 @@ pub fn ecology_metrics(world: &World) -> EcologyMetrics {
                 && o.phenotype.morphology.mouth != crate::morphology::Mouth::Grazer
         })
         .count();
+    let mut temperatures = std::collections::BTreeMap::<u64, (i32, i32)>::new();
+    let side = world.state.config.size / crate::spatial::CELL_SIZE;
+    for o in &world.state.organisms {
+        let x = o.x / crate::spatial::CELL_SIZE;
+        let y = o.y / crate::spatial::CELL_SIZE;
+        let temperature = world.state.environment.temperature
+            + world.state.environment.cells[(y * side + x) as usize].temperature_offset;
+        let range = temperatures
+            .entry(o.species_id.0)
+            .or_insert((temperature, temperature));
+        range.0 = range.0.min(temperature);
+        range.1 = range.1.max(temperature);
+    }
     EcologyMetrics {
         morphology_mean_distance,
         morphology_max_distance,
+        morphology_clusters,
         morphology_variance,
         niche_mean_distance,
         niche_max_distance,
@@ -118,12 +153,45 @@ pub fn ecology_metrics(world: &World) -> EcologyMetrics {
             .get(complexities.len() / 2)
             .copied()
             .unwrap_or(0),
+        occupied_temperature_ranges: temperatures
+            .into_iter()
+            .map(|(id, (low, high))| (id, low, high))
+            .collect(),
     }
 }
 #[cfg(test)]
 mod tests {
     use super::*;
     use crate::Config;
+    #[test]
+    fn occupied_temperature_range_uses_actual_cells_at_world_edges() {
+        let mut w = World::new(Config {
+            starting_population: 2,
+            ..Config::default()
+        })
+        .unwrap();
+        w.state.organisms[0].x = 0;
+        w.state.organisms[0].y = 0;
+        w.state.organisms[1].x = 511;
+        w.state.organisms[1].y = 511;
+        w.state.environment.cells[0].temperature_offset = 100;
+        w.state
+            .environment
+            .cells
+            .last_mut()
+            .unwrap()
+            .temperature_offset = 500;
+        let before = w.hash();
+        assert_eq!(
+            ecology_metrics(&w).occupied_temperature_ranges,
+            vec![(1, 2100, 2500)]
+        );
+        assert_eq!(before, w.hash());
+        assert_eq!(
+            niche_cluster_representatives(&w).len(),
+            ecology_metrics(&w).niche_clusters
+        );
+    }
     #[test]
     fn distances_distinguish_real_species_profiles() {
         assert_eq!(distances(&[[0; 6], [1000; 6]]), (1000, 1000, 2));
