@@ -1,0 +1,6 @@
+{
+  "measurement": "Windows process peak working set, sampled every 250ms",
+  "scenario": 1000,
+  "timing_context": "phase2",
+  "peak_working_set_bytes": 7229440
+}

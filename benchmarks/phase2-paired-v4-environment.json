@@ -1,0 +1,5 @@
+{
+  "cpu_seconds_last_sample": 15.984375,
+  "peak_working_set_bytes": 6135808,
+  "context": "No concurrent simulation or compiler; user processes and thermal state uncontrolled; normal process priority"
+}

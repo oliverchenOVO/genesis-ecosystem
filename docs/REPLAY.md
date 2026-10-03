@@ -12,3 +12,5 @@ Phase 1.1 file UX and calibration do not change replay versions or golden fixtur
 
 Calibration's temperature sweep uses `1800 + (seed % 5) * 100` at tick zero. The runner omits a redundant command at 20°C/regen 12; the original Phase 1 stress runner logged it. This changes command-log hashes for that subset when comparing different command sequences, but not ecology rules. Preserve original stress artifacts as the exact Phase 1 baseline; compare hashes only for identical command sequences.
 
+
+Phase 2 v5 has a separate golden-v5 fixture. The original v4 fixture remains untouched and executes in CI by checking out protected v0.1.0; the current v5 decoder explicitly rejects it. Morphology/ecology rules and extra loci intentionally change v5 hashes. Analytical calibration reads never change world state or RNG.

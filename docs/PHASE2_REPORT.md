@@ -1,0 +1,19 @@
+# Phase 2 validation report — INCOMPLETE
+
+Status is INCOMPLETE while final calibration, default/showcase selection, native file/restart/replay UAT, private CI and release gates remain pending. This is an active evidence ledger, not acceptance sign-off.
+
+Simulation version 5; RNG version 1; save envelope version 1. v4 saves are rejected clearly before deserialization and must be opened with v0.1.0. The v4 fixture and protected tag/artifacts remain unchanged. Original baseline golden tests passed before implementation; v5 golden passes all six checkpoints.
+
+Implemented: inherited 22-locus genome with eight structural loci; bounded fixed-point morphology; segment/mass/storage/armor/sensory/locomotion/construction costs and benefits; three feeding morphologies; prey size/armor/speed interactions; temperature/productivity/terrain niches; safety-ceiling diagnostics; species founder snapshots, morphology/niche observations and persistent innovations; compact morphology snapshots, procedural rendering, inspectors, species/tree/history and habitat layers. No LLM and no later-phase systems.
+
+Validated before final candidate changes: 58 Rust tests and 24 frontend tests passed; format, clippy, lint, typecheck and frontend production build passed. Full version0.2.0 workspace regression now passes61 Rust tests (41core+5golden+8app+5calibration+2desktop);24frontend tests,fmt/clippy(allfeatures)/lint/typecheck/production frontend build pass. Observer changes do not change v5 world hashes; golden remains passing.
+
+Calibration: regeneration12 candidate rejected after completed seeds0–7 at100,000 ticks. All8 survive and pass save/load/full replay/1000-tick continuation, but safety ceiling dominates late population. Remaining scheduled seeds were deliberately cancelled; this is NOT a completed100-seed acceptance run. Retained raw evidence: phase2-reg12-rejected-partial.jsonl. Regeneration4 candidate8×20,000 ticks:8 survive,0 technical failures, final369–599, peak409–601,0 safety ceiling ticks. Formal final-rule100×100,000 run remains pending.
+
+Native production build exists in target/phase2/release (separate from protected baseline). EXE SHA25692E9AB5D3F3D00421490575739E8E4B9618F19D0FF006109BE95494D79E106E1; installer SHA2565E1D02F30D388483A88D00E83DADC73C5B8A5939A94B110C96A7A81FE63DB7C6. Application launched; actual organism#2, seed42/tick0 has1 segment,1 appendage,mass727,armor5.5%,Grazer bite18,locomotion809/sensory188,movement coefficient/500=0.32. Productivity/temperature/terrain layers and species summary/tree glyph observed. File flows/restart/replay remain pending. These hashes identify this development build, not a final released build.
+
+Current commits:9e9fab9 baseline/version policy;3ce5cc1 headless v5 morphology/ecology;734ace9 compact UI and bounded worker batches. No merge or v0.2.0 tag/release created. Existing private remote remains unchanged so far.
+
+Performance: >30% apparent slowdown relative to one historical timing was profiled. Perception dominated instrumented time (~85%). Compatibility checks now skip candidates that cannot win and calculate bounded distance once; full50,000-tick hashes match before/after optimization. Contemporary sequential comparison: unchanged v4 21.896s/2283.49TPS; v5 13.512s/3700.46TPS. Host timings varied considerably; these results do not establish a universal speedup. Final three-scale benchmarks and memory evidence are being recorded separately.
+
+Known limitations: niche exposure is a population-normalized diagnostic, not individual lifetime hazard; greedy analytical clusters are not species/reproductive barriers; founder glyph is representative while averages show current/last meaningful species data; no safe v4 migration; optional growth, full two-species comparison and richer overlays deferred to Phase2.1. Remaining Phase2 required gates must be completed before release. Phase3 features are excluded.
