@@ -1,4 +1,4 @@
-name: Phase 1 validation
+name: GENESIS baseline validation
 on: [push, pull_request, workflow_dispatch]
 jobs:
   core:
@@ -35,7 +35,7 @@ jobs:
       - run: pnpm test
       - run: pnpm build
       - run: cargo clippy --workspace --all-targets --locked -- -D warnings
-      - run: cargo test --workspace --locked
+      - run: cargo test --release --workspace --locked
       - run: pnpm tauri build
       - uses: actions/upload-artifact@v4
         with:
