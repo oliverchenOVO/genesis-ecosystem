@@ -1,6 +1,6 @@
 # Phase 1.1 finalization report
 
-Status: LOCAL GATES PASS; private GitHub CI and release pending verification. No Phase 2 work.
+Status: **Phase 1.1 COMPLETE** for validated baseline v0.1.0. Local gates and actual Linux/Windows CI passed; private release and both production artifacts verified. No Phase 2 work.
 
 ## Delivered scope
 
@@ -68,7 +68,21 @@ NSIS build successful; production executable launched and native picker works. I
 
 ## Git and remote gates
 
-Original8 Phase1 commits preserved. Current finalization will be split into application/native UX, measurement/evidence, and validation documentation commits. No generated target/dist/node_modules/manual test saves or secrets intended for tracking. Remote was absent; authenticated account oliverchenOVO permits private repository creation. Repository, actual remote CI, validated tag and artifact release remain pending until verified; this report must not imply green from YAML alone.
+Original8 Phase1 commits preserved. Three implementation/evidence commits:
+
+- `b76fa3d` feat(desktop): add native file workflows and protected world sessions
+- `b82698e` perf(sim): finalize deterministic ecology calibration and isolated benchmarks
+- `ed6c77d` docs(validation): record Phase 1.1 native UAT and baseline acceptance evidence
+
+Final remote/release evidence is recorded in a subsequent documentation-only commit. All intended work is committed; target/dist/node_modules/manual UAT fixtures remain ignored. No secrets tracked.
+
+Private repository: [oliverchenOVO/genesis-ecosystem](https://github.com/oliverchenOVO/genesis-ecosystem), `isPrivate=true` verified before creation/push/release. Validated main pushed with original history.
+
+**Actual CI PASS**: [run37099093255](https://github.com/oliverchenOVO/genesis-ecosystem/actions/runs/37099093255), full commit `ed6c77d4b876b859ed7a4b1d665f7bf9054b9096`. Linux core formatting/clippy,40 Rust tests and10-seed save/load/replay stress PASS. Windows frontend formatting/lint/typecheck/21tests/build,workspace clippy,42Rust tests,Tauri production NSIS build and artifact upload PASS. Both jobs concluded success; run logs inspected. Node20 deprecation annotation in checkout@v4 is non-blocking; no failed job.
+
+Annotated **v0.1.0** tag points to this exact CI-validated baseline commit. It was created/pushed only after both jobs passed. [Private Phase1/1.1 release](https://github.com/oliverchenOVO/genesis-ecosystem/releases/tag/v0.1.0) published with portable executable12,170,752bytes and installer2,904,507bytes. Both asset states uploaded; GitHub SHA256 digests exactly match the locally UAT-validated artifact hashes above. Original8 commits, no squash/rewrite/public push.
+
+The final report commit changes documentation only, after verified baseline release; source, executable, calibration and golden evidence remain unchanged. Additional automatic runs on the tag/documentation push do not replace the exact validated baseline evidence linked above.
 
 ## Limitations and deferred work
 
