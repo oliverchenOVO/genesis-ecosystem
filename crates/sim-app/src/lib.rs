@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+mod files;
 use serde_json::{json, Value};
 pub use sim_core::model::SIMULATION_VERSION;
 use sim_core::{persistence, replay::Replay, Command, Config, OrganismId, World};
@@ -23,6 +24,7 @@ pub enum Action {
     Save { path: Option<String> },
     Load { path: Option<String> },
     Replay,
+    ForgetRecent { path: String },
 }
 struct Request {
     action: Action,
@@ -45,30 +47,32 @@ impl App {
         thread::Builder::new().name("genesis-simulation".into()).spawn(move||{
             let mut world=world;let mut running=false;let mut speed=1;let mut last=Instant::now();
             let mut autosave_slot=0;let mut autosave_error:Option<String>=None;
+            let mut files=files::Files::new(&directory);
             tracing::info!(seed=world.state.config.seed,"simulation_created");
             loop{
                 let timeout=if running&&speed==0{Duration::from_millis(1)}else{Duration::from_millis(16)};
                 match receiver.recv_timeout(timeout){
                     Ok(request)=>{
                         let result=match request.action{
-                            Action::Snapshot=>Ok(snapshot(&world,running,speed,&autosave_error)),
-                            Action::New{config}=>World::new(config).map(|new|{world=new;running=true;last=Instant::now();autosave_error=None;tracing::info!(seed=world.state.config.seed,"simulation_created");snapshot(&world,running,speed,&autosave_error)}),
+                            Action::Snapshot=>Ok(snapshot(&world,running,speed,&autosave_error,&files)),
+                            Action::New{config}=>World::new(config).map(|new|{world=new;files.reset();running=true;last=Instant::now();autosave_error=None;tracing::info!(seed=world.state.config.seed,"simulation_created");snapshot(&world,running,speed,&autosave_error,&files)}),
                             Action::Control{running:r,speed:v}=>{
-                                if [0,1,4,16,64].contains(&v){running=r;speed=v;last=Instant::now();Ok(snapshot(&world,running,speed,&autosave_error))}else{Err("Unsupported simulation speed".into())}
+                                if [0,1,4,16,64].contains(&v){running=r;speed=v;last=Instant::now();Ok(snapshot(&world,running,speed,&autosave_error,&files))}else{Err("Unsupported simulation speed".into())}
                             },
-                            Action::Environment{temperature,regeneration}=>world.command(Command{tick:world.state.tick,temperature,regeneration}).map(|_|snapshot(&world,running,speed,&autosave_error)),
+                            Action::Environment{temperature,regeneration}=>world.command(Command{tick:world.state.tick,temperature,regeneration}).map(|_|snapshot(&world,running,speed,&autosave_error,&files)),
                             Action::Detail{id}=>world.state.organisms.iter().find(|o|o.id==OrganismId(id)).map(|o|json!(o)).ok_or("This organism is no longer alive".into()),
                             Action::Species=>Ok(json!(world.state.species.values().collect::<Vec<_>>())),
                             Action::History=>Ok(json!(world.state.history)),
                             Action::Telemetry=>Ok(json!(world.state.telemetry)),
                             Action::Save{path}=>{
-                                let path=path.map(PathBuf::from).unwrap_or_else(||directory.join("manual.genesis"));
-                                persistence::save_atomic(&world,&path).map(|_|{tracing::info!(path=%path.display(),tick=world.state.tick,"save_complete");json!({"path":path,"tick":world.state.tick,"hash":world.hash()})})
+                                let path=path.map(PathBuf::from).or_else(||files.current_path.clone()).unwrap_or_else(||directory.join("manual.genesis"));
+                                files::save_path(path).and_then(|path|persistence::save_atomic(&world,&path).map(|_|{tracing::info!(path=%path.display(),tick=world.state.tick,"save_complete");files.mark_saved(&world,path.clone());json!({"path":path,"tick":world.state.tick,"hash":world.hash(),"files":files.status(&world)})}))
                             },
                             Action::Load{path}=>{
                                 let path=path.map(PathBuf::from).unwrap_or_else(||directory.join("manual.genesis"));
-                                persistence::load(&path).map(|loaded|{world=loaded;running=false;last=Instant::now();autosave_error=None;tracing::info!(path=%path.display(),tick=world.state.tick,"load_complete");snapshot(&world,running,speed,&autosave_error)})
+                                persistence::load(&path).map(|loaded|{world=loaded;running=false;last=Instant::now();autosave_error=None;files.mark_saved(&world,path.clone());tracing::info!(path=%path.display(),tick=world.state.tick,"load_complete");snapshot(&world,running,speed,&autosave_error,&files)})
                             },
+                            Action::ForgetRecent{path}=>{files.forget(&path);Ok(snapshot(&world,running,speed,&autosave_error,&files))},
                             Action::Replay=>{
                                 let replay=Replay::from_world(&world);
                                 // Replay runs on a separate thread and does not stop the simulation worker.
@@ -106,7 +110,18 @@ impl App {
             .map_err(|_| "Simulation request timed out")?
     }
 }
-fn snapshot(world: &World, running: bool, speed: u32, error: &Option<String>) -> Value {
+fn snapshot(
+    world: &World,
+    running: bool,
+    speed: u32,
+    error: &Option<String>,
+    files: &files::Files,
+) -> Value {
+    let mut value = world_snapshot(world, running, speed, error);
+    value["files"] = files.status(world);
+    value
+}
+fn world_snapshot(world: &World, running: bool, speed: u32, error: &Option<String>) -> Value {
     let s = &world.state;
     json!({"simulation_version":sim_core::model::SIMULATION_VERSION,"seed":s.config.seed.to_string(),"tick":s.tick,"generation":s.organisms.iter().map(|o|o.generation).max().unwrap_or(0),"size":s.config.size,"population":s.organisms.len(),"species_count":s.species.values().filter(|sp|sp.population>0).count(),"temperature":s.environment.temperature,"regeneration":s.environment.regeneration,"running":running,"speed":speed,"counters":s.counters,"autosave_error":error,"cells":s.environment.cells.iter().map(|c|[c.food,c.temperature_offset,c.fertility]).collect::<Vec<_>>(),"organisms":s.organisms.iter().map(|o|json!({"id":o.id.0,"x":o.x,"y":o.y,"dx":o.dx,"dy":o.dy,"species_id":o.species_id.0,"body_size":o.phenotype.body_size,"speed":o.phenotype.speed,"carnivory":o.phenotype.carnivory})).collect::<Vec<_>>()})
 }
@@ -114,6 +129,91 @@ fn snapshot(world: &World, running: bool, speed: u32, error: &Option<String>) ->
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn failed_file_actions_preserve_world_and_save_marker() {
+        let dir = tempfile::tempdir().unwrap();
+        let app = App::start(dir.path().into()).unwrap();
+        let saved = app.execute(Action::Save { path: None }).unwrap();
+        let bytes = std::fs::read(dir.path().join("manual.genesis")).unwrap();
+        for (name, bytes) in [
+            ("corrupt.genesis", b"broken".to_vec()),
+            ("version.genesis", {
+                let mut b = bytes.clone();
+                b[12] = 99;
+                b
+            }),
+            ("checksum.genesis", {
+                let mut b = bytes.clone();
+                b[30] ^= 1;
+                b
+            }),
+        ] {
+            let path = dir.path().join(name);
+            std::fs::write(&path, bytes).unwrap();
+            assert!(app
+                .execute(Action::Load {
+                    path: Some(path.to_string_lossy().into())
+                })
+                .is_err());
+        }
+        assert!(app
+            .execute(Action::Load {
+                path: Some(dir.path().join("missing.genesis").to_string_lossy().into())
+            })
+            .is_err());
+        let blocked = dir.path().join("blocked.genesis");
+        std::fs::create_dir(&blocked).unwrap();
+        assert!(app
+            .execute(Action::Save {
+                path: Some(blocked.to_string_lossy().into())
+            })
+            .is_err());
+        let status = app.execute(Action::Snapshot).unwrap();
+        assert_eq!(status["files"]["dirty"], false);
+        assert_eq!(app.execute(Action::Replay).unwrap()["hash"], saved["hash"]);
+        assert_eq!(
+            persistence::load(&dir.path().join("manual.genesis"))
+                .unwrap()
+                .hash(),
+            saved["hash"].as_str().unwrap()
+        );
+    }
+    #[test]
+    fn rotating_autosaves_are_valid_and_do_not_clear_manual_dirty_marker() {
+        let dir = tempfile::tempdir().unwrap();
+        let app = App::start(dir.path().into()).unwrap();
+        app.execute(Action::Control {
+            running: true,
+            speed: 0,
+        })
+        .unwrap();
+        let deadline = Instant::now() + Duration::from_secs(120);
+        loop {
+            let s = app.execute(Action::Snapshot).unwrap();
+            if s["tick"].as_u64().unwrap() >= 15_100 {
+                break;
+            }
+            assert!(Instant::now() < deadline, "Autosave test timeout");
+            thread::sleep(Duration::from_millis(100));
+        }
+        app.execute(Action::Control {
+            running: false,
+            speed: 0,
+        })
+        .unwrap();
+        for slot in 0..3 {
+            let saved =
+                persistence::load(&dir.path().join(format!("autosave-{slot}.genesis"))).unwrap();
+            assert!(saved.state.tick >= 5000);
+            assert_eq!(
+                Replay::from_world(&saved).verify().unwrap().hash(),
+                saved.hash()
+            );
+        }
+        let snapshot = app.execute(Action::Snapshot).unwrap();
+        assert_eq!(snapshot["files"]["dirty"], true);
+        assert!(snapshot["autosave_error"].is_null());
+    }
     #[test]
     fn worker_manual_save_load_and_replay() {
         let dir = std::env::temp_dir().join(format!("genesis-app-test-{}", std::process::id()));

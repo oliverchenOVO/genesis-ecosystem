@@ -600,6 +600,7 @@ footer button {
   min-height: 650px;
 }
 .evolution-tree {
+  user-select: none;
   width: 100%;
   height: 650px;
   margin-top: 28px;
@@ -608,6 +609,33 @@ footer button {
   border-radius: 4px;
   cursor: grab;
   background: #0f1a16;
+}
+.unsaved-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+.recent-worlds {
+  padding: 0;
+  list-style: none;
+}
+.recent-worlds li {
+  display: flex;
+  gap: 12px;
+  margin: 12px 0;
+}
+.recent-worlds li > button:first-child {
+  min-width: 0;
+  flex: 1;
+  text-align: left;
+}
+.recent-worlds span,
+.recent-worlds small {
+  display: block;
+  overflow-wrap: anywhere;
+  margin-top: 6px;
+  color: var(--muted);
 }
 .tree-edge {
   stroke: #7fb48a;
@@ -792,17 +820,24 @@ dialog button.full {
     display: none;
   }
   header {
-    padding: 0 16px;
+    height: auto;
+    min-height: 70px;
+    flex-wrap: wrap;
+    padding: 12px 16px;
     gap: 10px;
   }
   .brand {
     font-size: 26px;
   }
   nav {
+    height: 42px;
     gap: 2px;
   }
   nav button {
     padding: 0 10px;
+  }
+  .header-actions {
+    flex-wrap: wrap;
   }
   .time-toolbar {
     gap: 12px;

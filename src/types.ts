@@ -10,6 +10,7 @@ export interface DisplayOrganism {
   carnivory: number;
 }
 export interface Snapshot {
+  files: FileStatus;
   simulation_version: number;
   seed: string;
   tick: number;
@@ -107,6 +108,7 @@ export type Action =
   | { op: "environment"; temperature: number; regeneration: number }
   | { op: "detail"; id: number }
   | { op: "new"; config: WorldConfig }
+  | { op: "forget_recent"; path: string }
   | { op: "save" | "load"; path: string | null };
 export interface WorldConfig {
   seed: number;
@@ -114,4 +116,10 @@ export interface WorldConfig {
   starting_population: number;
   population_limit: number;
   mutation_multiplier: number;
+}
+export interface FileStatus {
+  dirty: boolean;
+  current_path: string | null;
+  warning: string | null;
+  recent: { path: string; last_opened_ms: number; available: boolean }[];
 }

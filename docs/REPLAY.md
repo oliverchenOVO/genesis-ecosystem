@@ -8,3 +8,7 @@ No changes to golden hashes are allowed without a simulation version change and 
 
 V4 changes permanent species origin-generation metadata and canonical serialization, retaining its own golden baseline. A final checkpoint at final_tick is mandatory, including tick zero. Earlier version fixtures are preserved and rejected. No fixture is refreshed to mask an assertion failure.
 
+Phase 1.1 file UX and calibration do not change replay versions or golden fixtures. Showcase seed 11 uses the existing v4 configuration: size 512, founders 50, capacity 200, mutation multiplier 100, initial temperature 20°C and regeneration 12. Its world begins at tick zero and contains no injected species, mutations or events.
+
+Calibration's temperature sweep uses `1800 + (seed % 5) * 100` at tick zero. The runner omits a redundant command at 20°C/regen 12; the original Phase 1 stress runner logged it. This changes command-log hashes for that subset when comparing different command sequences, but not ecology rules. Preserve original stress artifacts as the exact Phase 1 baseline; compare hashes only for identical command sequences.
+

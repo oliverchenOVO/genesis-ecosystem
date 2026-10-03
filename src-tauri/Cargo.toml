@@ -7,6 +7,7 @@ license = "MIT"
 tauri-build = { version = "2", features = [] }
 [dependencies]
 tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
 sim-app = { path = "../crates/sim-app" }
 serde_json = "1"
 tracing = "0.1"

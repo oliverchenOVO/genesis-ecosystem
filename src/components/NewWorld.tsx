@@ -59,7 +59,26 @@ export function NewWorld({
         </div>
         <p className="muted">
           A reproducible ecosystem begins with a seed. Creating a world replaces
-          the current session; save first to keep it.
+          the current session after you choose how to handle unsaved progress.
+        </p>
+        <button
+          type="button"
+          disabled={busy}
+          onClick={() =>
+            setConfig({
+              seed: 11,
+              size: 512,
+              starting_population: 50,
+              population_limit: 200,
+              mutation_multiplier: 100,
+            })
+          }
+        >
+          Showcase · Seed 11
+        </button>
+        <p className="muted">
+          Showcase uses natural evolution: 50 founders, capacity 200. Run MAX to
+          observe genetic divergence; speciation is not forced.
         </p>
         <label>
           Seed

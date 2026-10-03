@@ -12,6 +12,7 @@ async fn action(app: tauri::State<'_, App>, action: Action) -> Result<serde_json
 fn main() {
     tracing_subscriber::fmt().with_env_filter("info").init();
     let result = tauri::Builder::default()
+        .plugin(tauri_plugin_dialog::init())
         .on_page_load(|window, payload| {
             if payload.event() == tauri::webview::PageLoadEvent::Finished {
                 tracing::info!(url=%payload.url(), "webview_page_loaded");
@@ -43,6 +44,17 @@ fn main() {
 mod tests {
     use super::*;
     use tauri::test::{get_ipc_response, mock_builder, mock_context, noop_assets, INVOKE_KEY};
+
+    #[test]
+    fn close_listener_can_finish_the_native_window_close() {
+        // Tauri's onCloseRequested wrapper invokes destroy after our guard allows close.
+        let capability: serde_json::Value =
+            serde_json::from_str(include_str!("../capabilities/default.json")).unwrap();
+        let permissions = capability["permissions"].as_array().unwrap();
+        assert!(permissions.iter().any(|p| p == "core:window:allow-close"));
+        assert!(permissions.iter().any(|p| p == "core:window:allow-destroy"));
+        assert_eq!(capability["windows"], serde_json::json!(["main"]));
+    }
 
     #[test]
     fn ipc_routes_real_worker_and_rejects_invalid_commands() {
