@@ -8,6 +8,8 @@ pub mod profile;
 pub mod replay;
 pub mod rng;
 pub mod spatial;
+#[cfg(feature = "viability")]
+pub mod viability;
 pub mod world;
 pub use model::*;
 pub use world::World;

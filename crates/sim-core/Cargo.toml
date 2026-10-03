@@ -14,3 +14,4 @@ tempfile = "3.23"
 
 [features]
 profile = []
+viability = []

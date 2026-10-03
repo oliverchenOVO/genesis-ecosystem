@@ -202,6 +202,10 @@ impl World {
         let mut profile_stamp = std::time::Instant::now();
         let s = &mut self.state;
         s.tick += 1;
+        #[cfg(feature = "viability")]
+        for o in &s.organisms {
+            crate::viability::tick(o, eligible(o, s.tick));
+        }
         for cell in &mut s.environment.cells {
             // Moisture and elevation define resource hardness/productivity; no species bonuses.
             let productivity = cell.fertility * (200 + cell.moisture) / 1000;
@@ -252,6 +256,8 @@ impl World {
                         best_mate = Some(candidate);
                     }
                 }
+                #[cfg(feature = "viability")]
+                crate::viability::perception(o, best_mate.is_some(), best_prey.is_some());
                 let mut choices = vec![(
                     10,
                     5,
@@ -380,6 +386,8 @@ impl World {
                 .phenotype
                 .morphology
                 .terrain_speed(o.phenotype.speed, terrain.elevation);
+            #[cfg(feature = "viability")]
+            crate::viability::movement(o, speed, intent.behavior == Behavior::Hunt);
             o.dx = dx * speed / norm;
             o.dy = dy * speed / norm;
             o.x = (o.x + o.dx).clamp(0, s.config.size - 1);
@@ -399,12 +407,23 @@ impl World {
                 * o.phenotype.morphology.resource_efficiency(cell.elevation)
                 / 100;
             if efficiency <= 0 {
+                #[cfg(feature = "viability")]
+                crate::viability::food(o, cell.food, efficiency, 25, 0, 0);
                 continue;
             }
             let amount = cell
                 .food
                 .min(25)
                 .min((o.phenotype.energy_capacity - o.energy) * 100 / efficiency.max(1));
+            #[cfg(feature = "viability")]
+            crate::viability::food(
+                o,
+                cell.food,
+                efficiency,
+                25,
+                amount,
+                (amount * efficiency / 100).min(o.phenotype.energy_capacity - o.energy),
+            );
             cell.food -= amount;
             s.species
                 .get_mut(&o.species_id)
@@ -446,6 +465,8 @@ impl World {
                     let attacker_species = predator.species_id;
                     let prey_species = prey.species_id;
                     let prey_mass = prey.phenotype.morphology.mass as u64;
+                    #[cfg(feature = "viability")]
+                    crate::viability::attack(predator, predator.energy.min(attack_cost));
                     s.organisms[i].energy = (s.organisms[i].energy - attack_cost).max(0);
                     s.organisms[i].last_attack = s.tick;
                     s.organisms[j].health -= damage;
@@ -455,6 +476,13 @@ impl World {
                         .feeding_observations[3] += 1;
                     if s.organisms[j].health <= 0 {
                         deaths.insert(j, DeathCause::Predation);
+                        #[cfg(feature = "viability")]
+                        crate::viability::kill(
+                            &s.organisms[i],
+                            gain.min(
+                                s.organisms[i].phenotype.energy_capacity - s.organisms[i].energy,
+                            ),
+                        );
                         s.organisms[i].energy = (s.organisms[i].energy + gain)
                             .min(s.organisms[i].phenotype.energy_capacity);
                         s.counters.predations += 1;
@@ -485,6 +513,18 @@ impl World {
             let cost = p.metabolism
                 + (o.dx.abs() + o.dy.abs()) * p.morphology.movement_cost / 500
                 + excess / (100 + p.morphology.mass / 50);
+            #[cfg(feature = "viability")]
+            crate::viability::metabolism(
+                o,
+                [
+                    p.metabolism - p.morphology.maintenance_cost,
+                    p.morphology.maintenance_cost,
+                    (o.dx.abs() + o.dy.abs()) * p.morphology.movement_cost / 500,
+                    excess / (100 + p.morphology.mass / 50),
+                ],
+                o.energy.min(cost),
+                o.energy <= cost,
+            );
             o.energy = (o.energy - cost).max(0);
             if o.energy == 0 {
                 o.health -= 5;
@@ -510,6 +550,8 @@ impl World {
         #[cfg(feature = "profile")]
         crate::profile::mark("metabolism", &mut profile_stamp);
         for (&i, &cause) in &deaths {
+            #[cfg(feature = "viability")]
+            crate::viability::death(&s.organisms[i], s.tick, cause);
             if cause == DeathCause::Starvation
                 && s.organisms[i].phenotype.carnivory > 650
                 && s.organisms[i].phenotype.morphology.mouth != crate::morphology::Mouth::Grazer
@@ -547,6 +589,41 @@ impl World {
                         s.organisms[*j].id,
                     )
                 });
+            #[cfg(feature = "viability")]
+            {
+                let mut candidates = [0; 9];
+                for j in mating_spatial.nearby(a.x, a.y, 24) {
+                    let b = &s.organisms[j];
+                    if j == i
+                        || deaths.contains_key(&j)
+                        || paired.contains(&j)
+                        || distance_squared(a.x, a.y, b.x, b.y) > 24 * 24
+                    {
+                        continue;
+                    }
+                    candidates[0] += 1;
+                    if eligible(b, s.tick) {
+                        candidates[1] += 1;
+                        candidates[2] += u64::from(a.genome.compatible(&b.genome));
+                        candidates[3] += u64::from(a.genome.distance(&b.genome) <= 220);
+                        let differences: Vec<_> = a
+                            .genome
+                            .0
+                            .iter()
+                            .zip(b.genome.0)
+                            .map(|(a, b)| a.abs_diff(b))
+                            .collect();
+                        candidates[4] += u64::from(differences[..14].iter().all(|d| *d <= 400));
+                        candidates[5] += u64::from(differences[14..].iter().all(|d| *d <= 400));
+                        candidates[6] += u64::from(differences[14] <= 400);
+                        candidates[7] += u64::from(differences[17] <= 400);
+                        candidates[8] += u64::from(differences[13] <= 400);
+                    }
+                }
+                crate::viability::mate_search(a, candidates);
+            }
+            #[cfg(feature = "viability")]
+            crate::viability::mating_attempt(a, mate.is_some());
             let Some(j) = mate else {
                 continue;
             };
@@ -557,6 +634,8 @@ impl World {
             paired.insert(j);
             let a = s.organisms[i].clone();
             let b = s.organisms[j].clone();
+            #[cfg(feature = "viability")]
+            crate::viability::mating_attempt(&b, true);
             let count = a.phenotype.offspring_count.min(b.phenotype.offspring_count);
             let a_cost = a.energy / 4 + a.phenotype.morphology.reproduction_cost / 2;
             let b_cost = b.energy / 4 + b.phenotype.morphology.reproduction_cost / 2;
@@ -659,8 +738,23 @@ impl World {
                     behavior: Behavior::Rest,
                 });
                 s.counters.births += 1;
+                #[cfg(feature = "viability")]
+                crate::viability::birth(births.last().expect("just born"));
                 s.organisms[i].offspring += 1;
                 s.organisms[j].offspring += 1;
+            }
+            #[cfg(feature = "viability")]
+            {
+                crate::viability::reproduction(
+                    &a,
+                    a.energy.min(a_cost),
+                    s.organisms[i].offspring - a.offspring,
+                );
+                crate::viability::reproduction(
+                    &b,
+                    b.energy.min(b_cost),
+                    s.organisms[j].offspring - b.offspring,
+                );
             }
             s.organisms[i].energy = (a.energy - a_cost).max(0);
             s.organisms[j].energy = (b.energy - b_cost).max(0);

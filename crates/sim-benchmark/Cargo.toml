@@ -10,3 +10,4 @@ serde_json.workspace = true
 
 [features]
 sim-profile = ["sim-core/profile"]
+viability = ["sim-core/viability"]
