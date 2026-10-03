@@ -26,7 +26,7 @@ fn main() -> Result<(), String> {
         if replayed.hash() != hash {
             return Err("Saved world replay mismatch".into());
         }
-        let restored = serde_json::json!({"seed":saved.state.config.seed,"tick":saved.state.tick,"population":saved.state.organisms.len(),"species":saved.state.species.len(),"lineages":saved.state.lineages.len(),"telemetry_samples":saved.state.telemetry.len(),"commands":saved.state.commands,"rng":saved.state.rng,"hash":hash});
+        let restored = serde_json::json!({"seed":saved.state.config.seed,"tick":saved.state.tick,"population":saved.state.organisms.len(),"species":saved.state.species.len(),"lineages":saved.state.lineages.len(),"telemetry_samples":saved.state.telemetry.len(),"commands":saved.state.commands,"rng":saved.state.rng,"hash":hash,"phase2_metrics":sim_core::analysis::ecology_metrics(&saved),"species_records":saved.state.species.values().collect::<Vec<_>>(),"multicellular_example":saved.state.organisms.iter().find(|o|o.phenotype.morphology.segment_count>1)});
         let continuation = argument("--continue", 1000);
         saved.advance(continuation);
         replayed.advance(continuation);
@@ -56,10 +56,25 @@ fn main() -> Result<(), String> {
     let limit = argument("--limit", population.max(2000) as u64) as usize;
     let mut world = World::new(Config {
         seed,
+        size: argument("--size", 512) as i32,
+        mutation_multiplier: argument("--mutation", 100) as u32,
         starting_population: population,
         population_limit: limit,
-        ..Config::default()
     })?;
+    let temperature = args
+        .windows(2)
+        .find(|p| p[0] == "--temperature")
+        .map(|p| p[1].parse::<i32>().map_err(|e| e.to_string()))
+        .transpose()?
+        .unwrap_or(2000);
+    let regeneration = argument("--regeneration", 12) as i32;
+    if temperature != 2000 || regeneration != 12 {
+        world.command(Command {
+            tick: 0,
+            temperature,
+            regeneration,
+        })?;
+    }
     let start = Instant::now();
     let mut organism_ticks = 0u128;
     let mut occupied_ticks = 0u64;
@@ -74,6 +89,9 @@ fn main() -> Result<(), String> {
     }
     world.validate()?;
     let elapsed = start.elapsed().as_secs_f64();
+    if let Some(pair) = args.windows(2).find(|p| p[0] == "--save-world") {
+        persistence::save_atomic(&world, std::path::Path::new(&pair[1]))?;
+    }
     #[cfg(feature = "sim-profile")]
     eprintln!(
         "{}",
@@ -81,7 +99,7 @@ fn main() -> Result<(), String> {
     );
     println!(
         "{}",
-        serde_json::json!({"seed":seed,"ticks":ticks,"initial_population":population,"elapsed_seconds":elapsed,"ticks_per_second":ticks as f64/elapsed,"occupied_ticks":occupied_ticks,"organism_ticks":organism_ticks.to_string(),"mean_population":organism_ticks as f64/ticks.max(1) as f64,"peak_population":world.state.counters.peak_population,"final_population":world.state.organisms.len(),"species_count":world.state.species.len(),"births":world.state.counters.births,"deaths":world.state.counters.deaths,"mutations":world.state.counters.mutations,"predations":world.state.counters.predations,"world_hash":world.hash()})
+        serde_json::json!({"seed":seed,"ticks":ticks,"initial_population":population,"elapsed_seconds":elapsed,"ticks_per_second":ticks as f64/elapsed,"occupied_ticks":occupied_ticks,"organism_ticks":organism_ticks.to_string(),"mean_population":organism_ticks as f64/ticks.max(1) as f64,"peak_population":world.state.counters.peak_population,"final_population":world.state.organisms.len(),"species_count":world.state.species.len(),"births":world.state.counters.births,"deaths":world.state.counters.deaths,"mutations":world.state.counters.mutations,"predations":world.state.counters.predations,"world_hash":world.hash(),"phase2_metrics":sim_core::analysis::ecology_metrics(&world)})
     );
     Ok(())
 }
