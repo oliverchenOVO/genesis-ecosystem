@@ -1,7 +1,7 @@
 use crate::rng::Rng;
 use serde::{Deserialize, Serialize};
 
-pub const LOCI: usize = 14;
+pub const LOCI: usize = 22;
 
 /// Haploid bounded regulatory alleles; values are not gameplay stats.
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
@@ -9,6 +9,7 @@ pub struct Genome(pub [u16; LOCI]);
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Phenotype {
+    pub morphology: crate::morphology::BodyMorphology,
     pub body_size: i32,
     pub speed: i32,
     pub vision: i32,
@@ -33,14 +34,19 @@ impl Genome {
     pub fn phenotype(&self) -> Phenotype {
         let g = self.0.map(i32::from);
         let body = 4 + g[0] / 125;
-        let capacity = 1200 + g[12] * 2 + body * 40;
+        let morphology =
+            crate::morphology::MorphologyGenome::from_loci(&self.0[14..]).express(body);
+        let capacity = 1200 + g[12] * 2 + morphology.mass * 3 + morphology.storage * 2;
         Phenotype {
             body_size: body,
-            speed: (2 + g[1] / 100) * 8 / body,
-            vision: 16 + g[2] / 16,
-            metabolism: 1 + g[3] / 250 + body / 4,
+            speed: ((2 + g[1] / 100) * 8 / body * morphology.locomotion_efficiency
+                / (1000 + morphology.mass / 4 + morphology.armor / 2))
+                .max(1),
+            vision: 16 + g[2] / 24 + morphology.sensory_investment / 40,
+            metabolism: 1 + g[3] / 250 + body / 4 + morphology.maintenance_cost,
             food_efficiency: 60 + g[4] / 10,
-            reproduction_threshold: capacity * (55 + g[5] / 40) / 100,
+            reproduction_threshold: (capacity * (55 + g[5] / 40) / 100)
+                .max(morphology.reproduction_cost),
             offspring_count: 1 + (g[6] / 500) as u32,
             mutation_rate: 5 + (g[7] / 10) as u32,
             aggression: g[8],
@@ -49,6 +55,7 @@ impl Genome {
             temperature_tolerance: 400 + g[11],
             energy_capacity: capacity,
             carnivory: g[13],
+            morphology,
         }
     }
 
@@ -62,12 +69,16 @@ impl Genome {
     }
 
     pub fn compatible(&self, other: &Self) -> bool {
-        self.distance(other) <= 220
-            && self
-                .0
-                .iter()
-                .zip(other.0)
-                .all(|(a, b)| a.abs_diff(b) <= 400)
+        let mut total = 0u32;
+        for (a, b) in self.0.iter().zip(other.0) {
+            let distance = a.abs_diff(b);
+            if distance > 400 {
+                return false;
+            }
+            total += u32::from(distance);
+        }
+        // Preserve the original floored mean threshold, including its boundary.
+        total < 221 * LOCI as u32
     }
 
     pub fn child(
@@ -103,6 +114,55 @@ impl Genome {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn compatibility_single_pass_preserves_floored_mean_boundary() {
+        let a = Genome([0; LOCI]);
+        let mut b = Genome([220; LOCI]);
+        b.0[0] += LOCI as u16 - 1;
+        assert!(a.compatible(&b));
+        b.0[0] += 1;
+        assert!(!a.compatible(&b));
+        for seed in 0..100 {
+            let a = Genome::random(&mut Rng(seed));
+            let b = Genome::random(&mut Rng(seed + 100));
+            assert_eq!(
+                a.compatible(&b),
+                a.distance(&b) <= 220 && a.0.iter().zip(b.0).all(|(a, b)| a.abs_diff(b) <= 400)
+            );
+        }
+    }
+
+    #[test]
+    fn morphology_is_inherited_not_unlocked_by_generation() {
+        let mut a = Genome([500; LOCI]);
+        a.0[14] = 0;
+        let mut b = a.clone();
+        b.0[14] = 750;
+        let mut inherited_complex = false;
+        let mut inherited_simple = false;
+        for seed in 0..32 {
+            let (child, n) = Genome::child(&a, &b, &mut Rng(seed), &mut Rng(seed + 1), 0);
+            assert_eq!(n, 0);
+            assert!(child.0[14] == 0 || child.0[14] == 750);
+            inherited_complex |= child.phenotype().morphology.segment_count == 4;
+            inherited_simple |= child.phenotype().morphology.segment_count == 1;
+        }
+        assert!(inherited_simple && inherited_complex);
+    }
+
+    #[test]
+    fn structural_investments_change_real_phenotype_costs() {
+        let mut a = Genome([500; LOCI]);
+        a.0[18] = 0;
+        a.0[19] = 0;
+        let mut b = a.clone();
+        b.0[18] = 1000;
+        b.0[19] = 1000;
+        let (a, b) = (a.phenotype(), b.phenotype());
+        assert!(b.metabolism > a.metabolism && b.vision > a.vision);
+        assert!(b.speed < a.speed);
+        assert!(b.morphology.reproduction_cost > a.morphology.reproduction_cost);
+    }
 
     #[test]
     fn inheritance_without_mutation() {

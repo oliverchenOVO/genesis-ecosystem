@@ -1,6 +1,10 @@
+pub mod analysis;
 pub mod genetics;
 pub mod model;
+pub mod morphology;
 pub mod persistence;
+#[cfg(feature = "profile")]
+pub mod profile;
 pub mod replay;
 pub mod rng;
 pub mod spatial;

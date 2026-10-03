@@ -50,6 +50,9 @@ pub fn decode(bytes: &[u8]) -> Result<World, String> {
                 .map_err(|_| "Invalid version")?,
         );
         if version != expected {
+            if offset == 12 && version == 4 {
+                return Err("Incompatible legacy simulation v4 save. Open it with GENESIS v0.1.0; Phase 2 v5 does not migrate or reinterpret legacy worlds.".into());
+            }
             return Err(format!(
                 "Incompatible save version at offset {offset}: {version}, expected {expected}"
             ));
@@ -109,6 +112,12 @@ pub fn load(path: &Path) -> Result<World, String> {
 mod tests {
     use super::*;
     use crate::Config;
+    #[test]
+    fn actual_baseline_save_has_clear_non_migrating_rejection() {
+        let bytes = include_bytes!("../../../examples/seed11-107504.genesis");
+        let error = decode(bytes).unwrap_err();
+        assert!(error.contains("legacy simulation v4") && error.contains("v0.1.0"));
+    }
     #[test]
     fn roundtrip_and_continuation() {
         let mut a = World::new(Config::default()).unwrap();

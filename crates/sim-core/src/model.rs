@@ -5,7 +5,7 @@ use crate::{
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-pub const SIMULATION_VERSION: u32 = 4;
+pub const SIMULATION_VERSION: u32 = 5;
 pub const TELEMETRY_INTERVAL: u64 = 100;
 macro_rules! id {
     ($name:ident) => {
@@ -131,6 +131,14 @@ pub struct Lineage {
 }
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Species {
+    pub representative_genome: Genome,
+    pub representative_morphology: crate::morphology::BodyMorphology,
+    pub morphology_summary: [i32; 9],
+    pub origin_environment: [i32; 3],
+    pub niche: [i32; 6],
+    pub feeding_observations: [u64; 4],
+    pub innovation_streaks: [u32; 5],
+    pub innovations: [bool; 5],
     pub id: SpeciesId,
     pub name: String,
     pub ancestor: Option<SpeciesId>,
@@ -144,6 +152,12 @@ pub struct Species {
 }
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub enum HistoryKind {
+    MorphologicalInnovation {
+        index: usize,
+    },
+    SafetyPopulationCeiling {
+        population: usize,
+    },
     Origin,
     SpeciesCandidate {
         lineage: LineageId,
@@ -171,6 +185,8 @@ pub struct HistoricalEvent {
 }
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct SpeciesTelemetry {
+    pub morphology: [i32; 9],
+    pub niche: [i32; 6],
     pub species: SpeciesId,
     pub population: usize,
     pub means: [i32; 6],
@@ -205,6 +221,9 @@ impl Command {
 }
 #[derive(Clone, Debug, Default, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Counters {
+    pub predator_starvation_deaths: u64,
+    pub coexistence_ticks: u64,
+    pub safety_ceiling_ticks: u64,
     pub births: u64,
     pub deaths: u64,
     pub mutations: u64,

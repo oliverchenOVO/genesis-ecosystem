@@ -1,3 +1,4 @@
+#![recursion_limit = "256"]
 use sim_core::{
     model::SIMULATION_VERSION,
     persistence,
@@ -73,6 +74,11 @@ fn main() -> Result<(), String> {
     }
     world.validate()?;
     let elapsed = start.elapsed().as_secs_f64();
+    #[cfg(feature = "sim-profile")]
+    eprintln!(
+        "{}",
+        serde_json::to_string(&sim_core::profile::report()).map_err(|e| e.to_string())?
+    );
     println!(
         "{}",
         serde_json::json!({"seed":seed,"ticks":ticks,"initial_population":population,"elapsed_seconds":elapsed,"ticks_per_second":ticks as f64/elapsed,"occupied_ticks":occupied_ticks,"organism_ticks":organism_ticks.to_string(),"mean_population":organism_ticks as f64/ticks.max(1) as f64,"peak_population":world.state.counters.peak_population,"final_population":world.state.organisms.len(),"species_count":world.state.species.len(),"births":world.state.counters.births,"deaths":world.state.counters.deaths,"mutations":world.state.counters.mutations,"predations":world.state.counters.predations,"world_hash":world.hash()})

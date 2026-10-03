@@ -11,3 +11,6 @@ bincode.workspace = true
 blake3.workspace = true
 flate2.workspace = true
 tempfile = "3.23"
+
+[features]
+profile = []

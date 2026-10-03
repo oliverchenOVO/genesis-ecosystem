@@ -23,25 +23,40 @@ impl World {
         config.validate()?;
         let mut rng = Streams::new(config.seed);
         let side = config.size / CELL_SIZE;
-        let cells = (0..side * side)
-            .map(|_| Cell {
+        let cells: Vec<Cell> = (0..side * side)
+            .map(|index| Cell {
                 food: 300 + rng.world.below(700) as i32,
                 fertility: 60 + rng.world.below(81) as i32,
-                temperature_offset: rng.world.below(401) as i32 - 200,
-                elevation: rng.world.below(1001) as i32,
-                moisture: rng.world.below(1001) as i32,
+                temperature_offset: ((index / side / 4 + (config.seed % 7) as i32) % 5 - 2) * 250
+                    + rng.world.below(201) as i32
+                    - 100,
+                elevation: ((index % side / 4 + (config.seed % 7) as i32) % 5) * 180
+                    + rng.world.below(201) as i32,
+                moisture: ((index / side / 4 + index % side / 4) % 5) * 180
+                    + rng.world.below(201) as i32,
             })
             .collect();
-        let base = Genome([500; LOCI]);
+        let mut base = Genome([500; LOCI]);
+        base.0[14..].copy_from_slice(&[200, 500, 125, 200, 100, 200, 300, 200]);
         let mut organisms = Vec::new();
         let mut ancestry = BTreeMap::new();
         for i in 1..=config.starting_population as u64 {
             let mut genome = base.clone();
-            for g in &mut genome.0 {
+            for g in &mut genome.0[..14] {
                 *g = (450 + rng.world.below(101)) as u16;
             }
             // Dietary tendency is heritable. Founders include natural standing variation.
             genome.0[13] = if rng.world.below(10) == 0 { 800 } else { 200 };
+            for g in &mut genome.0[14..] {
+                *g = (i32::from(*g) + rng.world.below(51) as i32 - 25).clamp(0, 1000) as u16;
+            }
+            genome.0[17] = if genome.0[13] > 650 {
+                800
+            } else if rng.world.below(4) == 0 {
+                500
+            } else {
+                200
+            };
             let phenotype = genome.phenotype();
             organisms.push(Organism {
                 id: OrganismId(i),
@@ -91,6 +106,20 @@ impl World {
         species.insert(
             SpeciesId(1),
             Species {
+                representative_genome: organisms[0].genome.clone(),
+                representative_morphology: organisms[0].phenotype.morphology.clone(),
+                morphology_summary: [0; 9],
+                origin_environment: [
+                    2000,
+                    12,
+                    cells
+                        [(organisms[0].y / CELL_SIZE * side + organisms[0].x / CELL_SIZE) as usize]
+                        .elevation,
+                ],
+                niche: [0; 6],
+                feeding_observations: [0; 4],
+                innovation_streaks: [0; 5],
+                innovations: [false; 5],
                 id: SpeciesId(1),
                 name: scientific_name(config.seed, 1),
                 ancestor: None,
@@ -169,11 +198,17 @@ impl World {
     }
 
     pub fn step(&mut self) {
+        #[cfg(feature = "profile")]
+        let mut profile_stamp = std::time::Instant::now();
         let s = &mut self.state;
         s.tick += 1;
         for cell in &mut s.environment.cells {
-            cell.food = (cell.food + s.environment.regeneration * cell.fertility / 100).min(1000);
+            // Moisture and elevation define resource hardness/productivity; no species bonuses.
+            let productivity = cell.fertility * (200 + cell.moisture) / 1000;
+            cell.food = (cell.food + s.environment.regeneration * productivity / 100).min(1000);
         }
+        #[cfg(feature = "profile")]
+        crate::profile::mark("resource regeneration", &mut profile_stamp);
         let spatial = Spatial::new(s.config.size, &s.organisms);
         let side = s.config.size / CELL_SIZE;
         // Perception and intent: no writes to any other organism.
@@ -197,21 +232,22 @@ impl World {
                     }
                     let candidate = (d, other.id, j);
                     if other.phenotype.carnivory > 650
+                        && other.phenotype.morphology.can_attack(&p.morphology)
                         && p.carnivory <= 650
                         && best_threat.is_none_or(|v| candidate < v)
                     {
                         best_threat = Some(candidate);
                     }
                     if p.carnivory > 650
-                        && other.phenotype.body_size <= p.body_size + 2
+                        && p.morphology.can_attack(&other.phenotype.morphology)
                         && other.phenotype.carnivory <= 650
                         && best_prey.is_none_or(|v| candidate < v)
                     {
                         best_prey = Some(candidate);
                     }
                     if other.energy >= other.phenotype.reproduction_threshold
-                        && o.genome.compatible(&other.genome)
                         && best_mate.is_none_or(|v| candidate < v)
+                        && o.genome.compatible(&other.genome)
                     {
                         best_mate = Some(candidate);
                     }
@@ -240,8 +276,7 @@ impl World {
                     ));
                 }
                 let hunger = (p.energy_capacity - o.energy) * 1000 / p.energy_capacity;
-                if let Some((_, _, j)) = best_prey.filter(|_| o.energy < p.energy_capacity * 3 / 4)
-                {
+                if let Some((_, _, j)) = best_prey.filter(|_| o.energy < p.energy_capacity / 2) {
                     let t = &s.organisms[j];
                     choices.push((
                         hunger + 300 + p.aggression / 4,
@@ -255,8 +290,8 @@ impl World {
                     ));
                 }
                 if o.energy >= p.reproduction_threshold
-                    && s.tick - o.birth_tick >= 60
-                    && s.tick - o.last_mating >= 80
+                    && s.tick - o.birth_tick >= 60 + p.morphology.complexity as u64 / 4
+                    && s.tick - o.last_mating >= 80 + p.morphology.complexity as u64 / 4
                 {
                     if let Some((_, _, j)) = best_mate {
                         let t = &s.organisms[j];
@@ -333,29 +368,52 @@ impl World {
                 choices[0].2
             })
             .collect();
+        #[cfg(feature = "profile")]
+        crate::profile::mark("perception", &mut profile_stamp);
         // Commit movement; all evaluated intents already exist.
         for (o, intent) in s.organisms.iter_mut().zip(&intents) {
             let dx = intent.x - o.x;
             let dy = intent.y - o.y;
             let norm = dx.abs().max(dy.abs()).max(1);
-            o.dx = dx * o.phenotype.speed / norm;
-            o.dy = dy * o.phenotype.speed / norm;
+            let terrain = &s.environment.cells[(o.y / CELL_SIZE * side + o.x / CELL_SIZE) as usize];
+            let speed = o
+                .phenotype
+                .morphology
+                .terrain_speed(o.phenotype.speed, terrain.elevation);
+            o.dx = dx * speed / norm;
+            o.dy = dy * speed / norm;
             o.x = (o.x + o.dx).clamp(0, s.config.size - 1);
             o.y = (o.y + o.dy).clamp(0, s.config.size - 1);
             o.behavior = intent.behavior;
         }
+        #[cfg(feature = "profile")]
+        crate::profile::mark("movement", &mut profile_stamp);
         // Shared food is allocated in stable organism-ID order.
         for o in &mut s.organisms {
+            if o.behavior == Behavior::Hunt {
+                continue;
+            }
             let cell =
                 &mut s.environment.cells[(o.y / CELL_SIZE * side + o.x / CELL_SIZE) as usize];
-            let efficiency = o.phenotype.food_efficiency * (1000 - o.phenotype.carnivory) / 1000;
+            let efficiency = o.phenotype.food_efficiency * (1000 - o.phenotype.carnivory) / 1000
+                * o.phenotype.morphology.resource_efficiency(cell.elevation)
+                / 100;
+            if efficiency <= 0 {
+                continue;
+            }
             let amount = cell
                 .food
-                .min(15)
+                .min(25)
                 .min((o.phenotype.energy_capacity - o.energy) * 100 / efficiency.max(1));
             cell.food -= amount;
+            s.species
+                .get_mut(&o.species_id)
+                .expect("registered species")
+                .feeding_observations[0] += amount as u64;
             o.energy = (o.energy + amount * efficiency / 100).min(o.phenotype.energy_capacity);
         }
+        #[cfg(feature = "profile")]
+        crate::profile::mark("feeding", &mut profile_stamp);
         let mut deaths: BTreeMap<usize, DeathCause> = BTreeMap::new();
         for (i, intent) in intents.iter().enumerate() {
             if intent.behavior != Behavior::Hunt || deaths.contains_key(&i) {
@@ -370,22 +428,49 @@ impl World {
                 if distance_squared(predator.x, predator.y, prey.x, prey.y) <= 64
                     && s.tick - predator.last_attack >= 10
                 {
-                    let gain = prey.energy / 2;
-                    let damage = 15
-                        + predator.phenotype.aggression / 40
-                        + (predator.phenotype.body_size - prey.phenotype.body_size).max(0) * 3;
-                    s.organisms[i].energy = (s.organisms[i].energy - 20).max(0);
+                    if !predator
+                        .phenotype
+                        .morphology
+                        .can_attack(&prey.phenotype.morphology)
+                    {
+                        continue;
+                    }
+                    let gain = prey.energy / 2 + prey.phenotype.morphology.mass / 4;
+                    let damage = predator.phenotype.morphology.damage(
+                        &prey.phenotype.morphology,
+                        predator.phenotype.aggression,
+                        predator.phenotype.speed,
+                        prey.phenotype.speed,
+                    );
+                    let attack_cost = 20 + predator.phenotype.morphology.mass / 40;
+                    let attacker_species = predator.species_id;
+                    let prey_species = prey.species_id;
+                    let prey_mass = prey.phenotype.morphology.mass as u64;
+                    s.organisms[i].energy = (s.organisms[i].energy - attack_cost).max(0);
                     s.organisms[i].last_attack = s.tick;
                     s.organisms[j].health -= damage;
+                    s.species
+                        .get_mut(&prey_species)
+                        .expect("registered prey")
+                        .feeding_observations[3] += 1;
                     if s.organisms[j].health <= 0 {
                         deaths.insert(j, DeathCause::Predation);
                         s.organisms[i].energy = (s.organisms[i].energy + gain)
                             .min(s.organisms[i].phenotype.energy_capacity);
                         s.counters.predations += 1;
+                        let feeding = &mut s
+                            .species
+                            .get_mut(&attacker_species)
+                            .expect("registered predator")
+                            .feeding_observations;
+                        feeding[1] += prey_mass;
+                        feeding[2] += 1;
                     }
                 }
             }
         }
+        #[cfg(feature = "profile")]
+        crate::profile::mark("predation", &mut profile_stamp);
         for (i, o) in s.organisms.iter_mut().enumerate() {
             if deaths.contains_key(&i) {
                 continue;
@@ -397,7 +482,9 @@ impl World {
                 .abs()
                 .saturating_sub(p.temperature_tolerance)
                 .max(0);
-            let cost = p.metabolism + (o.dx.abs() + o.dy.abs()) / 5 + excess / 100;
+            let cost = p.metabolism
+                + (o.dx.abs() + o.dy.abs()) * p.morphology.movement_cost / 500
+                + excess / (100 + p.morphology.mass / 50);
             o.energy = (o.energy - cost).max(0);
             if o.energy == 0 {
                 o.health -= 5;
@@ -420,12 +507,22 @@ impl World {
                 deaths.insert(i, DeathCause::Age);
             }
         }
+        #[cfg(feature = "profile")]
+        crate::profile::mark("metabolism", &mut profile_stamp);
         for (&i, &cause) in &deaths {
+            if cause == DeathCause::Starvation
+                && s.organisms[i].phenotype.carnivory > 650
+                && s.organisms[i].phenotype.morphology.mouth != crate::morphology::Mouth::Grazer
+            {
+                s.counters.predator_starvation_deaths += 1;
+            }
             if let Some(record) = s.ancestry.get_mut(&s.organisms[i].id) {
                 record.death = Some((s.tick, cause));
             }
             s.counters.deaths += 1;
         }
+        #[cfg(feature = "profile")]
+        crate::profile::mark("death accounting", &mut profile_stamp);
         // Matching uses post-resolution spatial positions, stable IDs, and one mating per tick.
         let mating_spatial = Spatial::new(s.config.size, &s.organisms);
         let mut paired = BTreeSet::new();
@@ -461,7 +558,11 @@ impl World {
             let a = s.organisms[i].clone();
             let b = s.organisms[j].clone();
             let count = a.phenotype.offspring_count.min(b.phenotype.offspring_count);
-            let budget = (a.energy + b.energy) / 3;
+            let a_cost = a.energy / 4 + a.phenotype.morphology.reproduction_cost / 2;
+            let b_cost = b.energy / 4 + b.phenotype.morphology.reproduction_cost / 2;
+            let budget = (a_cost + b_cost
+                - (a.phenotype.morphology.complexity + b.phenotype.morphology.complexity))
+                .max(0);
             for _ in 0..count {
                 if s.organisms.len() - deaths.len() + births.len() >= s.config.population_limit {
                     break;
@@ -561,11 +662,13 @@ impl World {
                 s.organisms[i].offspring += 1;
                 s.organisms[j].offspring += 1;
             }
-            s.organisms[i].energy -= a.energy / 3;
-            s.organisms[j].energy -= b.energy / 3;
+            s.organisms[i].energy = (a.energy - a_cost).max(0);
+            s.organisms[j].energy = (b.energy - b_cost).max(0);
             s.organisms[i].last_mating = s.tick;
             s.organisms[j].last_mating = s.tick;
         }
+        #[cfg(feature = "profile")]
+        crate::profile::mark("mating", &mut profile_stamp);
         let mut index = 0;
         s.organisms.retain(|_| {
             let keep = !deaths.contains_key(&index);
@@ -573,12 +676,38 @@ impl World {
             keep
         });
         s.organisms.extend(births);
+        let predators = s
+            .organisms
+            .iter()
+            .filter(|o| {
+                o.phenotype.carnivory > 650
+                    && o.phenotype.morphology.mouth != crate::morphology::Mouth::Grazer
+            })
+            .count();
+        if predators > 0 && predators < s.organisms.len() {
+            s.counters.coexistence_ticks += 1;
+        }
         s.counters.peak_population = s.counters.peak_population.max(s.organisms.len());
         self.account();
+        if self.state.organisms.len() == self.state.config.population_limit {
+            if self.state.counters.safety_ceiling_ticks == 0 {
+                self.event(
+                    None,
+                    HistoryKind::SafetyPopulationCeiling {
+                        population: self.state.organisms.len(),
+                    },
+                );
+            }
+            self.state.counters.safety_ceiling_ticks += 1;
+        }
+        #[cfg(feature = "profile")]
+        crate::profile::mark("population accounting", &mut profile_stamp);
         if self.state.tick.is_multiple_of(TELEMETRY_INTERVAL) {
             self.detect_species();
             self.sample();
         }
+        #[cfg(feature = "profile")]
+        crate::profile::mark("species and telemetry", &mut profile_stamp);
         if self.state.tick.is_multiple_of(1000) {
             self.event(
                 None,
@@ -659,6 +788,26 @@ impl World {
             self.state.species.insert(
                 spid,
                 Species {
+                    representative_genome: self.state.organisms[members[0]].genome.clone(),
+                    representative_morphology: self.state.organisms[members[0]]
+                        .phenotype
+                        .morphology
+                        .clone(),
+                    morphology_summary: [0; 9],
+                    origin_environment: [
+                        self.state.environment.temperature,
+                        self.state.environment.regeneration,
+                        self.state.environment.cells[(self.state.organisms[members[0]].y
+                            / CELL_SIZE
+                            * (self.state.config.size / CELL_SIZE)
+                            + self.state.organisms[members[0]].x / CELL_SIZE)
+                            as usize]
+                            .elevation,
+                    ],
+                    niche: [0; 6],
+                    feeding_observations: [0; 4],
+                    innovation_streaks: [0; 5],
+                    innovations: [false; 5],
                     id: spid,
                     name: scientific_name(self.state.config.seed, spid.0),
                     ancestor: Some(line.species_id),
@@ -700,7 +849,7 @@ impl World {
         for o in &self.state.organisms {
             groups.entry(o.species_id).or_default().push(o);
         }
-        let species = groups
+        let mut species = groups
             .iter()
             .map(|(id, group)| {
                 let mut sums = [0i64; 6];
@@ -725,13 +874,55 @@ impl World {
                     bounds[3] = bounds[3].max(o.y);
                 }
                 SpeciesTelemetry {
+                    morphology: morphology_mean(group),
+                    niche: niche_mean(group, &self.state.environment, self.state.config.size),
                     species: *id,
                     population: group.len(),
                     means: sums.map(|v| (v / group.len() as i64) as i32),
                     bounds,
                 }
             })
-            .collect();
+            .collect::<Vec<_>>();
+        let mut innovations = Vec::new();
+        let species_count = groups.len();
+        drop(groups);
+        for sample in &mut species {
+            let sp = self
+                .state
+                .species
+                .get_mut(&sample.species)
+                .expect("registered species");
+            sp.morphology_summary = sample.morphology;
+            sp.niche = sample.niche;
+            let f = sp.feeding_observations;
+            sp.niche[0] = (f[0] * 1000 / (f[0] + f[1]).max(1)) as i32;
+            sp.niche[1] = (f[1] / f[2].max(1) / 3).min(1000) as i32;
+            sp.niche[2] = (f[3] * 1000 / (self.state.tick.max(1) * sample.population as u64))
+                .min(1000) as i32;
+            sample.niche = sp.niche;
+            let m = sample.morphology;
+            let crossings = [
+                m[0] >= 2000,
+                m[2] >= 300,
+                m[8] >= 500 && f[2] > 0,
+                m[1] >= 1400,
+                m[5] >= 700,
+            ];
+            for (i, crossing) in crossings.into_iter().enumerate() {
+                sp.innovation_streaks[i] = if crossing && sample.population >= 8 {
+                    sp.innovation_streaks[i].saturating_add(1)
+                } else {
+                    0
+                };
+                if sp.innovation_streaks[i] >= 10 && !sp.innovations[i] {
+                    sp.innovations[i] = true;
+                    innovations.push((sp.id, i));
+                }
+            }
+        }
+        for (id, index) in innovations {
+            self.event(Some(id), HistoryKind::MorphologicalInnovation { index });
+        }
         let average = mean_genome(self.state.organisms.iter().map(|o| &o.genome));
         let diversity = if self.state.organisms.is_empty() {
             0
@@ -746,7 +937,7 @@ impl World {
         self.state.telemetry.push(Telemetry {
             tick: self.state.tick,
             population: self.state.organisms.len(),
-            species_count: groups.len(),
+            species_count,
             food: self
                 .state
                 .environment
@@ -787,11 +978,13 @@ impl World {
         {
             return Err("Invalid environment".into());
         }
-        if s.environment
-            .cells
-            .iter()
-            .any(|c| !(0..=1000).contains(&c.food) || !(60..=140).contains(&c.fertility))
-        {
+        if s.environment.cells.iter().any(|c| {
+            !(0..=1000).contains(&c.food)
+                || !(60..=140).contains(&c.fertility)
+                || !(0..=1000).contains(&c.elevation)
+                || !(0..=1000).contains(&c.moisture)
+                || !(-600..=600).contains(&c.temperature_offset)
+        }) {
             return Err("Invalid resources".into());
         }
         if s.organisms.len() > s.config.population_limit {
@@ -859,6 +1052,13 @@ impl World {
                     .extinct_tick
                     .is_some_and(|tick| tick < sp.origin_tick || tick > s.tick)
                 || sp.founder.0.iter().any(|g| *g > 1000)
+                || sp.representative_genome.0.iter().any(|g| *g > 1000)
+                || sp.representative_morphology != sp.representative_genome.phenotype().morphology
+                || sp
+                    .morphology_summary
+                    .iter()
+                    .any(|v| !(0..=5000).contains(v))
+                || sp.niche.iter().any(|v| !(0..=1000).contains(v))
                 || sp.population != *counts.get(id).unwrap_or(&0)
                 || sp.population > 0 && sp.extinct_tick.is_some()
                 || sp
@@ -892,6 +1092,17 @@ impl World {
                 return Err("Future command in history".into());
             }
         }
+        for (index, event) in s.history.iter().enumerate() {
+            if event.id.0 != index as u64 + 1
+                || event.tick > s.tick
+                || event.species.is_some_and(|id| !s.species.contains_key(&id))
+            {
+                return Err("Invalid historical event registry".into());
+            }
+            if matches!(event.kind, HistoryKind::MorphologicalInnovation { index } if index>=5) {
+                return Err("Invalid morphological innovation".into());
+            }
+        }
         if s.commands.windows(2).any(|w| w[0].tick > w[1].tick) {
             return Err("Unordered command history".into());
         }
@@ -900,9 +1111,53 @@ impl World {
 }
 
 fn eligible(o: &Organism, tick: u64) -> bool {
-    tick - o.birth_tick >= 60
-        && tick - o.last_mating >= 80
+    tick - o.birth_tick >= 60 + o.phenotype.morphology.complexity as u64 / 4
+        && tick - o.last_mating >= 80 + o.phenotype.morphology.complexity as u64 / 4
         && o.energy >= o.phenotype.reproduction_threshold
+}
+fn morphology_mean(group: &[&Organism]) -> [i32; 9] {
+    let mut sums = [0i64; 9];
+    for o in group {
+        let m = &o.phenotype.morphology;
+        let values = [
+            m.segment_count * 1000,
+            m.mass,
+            m.armor,
+            m.bite_capacity,
+            m.locomotion_efficiency,
+            m.sensory_investment,
+            m.complexity,
+            o.phenotype.speed,
+            if m.mouth == crate::morphology::Mouth::Piercer {
+                1000
+            } else {
+                0
+            },
+        ];
+        for (s, v) in sums.iter_mut().zip(values) {
+            *s += i64::from(v);
+        }
+    }
+    sums.map(|v| (v / group.len().max(1) as i64) as i32)
+}
+fn niche_mean(group: &[&Organism], environment: &Environment, size: i32) -> [i32; 6] {
+    let mut sums = [0i64; 6];
+    for o in group {
+        let cell =
+            &environment.cells[(o.y / CELL_SIZE * (size / CELL_SIZE) + o.x / CELL_SIZE) as usize];
+        let values = [
+            0,
+            0,
+            0,
+            (environment.temperature + cell.temperature_offset + 2600) / 10,
+            cell.elevation,
+            o.phenotype.speed * 50,
+        ];
+        for (s, v) in sums.iter_mut().zip(values) {
+            *s += i64::from(v);
+        }
+    }
+    sums.map(|v| (v / group.len().max(1) as i64).clamp(0, 1000) as i32)
 }
 fn mean_genome<'a>(genomes: impl Iterator<Item = &'a Genome>) -> Genome {
     let mut sums = [0u64; LOCI];
@@ -936,6 +1191,136 @@ pub fn scientific_name(seed: u64, id: u64) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn finite_resources_compete_in_stable_id_order() {
+        let mut w = World::new(Config {
+            starting_population: 2,
+            ..Config::default()
+        })
+        .unwrap();
+        w.state.environment.regeneration = 0;
+        for cell in &mut w.state.environment.cells {
+            cell.food = 0;
+            cell.temperature_offset = 0;
+        }
+        for o in &mut w.state.organisms {
+            o.x = 104;
+            o.y = 104;
+            o.genome.0[13] = 0;
+            o.genome.0[17] = 0;
+            o.phenotype = o.genome.phenotype();
+            o.energy = 1000;
+        }
+        let cell = (104 / CELL_SIZE * (w.state.config.size / CELL_SIZE) + 104 / CELL_SIZE) as usize;
+        w.state.environment.cells[cell].food = 10;
+        w.step();
+        assert_eq!(w.state.environment.cells[cell].food, 0);
+        assert_eq!(w.state.species[&SpeciesId(1)].feeding_observations[0], 10);
+        assert!(w.state.organisms[0].energy > w.state.organisms[1].energy);
+        w.validate().unwrap();
+    }
+    #[test]
+    fn habitat_bounds_hold_for_full_seed_range() {
+        for seed in [0, 1, 42, u64::MAX] {
+            let w = World::new(Config {
+                seed,
+                starting_population: 1,
+                ..Config::default()
+            })
+            .unwrap();
+            w.validate().unwrap();
+            let c = &w.state.environment.cells;
+            assert!(c.iter().any(|a| a.elevation < 200) && c.iter().any(|a| a.elevation > 700));
+            assert!(
+                c.iter().any(|a| a.temperature_offset < 0)
+                    && c.iter().any(|a| a.temperature_offset > 0)
+            );
+        }
+    }
+    #[test]
+    fn innovations_require_persistence_and_preserve_real_ancestor_snapshot() {
+        let mut w = World::new(Config {
+            starting_population: 8,
+            ..Config::default()
+        })
+        .unwrap();
+        let founder = w.state.species[&SpeciesId(1)]
+            .representative_morphology
+            .clone();
+        assert_eq!(founder.segment_count, 1);
+        for o in &mut w.state.organisms {
+            o.genome.0[14] = 500;
+            o.phenotype = o.genome.phenotype();
+        }
+        for i in 1..=9 {
+            w.state.tick = i * 100;
+            w.sample();
+        }
+        assert!(!w.state.species[&SpeciesId(1)].innovations[0]);
+        w.state.tick = 1000;
+        w.sample();
+        assert!(w.state.species[&SpeciesId(1)].innovations[0]);
+        w.state.tick = 1100;
+        w.sample();
+        assert_eq!(
+            w.state
+                .history
+                .iter()
+                .filter(|e| matches!(e.kind, HistoryKind::MorphologicalInnovation { index: 0 }))
+                .count(),
+            1
+        );
+        assert_eq!(
+            w.state.species[&SpeciesId(1)].representative_morphology,
+            founder
+        );
+        let restored =
+            crate::persistence::decode(&crate::persistence::encode(&w).unwrap()).unwrap();
+        assert_eq!(restored.hash(), w.hash());
+    }
+    #[test]
+    fn safety_ceiling_diagnostic_is_explicit_and_not_history_spam() {
+        let mut w = World::new(Config {
+            starting_population: 1,
+            population_limit: 1,
+            ..Config::default()
+        })
+        .unwrap();
+        w.advance(10);
+        assert_eq!(w.state.counters.safety_ceiling_ticks, 10);
+        assert_eq!(
+            w.state
+                .history
+                .iter()
+                .filter(|e| matches!(e.kind, HistoryKind::SafetyPopulationCeiling { .. }))
+                .count(),
+            1
+        );
+        w.validate().unwrap();
+    }
+    #[test]
+    fn extinct_species_keeps_last_morphology_and_observations() {
+        let mut w = World::new(Config {
+            starting_population: 1,
+            ..Config::default()
+        })
+        .unwrap();
+        let morphology = w.state.species[&SpeciesId(1)].morphology_summary;
+        w.command(Command {
+            tick: 0,
+            temperature: 6000,
+            regeneration: 0,
+        })
+        .unwrap();
+        w.advance(2000);
+        assert!(w.state.organisms.is_empty());
+        assert_eq!(
+            w.state.species[&SpeciesId(1)].morphology_summary,
+            morphology
+        );
+        assert!(w.state.species[&SpeciesId(1)].extinct_tick.is_some());
+        w.validate().unwrap();
+    }
     #[test]
     fn same_seed_and_chunking() {
         let mut a = World::new(Config::default()).unwrap();
@@ -1147,7 +1532,7 @@ mod tests {
             ..Config::default()
         })
         .unwrap();
-        w.state.tick = 80;
+        w.state.tick = 300;
         for o in &mut w.state.organisms {
             o.x = 100;
             o.y = 100;

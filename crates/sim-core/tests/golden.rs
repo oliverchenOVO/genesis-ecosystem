@@ -3,11 +3,20 @@ use sim_core::replay::Replay;
 #[test]
 fn golden_command_replay_matches_every_checkpoint() {
     let replay: Replay =
-        serde_json::from_str(include_str!("../../../fixtures/golden-v4.json")).unwrap();
+        serde_json::from_str(include_str!("../../../fixtures/golden-v5.json")).unwrap();
     assert_eq!(replay.checkpoints.len(), 6);
     let world = replay.verify().unwrap();
     assert_eq!(world.state.tick, 2000);
     assert_eq!(world.hash(), replay.checkpoints.last().unwrap().hash);
+}
+
+#[test]
+fn historical_v4_fixture_is_preserved_and_explicitly_incompatible() {
+    let replay: Replay =
+        serde_json::from_str(include_str!("../../../fixtures/golden-v4.json")).unwrap();
+    assert_eq!(replay.simulation_version, 4);
+    assert_eq!(replay.checkpoints.len(), 6);
+    assert!(replay.verify().unwrap_err().contains("Incompatible"));
 }
 
 #[test]
