@@ -7,7 +7,7 @@ use std::collections::BTreeMap;
 
 pub const SIMULATION_VERSION: u32 = 5;
 /// Unreleased v5 revisions are isolated; published v4 remains immutable.
-pub const SIMULATION_RULES_REVISION: u32 = 2;
+pub const SIMULATION_RULES_REVISION: u32 = 3;
 pub const TELEMETRY_INTERVAL: u64 = 100;
 macro_rules! id {
     ($name:ident) => {
@@ -63,6 +63,8 @@ impl Config {
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Cell {
     pub food: i32,
+    pub hard_food: i32,
+    pub resource_remainders: [i64; 2],
     pub fertility: i32,
     pub temperature_offset: i32,
     pub elevation: i32,

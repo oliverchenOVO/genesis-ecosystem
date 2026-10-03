@@ -2,6 +2,7 @@ import fs from 'node:fs'
 import { pathToFileURL } from 'node:url'
 import { summarizeEcology } from './summarize-ecological-diagnostics.mjs'
 import { summarizeViability } from './summarize-viability.mjs'
+import { readCalibration } from './read-calibration.mjs'
 
 const mean=v=>v.reduce((a,b)=>a+b,0)/v.length
 export function evaluateCandidate(run, control) {
@@ -34,7 +35,7 @@ export function evaluateCandidate(run, control) {
   return {scenario:run.scenario,simulation_version:run.simulation_version,rules_revision:run.rules_revision,analysis_version:run.analysis_version,seeds:run.seeds,ticks_per_seed:run.ticks_per_seed,technical_failures:run.failures,verified_save_load_replay_continuations:worlds.length,survival:worlds.length-collapse,natural_collapse:collapse,collapse_classifications:count(w=>w.classification==='Collapse'),safety_ceiling_worlds:capWorlds,maximum_safety_ceiling_fraction:Math.max(...worlds.map(w=>w.phase2.safety_ceiling_ticks/w.ticks)),persistent_multicellular_worlds:multicellular,persistent_high_C_worlds:highC,persistent_high_C_lineages:worlds.reduce((n,w)=>n+w.phase2.persistent_high_complexity_lineages,0),multiple_persistent_morphology_worlds:morphology,multiple_persistent_niche_worlds:niches,multiple_persistent_realized_feeding_worlds:feeding,persistent_prey_income_worlds:prey,speciation_worlds:count(w=>w.species_formed>0),new_species:worlds.reduce((n,w)=>n+w.species_formed,0),extinction_worlds:count(w=>w.extinct_species>0),extinct_species:worlds.reduce((n,w)=>n+w.extinct_species,0),mean_population_CV:mean(worlds.map(w=>w.population_coefficient_of_variation)),mean_resource_CV:mean(worlds.map(w=>w.phase2.resource_coefficient_of_variation)),cross_lineage:ecology.cross_lineage_fraction,cross_habitat:ecology.cross_habitat_fraction,mating_distance_by_seed:ecology.worlds.map(w=>({seed:w.seed,...w.mating_distance})),actual_mouth_diets:ecology.mouths,final_environmental_channel_income:finalChannelUsage,rejection_reasons:rejection,requires_cap_dominance_review:capWorlds>0,required_complexity_and_differentiation_nonzero:multicellular>0&&highC>0&&morphology>0&&niches>0&&feeding>0&&prey>0,definitions:'Paired configurations/seeds and unchanged analytical gates. No new acceptance threshold. Cap fractions reported for independent persistence review; natural collapse and isolated cap contacts are not automatically classified as technical or biological gate failures. Rejection flags only exact total loss of previously nonzero complex cohorts or persistently unused resource channel, not a high incidence quota. Natural collapse is reported separately. Prey persistence uses unchanged observed-income >=50%, members >=8, post-warmup 1000 sampled ticks. Resource windows follow diagnostic schema; compare habitat definitions only when compatible.'}
 }
 if (process.argv[1] && import.meta.url===pathToFileURL(process.argv[1]).href) {
-  const control=JSON.parse(fs.readFileSync(process.argv[2],'utf8'))
-  const candidates=process.argv.slice(4).map(path=>({path,...evaluateCandidate(JSON.parse(fs.readFileSync(path,'utf8')),control)}))
+  const control=readCalibration(process.argv[2])
+  const candidates=process.argv.slice(4).map(path=>({path,...evaluateCandidate(readCalibration(path),control)}))
   fs.writeFileSync(process.argv[3],JSON.stringify({control:process.argv[2],candidates},null,2)+'\n')
 }

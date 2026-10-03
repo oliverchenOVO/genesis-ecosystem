@@ -8,6 +8,7 @@ pub mod persistence;
 #[cfg(feature = "profile")]
 pub mod profile;
 pub mod replay;
+pub mod resources;
 pub mod rng;
 pub mod spatial;
 #[cfg(feature = "viability")]

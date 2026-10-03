@@ -38,6 +38,36 @@ pub fn distance_squared(ax: i32, ay: i32, bx: i32, by: i32) -> i32 {
 mod tests {
     use super::*;
     #[test]
+    fn local_mating_queries_match_distance_oracle_at_cell_and_world_edges() {
+        let w = crate::World::new(crate::Config {
+            starting_population: 200,
+            ..crate::Config::default()
+        })
+        .unwrap();
+        let grid = Spatial::new(w.state.config.size, &w.state.organisms);
+        for (x, y) in [(0, 0), (15, 16), (256, 256), (511, 511)] {
+            for radius in [16, 24] {
+                let mut indexed = grid
+                    .nearby(x, y, radius)
+                    .filter(|i| {
+                        distance_squared(x, y, w.state.organisms[*i].x, w.state.organisms[*i].y)
+                            <= radius * radius
+                    })
+                    .collect::<Vec<_>>();
+                indexed.sort_unstable();
+                let oracle = w
+                    .state
+                    .organisms
+                    .iter()
+                    .enumerate()
+                    .filter(|(_, o)| distance_squared(x, y, o.x, o.y) <= radius * radius)
+                    .map(|(i, _)| i)
+                    .collect::<Vec<_>>();
+                assert_eq!(indexed, oracle);
+            }
+        }
+    }
+    #[test]
     fn grid_edges_and_local_lookup() {
         let mut grid = Spatial::new(256, &[]);
         grid.buckets[0].push(1);

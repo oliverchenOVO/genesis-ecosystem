@@ -20,6 +20,11 @@ test('analysis4 cannot reinterpret revision1 or omit persistence evidence',()=>{
   assert.throws(()=>summarizePhase2({...old,analysis_version:4}),/Missing revision2/);
   assert.throws(()=>summarizePhase2({...old,analysis_version:4,rules_revision:2}),/acceptance measurements/);
 });
+test('analysis5 cannot relabel sealed R2 evidence as new resource-channel measurements',()=>{
+  const r2=JSON.parse(fs.readFileSync(new URL('../benchmarks/phase2-final-calibration-v2.json',import.meta.url),'utf8').replace(/^\uFEFF/,''));
+  assert.throws(()=>summarizePhase2({...r2,analysis_version:5}),/Missing revision3/);
+  assert.throws(()=>summarizePhase2({...r2,analysis_version:5,rules_revision:3}),/ecological acceptance measurements/);
+});
 test('viability summary verifies actual cohort/world energy and population closure',()=>{
   const run=JSON.parse(fs.readFileSync(new URL('../benchmarks/phase2-prefinal-viability-v2.json',import.meta.url),'utf8').replace(/^\uFEFF/,''));
   const summary=summarizeViability(run);

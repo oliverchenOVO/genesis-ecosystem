@@ -1,0 +1,6 @@
+{
+  "peak_working_set_bytes": 19447808,
+  "executable_sha256": "C3050D63E3AD5948B2829781BCE5EA7523C6B73BE09F10B0B47378D25FB3F058",
+  "measurement": "Windows process peak working set sampled every 250ms; includes replay verification",
+  "context": "Exploratory preflight: one unchanged R2 diagnostic calibration is running concurrently; no native app. External host load is not controlled. Final acceptance benchmarks must run after task calibration/compiler processes stop."
+}

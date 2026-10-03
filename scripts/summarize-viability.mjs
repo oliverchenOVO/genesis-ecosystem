@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import { pathToFileURL } from 'node:url'
+import { readCalibration } from './read-calibration.mjs'
 
 const labels = ['C<80', '80<=C<140', '140<=C<200', 'C>=200', 'single-unit', 'multi-unit', 'high-complexity', 'Piercer', 'predator-like']
 const rate = (n, d) => Number.isFinite(n) && d > 0 ? n / d : null
@@ -78,6 +79,6 @@ export function summarizeViability(run) {
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const [, , source, destination] = process.argv
   if (!source || !destination) throw Error('Usage: node scripts/summarize-viability.mjs INPUT OUTPUT')
-  const summary = summarizeViability(JSON.parse(fs.readFileSync(source, 'utf8').replace(/^\uFEFF/, '')))
+  const summary = summarizeViability(readCalibration(source))
   fs.writeFileSync(destination, JSON.stringify(summary, null, 2) + '\n')
 }

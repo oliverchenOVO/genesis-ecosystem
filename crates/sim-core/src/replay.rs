@@ -44,7 +44,7 @@ impl Replay {
             return Err("Incompatible replay version".into());
         }
         if self.rules_revision != SIMULATION_RULES_REVISION {
-            return Err(format!("Incompatible prerelease simulation v5 rules revision {} (expected {}). Use the preserved pre-final build for revision1 replays.",self.rules_revision,SIMULATION_RULES_REVISION));
+            return Err(format!("Incompatible prerelease simulation v5 rules revision {} (expected {}). Use the preserved GENESIS build for that rules revision; no implicit replay migration.",self.rules_revision,SIMULATION_RULES_REVISION));
         }
         if self.final_tick > 10_000_000 {
             return Err("Replay tick limit exceeded".into());

@@ -1,0 +1,6 @@
+{
+  "context": "Fresh unchanged R2 exploratory control immediately after R3 preflight. One R2 diagnostic calibration and R3 regression compilation run concurrently; no native app. External host load is not controlled. Original isolated R2 evidence is preserved separately.",
+  "peak_working_set_bytes": 11177984,
+  "executable_sha256": "63B913E80A964D2E5D7CCA3339AE0102CB38C86BB7B861B32691A070FF2D22DA",
+  "measurement": "Windows process peak working set sampled every 250ms; includes replay verification"
+}

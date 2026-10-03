@@ -112,7 +112,7 @@ impl Measurements {
             s.environment
                 .cells
                 .iter()
-                .map(|c| f64::from(c.food))
+                .map(|c| f64::from(c.total_food()))
                 .sum::<f64>()
                 / s.environment.cells.len() as f64,
         );

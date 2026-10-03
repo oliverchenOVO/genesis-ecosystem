@@ -190,6 +190,7 @@ pub fn feeding(
     units: i32,
     energy: i32,
     prey_mass: i32,
+    hardness: i32,
 ) {
     if energy <= 0 {
         return;
@@ -219,8 +220,8 @@ pub fn feeding(
                 f.food_events += 1;
                 f.food_energy += energy as u64;
                 f.units += units as u64;
-                f.hardness += terrain.elevation as u64;
-                f.hardness_bins[(terrain.elevation / 100).clamp(0, 9) as usize] += 1;
+                f.hardness += hardness as u64;
+                f.hardness_bins[(hardness / 100).clamp(0, 9) as usize] += 1;
             }
         }
     });
@@ -430,11 +431,11 @@ pub fn finish() -> serde_json::Value {
             .map(|((a, b), n)| serde_json::json!({"a":a,"b":b,"count":n}))
             .collect::<Vec<_>>()
     };
-    serde_json::json!({"version":3,"requested_hunting_movement_by_mouth":c.requested_hunting_movement_by_mouth,"requested_hunting_movement_by_lineage":c.requested_hunting_movement_by_lineage,"windows_5000_ticks":c.windows,"samples":c.samples,"lineages":exposure(&c.lineages),"species":exposure(&c.species),"mouth_budgets":c.mouth_budgets,"lineage_budgets":c.lineage_budgets,"gene_flow_matrix":matrix,
+    serde_json::json!({"version":4,"channel_names":["soft","hard","prey"],"requested_hunting_movement_by_mouth":c.requested_hunting_movement_by_mouth,"requested_hunting_movement_by_lineage":c.requested_hunting_movement_by_lineage,"windows_5000_ticks":c.windows,"samples":c.samples,"lineages":exposure(&c.lineages),"species":exposure(&c.species),"mouth_budgets":c.mouth_budgets,"lineage_budgets":c.lineage_budgets,"gene_flow_matrix":matrix,
         "feeding":c.feeding.iter().map(|((lineage,species,mouth),f)| serde_json::json!({"lineage":lineage,"species":species,"mouth":mouth,"totals":f})).collect::<Vec<_>>(),
         "mating":{"pairs":c.mating.pairs,"cross_lineage":c.mating.cross_lineage,"cross_species":c.mating.cross_species,"cross_habitat":c.mating.cross_habitat,"cross_mouth":c.mating.cross_mouth,"genetic_distance_sum":c.mating.genetic_distance_sum,"distance":distances(&c.mating.distance),"lineage_edges":edges(&c.mating.lineage_edges),"child_edges":edges(&c.mating.child_edges)},
         "major_persistent_lineages":major.iter().map(|(id,_)| **id).collect::<Vec<_>>(),"overlap":overlaps,
-        "definitions":"100-tick occupancy samples plus tick zero; 8x8 spatial regions; habitat bits elevation>=500/moisture>=500/fertility>=100 (R2 fertility range60..140). Productivity bins width20; hardness and prey mass bins width100, clipped to bin9. Persistence >=8 sampled residents for >=1000 ticks. Top16 persistent lineages by exposure then ID. Histogram intersection sum(min(normalized bins)); integer floor Euclidean distance in world units; nearest-rank p90. Origins retained only while alive; habitat switches sampled (lower bound); parent habitat means birth parent A cell. Feeding events require positive credited energy; channels 0=R2 shared environmental pool, 1=reserved hard, 2=prey. Matings counted once per successful pair; symmetric parent edges total twice pairs; child edges twice births. Temporal windows ticks1..5000 etc (tick-zero occupancy in first). No event archive or world mutations."})
+        "definitions":"100-tick occupancy samples plus tick zero; 8x8 spatial regions; habitat bits elevation>=500/moisture>=500/fertility>=100 (fertility range60..140). Productivity bins width20; hardness and prey mass bins width100, clipped to bin9. Physical resource processing hardness replaces the R2 elevation proxy: soft40..90, hard300..633. Persistence >=8 sampled residents for >=1000 ticks. Top16 persistent lineages by exposure then ID. Histogram intersection sum(min(normalized bins)); integer floor Euclidean distance in world units; nearest-rank p90. Origins retained only while alive; habitat switches sampled (lower bound); parent habitat means birth parent A cell. Feeding events require positive credited energy; channels 0=soft, 1=hard, 2=prey. Matings counted once per successful pair; symmetric parent edges total twice pairs; child edges twice births. Temporal windows ticks1..5000 etc (tick-zero occupancy in first). No event archive or world mutations."})
 }
 
 #[cfg(test)]

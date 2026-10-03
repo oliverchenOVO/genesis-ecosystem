@@ -30,6 +30,15 @@ fn prerelease_v5_revision1_fixture_is_preserved_and_explicitly_incompatible() {
 }
 
 #[test]
+fn prerelease_v5_revision2_fixture_is_preserved_and_explicitly_incompatible() {
+    let replay: Replay =
+        serde_json::from_str(include_str!("../../../fixtures/golden-v5-r2-archive.json")).unwrap();
+    assert_eq!(replay.rules_revision, 2);
+    assert_eq!(replay.checkpoints.len(), 6);
+    assert!(replay.verify().unwrap_err().contains("rules revision 2"));
+}
+
+#[test]
 fn historical_v1_fixture_is_explicitly_incompatible() {
     let replay: Replay =
         serde_json::from_str(include_str!("../../../fixtures/golden-v1.json")).unwrap();

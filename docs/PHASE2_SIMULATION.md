@@ -1,6 +1,24 @@
 # Phase 2 simulation v5 — development
 
-Current rules revision2 final result:100*100000,100 survivors/0 technical failures/0 caps; persistent multi-unit17/100 and high-C13/100. Multiple persistent morphology/niche clusters and differentiated trophic roles0/100. Phase2 INCOMPLETE; native UAT remains pending under the biological-first execution order. See PHASE2_REPORT.md for exact data, final package paths/hashes and green code-head CI. Earlier revision1/freeze checkpoints below are historical.
+Current ecological validation candidate is rules3 / analysis5, selected from
+the completed bounded D8×100k probe. RNG1 and save envelope1 remain unchanged.
+Two renewable fields use existing morphology processing and retained physical
+costs; local mate radius is16 with the same genetic compatibility rules.
+No dispersal change, region barrier or threshold relaxation is introduced.
+Analysis5 reports combined environmental resource quantity; clustering and
+actual prey-income persistence definitions remain unchanged. Headless ecology
+diagnostic schema4 reports real soft/hard/prey income; it stays outside State
+and frontend frame payloads. The compact food layer reports soft+hard stock.
+
+The D extension has8 survivors, zero completed-run technical/replay/cap failures,
+3 persistent multi-unit worlds and2 high-C worlds. Morphology/niche/trophic
+differentiation and persistent prey income remain zero. Formal100×100k,
+final regression and biological acceptance are pending. **PHASE2 INCOMPLETE**;
+native UAT, merge, tag and release are gated on acceptance. The revision2
+descriptions below preserve the earlier sealed baseline; see candidate evidence
+and save policy for current revision3 provenance.
+
+Sealed revision2 baseline result:100*100000,100 survivors/0 technical failures/0 caps; persistent multi-unit17/100 and high-C13/100. Multiple persistent morphology/niche clusters and differentiated trophic roles0/100. Phase2 INCOMPLETE; native UAT remains pending under the biological-first execution order. See PHASE2_REPORT.md for exact data, final package paths/hashes and green code-head CI. Earlier revision1/freeze checkpoints below are historical.
 
 Authoritative rules changed once from simulation4 to5. RNG algorithm stays1; save envelope stays1. Additional loci/RNG draws, morphology-dependent energy and interactions, habitat fields and new species/history data change hashes intentionally. Old v4 fixtures are unchanged historical evidence and rejected by v5; they passed on the protected baseline before implementation. See PHASE2_SAVE_MIGRATION.md.
 

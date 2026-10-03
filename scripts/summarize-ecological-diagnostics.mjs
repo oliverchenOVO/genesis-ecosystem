@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import { pathToFileURL } from 'node:url'
+import { readCalibration } from './read-calibration.mjs'
 
 const ratio = (n, d) => d > 0 ? n / d : null
 const distribution = values => {
@@ -41,7 +42,7 @@ export function summarizeEcology(run) {
   return {simulation_version:run.simulation_version,rules_revision:run.rules_revision,ecological_diagnostic_versions:[...new Set(run.results.map(r=>r.phase2.viability.ecology.version))],seeds:run.seeds,ticks_per_seed:run.ticks_per_seed,failures:run.failures,mouths:mouths.map(m=>({...m,mean_food_hardness:ratio(m.hardness,m.food_events),mean_productivity:ratio(m.productivity,m.food_events+m.prey_events),mean_food_energy:ratio(m.food_energy,m.food_events),mean_prey_energy:ratio(m.prey_energy,m.prey_events),prey_energy_fraction:ratio(m.prey_energy,m.food_energy+m.prey_energy),starvation_deaths_per_organism_tick:ratio(m.starvation_deaths,m.organism_ticks),offspring_per_organism_tick:ratio(m.offspring,m.organism_ticks)})),cross_lineage_fraction:distribution(worlds.map(w=>w.cross_lineage_fraction)),cross_habitat_fraction:distribution(worlds.map(w=>w.cross_habitat_fraction)),worlds}
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const result=summarizeEcology(JSON.parse(fs.readFileSync(process.argv[2],'utf8')))
+  const result=summarizeEcology(readCalibration(process.argv[2]))
   if (process.argv[3]) fs.writeFileSync(process.argv[3],JSON.stringify(result,null,2)+'\n')
   else process.stdout.write(JSON.stringify(result,null,2)+'\n')
 }

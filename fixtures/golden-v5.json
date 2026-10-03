@@ -1,6 +1,6 @@
 {
   "simulation_version": 5,
-  "rules_revision": 2,
+  "rules_revision": 3,
   "rng_version": 1,
   "config": {
     "seed": 42,
@@ -25,27 +25,27 @@
   "checkpoints": [
     {
       "tick": 0,
-      "hash": "af84a9a620072545238cd9f0e3bd162544bd1ab0c29ec8b1891357cf79924775"
+      "hash": "93ae17cf0373f715f9d7eb586c08b971b1856a2b8fb4be4be824205ed4bb3474"
     },
     {
       "tick": 300,
-      "hash": "b70311bda35e7b1bceec7671e37370e9854844b103240eba4174b4f6d548221e"
+      "hash": "98859e1077d6ee2076021fa10f828b148d4a0cb07ca7f62b4597d341d4bebdae"
     },
     {
       "tick": 500,
-      "hash": "d94d0661848c5fb4878478de5bac4817cfa3fe9f1e840c817343253c18a998c5"
+      "hash": "e78b6080bc246cea56408176c3258250cc352f52d8739c41fd800eb5f09c8190"
     },
     {
       "tick": 1000,
-      "hash": "857e6d7504028afc8b7f1e06dbd1b73366ed6e12777fe0c79113cdc1f53d4d5c"
+      "hash": "96f96f70a651a26499e4a3caa565d109bdde3bc868d62daee391a90743b60b5b"
     },
     {
       "tick": 1200,
-      "hash": "7eccfd8b7d47ea66c05cef865193aec1af20d03ef9ea42751b2cc9734fcfe644"
+      "hash": "252470a2af918718e3d79d598eebd3d729ad60bc97414fd95cd038a4d9aad2e6"
     },
     {
       "tick": 2000,
-      "hash": "c7d51e79eaa59017bec57d4c0a7c6fd2667d3046cddac38aaf4f8410b7e84b5d"
+      "hash": "585a08d3cb638bf7ecd485b6a0547347dabaa1b34ace237a4c211abd470f8e86"
     }
   ]
 }

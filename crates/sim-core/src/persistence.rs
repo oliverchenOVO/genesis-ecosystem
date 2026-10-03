@@ -15,7 +15,7 @@ pub const MAX_SAVE_BYTES: u64 = 128 * 1024 * 1024;
 const MAGIC: &[u8; 8] = b"GENESIS1";
 const HEADER: usize = 60;
 // This cannot alias an old valid State: its bytes8..12 are not a valid world size.
-const PAYLOAD_TAG: &[u8; 16] = b"GENESIS5RULES002";
+const PAYLOAD_TAG: &[u8; 16] = b"GENESIS5RULES003";
 
 pub fn encode(world: &World) -> Result<Vec<u8>, String> {
     world.validate()?;
@@ -73,7 +73,13 @@ pub fn decode(bytes: &[u8]) -> Result<World, String> {
     if raw.len() as u64 != expected_len || blake3::hash(&raw).as_bytes() != &bytes[28..60] {
         return Err("Save checksum or size mismatch".into());
     }
-    let payload = raw.strip_prefix(PAYLOAD_TAG).ok_or("Incompatible prerelease simulation v5 rules revision1 save. Use the preserved pre-final GENESIS build (phase2/pre-finalization-a3d8cc0); revision2 does not silently migrate earlier v5 worlds.")?;
+    let payload = raw.strip_prefix(PAYLOAD_TAG).ok_or_else(|| {
+        if raw.starts_with(b"GENESIS5R3PROB") {
+            return "Incompatible experimental simulation v5 revision3 candidate save. Use its preserved probe build; finalized revision3 does not reinterpret experimental saves.".to_string();
+        }
+        let revision=if raw.starts_with(b"GENESIS5RULES002") {2} else {1};
+        format!("Incompatible prerelease simulation v5 rules revision{revision} save. Use its preserved R2 or pre-final GENESIS build; revision3 does not migrate earlier worlds.")
+    })?;
     let state: State = bincode::DefaultOptions::new()
         .with_fixint_encoding()
         .with_limit(MAX_SAVE_BYTES)
@@ -116,6 +122,31 @@ pub fn load(path: &Path) -> Result<World, String> {
 mod tests {
     use super::*;
     use crate::Config;
+    #[test]
+    fn experimental_candidate_tag_is_not_a_final_revision3_save() {
+        let world = World::new(Config::default()).unwrap();
+        let mut bytes = encode(&world).unwrap();
+        let mut raw = Vec::new();
+        ZlibDecoder::new(&bytes[HEADER..])
+            .read_to_end(&mut raw)
+            .unwrap();
+        raw[..16].copy_from_slice(b"GENESIS5R3PROBED");
+        bytes[28..60].copy_from_slice(blake3::hash(&raw).as_bytes());
+        let mut encoder = ZlibEncoder::new(Vec::new(), Compression::fast());
+        encoder.write_all(&raw).unwrap();
+        bytes.truncate(HEADER);
+        bytes.extend(encoder.finish().unwrap());
+        let error = decode(&bytes).unwrap_err();
+        assert!(error.contains("experimental") && error.contains("revision3"));
+    }
+    #[test]
+    fn real_revision2_save_cannot_be_reinterpreted() {
+        let error = decode(include_bytes!(
+            "../../../examples/phase2-r2-seed7-tick40000.genesis"
+        ))
+        .unwrap_err();
+        assert!(error.contains("revision2") && error.contains("revision3"));
+    }
     #[test]
     fn actual_baseline_save_has_clear_non_migrating_rejection() {
         let bytes = include_bytes!("../../../examples/seed11-107504.genesis");

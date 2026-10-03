@@ -1,40 +1,6 @@
 # Phase2 finalization report — INCOMPLETE
 
-## Current ecological revision3 validation
-
-Current branch authority is simulation5 / rules3 / RNG1 / envelope1 / analysis5;
-ecology diagnostic4 remains optional and outside State. Selected ecological D
-completes paired8×100k with8 survivors, zero technical/replay/cap failures,
-3 persistent multi-unit worlds and2 high-C worlds (3 lineages), compared with
-sealed R2 same-seed results2/1. Its complete JSONL matches final JSON; every
-world verifies save/load, full replay, independent1000-tick continuation and
-energy/population closure. The additional unchanged-R2 diagnostic extension is
-still running; completed hashes match the sealed R2 formal run.
-
-All eight D worlds still lack a second persistent morphology/niche/trophic
-role and persistent prey income. Cross-lineage mating mean0.5841650703643353;
-cross-habitat mean0.49738592855325925. These are measured limitations, not
-evidence that local mating solved gene flow. Short D Grazer hard-income fraction
-0.11858573616522688 versus Crusher0.6114486602626756 demonstrates mechanical
-resource use differences, but does not satisfy persistent ecological gates.
-
-Independent D seed1×100k without an active collector matches the diagnostic
-world hash `a8458ae00cba69a39d558e318bcbbbd526d9da83f7fb6b70437442d21f5bce1c`.
-Its15 living lineages with>=8 members have maximum normalized nine-trait
-distance42, with zero pairs>=150. This single snapshot does not claim persistence
-or hidden qualified morphology clusters.
-
-Current R3 golden was intentionally generated and all six checkpoints match
-the frozen D probe. R2 archive and v4 remain unchanged; R2 and experimental probe
-saves are explicitly incompatible. Formal100×100k, final isolated benchmarks,
-complete R3 regression and R3 code-head CI remain pending. Native UAT is gated
-on biology. **PHASE2 INCOMPLETE**; no merge, tag, release or later Phase.
-
-The prior sealed R2 report is preserved exactly in
-[PHASE2_REPORT_R2_ARCHIVE.md](PHASE2_REPORT_R2_ARCHIVE.md). The sections below
-are historical R2 results, not completed revision3 evidence.
-
-Historical R2 unreleased candidate: simulation5 / rules revision2 / RNG1 / save envelope1 / analysis4 / diagnostic4. Authoritative rules froze at57704c3d62cc67d8259ac1cef6d7f1f531742c29; subsequent0ca7a3b04dd2c2d6f6841c1e97af4b3b5d6a4cbe adds evidence/inspection tests only. The final report/data follow-up is identified by git log on phase2/multicellular-ecology. No authoritative changes occurred during the final100-seed run. No LLM is used in the simulation loop.
+Current unreleased candidate: simulation5 / rules revision2 / RNG1 / save envelope1 / analysis4 / diagnostic4. Authoritative rules froze at57704c3d62cc67d8259ac1cef6d7f1f531742c29; subsequent0ca7a3b04dd2c2d6f6841c1e97af4b3b5d6a4cbe adds evidence/inspection tests only. The final report/data follow-up is identified by git log on phase2/multicellular-ecology. No authoritative changes occurred during the final100-seed run. No LLM is used in the simulation loop.
 
 **Completed:** measured root-cause diagnostics before tuning; bounded paired candidate matrix; revised inherited morphology viability; explicit incompatible prerelease save/replay policy; intentional real v5 golden replacement; formal100*100000 validation; genuine complex-lineage showcase; production EXE/NSIS builds; isolated three-scale benchmarks; complete local regression; actual green private code-head CI.
 
@@ -135,62 +101,3 @@ These are review artifacts, not a v0.2.0 release. Previous R1 and pre-calibratio
 | Report/data follow-up (git log) | Complete100-seed R2 evidence, isolated performance, final package hashes and explicit INCOMPLETE decision |
 
 The requested biological gates and native acceptance remain unfulfilled. Preserve the viable morphology changes, investigate ecological stabilization within Phase2, and rerun the same acceptance gates after a bounded evidence-supported change. No automatic transition to the next major Phase.
-
-## Ecological finalization: unchanged-R2 diagnostic milestone
-
-Source commit `7703ef1` adds optional habitat occupancy, realized feeding, mating
-distance, symmetric gene-flow, offspring ancestry, dispersal and temporal-window
-diagnostics. Simulation remains v5 / rules2 / RNG1 / envelope1 / analysis4;
-diagnostic schema3 is separate from authority. The archived R2 golden is preserved.
-
-[Measurement definitions and diagnosis](PHASE2_ECOLOGICAL_DIAGNOSTICS.md) records
-three instrument iterations and their limitations. All eight seeds ×50,000 ticks
-match the frozen normal R2 executable exactly, including refined schema3; save/load,
-full replay and independent1,000-tick continuations pass with zero failures.
-Cross-lineage mating world mean0.47899162408452234; refined cross-habitat mean
-0.5741865561478211; mating-distance p90=23 against existing radius24. Initial coarse
-habitat/productivity definitions are retained and must not be interpreted as rule
-changes. Refined feeding-productivity overlap world means0.823071521149354–
-0.929405977708568; environmental food uses one shared pool. The complex showcase's
-maximum living-lineage nine-trait distance136 remains below unchanged threshold150.
-
-Measured predator-like prey visibility131546/142789 organism ticks contrasts with
-only14 compatible candidates among1097 nearby eligible mates. Piercer actual prey
-income fraction0.7707490178271771 is pooled transient lifetime data, not a persistent
-trophic gate. Resource homogenization and sexual bottlenecks therefore both matter.
-No authoritative ecology, mating or dispersal adjustment is selected by this milestone.
-
-Validation:67 normal release headless tests and2 native debug routing tests pass;
-73 all-feature release headless tests (including2 added diagnostic tests) pass;
-24 frontend and8 Node checks pass. fmt, all-target/all-feature clippy, frontend
-format/lint/typecheck/build pass. A concurrent debug autosave test timed out at its
-unchanged120-second limit; the existing release-profile test passes. Protected main,
-v0.1.0 and Phase1 EXE/installer hashes remain unchanged. These are diagnostics,
-not completed Phase2 biological/native acceptance. Next: paired resource separation
-and local mating candidates, with no dispersal change until measured need.
-
-## Bounded ecological candidate evidence
-
-[Candidate matrix and provenance](PHASE2_ECOLOGY_CANDIDATES.md) records completed
-paired seeds0–7 ×50,000 probes A/B/C/B2/D. All completed worlds verify save/load,
-full replay and independent1000-tick continuation. JSONL and final JSON agree
-exactly. No cap contact or completed-run technical/replay failure is observed.
-B2 has one natural extinction. A has2 persistent multi-unit worlds and1 high-C;
-B has0/0, C1/0, B2 0/2 and D3/2. Every setting still has zero worlds with a second
-persistent morphology/niche cluster, second persistent realized feeding role or
-persistent prey-income cohort. Biological acceptance remains **INCOMPLETE**.
-
-Preserved probe implementations use separate revision3 experimental save tags
-and separate measured replay goldens. No candidate is selected by this evidence
-commit; branch authority and current golden remain R2. B and C are rejected
-standalone; B2 is one bounded correction to the newly introduced hard-channel
-processing range after B's measured complexity loss. D advances to paired
-8×100,000 against unchanged A; no dispersal adjustment is justified. A's initial
-long invocation aborted before a seed record with Windows allocation failure;
-its empty outputs/stderr are retained, and it is retried with one worker.
-
-Candidate core viability library tests pass: B53, B2 53, C52, D54. fmt and
-core/benchmark all-target/all-feature clippy pass. Node evidence checks now total
-11, including paired environment rejection, actual continuation requirement and
-recomputed energy closure. Frontend source remains unchanged. These probe tests
-do not substitute for a selected final rule set's full regression or final100×100k.

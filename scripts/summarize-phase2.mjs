@@ -1,5 +1,6 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
+import { readCalibration } from './read-calibration.mjs';
 
 export function distribution(values) {
   if (!values.length) return null;
@@ -10,10 +11,11 @@ export function distribution(values) {
 }
 export function summarizePhase2(report) {
   const rows = report.results;
-  if (report.simulation_version !== 5 || ![3,4].includes(report.analysis_version)) throw new Error('Expected simulation5 / analysis3 or4');
+  if (report.simulation_version !== 5 || ![3,4,5].includes(report.analysis_version)) throw new Error('Expected simulation5 / analysis3,4 or5');
   if (report.seeds < 100 || report.ticks_per_seed < 100000 || rows.length !== report.seeds || new Set(rows.map(r=>r.seed)).size !== report.seeds) throw new Error('Incomplete or duplicate long-run seed set');
   const valid = rows.filter(r=>!r.error);
   if(report.analysis_version===4 && (report.rules_revision!==2 || valid.some(r=>!Number.isFinite(r.phase2.maximum_persistent_morphology_clusters)||!r.phase2.realized_trophic_persistence))) throw new Error('Missing revision2 / analysis4 acceptance measurements');
+  if(report.analysis_version===5 && (report.rules_revision!==3 || valid.some(r=>!Number.isFinite(r.phase2.maximum_persistent_morphology_clusters)||!r.phase2.realized_trophic_persistence||r.phase2.viability?.ecology?.version!==4))) throw new Error('Missing revision3 / analysis5 ecological acceptance measurements');
   if (valid.some(r=>r.ticks !== report.ticks_per_seed)) throw new Error('Mismatched tick duration');
   const count = predicate => valid.filter(predicate).length;
   const dist = selector => distribution(valid.map(selector));
@@ -70,7 +72,7 @@ export function summarizePhase2(report) {
 if (process.argv[1] && import.meta.url===pathToFileURL(process.argv[1]).href) {
   const [input,output] = process.argv.slice(2);
   if (!input || !output) throw new Error('Usage: node scripts/summarize-phase2.mjs INPUT OUTPUT');
-  const report=JSON.parse((await readFile(input,'utf8')).replace(/^\uFEFF/,''));
+  const report=readCalibration(input);
   const summary=summarizePhase2(report);
   await writeFile(output,JSON.stringify(summary,null,2)+'\n');
   console.log(JSON.stringify(summary,null,2));

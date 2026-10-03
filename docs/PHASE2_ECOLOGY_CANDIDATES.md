@@ -64,5 +64,50 @@ No partial run is eligible for candidate evaluation.
 Machine-readable comparisons: `benchmarks/phase2-r3-initial-matrix.json`.
 Per-scenario original JSON/JSONL, summaries, patches, probe goldens and provenance
 use separate `phase2-r3-candidate-*` names. R2 formal100×100k, showcase, protected
-main/v0.1.0 and binaries remain untouched. Long-run selection and final100×100k
-remain pending; native UAT is conditional on biological gates passing.
+main/v0.1.0 and binaries remain untouched. The stage below records the subsequent
+long-run selection; native UAT remains conditional on biological gates passing.
+
+## Completed paired100k extension and selection
+
+The A retry completes all8 seeds; each authoritative hash matches sealed R2
+100k evidence, JSON/JSONL rows agree, all replay/save/continuations close.
+The allocation-failed invocation remains separately documented above.
+Both A and D have8 survivors, zero completed-run technical/replay/cap failures.
+A has2 persistent multi-unit and1 high-C world; D has3 and2 (3 high-C lineages).
+Both have zero worlds meeting persistent morphology/niche/trophic differentiation
+or prey-income gates. Mean cross-lineage A0.48577273560644685 versus
+D0.5841650703643353; cross-habitat A0.5880522490506069 versus
+D0.49738592855325925. Mating p90 A23 versus D15. Shortening radius reduces
+cross-habitat mating but does **not** establish lower cross-lineage mixing.
+
+D is selected for formal expansion as the only resource-separated candidate
+retaining both complex-form gains. It is a validation candidate, not biological
+acceptance. Mechanical short-run hard-income fractions are Grazer0.11858573616522688
+and Crusher0.6114486602626756. Piercer pooled prey fraction0.8746944895735231
+remains transient, not a sustained prey role. No further physical parameter
+tuning is added. The final100-seed study remains required.
+
+Independent standalone D seed1×100k matches the diagnostic world's full hash;
+15 living lineages have maximum normalized morphology distance42 and zero
+pairs>=150. This snapshot does not show qualified hidden lineage clusters or
+prove persistence. It is kept separately from any future official showcase.
+
+Selected rules3 use final `GENESIS5RULES003`, simulation5/RNG1/envelope1/analysis5.
+R2 and experimental probe saves reject explicitly. The actual generated current
+golden matches all six frozen D checkpoints; R2/v4 archives remain unchanged.
+Normal full workspace regression has75 passing tests; all-feature validation
+has81 passing tests. fmt and all-target/all-feature workspace clippy pass.
+Additional evidence checks now total13; frontend24/build/checks
+remain green. Candidate-evidence CI89d622c is green in all3 jobs (normal69,
+Node11, frontend24, Tauri/NSIS build), on its unchanged-R2 source tree.
+
+Exploratory selected-R3 preflight TPS: reference1641.51526580142,
+medium331.091851431895, density41.6537814165003. Fresh same-host R2 rechecks:
+3055.64142756756 /484.212603944649 /50.0308833138064. These runs overlap R2
+diagnostic calibration and R3 regression compilation, with uncontrolled external
+host load; they are not final isolated acceptance measurements. Original R2
+isolated numbers remain unchanged. The rough reference/medium deficits motivate
+profiling: selected-R3 density profile matches the normal hash exactly and
+spends46.8968605 seconds in perception out of49.5349629 seconds of marked phases.
+The food-cell loop calculates both channel efficiencies and then recalculates
+the selected one; a minimal bit-identical correction is the next technical task.

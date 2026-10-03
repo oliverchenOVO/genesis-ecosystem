@@ -26,6 +26,8 @@ impl World {
         let cells: Vec<Cell> = (0..side * side)
             .map(|index| Cell {
                 food: 300 + rng.world.below(700) as i32,
+                hard_food: 0,
+                resource_remainders: [0; 2],
                 fertility: 60 + rng.world.below(81) as i32,
                 temperature_offset: ((index / side / 4 + (config.seed % 7) as i32) % 5 - 2) * 250
                     + rng.world.below(201) as i32
@@ -34,6 +36,10 @@ impl World {
                     + rng.world.below(201) as i32,
                 moisture: ((index / side / 4 + index % side / 4) % 5) * 180
                     + rng.world.below(201) as i32,
+            })
+            .map(|mut cell| {
+                cell.initialize_channels();
+                cell
             })
             .collect();
         let mut base = Genome([500; LOCI]);
@@ -209,9 +215,7 @@ impl World {
             crate::viability::tick(o, eligible(o, s.tick));
         }
         for cell in &mut s.environment.cells {
-            // Moisture and elevation define resource hardness/productivity; no species bonuses.
-            let productivity = cell.fertility * (200 + cell.moisture) / 1000;
-            cell.food = (cell.food + s.environment.regeneration * productivity / 100).min(1000);
+            cell.regenerate_channels(s.environment.regeneration);
         }
         #[cfg(feature = "profile")]
         crate::profile::mark("resource regeneration", &mut profile_stamp);
@@ -325,7 +329,10 @@ impl World {
                         let fx = x * CELL_SIZE + CELL_SIZE / 2;
                         let fy = y * CELL_SIZE + CELL_SIZE / 2;
                         let d = distance_squared(o.x, o.y, fx, fy);
-                        let score = s.environment.cells[idx].food * 4 - d / 16;
+                        let c = &s.environment.cells[idx];
+                        let channel = c.preferred_channel(o);
+                        let supply = if channel == 0 { c.food } else { c.hard_food };
+                        let score = supply * c.feeding_efficiency(o, channel) / 25 - d / 16;
                         let candidate = (score, std::cmp::Reverse(idx), fx, fy);
                         if food.is_none_or(|v| candidate > v) {
                             food = Some(candidate);
@@ -405,36 +412,44 @@ impl World {
             }
             let cell =
                 &mut s.environment.cells[(o.y / CELL_SIZE * side + o.x / CELL_SIZE) as usize];
-            let efficiency = o.phenotype.food_efficiency * (1000 - o.phenotype.carnivory) / 1000
-                * o.phenotype.morphology.resource_efficiency(cell.elevation)
-                / 100;
+            let channel = cell.preferred_channel(o);
+            let available = if channel == 0 {
+                cell.food
+            } else {
+                cell.hard_food
+            };
+            let efficiency = cell.feeding_efficiency(o, channel);
             if efficiency <= 0 {
                 #[cfg(feature = "viability")]
-                crate::viability::food(o, cell.food, efficiency, 25, 0, 0);
+                crate::viability::food(o, available, efficiency, 25, 0, 0);
                 continue;
             }
-            let amount = cell
-                .food
+            let amount = available
                 .min(25)
                 .min((o.phenotype.energy_capacity - o.energy) * 100 / efficiency.max(1));
             #[cfg(feature = "viability")]
             crate::viability::food(
                 o,
-                cell.food,
+                available,
                 efficiency,
                 25,
                 amount,
                 (amount * efficiency / 100).min(o.phenotype.energy_capacity - o.energy),
             );
-            cell.food -= amount;
+            if channel == 0 {
+                cell.food -= amount;
+            } else {
+                cell.hard_food -= amount;
+            }
             #[cfg(feature = "viability")]
             crate::ecological_diagnostics::feeding(
                 o,
                 cell,
-                0,
+                channel,
                 amount,
                 (amount * efficiency / 100).min(o.phenotype.energy_capacity - o.energy),
                 0,
+                cell.hardness(channel),
             );
             s.species
                 .get_mut(&o.species_id)
@@ -498,6 +513,7 @@ impl World {
                                 s.organisms[i].phenotype.energy_capacity - s.organisms[i].energy,
                             ),
                             prey_mass as i32,
+                            0,
                         );
                         deaths.insert(j, DeathCause::Predation);
                         #[cfg(feature = "viability")]
@@ -599,12 +615,12 @@ impl World {
                 continue;
             }
             let mate = mating_spatial
-                .nearby(a.x, a.y, 24)
+                .nearby(a.x, a.y, 16)
                 .filter(|j| *j != i && !deaths.contains_key(j) && !paired.contains(j))
                 .filter(|j| {
                     let b = &s.organisms[*j];
                     eligible(b, s.tick)
-                        && distance_squared(a.x, a.y, b.x, b.y) <= 24 * 24
+                        && distance_squared(a.x, a.y, b.x, b.y) <= 16 * 16
                         && a.genome.compatible(&b.genome)
                 })
                 .min_by_key(|j| {
@@ -616,12 +632,12 @@ impl World {
             #[cfg(feature = "viability")]
             {
                 let mut candidates = [0; 9];
-                for j in mating_spatial.nearby(a.x, a.y, 24) {
+                for j in mating_spatial.nearby(a.x, a.y, 16) {
                     let b = &s.organisms[j];
                     if j == i
                         || deaths.contains_key(&j)
                         || paired.contains(&j)
-                        || distance_squared(a.x, a.y, b.x, b.y) > 24 * 24
+                        || distance_squared(a.x, a.y, b.x, b.y) > 16 * 16
                     {
                         continue;
                     }
@@ -1084,7 +1100,7 @@ impl World {
                 .environment
                 .cells
                 .iter()
-                .map(|c| i64::from(c.food))
+                .map(|c| i64::from(c.total_food()))
                 .sum(),
             temperature: self.state.environment.temperature,
             births: self.state.counters.births,
@@ -1121,6 +1137,11 @@ impl World {
         }
         if s.environment.cells.iter().any(|c| {
             !(0..=1000).contains(&c.food)
+                || !(0..=300).contains(&c.hard_food)
+                || c.resource_remainders
+                    .iter()
+                    .zip(crate::resources::DENOMINATORS)
+                    .any(|(n, d)| !(0..d).contains(n))
                 || !(60..=140).contains(&c.fertility)
                 || !(0..=1000).contains(&c.elevation)
                 || !(0..=1000).contains(&c.moisture)
@@ -1342,6 +1363,7 @@ mod tests {
         w.state.environment.regeneration = 0;
         for cell in &mut w.state.environment.cells {
             cell.food = 0;
+            cell.hard_food = 0;
             cell.temperature_offset = 0;
         }
         for o in &mut w.state.organisms {
@@ -1486,6 +1508,7 @@ mod tests {
         .unwrap();
         for c in &mut w.state.environment.cells {
             c.food = 0;
+            c.hard_food = 0;
         }
         w.state.environment.regeneration = 10;
         w.step();
@@ -1648,6 +1671,7 @@ mod tests {
         normal.state.environment.regeneration = 0;
         for cell in &mut normal.state.environment.cells {
             cell.food = 0;
+            cell.hard_food = 0;
             cell.temperature_offset = 0;
         }
         let optimum = normal.state.organisms[0].phenotype.temperature_optimum;

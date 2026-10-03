@@ -146,7 +146,7 @@ fn snapshot(
 }
 fn world_snapshot(world: &World, running: bool, speed: u32, error: &Option<String>) -> Value {
     let s = &world.state;
-    json!({"simulation_version":sim_core::model::SIMULATION_VERSION,"seed":s.config.seed.to_string(),"tick":s.tick,"generation":s.organisms.iter().map(|o|o.generation).max().unwrap_or(0),"size":s.config.size,"population":s.organisms.len(),"species_count":s.species.values().filter(|sp|sp.population>0).count(),"temperature":s.environment.temperature,"regeneration":s.environment.regeneration,"running":running,"speed":speed,"counters":s.counters,"autosave_error":error,"cells":s.environment.cells.iter().map(|c|[c.food,c.temperature_offset,c.fertility,c.elevation,c.moisture]).collect::<Vec<_>>(),"organisms":s.organisms.iter().map(|o|json!({"id":o.id.0,"x":o.x,"y":o.y,"dx":o.dx,"dy":o.dy,"species_id":o.species_id.0,"body_size":o.phenotype.body_size,"speed":o.phenotype.speed,"carnivory":o.phenotype.carnivory,"morphology":[o.phenotype.morphology.segment_count,o.phenotype.morphology.aspect_ratio,o.phenotype.morphology.appendage_count,o.phenotype.morphology.armor,match o.phenotype.morphology.mouth {sim_core::morphology::Mouth::Grazer=>0,sim_core::morphology::Mouth::Crusher=>1,sim_core::morphology::Mouth::Piercer=>2},o.phenotype.morphology.sensory_investment]})).collect::<Vec<_>>()})
+    json!({"simulation_version":sim_core::model::SIMULATION_VERSION,"seed":s.config.seed.to_string(),"tick":s.tick,"generation":s.organisms.iter().map(|o|o.generation).max().unwrap_or(0),"size":s.config.size,"population":s.organisms.len(),"species_count":s.species.values().filter(|sp|sp.population>0).count(),"temperature":s.environment.temperature,"regeneration":s.environment.regeneration,"running":running,"speed":speed,"counters":s.counters,"autosave_error":error,"cells":s.environment.cells.iter().map(|c|[c.total_food(),c.temperature_offset,c.fertility,c.elevation,c.moisture]).collect::<Vec<_>>(),"organisms":s.organisms.iter().map(|o|json!({"id":o.id.0,"x":o.x,"y":o.y,"dx":o.dx,"dy":o.dy,"species_id":o.species_id.0,"body_size":o.phenotype.body_size,"speed":o.phenotype.speed,"carnivory":o.phenotype.carnivory,"morphology":[o.phenotype.morphology.segment_count,o.phenotype.morphology.aspect_ratio,o.phenotype.morphology.appendage_count,o.phenotype.morphology.armor,match o.phenotype.morphology.mouth {sim_core::morphology::Mouth::Grazer=>0,sim_core::morphology::Mouth::Crusher=>1,sim_core::morphology::Mouth::Piercer=>2},o.phenotype.morphology.sensory_investment]})).collect::<Vec<_>>()})
 }
 
 #[cfg(test)]
@@ -242,6 +242,10 @@ mod tests {
         );
         assert!(visual.get("genome").is_none());
         assert_eq!(snapshot["cells"][0].as_array().unwrap().len(), 5);
+        assert_eq!(
+            snapshot["cells"][0][0],
+            world.state.environment.cells[0].total_food()
+        );
         assert_eq!(
             snapshot["cells"][0][3],
             world.state.environment.cells[0].elevation

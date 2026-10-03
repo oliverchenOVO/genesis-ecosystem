@@ -1,7 +1,7 @@
 //! Read-only, fixed-point species distances. Never consumes RNG or changes a world.
 use crate::World;
 use serde::Serialize;
-pub const ANALYSIS_VERSION: u32 = 4;
+pub const ANALYSIS_VERSION: u32 = 5;
 pub fn morphology_profile(m: [i32; 9]) -> [i32; 9] {
     [
         m[0] / 5,
