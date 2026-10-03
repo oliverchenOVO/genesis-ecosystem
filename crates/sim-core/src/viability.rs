@@ -112,12 +112,14 @@ fn update(o: &Organism, mut f: impl FnMut(&mut Cohort)) {
             for i in indices(o) {
                 f(&mut c.cohorts[i]);
             }
+            crate::ecological_diagnostics::budget(o, &mut f);
         }
     });
 }
 
 /// Start only at a world boundary; replay and restored continuations stay unobserved.
 pub fn start(world: &World) {
+    crate::ecological_diagnostics::start(world);
     ACTIVE.with(|a| *a.borrow_mut() = Some(Collector::default()));
     for o in &world.state.organisms {
         update(o, |c| {
@@ -201,6 +203,7 @@ pub fn metabolism(o: &Organism, components: [i32; 4], actual: i32, starving: boo
     });
 }
 pub fn death(o: &Organism, tick: u64, cause: DeathCause) {
+    crate::ecological_diagnostics::death(o);
     update(o, |c| {
         c.deaths += 1;
         c.removed_death_energy += o.energy as u64;
@@ -289,7 +292,7 @@ pub fn finish(world: &World) -> serde_json::Value {
             "starvation_death_fraction":ratio(c.starvation_deaths,c.deaths),
             "predation_death_fraction":ratio(c.predation_deaths,c.deaths)})
     }).collect();
-    serde_json::json!({"diagnostic_version":4,"tick":world.state.tick,"cohorts":rows,
+    serde_json::json!({"diagnostic_version":4,"ecology":crate::ecological_diagnostics::finish(),"tick":world.state.tick,"cohorts":rows,
         "definitions":"Overlapping inherited phenotype cohorts, whole-run exposure; parent offspring counted per parent, births by child phenotype. Requested metabolic components may exceed actual energy when depleted; actual total is clamped. Completed lifetimes exclude right-censored survivors, recorded separately. No counters in authoritative State or compact UI."})
 }
 

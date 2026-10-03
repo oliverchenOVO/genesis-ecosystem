@@ -203,6 +203,8 @@ impl World {
         let s = &mut self.state;
         s.tick += 1;
         #[cfg(feature = "viability")]
+        crate::ecological_diagnostics::tick(s.tick);
+        #[cfg(feature = "viability")]
         for o in &s.organisms {
             crate::viability::tick(o, eligible(o, s.tick));
         }
@@ -425,6 +427,15 @@ impl World {
                 (amount * efficiency / 100).min(o.phenotype.energy_capacity - o.energy),
             );
             cell.food -= amount;
+            #[cfg(feature = "viability")]
+            crate::ecological_diagnostics::feeding(
+                o,
+                cell,
+                0,
+                amount,
+                (amount * efficiency / 100).min(o.phenotype.energy_capacity - o.energy),
+                0,
+            );
             s.species
                 .get_mut(&o.species_id)
                 .expect("registered species")
@@ -475,6 +486,19 @@ impl World {
                         .expect("registered prey")
                         .feeding_observations[3] += 1;
                     if s.organisms[j].health <= 0 {
+                        #[cfg(feature = "viability")]
+                        crate::ecological_diagnostics::feeding(
+                            &s.organisms[i],
+                            &s.environment.cells[(s.organisms[i].y / CELL_SIZE * side
+                                + s.organisms[i].x / CELL_SIZE)
+                                as usize],
+                            2,
+                            0,
+                            gain.min(
+                                s.organisms[i].phenotype.energy_capacity - s.organisms[i].energy,
+                            ),
+                            prey_mass as i32,
+                        );
                         deaths.insert(j, DeathCause::Predation);
                         #[cfg(feature = "viability")]
                         crate::viability::kill(
@@ -743,6 +767,13 @@ impl World {
                 #[cfg(feature = "viability")]
                 {
                     let child = births.last().expect("just born");
+                    crate::ecological_diagnostics::birth(
+                        child,
+                        &s.environment.cells
+                            [(child.y / CELL_SIZE * side + child.x / CELL_SIZE) as usize],
+                        &a,
+                        &b,
+                    );
                     crate::viability::parent_child(&a, child);
                     crate::viability::parent_child(&b, child);
                 }
@@ -751,6 +782,14 @@ impl World {
             }
             #[cfg(feature = "viability")]
             {
+                if s.organisms[i].offspring > a.offspring {
+                    crate::ecological_diagnostics::mating(
+                        &a,
+                        &b,
+                        &s.environment.cells[(a.y / CELL_SIZE * side + a.x / CELL_SIZE) as usize],
+                        &s.environment.cells[(b.y / CELL_SIZE * side + b.x / CELL_SIZE) as usize],
+                    );
+                }
                 crate::viability::reproduction(
                     &a,
                     a.energy.min(a_cost),
@@ -805,6 +844,8 @@ impl World {
         if self.state.tick.is_multiple_of(TELEMETRY_INTERVAL) {
             self.detect_species();
             self.sample();
+            #[cfg(feature = "viability")]
+            crate::ecological_diagnostics::sample(self);
         }
         #[cfg(feature = "profile")]
         crate::profile::mark("species and telemetry", &mut profile_stamp);

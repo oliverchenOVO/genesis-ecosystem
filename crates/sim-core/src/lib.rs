@@ -1,4 +1,6 @@
 pub mod analysis;
+#[cfg(feature = "viability")]
+pub mod ecological_diagnostics;
 pub mod genetics;
 pub mod model;
 pub mod morphology;
