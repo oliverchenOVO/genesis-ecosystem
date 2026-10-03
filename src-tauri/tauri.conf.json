@@ -3,7 +3,33 @@
   "productName": "GENESIS",
   "version": "0.2.0",
   "identifier": "local.genesis.ecosystem",
-  "build": {"beforeDevCommand": "pnpm dev", "devUrl": "http://127.0.0.1:1420", "beforeBuildCommand": "pnpm build", "frontendDist": "../dist"},
-  "app": {"windows": [{"title": "GENESIS — Evolution research station", "width": 1440, "height": 1000, "minWidth": 800, "minHeight": 600}], "security": {"csp": "default-src 'self'; img-src 'self' asset: http://asset.localhost data:; style-src 'self' 'unsafe-inline'; connect-src ipc: http://ipc.localhost"}},
-  "bundle": {"active": true, "targets": ["nsis"], "shortDescription": "Deterministic evolutionary ecosystem", "category": "Education"}
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "GENESIS — Evolution research station",
+        "width": 1440,
+        "height": 1000,
+        "minWidth": 800,
+        "minHeight": 600,
+        "create": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' asset: http://asset.localhost data:; style-src 'self' 'unsafe-inline'; connect-src ipc: http://ipc.localhost"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "nsis"
+    ],
+    "shortDescription": "Deterministic evolutionary ecosystem",
+    "category": "Education"
+  }
 }

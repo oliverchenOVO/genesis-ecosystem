@@ -27,10 +27,17 @@ fn main() {
             }
         })
         .setup(|app| {
-            let directory = app.path().app_data_dir()?.join("worlds");
+            let app_directory = app.path().app_data_dir()?;
+            let directory = app_directory.join("worlds");
             let worker = App::start(directory).map_err(std::io::Error::other)?;
             tracing::info!("application_startup");
             app.manage(worker);
+            // Keep the v5 browser profile separate from released v4 WebView2 instances.
+            // Simulation saves/preferences stay in the existing worlds directory.
+            let window_config = app.config().app.windows[0].clone();
+            tauri::WebviewWindowBuilder::from_config(app, &window_config)?
+                .data_directory(app_directory.join(format!("webview-sim-v{}", sim_app::SIMULATION_VERSION)))
+                .build()?;
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![action])
