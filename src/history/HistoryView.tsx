@@ -34,7 +34,7 @@ export function eventDescription(event: HistoryEvent): string {
         [
           "Multi-unit morphology persisted",
           "Armor investment persisted",
-          "Predatory morphology with observed kills persisted",
+          "Piercer morphology persisted with observed kills",
           "Large-body morphology persisted",
           "Sensory expansion persisted",
         ][payload.index] ?? "Unknown morphology observation"

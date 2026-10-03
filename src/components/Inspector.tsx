@@ -93,8 +93,8 @@ export function Inspector({
         <dd>
           {m.locomotion_efficiency} / {m.sensory_investment}
         </dd>
-        <dt>Movement coefficient</dt>
-        <dd>{(m.movement_cost / 100).toFixed(2)}</dd>
+        <dt>Movement energy rate</dt>
+        <dd>{(m.movement_cost / 500).toFixed(2)}</dd>
         <dt>Construction investment</dt>
         <dd>{m.reproduction_cost} energy</dd>
         <dt>Complexity / maintenance</dt>

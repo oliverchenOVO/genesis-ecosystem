@@ -1053,3 +1053,11 @@ dialog button.full {
   scrollbar-color: #45604e #101b17;
   scrollbar-width: thin;
 }
+
+.canvas-toolbar {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.canvas-toolbar .segments {
+  flex-wrap: wrap;
+}

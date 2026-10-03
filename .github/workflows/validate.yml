@@ -1,6 +1,16 @@
-name: GENESIS baseline validation
+name: GENESIS versioned validation
 on: [push, pull_request, workflow_dispatch]
 jobs:
+  legacy-v4:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.1.0
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.99.0'
+      - run: cargo test --release --locked -p sim-core --test golden
   core:
     runs-on: ubuntu-latest
     steps:
@@ -10,8 +20,9 @@ jobs:
           toolchain: '1.99.0'
           components: rustfmt, clippy
       - run: cargo fmt --all -- --check
-      - run: cargo clippy -p sim-core -p sim-app -p sim-benchmark -p sim-server --all-targets --locked -- -D warnings
+      - run: cargo clippy -p sim-core -p sim-app -p sim-benchmark -p sim-server --all-targets --all-features --locked -- -D warnings
       - run: cargo test --release --locked -p sim-core -p sim-app -p sim-benchmark -p sim-server
+      - run: cargo test --release --locked -p sim-core --features profile
       - run: cargo run --release -p sim-benchmark --locked -- --stress --seeds 10 --ticks 2000 --population 50 --limit 200
   windows:
     runs-on: windows-latest

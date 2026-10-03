@@ -69,7 +69,7 @@ export function WorldCanvas({
       ctx.translate(x, y);
       ctx.rotate(Math.atan2(o.dy, o.dx));
       ctx.fillStyle =
-        o.carnivory > 650
+        mouth === 2
           ? "#d08e87"
           : `hsl(${100 + ((o.species_id * 23) % 90)} 44% 73%)`;
       ctx.strokeStyle = "#91b896";
@@ -169,8 +169,7 @@ export function WorldCanvas({
       />
       <div className="map-caption">
         <span>
-          ● Resource consumer{" "}
-          <span className="predator">▲ Predatory mouth</span>
+          ● Resource consumer <span className="predator">▲ Piercer mouth</span>
         </span>
         <span>
           {snapshot.population === 0

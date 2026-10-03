@@ -1108,7 +1108,7 @@ dependencies = [
 
 [[package]]
 name = "genesis-desktop"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "serde_json",
  "sim-app",
@@ -3016,7 +3016,7 @@ checksum = "f8fadd59c855ef2080decdef8ff161eb6661b86933c9d82e5ba29dc602a55aba"
 
 [[package]]
 name = "sim-app"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "serde",
  "serde_json",
@@ -3027,7 +3027,7 @@ dependencies = [
 
 [[package]]
 name = "sim-benchmark"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "serde_json",
  "sim-core",
@@ -3035,7 +3035,7 @@ dependencies = [
 
 [[package]]
 name = "sim-core"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "bincode",
  "blake3",
@@ -3047,7 +3047,7 @@ dependencies = [
 
 [[package]]
 name = "sim-server"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "axum",
  "serde_json",
