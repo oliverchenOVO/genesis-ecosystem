@@ -37,12 +37,12 @@ export function NewWorld({
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [temperature, setTemperature] = useState(20);
-  const [regeneration, setRegeneration] = useState(12);
+  const [regeneration, setRegeneration] = useState(4);
   const [config, setConfig] = useState<WorldConfig>({
     seed: 42,
     size: 512,
     starting_population: 50,
-    population_limit: 200,
+    population_limit: 2000,
     mutation_multiplier: 100,
   });
   const error = validateConfig(config);
@@ -71,21 +71,24 @@ export function NewWorld({
         <button
           type="button"
           disabled={busy}
-          onClick={() =>
+          onClick={() => {
             setConfig({
-              seed: 11,
+              seed: 4,
               size: 512,
               starting_population: 50,
-              population_limit: 200,
+              population_limit: 2000,
               mutation_multiplier: 100,
-            })
-          }
+            });
+            setTemperature(20);
+            setRegeneration(4);
+          }}
         >
-          Showcase · Seed 11
+          Showcase · Seed 4
         </button>
         <p className="muted">
-          Showcase uses natural evolution: 50 founders, capacity 200. Run MAX to
-          observe genetic divergence; speciation is not forced.
+          Seed 4 preset: 50 founders, safety ceiling 2,000, 20°C and
+          regeneration 4. First new species observed at tick 35,000. Run MAX to
+          explore the same deterministic evolution.
         </p>
         <label>
           Seed

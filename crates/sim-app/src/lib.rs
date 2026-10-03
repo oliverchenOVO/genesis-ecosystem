@@ -56,10 +56,15 @@ impl App {
     pub fn start(directory: PathBuf) -> Result<Self, String> {
         std::fs::create_dir_all(&directory).map_err(|e| e.to_string())?;
         // Evidence-based starter habitat; larger capacities remain configurable.
-        let world = World::new(Config {
+        let mut world = World::new(Config {
             starting_population: 50,
-            population_limit: 200,
+            population_limit: 2000,
             ..Config::default()
+        })?;
+        world.command(Command {
+            tick: 0,
+            temperature: 2000,
+            regeneration: 4,
         })?;
         let (sender, receiver) = mpsc::channel::<Request>();
         thread::Builder::new().name("genesis-simulation".into()).spawn(move||{
@@ -147,6 +152,34 @@ fn world_snapshot(world: &World, running: bool, speed: u32, error: &Option<Strin
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn starter_matches_calibrated_configuration_and_tick_zero_replay() {
+        let dir = tempfile::tempdir().unwrap();
+        let app = App::start(dir.path().into()).unwrap();
+        let snapshot = app.execute(Action::Snapshot).unwrap();
+        assert_eq!(snapshot["population"], 50);
+        assert_eq!(snapshot["regeneration"], 4);
+        assert_eq!(snapshot["tick"], 0);
+        let mut expected = World::new(Config {
+            seed: 42,
+            size: 512,
+            starting_population: 50,
+            population_limit: 2000,
+            mutation_multiplier: 100,
+        })
+        .unwrap();
+        expected
+            .command(Command {
+                tick: 0,
+                temperature: 2000,
+                regeneration: 4,
+            })
+            .unwrap();
+        assert_eq!(
+            app.execute(Action::Replay).unwrap()["hash"],
+            expected.hash()
+        );
+    }
     #[test]
     fn initial_habitat_is_replayed_and_invalid_new_world_preserves_session() {
         let dir = tempfile::tempdir().unwrap();

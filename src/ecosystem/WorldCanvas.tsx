@@ -169,7 +169,8 @@ export function WorldCanvas({
       />
       <div className="map-caption">
         <span>
-          ● Resource consumer <span className="predator">▲ Piercer mouth</span>
+          ● Grazer / Crusher mouth{" "}
+          <span className="predator">▲ Piercer mouth</span>
         </span>
         <span>
           {snapshot.population === 0
