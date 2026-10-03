@@ -14,17 +14,35 @@ use std::{
 #[serde(tag = "op", rename_all = "snake_case")]
 pub enum Action {
     Snapshot,
-    New { config: Config },
-    Control { running: bool, speed: u32 },
-    Environment { temperature: i32, regeneration: i32 },
-    Detail { id: u64 },
+    New {
+        config: Config,
+        temperature: Option<i32>,
+        regeneration: Option<i32>,
+    },
+    Control {
+        running: bool,
+        speed: u32,
+    },
+    Environment {
+        temperature: i32,
+        regeneration: i32,
+    },
+    Detail {
+        id: u64,
+    },
     Species,
     History,
     Telemetry,
-    Save { path: Option<String> },
-    Load { path: Option<String> },
+    Save {
+        path: Option<String>,
+    },
+    Load {
+        path: Option<String>,
+    },
     Replay,
-    ForgetRecent { path: String },
+    ForgetRecent {
+        path: String,
+    },
 }
 struct Request {
     action: Action,
@@ -55,7 +73,7 @@ impl App {
                     Ok(request)=>{
                         let result=match request.action{
                             Action::Snapshot=>Ok(snapshot(&world,running,speed,&autosave_error,&files)),
-                            Action::New{config}=>World::new(config).map(|new|{world=new;files.reset();running=true;last=Instant::now();autosave_error=None;tracing::info!(seed=world.state.config.seed,"simulation_created");snapshot(&world,running,speed,&autosave_error,&files)}),
+                            Action::New{config,temperature,regeneration}=>World::new(config).and_then(|mut new|{let temperature=temperature.unwrap_or(2000);let regeneration=regeneration.unwrap_or(12);if temperature!=2000||regeneration!=12 {new.command(Command{tick:0,temperature,regeneration})?;}Ok(new)}).map(|new|{world=new;files.reset();running=true;last=Instant::now();autosave_error=None;tracing::info!(seed=world.state.config.seed,"simulation_created");snapshot(&world,running,speed,&autosave_error,&files)}),
                             Action::Control{running:r,speed:v}=>{
                                 if [0,1,4,16,64].contains(&v){running=r;speed=v;last=Instant::now();Ok(snapshot(&world,running,speed,&autosave_error,&files))}else{Err("Unsupported simulation speed".into())}
                             },
@@ -129,6 +147,52 @@ fn world_snapshot(world: &World, running: bool, speed: u32, error: &Option<Strin
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn initial_habitat_is_replayed_and_invalid_new_world_preserves_session() {
+        let dir = tempfile::tempdir().unwrap();
+        let app = App::start(dir.path().into()).unwrap();
+        let created = app
+            .execute(Action::New {
+                config: Config {
+                    seed: 7,
+                    starting_population: 50,
+                    ..Config::default()
+                },
+                temperature: Some(2600),
+                regeneration: Some(6),
+            })
+            .unwrap();
+        assert_eq!(created["temperature"], 2600);
+        assert_eq!(created["regeneration"], 6);
+        app.execute(Action::Control {
+            running: false,
+            speed: 1,
+        })
+        .unwrap();
+        let saved = app.execute(Action::Save { path: None }).unwrap();
+        let loaded = persistence::load(&dir.path().join("manual.genesis")).unwrap();
+        assert_eq!(
+            loaded.state.commands[0],
+            Command {
+                tick: 0,
+                temperature: 2600,
+                regeneration: 6
+            }
+        );
+        assert_eq!(app.execute(Action::Replay).unwrap()["hash"], saved["hash"]);
+        assert!(app
+            .execute(Action::New {
+                config: Config::default(),
+                temperature: Some(2000),
+                regeneration: Some(101)
+            })
+            .is_err());
+        assert_eq!(app.execute(Action::Replay).unwrap()["hash"], saved["hash"]);
+        assert_eq!(
+            app.execute(Action::Snapshot).unwrap()["files"]["dirty"],
+            false
+        );
+    }
     #[test]
     fn snapshot_has_compact_morphology_and_real_habitat_without_genomes() {
         let world = World::new(Config {

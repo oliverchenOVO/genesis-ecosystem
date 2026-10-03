@@ -27,11 +27,17 @@ export function NewWorld({
   close,
   busy,
 }: {
-  create: (config: WorldConfig) => void;
+  create: (
+    config: WorldConfig,
+    temperature: number,
+    regeneration: number,
+  ) => void;
   close: () => void;
   busy: boolean;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const [temperature, setTemperature] = useState(20);
+  const [regeneration, setRegeneration] = useState(12);
   const [config, setConfig] = useState<WorldConfig>({
     seed: 42,
     size: 512,
@@ -48,7 +54,8 @@ export function NewWorld({
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          if (!error) create(config);
+          if (!error)
+            create(config, Math.round(temperature * 100), regeneration);
         }}
       >
         <div className="view-heading">
@@ -164,6 +171,30 @@ export function NewWorld({
             <option value="200">High · 2×</option>
             <option value="500">Very high · 5×</option>
           </select>
+        </label>
+        <label>
+          Initial temperature (°C)
+          <input
+            type="number"
+            min="-20"
+            max="60"
+            step="1"
+            value={temperature}
+            onChange={(e) => setTemperature(Number(e.target.value))}
+            required
+          />
+        </label>
+        <label>
+          Initial food regeneration
+          <input
+            type="number"
+            min="0"
+            max="100"
+            step="1"
+            value={regeneration}
+            onChange={(e) => setRegeneration(Number(e.target.value))}
+            required
+          />
         </label>
         {error ? (
           <p className="error" role="alert">

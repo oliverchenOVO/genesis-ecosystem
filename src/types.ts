@@ -116,7 +116,12 @@ export type Action =
   | { op: "control"; running: boolean; speed: number }
   | { op: "environment"; temperature: number; regeneration: number }
   | { op: "detail"; id: number }
-  | { op: "new"; config: WorldConfig }
+  | {
+      op: "new";
+      config: WorldConfig;
+      temperature?: number;
+      regeneration?: number;
+    }
   | { op: "forget_recent"; path: string }
   | { op: "save" | "load"; path: string | null };
 export interface WorldConfig {

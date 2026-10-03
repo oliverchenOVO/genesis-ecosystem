@@ -158,9 +158,20 @@ export function App() {
     setSelectedSpecies(id);
     setPage("Species");
   }
-  async function create(config: WorldConfig) {
+  async function create(
+    config: WorldConfig,
+    temperature: number,
+    regeneration: number,
+  ) {
     await fileTask(async () => {
-      if (await guard(() => act({ op: "new", config }, "New world started")))
+      if (
+        await guard(() =>
+          act(
+            { op: "new", config, temperature, regeneration },
+            "New world started",
+          ),
+        )
+      )
         setCreating(false);
     });
   }
@@ -529,8 +540,8 @@ export function App() {
       ) : null}
       {creating ? (
         <NewWorld
-          create={(config) => {
-            void create(config);
+          create={(config, temperature, regeneration) => {
+            void create(config, temperature, regeneration);
           }}
           close={() => setCreating(false)}
           busy={busy}
