@@ -330,9 +330,8 @@ impl World {
                         let fy = y * CELL_SIZE + CELL_SIZE / 2;
                         let d = distance_squared(o.x, o.y, fx, fy);
                         let c = &s.environment.cells[idx];
-                        let channel = c.preferred_channel(o);
-                        let supply = if channel == 0 { c.food } else { c.hard_food };
-                        let score = supply * c.feeding_efficiency(o, channel) / 25 - d / 16;
+                        let (_, supply, efficiency) = c.preferred_feeding(o);
+                        let score = supply * efficiency / 25 - d / 16;
                         let candidate = (score, std::cmp::Reverse(idx), fx, fy);
                         if food.is_none_or(|v| candidate > v) {
                             food = Some(candidate);
@@ -412,13 +411,7 @@ impl World {
             }
             let cell =
                 &mut s.environment.cells[(o.y / CELL_SIZE * side + o.x / CELL_SIZE) as usize];
-            let channel = cell.preferred_channel(o);
-            let available = if channel == 0 {
-                cell.food
-            } else {
-                cell.hard_food
-            };
-            let efficiency = cell.feeding_efficiency(o, channel);
+            let (channel, available, efficiency) = cell.preferred_feeding(o);
             if efficiency <= 0 {
                 #[cfg(feature = "viability")]
                 crate::viability::food(o, available, efficiency, 25, 0, 0);

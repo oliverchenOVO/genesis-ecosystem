@@ -51,10 +51,11 @@ impl Cell {
             / 1000
             * if channel == 0 { 1 } else { 3 }
     }
-    pub fn preferred_channel(&self, o: &Organism) -> usize {
-        let soft = self.food * self.feeding_efficiency(o, 0);
-        let hard = self.hard_food * self.feeding_efficiency(o, 1);
-        usize::from(hard > soft)
+    pub fn preferred_feeding(&self, o: &Organism) -> (usize, i32, i32) {
+        let efficiency = [self.feeding_efficiency(o, 0), self.feeding_efficiency(o, 1)];
+        let stock = [self.food, self.hard_food];
+        let channel = usize::from(stock[1] * efficiency[1] > stock[0] * efficiency[0]);
+        (channel, stock[channel], efficiency[channel])
     }
 }
 #[cfg(test)]
@@ -124,5 +125,11 @@ mod tests {
             massive.phenotype.morphology.maintenance_cost
                 > crusher.phenotype.morphology.maintenance_cost
         );
+        // Equal zero yields must retain soft-channel tie order and observed supply.
+        grazer.genome.0[13] = 1000;
+        grazer.phenotype = grazer.genome.phenotype();
+        cell.food = 7;
+        cell.hard_food = 300;
+        assert_eq!(cell.preferred_feeding(&grazer), (0, 7, 0));
     }
 }

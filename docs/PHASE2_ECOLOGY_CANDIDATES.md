@@ -111,3 +111,35 @@ profiling: selected-R3 density profile matches the normal hash exactly and
 spends46.8968605 seconds in perception out of49.5349629 seconds of marked phases.
 The food-cell loop calculates both channel efficiencies and then recalculates
 the selected one; a minimal bit-identical correction is the next technical task.
+
+## Bit-identical technical correction before formal expansion
+
+Selected channel/stock/efficiency are returned together, reducing each resource
+opportunity from three efficiency evaluations to two without changing operation
+order or soft-channel ties. The existing processing-cost test additionally checks
+zero-yield ties and observed supply. All six golden checkpoints and all three
+complete benchmark endpoint hashes match the unoptimized selected D exactly.
+Full optimized regression passes75 normal /81 all-feature tests, fmt and
+all-target/all-feature workspace clippy. The final viability executable's two-seed
+1000-tick preflight verifies complete JSON/JSONL equality, all diagnostic closure,
+save/load, replay and independent1000-tick continuation.
+
+Calibration report assembly moves its completed `Value` array instead of
+serializing/cloning every diagnostic ledger a second time. No data are omitted;
+the preflight rows retain every field. This reduces final report memory pressure
+after the earlier recovered R2 allocation failure.
+
+Optimized preliminary TPS:2092.20057627322 /354.169944509503 /50.7030763632721.
+They run sequentially with task compilers/calibrations stopped and no native app;
+external host load remains uncontrolled. Compared with earlier unoptimized R3
+preflight these are about27%,7%,22% faster, but contexts differ, so this is not a
+controlled effect-size claim. Final same-host R2/R3 checks still follow the formal
+100-seed study. No authoritative rules, RNG, thresholds or current golden change.
+
+Lineage source-overlap means across the D extension are0.8720404690885815–
+0.9500105612499526, with some pairs as low as0.5970046387404786. This is partial
+realized resource separation in pooled lifetime data, not proof of continuous
+1000-tick feeding-niche persistence. Existing species-based niche vectors retain
+combined resource/prey mass and do not directly encode a soft/hard axis. Formal
+acceptance definitions remain unchanged; this analytical limitation must be kept
+separate from the genuine failure of the unchanged sustained prey-income gate.

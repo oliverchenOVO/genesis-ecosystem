@@ -584,10 +584,10 @@ pub fn run() -> Result<(), String> {
                 .count(),
         );
     }
-    println!(
-        "{}",
-        json!({"scenario":val("--label").unwrap_or_else(||"Phase1 Baseline".into()),"simulation_version":SIMULATION_VERSION,"rules_revision":sim_core::model::SIMULATION_RULES_REVISION,"analysis_version":sim_core::analysis::ANALYSIS_VERSION,"base_config":config,"temperature_sweep":sweep,"seeds":seeds,"ticks_per_seed":ticks,"workers":workers,"elapsed_seconds":start.elapsed().as_secs_f64(),"failures":failures,"classifications":classifications,"final_population_distribution":summary(&results.iter().filter_map(|r|r["final_population"].as_f64()).collect::<Vec<_>>()),"results":results})
-    );
+    let mut report = json!({"scenario":val("--label").unwrap_or_else(||"Phase1 Baseline".into()),"simulation_version":SIMULATION_VERSION,"rules_revision":sim_core::model::SIMULATION_RULES_REVISION,"analysis_version":sim_core::analysis::ANALYSIS_VERSION,"base_config":config,"temperature_sweep":sweep,"seeds":seeds,"ticks_per_seed":ticks,"workers":workers,"elapsed_seconds":start.elapsed().as_secs_f64(),"failures":failures,"classifications":classifications,"final_population_distribution":summary(&results.iter().filter_map(|r|r["final_population"].as_f64()).collect::<Vec<_>>())});
+    // Move large diagnostic ledgers instead of serializing/cloning the whole array.
+    report["results"] = Value::Array(results);
+    println!("{report}");
     if failures > 0 {
         Err(format!("{failures} calibration failures"))
     } else {
