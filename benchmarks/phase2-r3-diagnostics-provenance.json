@@ -1,0 +1,76 @@
+{
+  "source_commit": "7703ef14d58b83f12c6fd957b59d6c9af3d03887",
+  "preserved_r2_commit": "b193c9b13ea000284bcc0daffb8120e5d07a9655",
+  "authority": {
+    "rules_revision": 2,
+    "rng_version": 1,
+    "save_envelope": 1,
+    "simulation_version": 5,
+    "analysis_version": 4
+  },
+  "config": {
+    "temperature": 2000,
+    "seeds": 8,
+    "mutation": 100,
+    "size": 512,
+    "regeneration": 4,
+    "founders": 50,
+    "limit": 2000,
+    "ticks": 50000
+  },
+  "independent_frozen_hash_matches": 8,
+  "refined_observer_hash_matches": 8,
+  "technical_failures": 0,
+  "replay_and_continuation_passes_per_run": 8,
+  "context": "Concurrent calibration and compilation; not isolated production TPS",
+  "files": [
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\artifacts\\phase2-r2-normal-baseline.exe",
+      "sha256": "63B913E80A964D2E5D7CCA3339AE0102CB38C86BB7B861B32691A070FF2D22DA"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\artifacts\\phase2-r3-diagnostics-r2.exe",
+      "sha256": "24827138C96AA8D188DB8C9F5BC0A5C6B88435C4404CB9E6701EDB7572A5FB84"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\artifacts\\phase2-r3-diagnostics-r2-v2.exe",
+      "sha256": "C5CB4B89B14965D105BEBC6F0E1401D3CEB5C3D66E9E1CD78B7441FCF8C13AD8"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\artifacts\\phase2-r3-diagnostics-r2-v3.exe",
+      "sha256": "E5D3A2CCF72816F853F959F69EE85AB15C4E533166AC07675E88191DBE302D9F"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\fixtures\\golden-v5.json",
+      "sha256": "94A7BD7DC164D1C11E3A7CF905FEC585CCEA723876FF4B8F95BE66D739989A97"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\fixtures\\golden-v5-r2-archive.json",
+      "sha256": "94A7BD7DC164D1C11E3A7CF905FEC585CCEA723876FF4B8F95BE66D739989A97"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\ecological_diagnostics.rs",
+      "sha256": "491F8EDD9AD5B1351C7E77F966EA842E100F183E69F5C4709A88BB56B245CD4C"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\viability.rs",
+      "sha256": "417511EAF86CBB4262E6DFF3EBC0EDA622C048D8CA823B86E857F1A7C8C654AF"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\world.rs",
+      "sha256": "B57087CE96F673589EB4D9E633071075C5EED1BEDEF63FE1591C0B34990E8277"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\benchmarks\\phase2-r3-diagnostics-r2-v3.json",
+      "sha256": "4FB75B58BC54453B4B99884E76F011DC904E4C964039579E0A7F325A92323539"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\benchmarks\\phase2-r3-paired-frozen-r2.json",
+      "sha256": "380BE0D8A0ED37D1A144559FB569A34821262856B3F003BEDB26CFF40E5C1B4B"
+    },
+    {
+      "path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\benchmarks\\phase2-r3-diagnostics-r2-lineage-profiles.json",
+      "sha256": "7FE7855D12482EF37BBBD2F1E552D6B3FDD8F6B3539513BE4F8AC6FFFC46C829"
+    }
+  ]
+}

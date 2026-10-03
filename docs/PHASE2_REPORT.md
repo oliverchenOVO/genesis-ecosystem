@@ -101,3 +101,36 @@ These are review artifacts, not a v0.2.0 release. Previous R1 and pre-calibratio
 | Report/data follow-up (git log) | Complete100-seed R2 evidence, isolated performance, final package hashes and explicit INCOMPLETE decision |
 
 The requested biological gates and native acceptance remain unfulfilled. Preserve the viable morphology changes, investigate ecological stabilization within Phase2, and rerun the same acceptance gates after a bounded evidence-supported change. No automatic transition to the next major Phase.
+
+## Ecological finalization: unchanged-R2 diagnostic milestone
+
+Source commit `7703ef1` adds optional habitat occupancy, realized feeding, mating
+distance, symmetric gene-flow, offspring ancestry, dispersal and temporal-window
+diagnostics. Simulation remains v5 / rules2 / RNG1 / envelope1 / analysis4;
+diagnostic schema3 is separate from authority. The archived R2 golden is preserved.
+
+[Measurement definitions and diagnosis](PHASE2_ECOLOGICAL_DIAGNOSTICS.md) records
+three instrument iterations and their limitations. All eight seeds ×50,000 ticks
+match the frozen normal R2 executable exactly, including refined schema3; save/load,
+full replay and independent1,000-tick continuations pass with zero failures.
+Cross-lineage mating world mean0.47899162408452234; refined cross-habitat mean
+0.5741865561478211; mating-distance p90=23 against existing radius24. Initial coarse
+habitat/productivity definitions are retained and must not be interpreted as rule
+changes. Refined feeding-productivity overlap world means0.823071521149354–
+0.929405977708568; environmental food uses one shared pool. The complex showcase's
+maximum living-lineage nine-trait distance136 remains below unchanged threshold150.
+
+Measured predator-like prey visibility131546/142789 organism ticks contrasts with
+only14 compatible candidates among1097 nearby eligible mates. Piercer actual prey
+income fraction0.7707490178271771 is pooled transient lifetime data, not a persistent
+trophic gate. Resource homogenization and sexual bottlenecks therefore both matter.
+No authoritative ecology, mating or dispersal adjustment is selected by this milestone.
+
+Validation:67 normal release headless tests and2 native debug routing tests pass;
+73 all-feature release headless tests (including2 added diagnostic tests) pass;
+24 frontend and8 Node checks pass. fmt, all-target/all-feature clippy, frontend
+format/lint/typecheck/build pass. A concurrent debug autosave test timed out at its
+unchanged120-second limit; the existing release-profile test passes. Protected main,
+v0.1.0 and Phase1 EXE/installer hashes remain unchanged. These are diagnostics,
+not completed Phase2 biological/native acceptance. Next: paired resource separation
+and local mating candidates, with no dispersal change until measured need.
