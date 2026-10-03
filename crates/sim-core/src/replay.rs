@@ -1,5 +1,5 @@
 use crate::{
-    model::{Command, Config, SIMULATION_VERSION},
+    model::{Command, Config, SIMULATION_RULES_REVISION, SIMULATION_VERSION},
     rng::RNG_VERSION,
     World,
 };
@@ -13,16 +13,22 @@ pub struct Checkpoint {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Replay {
     pub simulation_version: u32,
+    #[serde(default = "legacy_rules_revision")]
+    pub rules_revision: u32,
     pub rng_version: u32,
     pub config: Config,
     pub commands: Vec<Command>,
     pub final_tick: u64,
     pub checkpoints: Vec<Checkpoint>,
 }
+fn legacy_rules_revision() -> u32 {
+    1
+}
 impl Replay {
     pub fn from_world(world: &World) -> Self {
         Self {
             simulation_version: SIMULATION_VERSION,
+            rules_revision: SIMULATION_RULES_REVISION,
             rng_version: RNG_VERSION,
             config: world.state.config.clone(),
             commands: world.state.commands.clone(),
@@ -36,6 +42,9 @@ impl Replay {
     pub fn verify(&self) -> Result<World, String> {
         if self.simulation_version != SIMULATION_VERSION || self.rng_version != RNG_VERSION {
             return Err("Incompatible replay version".into());
+        }
+        if self.rules_revision != SIMULATION_RULES_REVISION {
+            return Err(format!("Incompatible prerelease simulation v5 rules revision {} (expected {}). Use the preserved pre-final build for revision1 replays.",self.rules_revision,SIMULATION_RULES_REVISION));
         }
         if self.final_tick > 10_000_000 {
             return Err("Replay tick limit exceeded".into());

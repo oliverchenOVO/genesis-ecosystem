@@ -104,7 +104,10 @@ impl BodyMorphology {
     pub fn resource_efficiency(&self, hardness: i32) -> i32 {
         match self.mouth {
             Mouth::Grazer => 125 - hardness / 12,
-            Mouth::Crusher => 65 + hardness / 12,
+            Mouth::Crusher => {
+                65 + hardness / 12
+                    + hardness * (self.bite_capacity - hardness / 20).clamp(0, 20) / 50
+            }
             Mouth::Piercer => 35,
         }
     }
@@ -164,5 +167,20 @@ mod tests {
         assert!(crusher.resource_efficiency(1000) > grazer.resource_efficiency(1000));
         assert!(!grazer.can_attack(&hunter));
         assert!(!hunter.can_attack(&MorphologyGenome::from_loci(&[1000; 8]).express(12)));
+    }
+    #[test]
+    fn hard_resource_processing_uses_bite_capacity_not_complexity_labels() {
+        let mut g = genes();
+        g.mouth = 500;
+        let small = g.express(8);
+        g.segmentation = 750;
+        let large = g.express(8);
+        assert_eq!(small.resource_efficiency(0), large.resource_efficiency(0));
+        assert!(large.resource_efficiency(700) > small.resource_efficiency(700));
+        assert_eq!(
+            small.resource_efficiency(1000),
+            large.resource_efficiency(1000)
+        );
+        assert!(large.maintenance_cost > small.maintenance_cost);
     }
 }

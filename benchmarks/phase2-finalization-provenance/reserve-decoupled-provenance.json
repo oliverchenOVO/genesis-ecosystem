@@ -1,0 +1,22 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "EB687370DE92676858F436463ABF42BE7D9C6DC5D71B442DC47417916A053911",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\genetics.rs"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F3DA4DE4F4786842AB59C2A87A2D3F237E1E9E57F7B90C724FD6CBE3718BA049",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\morphology.rs"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "7B7708E74099FD25C1623ECC0D889A02B59F3BF040234E7EBBEFA40C24BFF93B",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\world.rs"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "1C661AF90F4460B982C819EF511F507BF95938CD7A17FBC60CCEFDC7EE03788E",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\artifacts\\phase2-candidates\\reserve-decoupled.exe"
+  }
+]

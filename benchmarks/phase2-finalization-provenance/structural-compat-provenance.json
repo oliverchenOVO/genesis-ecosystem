@@ -1,0 +1,22 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "560D6AD2FCF701706D62F69FC9602B2738BB17246ABB6A14E1FBC85BA5576847",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\genetics.rs"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "4F6333419E22E2D47E4DF1FCA79620136CE4DEAEDD16413DC2968F1582566651",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\morphology.rs"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "E9E71947479EE76B1BB5B72966CDAC255B4422B5B0362169EDC1C6B8CB28A56B",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\world.rs"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "AB37A436557EA5338A3B9E4B73408035C4B43E4805F518E422489F285A015776",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\artifacts\\phase2-candidates\\structural-compat.exe"
+  }
+]

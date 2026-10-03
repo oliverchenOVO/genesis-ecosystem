@@ -22,6 +22,14 @@ struct Measurements {
     maximum_persistent_complex_lineages: usize,
     niche_streaks: BTreeMap<u64, ([i32; 6], u64)>,
     maximum_persistent_niche_clusters: usize,
+    morphology_streaks: BTreeMap<u64, ([i32; 9], u64)>,
+    maximum_persistent_morphology_clusters: usize,
+    #[cfg(feature = "viability")]
+    feeding_role_streaks: [u64; 2],
+    #[cfg(feature = "viability")]
+    longest_feeding_role_streaks: [u64; 2],
+    #[cfg(feature = "viability")]
+    maximum_persistent_realized_feeding_roles: usize,
     predator_population: Vec<f64>,
     consumer_population: Vec<f64>,
     multicellular_streak: u64,
@@ -89,6 +97,8 @@ fn genomic_distance(world: &World) -> f64 {
 impl Measurements {
     fn sample(&mut self, world: &World, warmup: u64, interval: u64) {
         let s = &world.state;
+        #[cfg(feature = "viability")]
+        let feeding_window = sim_core::viability::take_energy_window();
         let n = s.organisms.len();
         self.maximum_species = self
             .maximum_species
@@ -108,6 +118,62 @@ impl Measurements {
         );
         self.diversity.push(genomic_distance(world));
         let metrics = sim_core::analysis::ecology_metrics(world);
+        #[cfg(feature = "viability")]
+        if s.tick > warmup {
+            let consumers = metrics.primary_consumer_population;
+            let predators = metrics.predator_like_population;
+            let resource = feeding_window[0];
+            let prey = feeding_window[1];
+            let crossings = [
+                consumers >= 8
+                    && resource[0] > 0
+                    && resource[0] * 1000 / (resource[0] + resource[1]).max(1) >= 900,
+                predators >= 8 && prey[1] > 0 && prey[1] * 1000 / (prey[0] + prey[1]).max(1) >= 500,
+            ];
+            for (i, crossing) in crossings.into_iter().enumerate() {
+                self.feeding_role_streaks[i] = if crossing {
+                    self.feeding_role_streaks[i] + interval
+                } else {
+                    0
+                };
+                self.longest_feeding_role_streaks[i] =
+                    self.longest_feeding_role_streaks[i].max(self.feeding_role_streaks[i]);
+            }
+            self.maximum_persistent_realized_feeding_roles =
+                self.maximum_persistent_realized_feeding_roles.max(
+                    self.feeding_role_streaks
+                        .iter()
+                        .filter(|t| **t >= 1000)
+                        .count(),
+                );
+        }
+        let morph_representatives = sim_core::analysis::morphology_cluster_representatives(world);
+        self.morphology_streaks.retain(|id, _| {
+            morph_representatives
+                .iter()
+                .any(|(current, _)| current == id)
+        });
+        for (id, profile) in morph_representatives {
+            let streak = self.morphology_streaks.entry(id).or_insert((profile, 0));
+            let distance = streak
+                .0
+                .iter()
+                .zip(profile)
+                .map(|(a, b)| (a - b).abs())
+                .sum::<i32>()
+                / 9;
+            if distance >= 150 {
+                *streak = (profile, 0);
+            }
+            streak.1 += interval;
+        }
+        self.maximum_persistent_morphology_clusters =
+            self.maximum_persistent_morphology_clusters.max(
+                self.morphology_streaks
+                    .values()
+                    .filter(|(_, ticks)| *ticks >= 1000)
+                    .count(),
+            );
         self.morphology_distance
             .push(f64::from(metrics.morphology_mean_distance));
         self.niche_distance
@@ -398,11 +464,14 @@ fn measure(
         births: s.counters.births,
         initial: config.starting_population,
     });
-    let phase2 = json!({"morphology_cluster_distribution":summary(&m.morphology_clusters),"median_species_complexity_distribution":summary(&m.species_complexity),"persistent_high_complexity_lineages":m.complex_lineages_observed.len(),"maximum_simultaneous_persistent_high_complexity_lineages":m.maximum_persistent_complex_lineages,"maximum_persistent_niche_clusters":m.maximum_persistent_niche_clusters,"save_load_replay_verified":true,"rng_continuation_ticks":1000,"verification_seconds":verification_seconds,"phase2_metrics":sim_core::analysis::ecology_metrics(&world),"morphology_distance_distribution":summary(&m.morphology_distance),"niche_distance_distribution":summary(&m.niche_distance),"predator_like_population_distribution":summary(&m.predator_population),"consumer_population_distribution":summary(&m.consumer_population),"longest_multicellular_sampled_ticks":m.longest_multicellular,"persistent_multicellular":m.longest_multicellular>=1000,"maximum_sampled_complexity":m.maximum_complexity,"longest_two_niche_cluster_sampled_ticks":m.longest_niche_clusters,"predator_starvation_deaths":s.counters.predator_starvation_deaths,"coexistence_ticks":s.counters.coexistence_ticks,"safety_ceiling_ticks":s.counters.safety_ceiling_ticks,"resource_coefficient_of_variation":if mean(&m.food)>0.0 {variance(&m.food).sqrt()/mean(&m.food)}else{0.0},"innovation_species_counts":(0..5).map(|i|s.species.values().filter(|sp|sp.innovations[i]).count()).collect::<Vec<_>>()});
+    let phase2 = json!({"morphology_cluster_distribution":summary(&m.morphology_clusters),"median_species_complexity_distribution":summary(&m.species_complexity),"persistent_high_complexity_lineages":m.complex_lineages_observed.len(),"maximum_simultaneous_persistent_high_complexity_lineages":m.maximum_persistent_complex_lineages,"maximum_persistent_niche_clusters":m.maximum_persistent_niche_clusters,"maximum_persistent_morphology_clusters":m.maximum_persistent_morphology_clusters,"save_load_replay_verified":true,"rng_continuation_ticks":1000,"verification_seconds":verification_seconds,"phase2_metrics":sim_core::analysis::ecology_metrics(&world),"morphology_distance_distribution":summary(&m.morphology_distance),"niche_distance_distribution":summary(&m.niche_distance),"predator_like_population_distribution":summary(&m.predator_population),"consumer_population_distribution":summary(&m.consumer_population),"longest_multicellular_sampled_ticks":m.longest_multicellular,"persistent_multicellular":m.longest_multicellular>=1000,"maximum_sampled_complexity":m.maximum_complexity,"longest_two_niche_cluster_sampled_ticks":m.longest_niche_clusters,"predator_starvation_deaths":s.counters.predator_starvation_deaths,"coexistence_ticks":s.counters.coexistence_ticks,"safety_ceiling_ticks":s.counters.safety_ceiling_ticks,"resource_coefficient_of_variation":if mean(&m.food)>0.0 {variance(&m.food).sqrt()/mean(&m.food)}else{0.0},"innovation_species_counts":(0..5).map(|i|s.species.values().filter(|sp|sp.innovations[i]).count()).collect::<Vec<_>>()});
     #[cfg(feature = "viability")]
     let phase2 = {
         let mut phase2 = phase2;
         phase2["viability"] = viability;
+        phase2["realized_trophic_persistence"] = json!({"maximum_simultaneous_persistent_roles":m.maximum_persistent_realized_feeding_roles,
+            "longest_resource_consumer_sampled_ticks":m.longest_feeding_role_streaks[0],"longest_prey_consumer_sampled_ticks":m.longest_feeding_role_streaks[1],
+            "definitions":"At least8 living members; resource phenotype cohort gets>=90% actual food/prey income from resources, predator-like cohort gets>=50% from prey in each100-tick window;1000 consecutive sampled ticks after warmup. Trait labels alone are insufficient."});
         phase2
     };
     Ok(
@@ -517,7 +586,7 @@ pub fn run() -> Result<(), String> {
     }
     println!(
         "{}",
-        json!({"scenario":val("--label").unwrap_or_else(||"Phase1 Baseline".into()),"simulation_version":SIMULATION_VERSION,"analysis_version":3,"base_config":config,"temperature_sweep":sweep,"seeds":seeds,"ticks_per_seed":ticks,"workers":workers,"elapsed_seconds":start.elapsed().as_secs_f64(),"failures":failures,"classifications":classifications,"final_population_distribution":summary(&results.iter().filter_map(|r|r["final_population"].as_f64()).collect::<Vec<_>>()),"results":results})
+        json!({"scenario":val("--label").unwrap_or_else(||"Phase1 Baseline".into()),"simulation_version":SIMULATION_VERSION,"rules_revision":sim_core::model::SIMULATION_RULES_REVISION,"analysis_version":sim_core::analysis::ANALYSIS_VERSION,"base_config":config,"temperature_sweep":sweep,"seeds":seeds,"ticks_per_seed":ticks,"workers":workers,"elapsed_seconds":start.elapsed().as_secs_f64(),"failures":failures,"classifications":classifications,"final_population_distribution":summary(&results.iter().filter_map(|r|r["final_population"].as_f64()).collect::<Vec<_>>()),"results":results})
     );
     if failures > 0 {
         Err(format!("{failures} calibration failures"))
@@ -576,6 +645,55 @@ mod tests {
             .niche = [1000; 6];
         m.sample(&world, 0, 100);
         assert_eq!(m.niche_streaks[&1].1, 100);
+    }
+    #[test]
+    fn morphology_persistence_requires_duration_and_resets_on_species_loss() {
+        let mut world = World::new(Config::default()).unwrap();
+        let mut m = Measurements {
+            minimum: usize::MAX,
+            ..Default::default()
+        };
+        for _ in 0..9 {
+            m.sample(&world, 0, 100);
+        }
+        assert_eq!(m.maximum_persistent_morphology_clusters, 0);
+        m.sample(&world, 0, 100);
+        assert_eq!(m.maximum_persistent_morphology_clusters, 1);
+        world
+            .state
+            .species
+            .values_mut()
+            .for_each(|s| s.population = 7);
+        m.sample(&world, 0, 100);
+        assert!(m.morphology_streaks.is_empty());
+        world
+            .state
+            .species
+            .values_mut()
+            .for_each(|s| s.population = 50);
+        m.sample(&world, 0, 100);
+        assert!(m.morphology_streaks.values().all(|(_, t)| *t == 100));
+    }
+    #[test]
+    #[cfg(feature = "viability")]
+    fn predator_traits_without_observed_prey_energy_do_not_prove_a_trophic_role() {
+        let mut world = World::new(Config::default()).unwrap();
+        sim_core::viability::start(&world);
+        let mut m = Measurements {
+            minimum: usize::MAX,
+            ..Default::default()
+        };
+        for _ in 0..10 {
+            world.advance(100);
+            // Deliberately omit income evidence: living predator traits alone
+            // must never fill a missing observation window.
+            sim_core::viability::take_energy_window();
+            m.sample(&world, 0, 100);
+        }
+        assert!(m.predator_population.iter().any(|n| *n >= 8.0));
+        assert_eq!(m.longest_feeding_role_streaks[1], 0);
+        assert_eq!(m.maximum_persistent_realized_feeding_roles, 0);
+        sim_core::viability::finish(&world);
     }
     #[test]
     fn classification_requires_evidence_not_species_absence() {

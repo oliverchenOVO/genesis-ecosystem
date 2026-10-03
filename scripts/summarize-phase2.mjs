@@ -10,16 +10,17 @@ export function distribution(values) {
 }
 export function summarizePhase2(report) {
   const rows = report.results;
-  if (report.simulation_version !== 5 || report.analysis_version !== 3) throw new Error('Expected simulation5 / analysis3');
+  if (report.simulation_version !== 5 || ![3,4].includes(report.analysis_version)) throw new Error('Expected simulation5 / analysis3 or4');
   if (report.seeds < 100 || report.ticks_per_seed < 100000 || rows.length !== report.seeds || new Set(rows.map(r=>r.seed)).size !== report.seeds) throw new Error('Incomplete or duplicate long-run seed set');
   const valid = rows.filter(r=>!r.error);
+  if(report.analysis_version===4 && (report.rules_revision!==2 || valid.some(r=>!Number.isFinite(r.phase2.maximum_persistent_morphology_clusters)||!r.phase2.realized_trophic_persistence))) throw new Error('Missing revision2 / analysis4 acceptance measurements');
   if (valid.some(r=>r.ticks !== report.ticks_per_seed)) throw new Error('Mismatched tick duration');
   const count = predicate => valid.filter(predicate).length;
   const dist = selector => distribution(valid.map(selector));
   const failures = rows.length-valid.length;
   const verified = count(r=>r.phase2.save_load_replay_verified && r.phase2.rng_continuation_ticks===1000);
   return {
-    simulation_version:5, rng_version:1, save_format_version:1, analysis_version:3,
+    simulation_version:5, rules_revision:report.rules_revision??1, rng_version:1, save_format_version:1, analysis_version:report.analysis_version,
     scenario:report.scenario, initial_environment:valid[0]?.initial_environment, config:report.base_config, seeds:report.seeds, ticks_per_seed:report.ticks_per_seed,
     elapsed_seconds:report.elapsed_seconds,technical_failures:failures,save_load_replay_continuation_verified:verified,
     stability_pass:failures===0 && verified===rows.length,
@@ -33,7 +34,18 @@ export function summarizePhase2(report) {
     maximum_sampled_complexity:dist(r=>r.phase2.maximum_sampled_complexity),
     median_species_complexity:dist(r=>r.phase2.phase2_metrics.median_species_complexity),
     persistent_high_complexity_lineages:dist(r=>r.phase2.persistent_high_complexity_lineages),
+    persistent_high_complexity_worlds:count(r=>r.phase2.persistent_high_complexity_lineages>0),
+    maximum_persistent_morphology_clusters:report.analysis_version>=4?dist(r=>r.phase2.maximum_persistent_morphology_clusters):null,
+    multiple_persistent_morphology_cluster_worlds:report.analysis_version>=4?count(r=>r.phase2.maximum_persistent_morphology_clusters>1):null,
     maximum_persistent_niche_clusters:dist(r=>r.phase2.maximum_persistent_niche_clusters),
+    multiple_persistent_niche_cluster_worlds:count(r=>r.phase2.maximum_persistent_niche_clusters>1),
+    realized_feeding_roles:report.analysis_version>=4?{
+      maximum_simultaneous_persistent_roles:dist(r=>r.phase2.realized_trophic_persistence.maximum_simultaneous_persistent_roles),
+      differentiated_trophic_worlds:count(r=>r.phase2.realized_trophic_persistence.maximum_simultaneous_persistent_roles>1),
+      persistent_prey_income_worlds:count(r=>r.phase2.realized_trophic_persistence.longest_prey_consumer_sampled_ticks>=1000),
+      longest_prey_consumer_sampled_ticks:dist(r=>r.phase2.realized_trophic_persistence.longest_prey_consumer_sampled_ticks),
+      longest_resource_consumer_sampled_ticks:dist(r=>r.phase2.realized_trophic_persistence.longest_resource_consumer_sampled_ticks),
+    }:null,
     morphology_mean_distance:dist(r=>r.phase2.morphology_distance_distribution.mean),
     final_morphology_max_distance:dist(r=>r.phase2.phase2_metrics.morphology_max_distance),
     morphology_cluster_mean:dist(r=>r.phase2.morphology_cluster_distribution.mean),

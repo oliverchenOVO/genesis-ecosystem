@@ -20,3 +20,7 @@ Final calibrated review artifacts built2026-10-03 after seed42/regeneration4 def
 - target/phase2-review/release/bundle/nsis/GENESIS_0.2.0_x64-setup.exe SHA256BBF075FE7CEBACD4088A06329D1C7DB5DADBDBA7B9157D02EC96289A30B57B21.
 
 These final review binaries have not been controlled/launched for UAT after the physical stop. Previous partial observations refer to earlier development builds and are not substituted for final-build acceptance. The diagnostic build's page-loaded log establishes startup only; repeated restart recovery remains unverified. No native input/capture after user stop. No v0.2.0 tag/release.
+
+## Rules revision2 pending native acceptance
+
+Old revision1 UAT above remains historical development evidence. Revision2 final-build UAT, five repeated restarts, save/load/continue/replay, legacy-v4 UX, MAX, resizing and dirty guards remain unverified. The finalization instruction orders native UAT after biological acceptance. Headless tests and packaging do not satisfy native gates. No revision2 native success is claimed while the formal biological results are pending.

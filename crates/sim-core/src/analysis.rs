@@ -1,6 +1,38 @@
 //! Read-only, fixed-point species distances. Never consumes RNG or changes a world.
 use crate::World;
 use serde::Serialize;
+pub const ANALYSIS_VERSION: u32 = 4;
+pub fn morphology_profile(m: [i32; 9]) -> [i32; 9] {
+    [
+        m[0] / 5,
+        m[1] / 3,
+        m[2],
+        m[3] * 10,
+        m[4] / 2,
+        m[5],
+        m[6],
+        m[7] * 50,
+        m[8],
+    ]
+    .map(|v| v.clamp(0, 1000))
+}
+pub fn morphology_cluster_representatives(world: &World) -> Vec<(u64, [i32; 9])> {
+    let mut representatives = Vec::<(u64, [i32; 9])>::new();
+    for s in world.state.species.values().filter(|s| s.population >= 8) {
+        let profile = morphology_profile(s.morphology_summary);
+        if !representatives.iter().any(|(_, p)| {
+            p.iter()
+                .zip(profile)
+                .map(|(a, b)| (a - b).abs())
+                .sum::<i32>()
+                / 9
+                < 150
+        }) {
+            representatives.push((s.id.0, profile));
+        }
+    }
+    representatives
+}
 
 #[derive(Debug, Serialize, PartialEq, Eq)]
 pub struct EcologyMetrics {
@@ -62,20 +94,7 @@ pub fn ecology_metrics(world: &World) -> EcologyMetrics {
     let mut complexities = Vec::new();
     for s in world.state.species.values().filter(|s| s.population >= 8) {
         let m = s.morphology_summary;
-        morphology.push(
-            [
-                m[0] / 5,
-                m[1] / 3,
-                m[2],
-                m[3] * 10,
-                m[4] / 2,
-                m[5],
-                m[6],
-                m[7] * 50,
-                m[8],
-            ]
-            .map(|v| v.clamp(0, 1000)),
-        );
+        morphology.push(morphology_profile(m));
         niche.push(s.niche);
         complexities.push(m[6]);
     }

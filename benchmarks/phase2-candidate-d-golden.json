@@ -1,6 +1,5 @@
 {
   "simulation_version": 5,
-  "rules_revision": 2,
   "rng_version": 1,
   "config": {
     "seed": 42,

@@ -6,6 +6,8 @@ use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
 pub const SIMULATION_VERSION: u32 = 5;
+/// Unreleased v5 revisions are isolated; published v4 remains immutable.
+pub const SIMULATION_RULES_REVISION: u32 = 2;
 pub const TELEMETRY_INTERVAL: u64 = 100;
 macro_rules! id {
     ($name:ident) => {

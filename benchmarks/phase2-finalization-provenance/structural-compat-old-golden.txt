@@ -1,0 +1,22 @@
+   Compiling sim-core v0.2.0 (F:\CodeX開發小東東\AI 生態箱：從單細胞一路演化\crates\sim-core)
+    Finished `release` profile [optimized] target(s) in 8.80s
+     Running tests\golden.rs (target\release\deps\golden-352cf01d54bff702.exe)
+
+running 1 test
+test golden_command_replay_matches_every_checkpoint ... FAILED
+
+failures:
+
+---- golden_command_replay_matches_every_checkpoint stdout ----
+
+thread 'golden_command_replay_matches_every_checkpoint' (60700) panicked at crates\sim-core\tests\golden.rs:8:33:
+called `Result::unwrap()` on an `Err` value: "Replay mismatch at tick 1200"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    golden_command_replay_matches_every_checkpoint
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.17s
+
+error: test failed, to rerun pass `-p sim-core --test golden`

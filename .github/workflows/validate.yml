@@ -24,6 +24,7 @@ jobs:
       - run: cargo test --release --locked -p sim-core -p sim-app -p sim-benchmark -p sim-server
       - run: cargo test --release --locked -p sim-core --features profile
       - run: cargo test --release --locked -p sim-core --features viability
+      - run: cargo test --release --locked -p sim-benchmark --features viability
       - run: cargo run --release -p sim-benchmark --locked -- --stress --seeds 10 --ticks 2000 --population 50 --limit 200
   windows:
     runs-on: windows-latest

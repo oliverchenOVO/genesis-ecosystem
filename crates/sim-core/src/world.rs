@@ -740,6 +740,12 @@ impl World {
                 s.counters.births += 1;
                 #[cfg(feature = "viability")]
                 crate::viability::birth(births.last().expect("just born"));
+                #[cfg(feature = "viability")]
+                {
+                    let child = births.last().expect("just born");
+                    crate::viability::parent_child(&a, child);
+                    crate::viability::parent_child(&b, child);
+                }
                 s.organisms[i].offspring += 1;
                 s.organisms[j].offspring += 1;
             }

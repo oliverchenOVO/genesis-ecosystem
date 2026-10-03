@@ -1,0 +1,22 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "A1732D5D5103157A6A88D36725C0C9BBBF92CD5C6D45EFBF2B63F1CEA7A3D483",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\genetics.rs"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F3DA4DE4F4786842AB59C2A87A2D3F237E1E9E57F7B90C724FD6CBE3718BA049",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\morphology.rs"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "E9E71947479EE76B1BB5B72966CDAC255B4422B5B0362169EDC1C6B8CB28A56B",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\world.rs"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "BA27FB9C6E53C6E606998E4F42591190E730D8C5F61CB72EACCB129CABF2630C",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\artifacts\\phase2-candidates\\mechanical-feeding.exe"
+  }
+]

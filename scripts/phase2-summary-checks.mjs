@@ -12,6 +12,13 @@ test('cross-world distributions preserve zeros and reject nonfinite values',()=>
   assert.equal(distribution([]),null);
   assert.throws(()=>distribution([Infinity]),/Nonfinite/);
 });
+
+test('analysis4 cannot reinterpret revision1 or omit persistence evidence',()=>{
+  const old=JSON.parse(fs.readFileSync(new URL('../benchmarks/phase2-final-calibration.json',import.meta.url),'utf8').replace(/^\uFEFF/,''));
+  assert.equal(summarizePhase2(old).rules_revision,1);
+  assert.throws(()=>summarizePhase2({...old,analysis_version:4}),/Missing revision2/);
+  assert.throws(()=>summarizePhase2({...old,analysis_version:4,rules_revision:2}),/acceptance measurements/);
+});
 test('viability summary verifies actual cohort/world energy and population closure',()=>{
   const run=JSON.parse(fs.readFileSync(new URL('../benchmarks/phase2-prefinal-viability-v2.json',import.meta.url),'utf8').replace(/^\uFEFF/,''));
   const summary=summarizeViability(run);

@@ -18,6 +18,16 @@ fn historical_v4_fixture_is_preserved_and_explicitly_incompatible() {
     assert_eq!(replay.checkpoints.len(), 6);
     assert!(replay.verify().unwrap_err().contains("Incompatible"));
 }
+#[test]
+fn prerelease_v5_revision1_fixture_is_preserved_and_explicitly_incompatible() {
+    let replay: Replay =
+        serde_json::from_str(include_str!("../../../fixtures/golden-v5-prefinal-r1.json")).unwrap();
+    assert_eq!(replay.rules_revision, 1);
+    assert!(replay
+        .verify()
+        .unwrap_err()
+        .contains("prerelease simulation v5 rules revision"));
+}
 
 #[test]
 fn historical_v1_fixture_is_explicitly_incompatible() {

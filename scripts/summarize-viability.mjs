@@ -8,7 +8,7 @@ export function summarizeViability(run) {
   if (run.simulation_version !== 5 || run.failures !== 0 || run.results.length !== run.seeds || new Set(run.results.map(r => r.seed)).size !== run.seeds) throw Error('Incomplete or invalid viability run')
   const totals = labels.map(() => ({}))
   for (const result of run.results) {
-    if (result.ticks !== run.ticks_per_seed || !result.phase2.save_load_replay_verified || ![2,3].includes(result.phase2.viability.diagnostic_version)) throw Error('Unverified run or old diagnostic schema')
+    if (result.ticks !== run.ticks_per_seed || !result.phase2.save_load_replay_verified || ![2,3,4].includes(result.phase2.viability.diagnostic_version)) throw Error('Unverified run or old diagnostic schema')
     const cohorts = result.phase2.viability.cohorts
     if (cohorts.length !== labels.length) throw Error('Missing cohorts')
     cohorts.forEach((row, i) => {
@@ -50,6 +50,9 @@ export function summarizeViability(run) {
       completed_lifespan:rate(t.completed_lifespan_sum,t.deaths),
       completed_offspring:rate(t.completed_offspring_sum,t.deaths),
       offspring_per_organism_tick:rate(t.offspring_produced,t.organism_ticks),
+      multiunit_offspring_fraction:rate(t.multiunit_offspring_produced,t.offspring_produced),
+      high_complexity_offspring_fraction:rate(t.high_complexity_offspring_produced,t.offspring_produced),
+      same_lineage_offspring_fraction:rate(t.same_lineage_offspring_produced,t.offspring_produced),
       effective_speed:rate(t.effective_speed_sum,t.organism_ticks),
       construction_cost:rate(t.construction_cost_sum,t.organism_ticks),
       stored_energy:rate(t.energy_sum,t.organism_ticks), capacity:rate(t.capacity_sum,t.organism_ticks),

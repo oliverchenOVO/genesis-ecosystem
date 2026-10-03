@@ -1,0 +1,22 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "560D6AD2FCF701706D62F69FC9602B2738BB17246ABB6A14E1FBC85BA5576847",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\genetics.rs"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F3DA4DE4F4786842AB59C2A87A2D3F237E1E9E57F7B90C724FD6CBE3718BA049",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\morphology.rs"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "E9E71947479EE76B1BB5B72966CDAC255B4422B5B0362169EDC1C6B8CB28A56B",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\world.rs"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "006694BAD6E3DF5E4B199FEE1D709B4E27935892901B2CCDBFE6BBA6000B71F5",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\artifacts\\phase2-candidates\\combined.exe"
+  }
+]

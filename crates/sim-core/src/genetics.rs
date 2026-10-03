@@ -37,6 +37,7 @@ impl Genome {
         let morphology =
             crate::morphology::MorphologyGenome::from_loci(&self.0[14..]).express(body);
         let capacity = 1200 + g[12] * 2 + morphology.mass * 3 + morphology.storage * 2;
+        let reproductive_reserve = 1200 + g[12] * 2 + body * 300;
         Phenotype {
             body_size: body,
             speed: ((2 + g[1] / 100) * 8 / body * morphology.locomotion_efficiency
@@ -45,7 +46,7 @@ impl Genome {
             vision: 16 + g[2] / 24 + morphology.sensory_investment / 40,
             metabolism: 1 + g[3] / 250 + body / 4 + morphology.maintenance_cost,
             food_efficiency: 60 + g[4] / 10,
-            reproduction_threshold: (capacity * (55 + g[5] / 40) / 100)
+            reproduction_threshold: (reproductive_reserve * (55 + g[5] / 40) / 100)
                 .max(morphology.reproduction_cost),
             offspring_count: 1 + (g[6] / 500) as u32,
             mutation_rate: 5 + (g[7] / 10) as u32,
@@ -70,9 +71,9 @@ impl Genome {
 
     pub fn compatible(&self, other: &Self) -> bool {
         let mut total = 0u32;
-        for (a, b) in self.0.iter().zip(other.0) {
+        for (locus, (a, b)) in self.0.iter().zip(other.0).enumerate() {
             let distance = a.abs_diff(b);
-            if distance > 400 {
+            if locus < 14 && distance > 400 {
                 return false;
             }
             total += u32::from(distance);
@@ -127,7 +128,12 @@ mod tests {
             let b = Genome::random(&mut Rng(seed + 100));
             assert_eq!(
                 a.compatible(&b),
-                a.distance(&b) <= 220 && a.0.iter().zip(b.0).all(|(a, b)| a.abs_diff(b) <= 400)
+                a.distance(&b) <= 220
+                    && a.0
+                        .iter()
+                        .zip(b.0)
+                        .take(14)
+                        .all(|(a, b)| a.abs_diff(b) <= 400)
             );
         }
     }
@@ -162,6 +168,28 @@ mod tests {
         assert!(b.metabolism > a.metabolism && b.vision > a.vision);
         assert!(b.speed < a.speed);
         assert!(b.morphology.reproduction_cost > a.morphology.reproduction_cost);
+    }
+    #[test]
+    fn structural_variation_has_mean_distance_cost_without_a_single_locus_cliff() {
+        let a = Genome([500; LOCI]);
+        let mut b = a.clone();
+        b.0[14] = 1000;
+        assert!(a.compatible(&b));
+        b.0[13] = 0;
+        assert!(!a.compatible(&b)); // dietary candidate was rejected for measured collapse.
+        assert!(!a.compatible(&Genome([900; LOCI])));
+    }
+    #[test]
+    fn storage_reserve_does_not_raise_readiness_but_construction_is_still_paid() {
+        let mut a = Genome([500; LOCI]);
+        a.0[21] = 0;
+        let mut b = a.clone();
+        b.0[21] = 1000;
+        let (a, b) = (a.phenotype(), b.phenotype());
+        assert!(b.energy_capacity > a.energy_capacity);
+        assert!(b.morphology.reproduction_cost > a.morphology.reproduction_cost);
+        assert_eq!(a.reproduction_threshold, b.reproduction_threshold);
+        assert!(b.reproduction_threshold >= b.morphology.reproduction_cost);
     }
 
     #[test]

@@ -14,10 +14,13 @@ pub const SAVE_FORMAT_VERSION: u32 = 1;
 pub const MAX_SAVE_BYTES: u64 = 128 * 1024 * 1024;
 const MAGIC: &[u8; 8] = b"GENESIS1";
 const HEADER: usize = 60;
+// This cannot alias an old valid State: its bytes8..12 are not a valid world size.
+const PAYLOAD_TAG: &[u8; 16] = b"GENESIS5RULES002";
 
 pub fn encode(world: &World) -> Result<Vec<u8>, String> {
     world.validate()?;
-    let raw = bincode::serialize(&world.state).map_err(|e| e.to_string())?;
+    let mut raw = PAYLOAD_TAG.to_vec();
+    raw.extend(bincode::serialize(&world.state).map_err(|e| e.to_string())?);
     if raw.len() as u64 > MAX_SAVE_BYTES {
         return Err("World exceeds the Phase 1 save size limit".into());
     }
@@ -70,11 +73,12 @@ pub fn decode(bytes: &[u8]) -> Result<World, String> {
     if raw.len() as u64 != expected_len || blake3::hash(&raw).as_bytes() != &bytes[28..60] {
         return Err("Save checksum or size mismatch".into());
     }
+    let payload = raw.strip_prefix(PAYLOAD_TAG).ok_or("Incompatible prerelease simulation v5 rules revision1 save. Use the preserved pre-final GENESIS build (phase2/pre-finalization-a3d8cc0); revision2 does not silently migrate earlier v5 worlds.")?;
     let state: State = bincode::DefaultOptions::new()
         .with_fixint_encoding()
         .with_limit(MAX_SAVE_BYTES)
         .reject_trailing_bytes()
-        .deserialize(&raw)
+        .deserialize(payload)
         .map_err(|e| format!("Invalid save payload: {e}"))?;
     let world = World { state };
     world.validate()?;
@@ -117,6 +121,12 @@ mod tests {
         let bytes = include_bytes!("../../../examples/seed11-107504.genesis");
         let error = decode(bytes).unwrap_err();
         assert!(error.contains("legacy simulation v4") && error.contains("v0.1.0"));
+    }
+    #[test]
+    fn actual_prerelease_v5_save_is_rejected_before_reinterpretation() {
+        let bytes = include_bytes!("../../../examples/phase2-seed4-tick50000.genesis");
+        let error = decode(bytes).unwrap_err();
+        assert!(error.contains("prerelease simulation v5") && error.contains("revision1"));
     }
     #[test]
     fn roundtrip_and_continuation() {

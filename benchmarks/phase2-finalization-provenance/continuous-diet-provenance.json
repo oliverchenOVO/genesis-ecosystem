@@ -1,0 +1,22 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "CDE54C794DD9603FD499AB87ACC819F67DE2612F42E2A66D02C4ADC8574ED7D0",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\genetics.rs"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F3DA4DE4F4786842AB59C2A87A2D3F237E1E9E57F7B90C724FD6CBE3718BA049",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\morphology.rs"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "7B7708E74099FD25C1623ECC0D889A02B59F3BF040234E7EBBEFA40C24BFF93B",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\crates\\sim-core\\src\\world.rs"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "118F69ED77DA72206EC87B73332E179D470472532D42697F39A0BA002AF13988",
+    "Path": "F:\\CodeX開發小東東\\AI 生態箱：從單細胞一路演化\\artifacts\\phase2-candidates\\continuous-diet.exe"
+  }
+]

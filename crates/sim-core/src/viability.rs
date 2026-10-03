@@ -64,6 +64,10 @@ pub struct Cohort {
     pub nearby_carnivory_compatible_candidates: u64,
     pub successful_matings: u64,
     pub offspring_produced: u64,
+    pub multiunit_offspring_produced: u64,
+    pub high_complexity_offspring_produced: u64,
+    pub same_lineage_offspring_produced: u64,
+    pub offspring_complexity_sum: u64,
     pub attacks: u64,
     pub kills: u64,
     pub starvation_ticks: u64,
@@ -80,6 +84,7 @@ pub struct Cohort {
 #[derive(Default)]
 struct Collector {
     cohorts: [Cohort; 9],
+    energy_window: [[u64; 2]; 2],
 }
 thread_local! { static ACTIVE: RefCell<Option<Collector>> = const { RefCell::new(None) }; }
 
@@ -143,6 +148,7 @@ pub fn movement(o: &Organism, speed: i32, hunt: bool) {
     });
 }
 pub fn food(o: &Organism, available: i32, efficiency: i32, quota: i32, amount: i32, gained: i32) {
+    income(o, gained as u64, 0);
     update(o, |c| {
         c.food_attempt_ticks += 1;
         c.available_resource_sum += available as u64;
@@ -160,10 +166,29 @@ pub fn attack(o: &Organism, spent: i32) {
     });
 }
 pub fn kill(o: &Organism, gained: i32) {
+    income(o, 0, gained as u64);
     update(o, |c| {
         c.kills += 1;
         c.prey_energy += gained as u64;
     });
+}
+fn income(o: &Organism, food: u64, prey: u64) {
+    let predator = o.phenotype.carnivory > 650 && o.phenotype.morphology.mouth != Mouth::Grazer;
+    ACTIVE.with(|a| {
+        if let Some(c) = a.borrow_mut().as_mut() {
+            c.energy_window[usize::from(predator)][0] += food;
+            c.energy_window[usize::from(predator)][1] += prey;
+        }
+    });
+}
+/// Observed realized food/prey income since the preceding sample, not trait labels.
+pub fn take_energy_window() -> [[u64; 2]; 2] {
+    ACTIVE.with(|a| {
+        a.borrow_mut()
+            .as_mut()
+            .map(|c| std::mem::take(&mut c.energy_window))
+            .unwrap_or_default()
+    })
 }
 pub fn metabolism(o: &Organism, components: [i32; 4], actual: i32, starving: bool) {
     update(o, |c| {
@@ -216,6 +241,15 @@ pub fn reproduction(o: &Organism, spent: i32, children: u32) {
         c.reproductive_energy += spent as u64;
     });
 }
+pub fn parent_child(parent: &Organism, child: &Organism) {
+    update(parent, |c| {
+        c.multiunit_offspring_produced += u64::from(child.phenotype.morphology.segment_count > 1);
+        c.high_complexity_offspring_produced +=
+            u64::from(child.phenotype.morphology.complexity >= 200);
+        c.same_lineage_offspring_produced += u64::from(child.lineage_id == parent.lineage_id);
+        c.offspring_complexity_sum += child.phenotype.morphology.complexity as u64;
+    });
+}
 pub fn birth(o: &Organism) {
     update(o, |c| {
         c.births += 1;
@@ -255,7 +289,7 @@ pub fn finish(world: &World) -> serde_json::Value {
             "starvation_death_fraction":ratio(c.starvation_deaths,c.deaths),
             "predation_death_fraction":ratio(c.predation_deaths,c.deaths)})
     }).collect();
-    serde_json::json!({"diagnostic_version":3,"tick":world.state.tick,"cohorts":rows,
+    serde_json::json!({"diagnostic_version":4,"tick":world.state.tick,"cohorts":rows,
         "definitions":"Overlapping inherited phenotype cohorts, whole-run exposure; parent offspring counted per parent, births by child phenotype. Requested metabolic components may exceed actual energy when depleted; actual total is clamped. Completed lifetimes exclude right-censored survivors, recorded separately. No counters in authoritative State or compact UI."})
 }
 
@@ -288,7 +322,30 @@ mod tests {
         for row in report["cohorts"].as_array().unwrap() {
             assert_eq!(row["energy_closure_error"], 0);
             assert_eq!(row["population_closure_error"], 0);
+            assert!(
+                row["totals"]["high_complexity_offspring_produced"]
+                    .as_u64()
+                    .unwrap()
+                    <= row["totals"]["offspring_produced"].as_u64().unwrap()
+            );
         }
+        let rows = report["cohorts"].as_array().unwrap();
+        assert_eq!(
+            rows[..4]
+                .iter()
+                .map(|r| r["totals"]["offspring_produced"].as_u64().unwrap())
+                .sum::<u64>(),
+            world.state.counters.births * 2
+        );
+        assert_eq!(
+            rows[..4]
+                .iter()
+                .map(|r| r["totals"]["high_complexity_offspring_produced"]
+                    .as_u64()
+                    .unwrap())
+                .sum::<u64>(),
+            rows[3]["totals"]["births"].as_u64().unwrap() * 2
+        );
         assert_eq!(
             report["cohorts"][0]["totals"]["deaths"].as_u64().unwrap()
                 + report["cohorts"][1]["totals"]["deaths"].as_u64().unwrap()
@@ -298,6 +355,44 @@ mod tests {
         );
         let replay = crate::replay::Replay::from_world(&world).verify().unwrap();
         assert_eq!(replay.hash(), world.hash());
+    }
+    #[test]
+    fn feeding_windows_drain_without_losing_whole_run_accounting() {
+        let mut world = World::new(Config::default()).unwrap();
+        start(&world);
+        world.advance(100);
+        let first = take_energy_window();
+        assert!(first.iter().map(|r| r[0]).sum::<u64>() > 0);
+        assert_eq!(take_energy_window(), [[0; 2]; 2]);
+        world.advance(100);
+        let second = take_energy_window();
+        let report = finish(&world);
+        for (role, cohort) in [(0, "single-unit"), (1, "predator-like")] {
+            let row = report["cohorts"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .find(|r| r["cohort"] == cohort)
+                .unwrap();
+            if role == 1 {
+                assert_eq!(
+                    first[role][0] + second[role][0],
+                    row["totals"]["food_energy"].as_u64().unwrap()
+                );
+                assert_eq!(
+                    first[role][1] + second[role][1],
+                    row["totals"]["prey_energy"].as_u64().unwrap()
+                );
+            }
+            assert_eq!(row["energy_closure_error"], 0);
+        }
+        let total_window_food = first.iter().chain(second.iter()).map(|r| r[0]).sum::<u64>();
+        let total_food = report["cohorts"].as_array().unwrap()[..4]
+            .iter()
+            .map(|r| r["totals"]["food_energy"].as_u64().unwrap())
+            .sum::<u64>();
+        assert_eq!(total_window_food, total_food);
+        assert_eq!(take_energy_window(), [[0; 2]; 2]);
     }
     #[test]
     fn reset_and_threads_do_not_mix_independent_worlds() {

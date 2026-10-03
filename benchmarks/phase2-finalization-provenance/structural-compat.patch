@@ -1,0 +1,16 @@
+diff --git a/crates/sim-core/src/genetics.rs b/crates/sim-core/src/genetics.rs
+index bafbb5a..443bc5d 100644
+--- a/crates/sim-core/src/genetics.rs
++++ b/crates/sim-core/src/genetics.rs
+@@ -70,9 +70,9 @@ impl Genome {
+ 
+     pub fn compatible(&self, other: &Self) -> bool {
+         let mut total = 0u32;
+-        for (a, b) in self.0.iter().zip(other.0) {
++        for (locus, (a, b)) in self.0.iter().zip(other.0).enumerate() {
+             let distance = a.abs_diff(b);
+-            if distance > 400 {
++            if locus < 14 && distance > 400 {
+                 return false;
+             }
+             total += u32::from(distance);

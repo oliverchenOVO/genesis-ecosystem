@@ -17,3 +17,11 @@ All arithmetic below is integer division, with body size B from original locus0:
 More segments/storage yield larger capacity and bite capacity, and mass reduces thermal energy loss; maintenance, movement, construction and reproductive delay oppose those benefits. Armor reduces attack damage while increasing mass, movement coefficient and construction cost. Sensors improve range at a maintenance cost. Appendages/locomotion improve speed at complexity/construction cost. No structural investment is free.
 
 The representation and formulas are artificial-life rules, not claims of molecular or real-world biology. Optional juvenile growth is deferred to Phase2.1.
+
+## Revision2 readiness and mechanical feeding
+
+The selected D candidate retains the original capacity, maturity, cooldown, maintenance, movement and parental construction payments. Reproductive readiness uses reserve=1200+original capacity allele*2+B*300, threshold=max(reserve*(55+original threshold allele/40)/100,K). Additional morphology/storage capacity is usable reserve rather than a proportional second readiness penalty; actual construction K is still paid. No phenotype-label bonus or global energy subsidy exists.
+
+Crusher resource efficiency=65+hardness/12+hardness*clamp(bite_capacity-hardness/20,0,20)/50. This is a bounded bite-dependent payoff for processing hard resources; at hardness0 it adds nothing, and insufficient bite capacity adds nothing. Grazer125-hardness/12 and Piercer35 are unchanged. Feeding quota25 remains unchanged because measured intake was supply-limited, not quota-limited.
+
+Mating retains the floored mean22-locus distance<=220 and the original14-locus per-locus distance<=400. The structural8 loci contribute to global distance without an additional400 cliff. Diet remains in the original14-locus barrier; removing that barrier was separately tested and rejected after5/8 natural world extinctions. Mutation distributions and RNG consumption rules are unchanged. See PHASE2_FINALIZATION.md for bounded paired comparisons and retained failures.

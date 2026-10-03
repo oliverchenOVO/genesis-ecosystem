@@ -1,6 +1,6 @@
 #![recursion_limit = "256"]
 use sim_core::{
-    model::SIMULATION_VERSION,
+    model::{SIMULATION_RULES_REVISION, SIMULATION_VERSION},
     persistence,
     replay::{Checkpoint, Replay},
     rng::RNG_VERSION,
@@ -139,6 +139,7 @@ fn golden() -> Result<(), String> {
         "{}",
         serde_json::to_string_pretty(&Replay {
             simulation_version: SIMULATION_VERSION,
+            rules_revision: SIMULATION_RULES_REVISION,
             rng_version: RNG_VERSION,
             config,
             commands,

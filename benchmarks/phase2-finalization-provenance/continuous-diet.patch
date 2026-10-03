@@ -1,0 +1,49 @@
+diff --git a/crates/sim-core/src/genetics.rs b/crates/sim-core/src/genetics.rs
+index bafbb5a..632baa8 100644
+--- a/crates/sim-core/src/genetics.rs
++++ b/crates/sim-core/src/genetics.rs
+@@ -37,6 +37,7 @@ impl Genome {
+         let morphology =
+             crate::morphology::MorphologyGenome::from_loci(&self.0[14..]).express(body);
+         let capacity = 1200 + g[12] * 2 + morphology.mass * 3 + morphology.storage * 2;
++        let reproductive_reserve = 1200 + g[12] * 2 + body * 300;
+         Phenotype {
+             body_size: body,
+             speed: ((2 + g[1] / 100) * 8 / body * morphology.locomotion_efficiency
+@@ -45,7 +46,7 @@ impl Genome {
+             vision: 16 + g[2] / 24 + morphology.sensory_investment / 40,
+             metabolism: 1 + g[3] / 250 + body / 4 + morphology.maintenance_cost,
+             food_efficiency: 60 + g[4] / 10,
+-            reproduction_threshold: (capacity * (55 + g[5] / 40) / 100)
++            reproduction_threshold: (reproductive_reserve * (55 + g[5] / 40) / 100)
+                 .max(morphology.reproduction_cost),
+             offspring_count: 1 + (g[6] / 500) as u32,
+             mutation_rate: 5 + (g[7] / 10) as u32,
+@@ -70,9 +71,9 @@ impl Genome {
+ 
+     pub fn compatible(&self, other: &Self) -> bool {
+         let mut total = 0u32;
+-        for (a, b) in self.0.iter().zip(other.0) {
++        for (locus, (a, b)) in self.0.iter().zip(other.0).enumerate() {
+             let distance = a.abs_diff(b);
+-            if distance > 400 {
++            if locus < 13 && distance > 400 {
+                 return false;
+             }
+             total += u32::from(distance);
+diff --git a/crates/sim-core/src/morphology.rs b/crates/sim-core/src/morphology.rs
+index 61980fb..ed3cbdd 100644
+--- a/crates/sim-core/src/morphology.rs
++++ b/crates/sim-core/src/morphology.rs
+@@ -104,7 +104,10 @@ impl BodyMorphology {
+     pub fn resource_efficiency(&self, hardness: i32) -> i32 {
+         match self.mouth {
+             Mouth::Grazer => 125 - hardness / 12,
+-            Mouth::Crusher => 65 + hardness / 12,
++            Mouth::Crusher => {
++                65 + hardness / 12
++                    + hardness * (self.bite_capacity - hardness / 20).clamp(0, 20) / 50
++            }
+             Mouth::Piercer => 35,
+         }
+     }
