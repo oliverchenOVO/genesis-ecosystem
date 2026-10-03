@@ -33,6 +33,7 @@ export function SpeciesView({
   }));
   const latest = samples.filter((s) => s.data).at(-1)?.data;
   const first = samples.find((s) => s.data)?.data;
+  const ancestor = species.find((s) => s.id === detail?.ancestor);
   return (
     <div className="species-workspace">
       <section className="species-list rail">
@@ -126,6 +127,73 @@ export function SpeciesView({
               "Initial living population"
             )}
           </p>
+          <div className="divider" />
+          <h2>Morphology and ecological observations</h2>
+          <div className="trait-grid">
+            {[
+              "Segments",
+              "Mass",
+              "Armor",
+              "Bite",
+              "Locomotion",
+              "Sensory",
+              "Complexity",
+              "Speed",
+              "Piercer fraction",
+            ].map((name, i) => (
+              <div className="trait-row" key={name}>
+                <span>{name}</span>
+                <strong>
+                  {i === 0
+                    ? (detail.morphology_summary[i] / 1000).toFixed(2)
+                    : i === 2 || i === 8
+                      ? `${(detail.morphology_summary[i] / 10).toFixed(1)}%`
+                      : detail.morphology_summary[i]}
+                </strong>
+              </div>
+            ))}
+          </div>
+          <p className="muted">
+            Observed resource units{" "}
+            {detail.feeding_observations[0].toLocaleString()} · prey consumed{" "}
+            {detail.feeding_observations[2].toLocaleString()} · attacks received{" "}
+            {detail.feeding_observations[3].toLocaleString()}. Occupied terrain{" "}
+            {detail.niche[4]}/1000; temperature approximately{" "}
+            {(detail.niche[3] / 10 - 26).toFixed(1)} °C.
+          </p>
+          <p className="muted">
+            Representative founder:{" "}
+            {detail.representative_morphology.segment_count} body units ·{" "}
+            {detail.representative_morphology.mass} mass ·{" "}
+            {detail.representative_morphology.mouth} mouth.
+          </p>
+          {ancestor ? (
+            <p>
+              Founder comparison with {ancestor.name}: mass{" "}
+              {detail.representative_morphology.mass -
+                ancestor.representative_morphology.mass >=
+              0
+                ? "+"
+                : ""}
+              {detail.representative_morphology.mass -
+                ancestor.representative_morphology.mass}
+              ; armor{" "}
+              {(detail.representative_morphology.armor -
+                ancestor.representative_morphology.armor) /
+                10}{" "}
+              percentage points; bite{" "}
+              {detail.representative_morphology.bite_capacity -
+                ancestor.representative_morphology.bite_capacity}
+              .
+            </p>
+          ) : null}
+          <Chart
+            label="Mean segment count"
+            values={samples
+              .filter((s) => s.data)
+              .map((s) => s.data!.morphology[0] / 1000)}
+            ticks={samples.filter((s) => s.data).map((s) => s.tick)}
+          />
           <div className="divider" />
           <h2>Measured trait averages</h2>
           <div className="trait-grid">

@@ -2,7 +2,11 @@ import { useState } from "react";
 import type { HistoryEvent, Species } from "../types";
 export function eventCategory(event: HistoryEvent): string {
   if (typeof event.kind === "string") return "Evolution";
-  if ("PopulationMilestone" in event.kind) return "Population";
+  if (
+    "PopulationMilestone" in event.kind ||
+    "SafetyPopulationCeiling" in event.kind
+  )
+    return "Population";
   if ("Environment" in event.kind) return "Environment";
   return "Evolution";
 }
@@ -23,6 +27,18 @@ export function eventDescription(event: HistoryEvent): string {
       return `Lineage #${payload.lineage} met the divergence criteria; persistence under observation`;
     case "PopulationMilestone":
       return `${payload.population.toLocaleString()} living organisms recorded`;
+    case "SafetyPopulationCeiling":
+      return `Technical safety ceiling reached at ${payload.population.toLocaleString()} organisms`;
+    case "MorphologicalInnovation":
+      return (
+        [
+          "Multi-unit morphology persisted",
+          "Armor investment persisted",
+          "Predatory morphology with observed kills persisted",
+          "Large-body morphology persisted",
+          "Sensory expansion persisted",
+        ][payload.index] ?? "Unknown morphology observation"
+      );
     default:
       return type;
   }

@@ -41,17 +41,30 @@ export function WorldCanvas({
     ctx.fillRect(0, 0, size, size);
     const side = snapshot.size / 16;
     const cell = size / side;
-    snapshot.cells.forEach(([food, offset], i) => {
-      ctx.fillStyle =
-        layer === "Resources"
-          ? `rgb(${12 + food / 100},${24 + food / 22},${18 + food / 80})`
-          : `hsl(${210 - (snapshot.temperature + offset) / 30} 28% 23%)`;
-      ctx.fillRect((i % side) * cell, Math.floor(i / side) * cell, cell, cell);
-    });
+    snapshot.cells.forEach(
+      ([food, offset, fertility, elevation, moisture], i) => {
+        ctx.fillStyle =
+          layer === "Resources"
+            ? `rgb(${12 + food / 100},${24 + food / 22},${18 + food / 80})`
+            : layer === "Temperature"
+              ? `hsl(${210 - (snapshot.temperature + offset) / 30} 28% 23%)`
+              : layer === "Terrain"
+                ? `hsl(${110 - elevation / 12} 25% ${18 + elevation / 40}%)`
+                : `hsl(110 35% ${15 + (fertility * (200 + moisture)) / 5000}%)`;
+        ctx.fillRect(
+          (i % side) * cell,
+          Math.floor(i / side) * cell,
+          cell,
+          cell,
+        );
+      },
+    );
     for (const o of snapshot.organisms) {
       const x = o.x * scale,
         y = o.y * scale;
       const radius = (1.2 + o.body_size / 5) * Math.max(0.8, scale / 2);
+      const [segments, aspect, appendages, armor, mouth, sensory] =
+        o.morphology;
       ctx.save();
       ctx.translate(x, y);
       ctx.rotate(Math.atan2(o.dy, o.dx));
@@ -60,7 +73,7 @@ export function WorldCanvas({
           ? "#d08e87"
           : `hsl(${100 + ((o.species_id * 23) % 90)} 44% 73%)`;
       ctx.strokeStyle = "#91b896";
-      ctx.lineWidth = 0.8;
+      ctx.lineWidth = 0.5 + armor / 250;
       if (o.speed > 6) {
         ctx.beginPath();
         ctx.moveTo(-radius * 2, 0);
@@ -68,15 +81,44 @@ export function WorldCanvas({
         ctx.stroke();
       }
       ctx.beginPath();
-      if (o.carnivory > 650) {
+      if (mouth === 2) {
         ctx.moveTo(radius * 1.7, 0);
         ctx.lineTo(-radius, -radius);
         ctx.lineTo(-radius, radius);
         ctx.closePath();
       } else {
-        ctx.ellipse(0, 0, radius * 1.6, radius, 0, 0, Math.PI * 2);
+        ctx.ellipse(
+          0,
+          0,
+          (radius * (1 + segments / 4) * aspect) / 1000,
+          radius,
+          0,
+          0,
+          Math.PI * 2,
+        );
       }
       ctx.fill();
+      ctx.stroke();
+      for (let i = 1; i < segments; i++) {
+        ctx.beginPath();
+        ctx.moveTo((i / segments - 0.5) * radius * 2, -radius * 0.7);
+        ctx.lineTo((i / segments - 0.5) * radius * 2, radius * 0.7);
+        ctx.stroke();
+      }
+      for (let i = 0; i < appendages; i++) {
+        const side = i % 2 === 0 ? -1 : 1;
+        ctx.beginPath();
+        ctx.moveTo(((Math.floor(i / 2) - 1) * radius) / 2, side * radius * 0.7);
+        ctx.lineTo(((Math.floor(i / 2) - 1) * radius) / 2, side * radius * 1.5);
+        ctx.stroke();
+      }
+      if (sensory >= 400) {
+        ctx.beginPath();
+        ctx.arc(radius, -radius * 0.7, 1 + sensory / 1000, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      if (mouth === 1)
+        ctx.fillRect(radius * 0.6, -radius * 0.4, radius * 0.8, radius * 0.8);
       ctx.fillStyle = "#253d29";
       ctx.beginPath();
       ctx.arc(radius * 0.8, 0, 1, 0, Math.PI * 2);
@@ -98,15 +140,17 @@ export function WorldCanvas({
           World {snapshot.size} × {snapshot.size}
         </span>
         <div className="segments">
-          {["Resources", "Temperature"].map((value) => (
-            <button
-              key={value}
-              className={layer === value ? "active" : ""}
-              onClick={() => setLayer(value)}
-            >
-              {value}
-            </button>
-          ))}
+          {["Resources", "Productivity", "Temperature", "Terrain"].map(
+            (value) => (
+              <button
+                key={value}
+                className={layer === value ? "active" : ""}
+                onClick={() => setLayer(value)}
+              >
+                {value}
+              </button>
+            ),
+          )}
         </div>
       </div>
       <canvas
@@ -125,7 +169,8 @@ export function WorldCanvas({
       />
       <div className="map-caption">
         <span>
-          ● Herbivore <span className="predator">▲ Predator</span>
+          ● Resource consumer{" "}
+          <span className="predator">▲ Predatory mouth</span>
         </span>
         <span>
           {snapshot.population === 0

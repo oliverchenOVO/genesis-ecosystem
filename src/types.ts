@@ -1,4 +1,5 @@
 export interface DisplayOrganism {
+  morphology: number[];
   id: number;
   x: number;
   y: number;
@@ -34,6 +35,7 @@ export interface Snapshot {
   autosave_error: string | null;
 }
 export interface Phenotype {
+  morphology: BodyMorphology;
   body_size: number;
   speed: number;
   vision: number;
@@ -66,6 +68,11 @@ export interface Organism {
   behavior: string;
 }
 export interface Species {
+  representative_morphology: BodyMorphology;
+  morphology_summary: number[];
+  niche: number[];
+  feeding_observations: number[];
+  innovations: boolean[];
   id: number;
   name: string;
   ancestor: number | null;
@@ -78,6 +85,8 @@ export interface Species {
   population: number;
 }
 export interface SpeciesSample {
+  morphology: number[];
+  niche: number[];
   species: number;
   population: number;
   means: number[];
@@ -122,4 +131,20 @@ export interface FileStatus {
   current_path: string | null;
   warning: string | null;
   recent: { path: string; last_opened_ms: number; available: boolean }[];
+}
+export interface BodyMorphology {
+  segment_count: number;
+  aspect_ratio: number;
+  appendage_count: number;
+  mouth: "Grazer" | "Crusher" | "Piercer";
+  mass: number;
+  armor: number;
+  bite_capacity: number;
+  sensory_investment: number;
+  locomotion_efficiency: number;
+  storage: number;
+  complexity: number;
+  maintenance_cost: number;
+  movement_cost: number;
+  reproduction_cost: number;
 }

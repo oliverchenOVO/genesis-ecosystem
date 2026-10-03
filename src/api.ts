@@ -15,6 +15,8 @@ export async function request<T>(action: Action): Promise<T> {
 }
 export function readableError(error: unknown): string {
   const detail = error instanceof Error ? error.message : String(error);
+  if (/legacy simulation v4/i.test(detail))
+    return "This is a legacy v4 world. Open it with GENESIS v0.1.0; Phase 2 does not migrate legacy worlds. Your current world has been kept.";
   if (/Incompatible save version/i.test(detail))
     return "This world was saved with an unsupported simulation or save version. Open it with the matching GENESIS version.";
   if (

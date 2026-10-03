@@ -121,7 +121,7 @@ export function NewWorld({
           </select>
         </label>
         <label>
-          Population capacity
+          Technical safety population ceiling
           <input
             type="number"
             min="1"

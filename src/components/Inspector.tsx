@@ -33,6 +33,7 @@ export function Inspector({
     );
   const sp = species.find((s) => s.id === organism.species_id);
   const p = organism.phenotype;
+  const m = p.morphology;
   const traits: [string, number, string][] = [
     ["Speed", p.speed, "units / tick"],
     ["Body size", p.body_size, "units"],
@@ -72,6 +73,36 @@ export function Inspector({
         <dd>{organism.offspring}</dd>
       </dl>
       <div className="divider" />
+      <h3>
+        Body structure · {m.segment_count > 1 ? "Multi-unit" : "Single-unit"}
+      </h3>
+      <dl>
+        <dt>Segments / appendages</dt>
+        <dd>
+          {m.segment_count} / {m.appendage_count}
+        </dd>
+        <dt>Body mass</dt>
+        <dd>{m.mass} mass units</dd>
+        <dt>Armor investment</dt>
+        <dd>{(m.armor / 10).toFixed(1)}%</dd>
+        <dt>Feeding structure</dt>
+        <dd>
+          {m.mouth} · bite {m.bite_capacity}
+        </dd>
+        <dt>Locomotion / sensory</dt>
+        <dd>
+          {m.locomotion_efficiency} / {m.sensory_investment}
+        </dd>
+        <dt>Movement coefficient</dt>
+        <dd>{(m.movement_cost / 100).toFixed(2)}</dd>
+        <dt>Construction investment</dt>
+        <dd>{m.reproduction_cost} energy</dd>
+        <dt>Complexity / maintenance</dt>
+        <dd>
+          {m.complexity} / {m.maintenance_cost} energy per tick
+        </dd>
+      </dl>
+      <div className="divider" />
       <h3>Trait values</h3>
       {traits.map(([label, value, unit]) => (
         <div key={label} className="trait-row">
@@ -82,7 +113,7 @@ export function Inspector({
         </div>
       ))}
       <div className="divider" />
-      <h3>Genome · 14 loci</h3>
+      <h3>Genome · {organism.genome.length} loci</h3>
       <div
         className="genome"
         aria-label={`Alleles: ${organism.genome.join(", ")}`}

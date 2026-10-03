@@ -87,7 +87,7 @@ impl App {
                     Err(mpsc::RecvTimeoutError::Timeout)=>{},
                 }
                 if running&&(speed==0||last.elapsed()>=Duration::from_millis(16)){
-                    let before=world.state.tick;world.advance(if speed==0{64}else{u64::from(speed)});last=Instant::now();
+                    let before=world.state.tick;let batch_start=Instant::now();for _ in 0..if speed==0{64}else{u64::from(speed)}{world.step();if batch_start.elapsed()>=Duration::from_millis(12){break;}}last=Instant::now();
                     if before/5000<world.state.tick/5000{
                         let path=directory.join(format!("autosave-{}.genesis",autosave_slot));autosave_slot=(autosave_slot+1)%3;
                         autosave_error=persistence::save_atomic(&world,&path).err();
@@ -123,12 +123,33 @@ fn snapshot(
 }
 fn world_snapshot(world: &World, running: bool, speed: u32, error: &Option<String>) -> Value {
     let s = &world.state;
-    json!({"simulation_version":sim_core::model::SIMULATION_VERSION,"seed":s.config.seed.to_string(),"tick":s.tick,"generation":s.organisms.iter().map(|o|o.generation).max().unwrap_or(0),"size":s.config.size,"population":s.organisms.len(),"species_count":s.species.values().filter(|sp|sp.population>0).count(),"temperature":s.environment.temperature,"regeneration":s.environment.regeneration,"running":running,"speed":speed,"counters":s.counters,"autosave_error":error,"cells":s.environment.cells.iter().map(|c|[c.food,c.temperature_offset,c.fertility]).collect::<Vec<_>>(),"organisms":s.organisms.iter().map(|o|json!({"id":o.id.0,"x":o.x,"y":o.y,"dx":o.dx,"dy":o.dy,"species_id":o.species_id.0,"body_size":o.phenotype.body_size,"speed":o.phenotype.speed,"carnivory":o.phenotype.carnivory})).collect::<Vec<_>>()})
+    json!({"simulation_version":sim_core::model::SIMULATION_VERSION,"seed":s.config.seed.to_string(),"tick":s.tick,"generation":s.organisms.iter().map(|o|o.generation).max().unwrap_or(0),"size":s.config.size,"population":s.organisms.len(),"species_count":s.species.values().filter(|sp|sp.population>0).count(),"temperature":s.environment.temperature,"regeneration":s.environment.regeneration,"running":running,"speed":speed,"counters":s.counters,"autosave_error":error,"cells":s.environment.cells.iter().map(|c|[c.food,c.temperature_offset,c.fertility,c.elevation,c.moisture]).collect::<Vec<_>>(),"organisms":s.organisms.iter().map(|o|json!({"id":o.id.0,"x":o.x,"y":o.y,"dx":o.dx,"dy":o.dy,"species_id":o.species_id.0,"body_size":o.phenotype.body_size,"speed":o.phenotype.speed,"carnivory":o.phenotype.carnivory,"morphology":[o.phenotype.morphology.segment_count,o.phenotype.morphology.aspect_ratio,o.phenotype.morphology.appendage_count,o.phenotype.morphology.armor,match o.phenotype.morphology.mouth {sim_core::morphology::Mouth::Grazer=>0,sim_core::morphology::Mouth::Crusher=>1,sim_core::morphology::Mouth::Piercer=>2},o.phenotype.morphology.sensory_investment]})).collect::<Vec<_>>()})
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn snapshot_has_compact_morphology_and_real_habitat_without_genomes() {
+        let world = World::new(Config {
+            starting_population: 1,
+            ..Config::default()
+        })
+        .unwrap();
+        let snapshot = world_snapshot(&world, false, 1, &None);
+        let visual = &snapshot["organisms"][0];
+        assert_eq!(visual["morphology"].as_array().unwrap().len(), 6);
+        assert_eq!(
+            visual["morphology"][0],
+            world.state.organisms[0].phenotype.morphology.segment_count
+        );
+        assert!(visual.get("genome").is_none());
+        assert_eq!(snapshot["cells"][0].as_array().unwrap().len(), 5);
+        assert_eq!(
+            snapshot["cells"][0][3],
+            world.state.environment.cells[0].elevation
+        );
+    }
     #[test]
     fn failed_file_actions_preserve_world_and_save_marker() {
         let dir = tempfile::tempdir().unwrap();

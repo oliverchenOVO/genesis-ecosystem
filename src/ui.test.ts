@@ -5,6 +5,10 @@ import { treePositions } from "./evolution/EvolutionView";
 import { eventDescription } from "./history/HistoryView";
 import { seriesPath } from "./components/Chart";
 import type { Species, DisplayOrganism } from "./types";
+import { readableError } from "./api";
+import { renderToStaticMarkup } from "react-dom/server";
+import { createElement } from "react";
+import { EvolutionView } from "./evolution/EvolutionView";
 describe("World configuration", () => {
   const config = {
     seed: 42,
@@ -76,4 +80,54 @@ it("keeps population milestones distinct from environmental interventions", () =
   expect(
     eventCategory({ id: 2, tick: 1001, species: 1, kind: "Extinction" }),
   ).toBe("Evolution");
+});
+it("explains legacy v4 worlds without inventing migrated morphology", () => {
+  const text = readableError(
+    new Error("Incompatible legacy simulation v4 save"),
+  );
+  expect(text).toContain("v0.1.0");
+  expect(text).toContain("does not migrate");
+  expect(text).toContain("current world has been kept");
+});
+it("renders stored founder morphology in the evolution tree", () => {
+  const species = [
+    {
+      id: 1,
+      name: "Test prima-1",
+      ancestor: null,
+      origin_tick: 0,
+      origin_generation: 0,
+      extinct_tick: null,
+      population: 8,
+      representative_morphology: {
+        segment_count: 3,
+        mouth: "Crusher",
+        armor: 400,
+      },
+    },
+  ] as Species[];
+  const html = renderToStaticMarkup(
+    createElement(EvolutionView, { species, select: () => {} }),
+  );
+  expect(html).toContain("3 units");
+  expect(html).toContain("Crusher");
+  expect(html).toContain("armor 40%");
+});
+it("renders measured innovation and safety-ceiling evidence", () => {
+  expect(
+    eventDescription({
+      id: 1,
+      tick: 1000,
+      species: 1,
+      kind: { MorphologicalInnovation: { index: 2 } },
+    }),
+  ).toContain("observed kills");
+  expect(
+    eventDescription({
+      id: 2,
+      tick: 1000,
+      species: null,
+      kind: { SafetyPopulationCeiling: { population: 2000 } },
+    }),
+  ).toContain("Technical safety ceiling");
 });

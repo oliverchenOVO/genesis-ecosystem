@@ -131,6 +131,9 @@ export function EvolutionView({
                     {s.origin_tick.toLocaleString()}
                   </span>
                   <small>
+                    {s.representative_morphology.segment_count} units ·{" "}
+                    {s.representative_morphology.mouth} · armor{" "}
+                    {Math.round(s.representative_morphology.armor / 10)}% ·{" "}
                     {s.extinct_tick === null
                       ? `${s.population} living`
                       : `Extinct · tick ${s.extinct_tick}`}
