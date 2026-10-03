@@ -1,119 +1,103 @@
-# Phase 2 validation report — INCOMPLETE
+# Phase2 finalization report — INCOMPLETE
 
-Recorded 2026-10-03. Implementation, local regression, final long-run calibration and review packaging are available. **Native production UAT was interrupted by the user's physical Escape key. Sustained multicellular/high-complexity and distinct persistent niche cohorts remain undemonstrated.** Do not merge, tag v0.2.0 or describe this branch as accepted.
+Current unreleased candidate: simulation5 / rules revision2 / RNG1 / save envelope1 / analysis4 / diagnostic4. Authoritative rules froze at57704c3d62cc67d8259ac1cef6d7f1f531742c29; subsequent0ca7a3b04dd2c2d6f6841c1e97af4b3b5d6a4cbe adds evidence/inspection tests only. The final report/data follow-up is identified by git log on phase2/multicellular-ecology. No authoritative changes occurred during the final100-seed run. No LLM is used in the simulation loop.
 
-## Implemented scope and version policy
+**Completed:** measured root-cause diagnostics before tuning; bounded paired candidate matrix; revised inherited morphology viability; explicit incompatible prerelease save/replay policy; intentional real v5 golden replacement; formal100*100000 validation; genuine complex-lineage showcase; production EXE/NSIS builds; isolated three-scale benchmarks; complete local regression; actual green private code-head CI.
 
-Simulation version **5**, RNG version **1**, save envelope version **1**, analytical measurement version **3**. v4 saves are explicitly rejected before state deserialization and must be opened with v0.1.0. No silent reinterpretation or migration. Original v4 fixtures, history, main, v0.1.0 tag and released artifacts are preserved; see PHASE2_BASELINE.md and PHASE2_SAVE_MIGRATION.md.
+**Still incomplete:** multiple persistent morphology/niche clusters and differentiated persistent trophic roles. Native UAT follows biological acceptance under the user's finalization order, so final repeated restart, save/load/continue/replay, legacy-v4 UX, MAX, resize and dirty guards remain unverified. Installer is build-only. Phase2 remains INCOMPLETE; no merge, v0.2.0 tag or private release.
 
-Authoritative Rust systems: 22 inherited loci including eight structured morphology loci; segments, aspect, appendages, mass, armor, sensory/locomotion/storage investment; integer complexity, maintenance, movement and reproduction costs; Grazer/Crusher/Piercer feeding; prey-size, armor and speed interactions; heterogeneous temperature, productivity, moisture and terrain; resource-limited populations and technical-ceiling diagnostics. Species retain founder morphology, current/last meaningful morphology, feeding observations, niches and persistent innovation thresholds. No LLM, scripted biological transitions or later-phase systems.
+## Final100-seed evidence
 
-Desktop: real compact morphology and habitat layers, phenotype/cost inspector, on-demand genomes, species/niche summaries, founder comparisons and history. Worker batches are bounded by64 ticks and12ms; pacing stays outside simulation truth. Initial habitat is recorded atomically as a tick-zero command with replay. Starter: seed42, size512,50 founders, safety ceiling2000, mutation100,20°C, regeneration4. Showcase: measured seed4 with the same config.
+Seeds0-99, each100000 ticks;512 world,50 founders,technical ceiling2000,mutation100,20C/regeneration4. Default app seed42 unchanged. Wall time 3703.905768 seconds (61.731763 minutes), eight workers, includes diagnostics/full replay/save-load/1000-tick continuation and concurrent validation/build work; it is not isolated kernel TPS. Raw JSON and unordered flushed JSONL agree on all100 sorted rows; all900 overlapping cohort energy/population closures are zero.
 
-## Tests and private CI
-
-Final local checks passed:
-
-- **63 Rust tests**:41 core,5 golden/version compatibility,10 application worker/file-session,5 calibration,2 desktop. v5 golden passes all six checkpoints. Actual legacy save rejection and atomic new-world failure preservation are tested.
-- **24 frontend tests**, **2 Node summary checks**. The summary rejects incomplete/duplicate/non-finite evidence and preserves zero incidence.
-- Rust fmt and workspace all-target/all-feature clippy with warnings denied; frontend formatting, lint, typecheck, production build; Windows Tauri EXE/NSIS packaging.
-- Observation/snapshot reads preserve hashes. Save/load, full replay and RNG continuation passed for all100 final worlds and all three benchmark scales.
-
-The repository remains private: oliverchenOVO/genesis-ecosystem. Earlier code head11b1908: all three jobs green in [run37109545702](https://github.com/oliverchenOVO/genesis-ecosystem/actions/runs/37109545702). Latest production code head52ec2b2604203adaa282a69727e1ea94f658a14f: [run37110938683](https://github.com/oliverchenOVO/genesis-ecosystem/actions/runs/37110938683). Final result: **SUCCESS in all three jobs**, completed2026-10-03T09:09:49Z. Windows verifies63 Rust tests and production EXE/NSIS packaging; the private installer artifact was uploaded. Final documentation/evidence commit changes no production source; its separate CI run may follow this validated code-head run. The legacy job runs original golden tests under protected v0.1.0 source; v5 does not claim to reproduce v4 hashes.
-
-## Final long-run calibration
-
-Raw evidence: benchmarks/phase2-final-calibration.json, phase2-final-calibration.jsonl, phase2-final-summary.json. Seeds0–99, **100 × 100,000 ticks**, eight independent workers, final v5/analysis3, size512/50 founders/ceiling2000/mutation100/20°C/regeneration4. Validate every1000 ticks; final save/load, full100000-tick replay and1000-tick original/restored continuation. Total2974.0981963s includes verification and some concurrent development workloads; not an isolated TPS timing.
-
-| Measure | Result |
+| Measurement | Actual result |
 | --- | --- |
-| Survival | 100/100 |
-| Natural world extinction / Collapse / Explosion | 0 / 0 / 0 |
-| Technical failure / invalid state / replay mismatch | 0 / 0 / 0 |
-| Save/load/full replay/RNG continuation | 100/100 verified |
-| Speciation incidence / new species | 31/100 (31%) / 34 |
-| Species-extinction incidence / extinct species | 17/100 (17%) / 19 |
-| Safety-ceiling worlds / ticks | 0 / 0 |
-| Final population min / median / max / mean | 727 / 849 / 921 / 841.76 |
-| Population CV min / median / max / mean | 0.1962987571 / 0.2832553518 / 0.3534112535 / 0.2833988962 |
-| Resource CV min / median / max / mean | 0.6637340807 / 1.4249848947 / 2.6876992448 / 1.4415738135 |
-| Morphology sampled pair-distance world mean / median / max | 1.5411987382 / 0 / 14.9137749737 |
-| Niche sampled pair-distance world mean / median / max | 3.5311356467 / 0 / 29.9442691903 |
-| Final maximum morphology distance mean / max | 1.96 / 36 |
-| Final maximum niche distance mean / max | 3.76 / 75 |
-| Maximum sampled complexity min / median / max | 270 / 316 / 349 |
-| Final median species complexity min / median / max | 17 / 48 / 72 |
-| Predator/consumer coexistence ticks min / median / max / mean | 3745 / 14586 / 27177 / 14993.68 |
-| Post-warmup sampled predator/prey ratio mean | 0.0002333501555 |
-| Predator starvation deaths / successful predations | 486 / 12028 |
-| Mean birth+death turnover per organism per tick | 0.00175328236575 |
-| Mean species formation+extinction per tick | 0.0000053 |
+| Survival / natural world extinctions | 100/100 / 0 |
+| Collapse / Explosion / technical failures | 0 / 0 / 0 |
+| Save/load/full replay +1000-tick RNG continuation | 100/100;0 mismatches |
+| Safety ceiling worlds / fraction | 0/100 /0 in every world |
+| Natural speciation | 18/100 worlds;20 new species |
+| Species extinction | 5/100 worlds;5 extinct species |
+| Persistent multi-unit population | 17/100; longest 55300 sampled ticks |
+| Persistent high-C lineage | 13/100;38 unique lineages across worlds; per-world max 12 |
+| Innovation species/world counts [multi-unit,armor,piercer,mass,sensory] | [0,1,0,0,0]; [0,1,0,0,0] |
+| Maximum simultaneous persistent morphology clusters |1 in100/100; >1 in0/100 |
+| Maximum simultaneous persistent niche clusters |1 in100/100; >1 in0/100 |
+| Maximum simultaneous actual persistent feeding roles |1 in100/100; differentiated0/100 |
+| Persistent prey-income role after warmup |0/100; longest qualifying sampled duration0 |
+| Resource-dependent role duration |95000 sampled ticks in every world |
+| Phenotype-label coexistence ticks | min 7498.000000 / median 20267.000000 / p90 27194.000000 / max 31299.000000 / mean 19997.060000 |
+| Predator-like / consumer ratio (post-warmup means) | min 0.000089 / median 0.000248 / p90 0.000358 / max 0.000437 / mean 0.000254 |
+| Predator-like starvation deaths / actual predations | 738 / 19922 |
+| Population CV | min 0.157232 / median 0.245165 / p90 0.297272 / max 0.344251 / mean 0.244895 |
+| Resource CV | min 0.637220 / median 1.162213 / p90 1.747528 / max 2.228408 / mean 1.229515 |
+| Final population | min 909.000000 / median 1002.000000 / p90 1041.000000 / max 1093.000000 / mean 998.280000 |
+| Across-world sampled morphology mean distance | min 0.000000 / median 0.000000 / p90 2.675079 / max 21.907466 / mean 1.100705 |
+| Across-world sampled niche mean distance | min 0.000000 / median 0.000000 / p90 7.910620 / max 24.486856 / mean 1.918297 |
 
-**Persistent multicellular incidence0/100; persistent high-complexity lineages0; all five innovation counts0. Every world has only one persistent niche cluster and one morphological cluster under unchanged thresholds.** Individual multi-unit mutants occur but do not establish a sustained cohort. The legacy classifier labels100 worlds Rich due to lineage persistence; this is not evidence for niche-rich or sustained complex evolution. Predator roles generally fade after early coexistence. No thresholds were reduced to hide these limitations.
+Persistence thresholds remain unchanged: multi-unit >=8 and>=25% living population for1000 consecutive sampled ticks; high-C lineage >=8 members with mean C>=200 for1000 ticks; same morphology/niche representative with drift<150 for1000 ticks. Sampling100 ticks, warmup min(ticks/10,5000). Actual trophic role additionally requires each100-tick window >=90% resource income for consumers or>=50% prey income for predator-like organisms, with>=8 living members and1000 sampled ticks. Phenotype-label coexistence allows rare/transient mutants and is not proof of sustained prey dependence. Historical kills alone also do not pass this gate. Rich classification100/100 describes genetic lineages/diversity and does not mean niche-rich ecology.
 
-Final mean within-organism variances: [11062.27,7116.22,536.88,10.19,6222.28,240.83] for segments×1000,mass,armor,bite,sensory,complexity; full quantiles in summary JSON. Samples100 ticks, warmup5000. Persistent multicellularity requires≥8 multi-unit organisms and≥25% of living population for1000 consecutive sampled ticks. Persistent complexity requires≥8 members of a lineage with mean C≥200 for1000 ticks. Niche persistence tracks representative species and bounded drift; analytical clusters are not reproductive barriers. Definitions in PHASE2_SIMULATION.md.
+## Viability, bounded decisions and limitations
 
-Rejected/limited candidates remain separate: regeneration12 eight verified100000-tick worlds saturated the ceiling57–84% of duration; remaining scheduled seeds cancelled, not a completed100-seed run. Mutation200/26°C/regen6 eight20000-tick worlds survive with no cap but no sustained complexity. Founders200/ceiling5000/mutation500/26°C/regen6 four50000-tick worlds:4 survive,4 full replay/continuation passes,0 cap ticks,final1320–1387,two new species,0 persistent multicellular/high-complexity/innovation cohorts,max persistent niches1. Higher mutation/density did not justify replacing the stable default. All raw evidence retained.
+PHASE2_VIABILITY.md records prior measurements. Candidates A(structural mating cliff),B(mechanical hard-resource processing),C(A+B) all had0 persistent complex cohorts in eight50000-tick worlds. D additionally separates extra morphology storage from proportional mating-readiness penalty while retaining construction/maintenance/movement/maturity costs: two persistent multi-unit worlds and one high-C world in its eight100000-tick extension. D was frozen for final validation. E removed the dietary barrier and caused5/8 natural world extinctions; rejected. D with200 founders lost1/8 worlds and offered no high-C improvement; rejected as default. Full raw failures/source patches/source and executable hashes are preserved in phase2-candidate-* and phase2-finalization-provenance. No generic complexity bonus, global energy increase, outcome hardcoding, persistence relaxation or test removal.
+
+Formal100-world pooled realized cohorts (overlapping inherited phenotype cohorts; complete lifetimes exclude censored survivors):
+
+| C bucket | Intake/organism-tick | Actual expenditure/organism-tick | Completed lifespan | Completed offspring/parent | Successful mating/attempt |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| C<80 | 4.442835 | 5.097856 | 1113.914410 | 2.032573 | 0.027165 |
+| 80<=C<140 | 5.375965 | 6.091805 | 1049.576505 | 1.860962 | 0.030581 |
+| 140<=C<200 | 6.443814 | 7.303701 | 982.656578 | 1.828125 | 0.029022 |
+| C>=200 | 8.279355 | 9.376892 | 867.407478 | 1.879436 | 0.026775 |
+
+High-C parent offspring:75154; high-C child retention70.149293%; same-lineage retention77.829523%. Exact initial/birth/food/prey/death/final energy closure is retained separately; intake minus expenditure alone excludes birth energy and cannot be used as a conservation residual. Cohort comparisons are exposure-weighted associations, not controlled causal effects. Baseline high-C completed offspring0.291139 versus formal revision2 1.879436. Complexity is viable in a subset of worlds but does not permanently dominate; many cohorts later recede. Natural speciation decreased from preserved R1's34 species/31 worlds to20/18, and extinction19/17 to5/5. Improved morphology viability does not solve ecological differentiation.
+
+Most likely next architectural hypothesis: habitat/resource separation and local gene flow are insufficient to stabilize distinct niches. This is an inference, not proven by the current counters. Stay in Phase2: first measure feeding hardness/locations and inter-lineage mating, then test explicit renewable soft/hard resource channels and local mating/dispersal in a bounded paired matrix. Do not restore arbitrary structural sterility or lower clustering thresholds to manufacture diversity. No Phase2.1/3, juvenile stages, LLM narration or new product scope was implemented.
 
 ## Genuine showcase
 
-examples/phase2-seed4-tick50000.genesis: actual seed4, first natural speciation35000, tick50000,population727,two species294/433,31 lineages,11 multi-unit organisms,39 predations. Morphology distance34,niche distance37,max living C231. Actual organism23620: generation105,born48273,parents22862/23005,two segments,Crusher,mass550,C120,maintenance2,movement coefficient155,construction1190; no offspring yet. This proves actual inherited multi-unit morphology, not a persistent successful complex lineage.
+examples/phase2-r2-seed7-tick40000.genesis: actual seed7/default ecology, tick40000,703 organisms,262 multi-unit(37.27%),18 living lineages. High-C lineage17 originated20425 from lineage4,27 members,mean C227,23 multi-unit members,real parents for all27,generations93-99; those living members already produced36 offspring. In a copied-world continuation, lineage17 stays>=8/mean C>=200 at every100-tick sample through41000,1000 sampled ticks. Original save/world unchanged. Full100k seed7 independently records33000 multi-unit sampled ticks and5 high-C lineages over the whole run; not5 concurrent saved cohorts.
 
-Save SHA256 D111C7C70AD308D3D983B304C53E560B0DCB54C607179AA22B5472378D08F7A6. Replay hash8c04e07c25f14f9c01286f26e4d28f7a8e284ecb3e41f79999dcb5c6f4512b79;1000-tick continuation0974b24968c9ac5b5b953f90203a3bdfb69f6c9b0b107f8c02a48455fdd33e46. Actual records in benchmarks/phase2-showcase-seed4-50000-verification.json. Native load/two-species inspection remain pending.
+Save SHA256 F5C5A91AF0B3735F94A6E45C569BD963E20D11FB7F517FAE70F0E9DB94B2713C; saved hash d4c8ccdcef711de6d8ff81e1bbbf59d2c48672323377f8d926e20616f5b6ad94; continuation07c88770d5e87e9fcc98f9897bde1cbf4d0ae2ec58d77d68bc7fcd0d3db2ac12. Independent locked inspector and authoritative CLI agree. Evidence phase2-r2-showcase*. One morphology/niche cluster and0 predator-like organisms; no trophic differentiation claim. Original R1 seed4 save remains unchanged and is intentionally rejected by R2 before decoding.
 
-## Performance
+## Performance and validation
 
-Sequential final headless scales: no competing compiler/calibration; desktop paused. Memory is sampled process working set including verification, not WebView memory. Each passed full replay and1000-tick continuation.
+Sequential normal CLI, observer/profile features disabled; no concurrent compiler/calibration/native desktop process. Same configurations as historical R1 scales. Reference seed11/512/50 founders/cap200/regen12/50000 ticks; medium seed42/1024/1000 founders/cap1000/regen100/10000; density seed42/1024/5000 founders/cap5000/regen100/2000. These technical caps sustain legal performance populations and are not default ecological evidence.
 
-| Scale | Configuration / duration | TPS | Organism updates/s | Peak working set |
-| --- | --- | ---: | ---: | ---: |
-| Reference | seed11/512/founders50/cap200/regen12;50000 ticks/14.1096123s | 3543.683478815 | 705695.50660155 | 9068544 bytes |
-| Medium | seed42/1024/founders1000/cap1000/regen100;10000 ticks/19.9510751s | 501.226121895 | 500154.049342 | 10727424 bytes |
-| Density | seed42/1024/founders5000/cap5000/regen100;2000 ticks/34.0384361s | 58.757106059 | 291801.802257 | 18874368 bytes |
+| Scale | Kernel seconds | TPS | Organism updates/s | Peak working-set bytes incl.verification | Post-warmup mean population |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| reference-200 | 6.063178 | 8246.500569 | 1642345.839795 | 9244672 | 200.000000 |
+| medium-1000 | 7.114274 | 1405.624765 | 1402126.164887 | 10915840 | 998.945055 |
+| density-5000 | 13.018060 | 153.632723 | 762931.189440 | 19288064 | 4999.263158 |
 
-Post-warmup mean population200/999.5055/4999; density minimum4981/final5000. Density cases deliberately hold a technical cap to test performance, not ecological carrying capacity. Files: benchmarks/phase2-final-reference-200*, phase2-final-medium-1000*, phase2-final-density-5000*.
+All scales pass full replay and1000-tick continuation. Historical R1 TPS3543.683479/501.226122/58.757106. No measured>30% regression; profiling is therefore not required. The current measurements are faster, but changed trajectories and host timing prevent a universal speedup claim. Raw phase2-r2-final-* plus host/compiler provenance retained. Frozen normal CLI file hash is in phase2-r2-freeze-provenance.
 
-Apparent>30% historical slowdown was profiled: perception ~85% of instrumented time. Mate checks skip candidates unable to win and calculate bounded distance once; full50000-tick before/after hashes match. Contemporary sequential pair: unmodified v4 21.8963453s/2283.486TPS versus optimized v5 13.5118253s/3700.462TPS. Host variation and changed rules prevent a universal speedup claim. Contended/early extinct runs retain provenance and do not replace final scales.
+Real paused-worker snapshot+JSON encoding,100 samples/scale with eight calibration workers active:200 organisms114411bytes/median2.7948ms/p955.5294ms;1000 organisms217092bytes/median8.733ms/p9520.7642ms;5000 organisms738501bytes/median28.4645ms/p9540.0759ms. World hashes unchanged. Excludes WebView transport/rendering; no native FPS/MAX claim. Optional diagnostics stay headless and are not serialized per frame.
 
-Paused worker snapshot construction/JSON encoding,100 samples, eight calibration workers active:200 organisms114411bytes/median2.8321ms/p9512.347ms;1000 organisms218157bytes/median8.8869ms/p9532.4155ms;5000 organisms738501bytes/median30.4464ms/p9541.9294ms. Hashes unchanged. Excludes WebView transport/rendering and does not prove MAX responsiveness.
+After final calibration:69 normal Rust workspace tests and73 all-features tests passed;24 frontend tests;5 Node evidence checks. Rust fmt/clippy all-targets/all-features, frontend formatting/lint/typecheck/build, v5 six-checkpoint golden, explicit old-R1/v4 rejection, full replay, save/load/RNG continuation, Tauri production and NSIS builds passed. Tests/thresholds were not removed or weakened. Protected v4 golden executes on actual v0.1.0 in CI and is green.
 
-## Native UAT and artifacts
+Actual private source-head CI: https://github.com/oliverchenOVO/genesis-ecosystem/actions/runs/37137134444, head 0ca7a3b04dd2c2d6f6841c1e97af4b3b5d6a4cbe, all jobs success. Previous57704c3 CI37134881580 and diagnosticf31837a CI37131492061 also success. Final report/evidence-only follow-up may run separate CI; inspect its head in git/GitHub before interpreting it as code changes.
 
-**UAT INCOMPLETE.** Development production launch, real morphology/inspector/species/tree/layers, native Save and Close observed. Restart failed with WebView2 resource-in-use HRESULT0x800700AA, exit101. Versioned WebView profile isolation preserves worlds/preferences and produced actual page-loaded production startup without panic. User then physically stopped Computer Use; no further app input. Repeated close/reopen, Load/continue/replay, legacy rejection UX, MAX, resize/dirty guards and final calibrated-build UAT remain unverified. Headless checks are not substitutes. Installer built, not interactively installed. See PHASE2_UAT.md.
+## Native status and final packages
 
-Latest review build after calibrated default and corrected mouth legend:
+Final source0ca7a3b production package built after formal validation in independent target/phase2-r2-final. Build-only: no interactive NSIS install/uninstall or final native UAT. Repeated restart5 cycles, native save/load/continue/replay, legacy-v4 error UX, MAX, resize, invalid-file/recent-world and dirty guards remain pending because biological acceptance failed first. Historical R1 WebView2 HRESULT0x800700AA and profile recovery/physical Escape evidence remain in PHASE2_UAT.md; no R2 restart success or repeated failure is inferred.
 
-- EXE: target/phase2-review/release/genesis-desktop.exe; SHA256 **1B9B9DBA6635FD52E5A3D1E6B5253DB88E0FD9908F6FA6E4B6FFABB3E3912A7F**.
-- Installer: target/phase2-review/release/bundle/nsis/GENESIS_0.2.0_x64-setup.exe; SHA256 **BBF075FE7CEBACD4088A06329D1C7DB5DADBDBA7B9157D02EC96289A30B57B21**.
+| Artifact | Absolute path | SHA256 |
+| --- | --- | --- |
+| EXE | F:/CodeX開發小東東/AI 生態箱：從單細胞一路演化/target/phase2-r2-final/release/genesis-desktop.exe | CA7788C9BAA9506D6AB6AFF03B0A610E57EEBFBB3E9D805943DE30C4DCB565F1 |
+| NSIS installer | F:/CodeX開發小東東/AI 生態箱：從單細胞一路演化/target/phase2-r2-final/release/bundle/nsis/GENESIS_0.2.0_x64-setup.exe | 2916F9660D9C9B7C888BE1454E46CDC477E3FD66284839128047D5AEBE8522F6 |
 
-These are review artifacts, not a v0.2.0 release. Protected v0.1.0 binaries remain unchanged in target/release.
+These are review artifacts, not a v0.2.0 release. Previous R1 and pre-calibration R2 review binaries remain at their separate paths. Main216a92ffca8e66e31789fc0a0e0eaf5085f13d76 unchanged/ancestor intact; annotated v0.1.0 still targets ed6c77d4b876b859ed7a4b1d665f7bf9054b9096. Protected EXE16FB27A061D6F817BDC68FE26897A6C69E1814FDB2110AD23C0A623ABE3C56C9 and installerEF09F5B0CEDACD1C5B62DF12776A4FF747E398A574E808054F51765821C115F4 unchanged. No merge commit, new main CI, v0.2.0 tag or release; existing repository remains private.
 
-## Commits and remaining work
+## Preserved history and new commits
 
-Branch phase2/multicellular-ecology. Main216a92ffca8e66e31789fc0a0e0eaf5085f13d76 unchanged; protected annotated v0.1.0 still targets ed6c77d4b876b859ed7a4b1d665f7bf9054b9096.
+[Unmodified R1 report at a3d8cc0](PHASE2_REPORT_R1_ARCHIVE.md), original100*100000 phase2-final-calibration.json/jsonl and phase2-final-summary.json retained. Pre-final source branch phase2/pre-finalization-a3d8cc0 preserved. Original logical commits and all failed probes remain. New commits:
 
 | Commit | Scope |
 | --- | --- |
-| 9e9fab9 | Baseline protection and v5 save policy |
-| 3ce5cc1 | Inherited morphology, resource ecology, headless observations |
-| 734ace9 | Morphology UI and bounded worker batches |
-| 3560609 | Persistent cohorts/complexity analysis and benchmarks |
-| 3751cbc | 0.2.0 review packaging and isolated v4 golden CI |
-| 200f926 | Candidate rejection and provenance/pending UAT |
-| d03561f | Versioned WebView profile, interrupted UAT |
-| 651cfae | Atomic recorded initial habitat |
-| 11b1908 | Verified showcase, snapshot timing, summary tooling |
-| 741672f | Resource-limited default and seed4 showcase |
-| 52ec2b2 | Complete100×100000 calibration evidence |
+| f31837a | Optional realized energy/fitness/mating diagnostics; R1 authority unchanged |
+| 57704c3 | Causally measured selected D rules revision2, explicit save/replay policy, preserved old golden and real replacement, analysis4 persistence |
+| 0ca7a3b | Genuine saved complex lineage and independent1000-tick proof; production review hashes;5 Node checks |
+| Report/data follow-up (git log) | Complete100-seed R2 evidence, isolated performance, final package hashes and explicit INCOMPLETE decision |
 
-Final documentation/evidence commit follows this list and is identifiable from git log. No merge, v0.2.0 tag or release while gates remain incomplete.
-
-Next required work: resume native UAT after explicit user authorization; retest repeated restart/profile recovery and all final-build file/replay/legacy/dirty/MAX flows; investigate genuine sustained multicellular/ecological differentiation against unchanged acceptance definitions. Parameter probes did not demonstrate it. Further authoritative-rule changes require an explicitly validated candidate/golden/save policy and fresh calibration, not relabeling these results.
-
-Known limits: population-normalized niche exposure is not individual lifetime hazard; greedy clusters are not species; founder glyph is representative while means show actual current/last meaningful data; no safe v4 migration; no demonstrated sustained trophic balance or persistent complex niche expansion. Optional growth/development, full species comparison, extra terrain and richer overlays stay Phase2.1. LLM, diseases, parasites, neural networks,3D,cloud and later phases remain excluded.
-
-## Revision2 finalization status
-
-Current candidate is simulation5/rules_revision2, RNG1/save envelope1, analysis4. PHASE2_FINALIZATION.md preserves the measured root-cause analysis, bounded paired matrix, rejected candidates and selected D. The new formal100*100000 run is pending; all results earlier in this report belong to preserved revision1. Current acceptance remains INCOMPLETE. No merge/tag/release is authorized until every biological and native gate passes.
-
-Revision2 freeze checks passed:73 Rust tests across the all-features workspace (69 normal +3 optional core-observer +1 optional benchmark feeding-window test),24 frontend tests,4 Node evidence checks, Rust fmt/clippy all-targets/all-features, frontend format/lint/typecheck/build, release CLI and real paused-worker snapshot benchmark. The previous diagnostic source commit f31837a has actual green private CI run37131492061. New source CI and final calibration/performance/artifacts will be recorded separately.
+The requested biological gates and native acceptance remain unfulfilled. Preserve the viable morphology changes, investigate ecological stabilization within Phase2, and rerun the same acceptance gates after a bounded evidence-supported change. No automatic transition to the next major Phase.

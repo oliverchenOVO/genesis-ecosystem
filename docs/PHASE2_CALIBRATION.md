@@ -1,5 +1,7 @@
 # Phase 2 calibration — final measured default, acceptance incomplete
 
+Current rules revision2 final result:100*100000,100 survivors/0 technical failures/0 caps; persistent multi-unit17/100 and high-C13/100. Multiple persistent morphology/niche clusters and differentiated trophic roles0/100. Phase2 INCOMPLETE; native UAT remains pending under the biological-first execution order. See PHASE2_REPORT.md for exact data, final package paths/hashes and green code-head CI. Earlier revision1/freeze checkpoints below are historical.
+
 Phase1/v4 evidence is retained and is not evidence for changed v5 ecology. Final default: seed42,size512,50 founders,safety population ceiling2000,mutation100,20°C/regeneration4. Final100-seed validation and actual seed4 showcase are complete headlessly; native UAT and sustained complex-niche evidence remain incomplete. The earlier candidate chronology below is retained with its original scope.
 
 Initial draft probe (`phase2-initial-probe.json/jsonl`),8×10,000 ticks:6 natural extinctions,2 survivors,0 technical failures. Predation dominated extinct worlds. This exploratory draft preceded final species telemetry and is retained with its raw hashes; it is not a stable-v5 long-run result.
@@ -39,3 +41,19 @@ Final bounded comparison: phase2-dense-high-mutation.json/jsonl, seeds0–3×500
 The earlier final100-seed evidence above is revision1 and remains unchanged. Bounded causal tuning and the selected revision2 candidate are documented in PHASE2_FINALIZATION.md. The new100*100000 run uses the same seeds0-99,50 founders,512 world,2000 ceiling,mutation100,20C/regen4; its output is separate phase2-final-calibration-v2, with analysis4/diagnostic4. No partial progress is presented as a final100-seed result. Performance must be rerun sequentially after this calibration completes.
 
 Revision2 complex showcase is now replay/continuation verified: examples/phase2-r2-seed7-tick40000.genesis, with actual multi-unit cohort262/703 and high-C lineage17 maintaining its unchanged sampled1000-tick criterion in a cloned continuation. It still has only one morphology/niche cluster and no predator-like population. See PHASE2_FINALIZATION.md and phase2-r2-showcase*. This is headless evidence, not native UAT or complete ecological acceptance.
+
+## Reproduce formal revision2 acceptance
+
+Use the optional observer for actual energy-role evidence; normal desktop and performance builds omit it:
+
+```powershell
+cargo build --release -p sim-benchmark --locked --features viability
+# Choose a fresh output prefix; never replace the retained official evidence.
+if (Test-Path artifacts/phase2-r2-reproduction.json) { throw 'Choose a fresh prefix' }
+Copy-Item target/release/sim-benchmark.exe artifacts/phase2-r2-reproduction.exe
+artifacts/phase2-r2-reproduction.exe --calibrate --seeds 100 --workers 8 --seed 0 --population 50 --limit 2000 --size 512 --regeneration 4 --ticks 100000 --label phase2-r2-reproduction --output artifacts/phase2-r2-reproduction.jsonl > artifacts/phase2-r2-reproduction.json
+node scripts/summarize-phase2.mjs artifacts/phase2-r2-reproduction.json artifacts/phase2-r2-reproduction-summary.json
+node scripts/summarize-viability.mjs artifacts/phase2-r2-reproduction.json artifacts/phase2-r2-reproduction-viability.json
+```
+
+Retain stdout as the complete final JSON only after successful completion; verify all100 JSONL rows match sorted results before summarizing. Existing evidence names are immutable; choose a new label/output when reproducing. Phase2-r2-freeze-provenance contains the actual frozen executable/source hashes. Final100 run wall time3703.905768s includes verification and concurrent builds; isolated normal CLI TPS is8246.500569/1405.624765/153.632723 for the three legal scales, separately recorded. The formal input features/profile status is not interchangeable with normal performance timing.

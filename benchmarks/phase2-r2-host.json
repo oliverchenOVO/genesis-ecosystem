@@ -1,0 +1,17 @@
+{
+  "pnpm": "11.19.0",
+  "rust": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "os": {
+    "Caption": "Microsoft Windows 11 家庭版 中文版",
+    "Version": "10.0.26200",
+    "BuildNumber": "26200"
+  },
+  "native_desktop_process_count": 0,
+  "node": "v24.13.0",
+  "cpu": {
+    "Name": "12th Gen Intel(R) Core(TM) i9-12900H",
+    "NumberOfCores": 14,
+    "NumberOfLogicalProcessors": 20
+  },
+  "context": "Native process absent at collection; final sequential benchmarks will follow calibration/compiler completion. No native UAT inference."
+}

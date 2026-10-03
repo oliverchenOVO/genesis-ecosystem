@@ -1,5 +1,7 @@
 # Phase 2 native production UAT
 
+Current rules revision2 final result:100*100000,100 survivors/0 technical failures/0 caps; persistent multi-unit17/100 and high-C13/100. Multiple persistent morphology/niche clusters and differentiated trophic roles0/100. Phase2 INCOMPLETE; native UAT remains pending under the biological-first execution order. See PHASE2_REPORT.md for exact data, final package paths/hashes and green code-head CI. Earlier revision1/freeze checkpoints below are historical.
+
 Status: INCOMPLETE. Phase1 UAT cannot validate v5 morphology or ecology. No claim of Phase2 native UAT pass is made.
 
 Final validation must use a separate Phase2 production build/artifact directory, preserving the v0.1.0 executable/installer and release. Required flows: new fixed-seed v5 world; procedural morphology and inspector; species/evolution/history; productivity/temperature/terrain layers; speeds/MAX/responsiveness; native Save/SaveAs/Recent/dirty guards; close/reopen/load/continue/replay; actual legacy v4 save clear rejection preserving active v5 world; resize and error states.

@@ -1,5 +1,7 @@
 # Phase 2 simulation v5 — development
 
+Current rules revision2 final result:100*100000,100 survivors/0 technical failures/0 caps; persistent multi-unit17/100 and high-C13/100. Multiple persistent morphology/niche clusters and differentiated trophic roles0/100. Phase2 INCOMPLETE; native UAT remains pending under the biological-first execution order. See PHASE2_REPORT.md for exact data, final package paths/hashes and green code-head CI. Earlier revision1/freeze checkpoints below are historical.
+
 Authoritative rules changed once from simulation4 to5. RNG algorithm stays1; save envelope stays1. Additional loci/RNG draws, morphology-dependent energy and interactions, habitat fields and new species/history data change hashes intentionally. Old v4 fixtures are unchanged historical evidence and rejected by v5; they passed on the protected baseline before implementation. See PHASE2_SAVE_MIGRATION.md.
 
 Headless features: inherited eight-locus structural expression, fixed-point phenotype, complexity/storage/construction costs, three mouth morphologies, prey-size constraints, defense and terrain interactions, coarse resource/temperature habitats, technical safety-ceiling diagnostics, species observations, representative actual founder genome/morphology, persistent innovations and read-only ecology measurements. No LLM. Frontend is never authoritative.

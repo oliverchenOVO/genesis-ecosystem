@@ -1,4 +1,6 @@
-# Phase2 finalization — rules frozen, acceptance pending
+# Phase2 finalization — INCOMPLETE after formal100-seed validation
+
+Current rules revision2 final result:100*100000,100 survivors/0 technical failures/0 caps; persistent multi-unit17/100 and high-C13/100. Multiple persistent morphology/niche clusters and differentiated trophic roles0/100. Phase2 INCOMPLETE; native UAT remains pending under the biological-first execution order. See PHASE2_REPORT.md for exact data, final package paths/hashes and green code-head CI. Earlier revision1/freeze checkpoints below are historical.
 
 The original a3d8cc0 evidence and private branch are preserved. The selected candidate D is authoritative simulation5/rules_revision2, RNG1/save envelope1, analysis4/diagnostic4. No merge, tag or release is permitted while Phase2 is INCOMPLETE.
 
@@ -24,7 +26,7 @@ All eight D long worlds still had one persistent niche cluster and one instantan
 
 Raw JSON/JSONL and pooled diagnostic summaries: benchmarks/phase2-candidate-{a,b,c,d,d-long,e,d-density}*. Source patches/executable and source hashes: benchmarks/phase2-finalization-provenance. Old baseline diagnostic-v2 eight50k worlds retain exact hash parity with diagnostic-v1. The new golden was generated from revised execution and independently matches all six D-executable checkpoints. Expected prior-golden failure is retained. Old v5 saves/replays are explicitly rejected rather than reinterpreted; see PHASE2_SAVE_MIGRATION.md.
 
-## Current acceptance checkpoint
+## Historical rules-freeze checkpoint before final100-seed validation
 
 Rules are frozen. The final100*100000 run is executing separately as phase2-final-calibration-v2, with the unchanged ecological default and full verification. The preserved revision1 phase2-final-calibration remains valid historical evidence for its own rules only. Final production packaging, updated showcase, isolated three-scale timings and native UAT have not yet been accepted for revision2. Native UAT follows successful biological acceptance, per the finalization instruction. Do not claim Phase2 COMPLETE from the bounded matrix.
 

@@ -1,8 +1,10 @@
 # v5 ecology rules — initial headless implementation
 
+Current rules revision2 final result:100*100000,100 survivors/0 technical failures/0 caps; persistent multi-unit17/100 and high-C13/100. Multiple persistent morphology/niche clusters and differentiated trophic roles0/100. Phase2 INCOMPLETE; native UAT remains pending under the biological-first execution order. See PHASE2_REPORT.md for exact data, final package paths/hashes and green code-head CI. Earlier revision1/freeze checkpoints below are historical.
+
 World cells retain food, fertility, temperature, elevation and moisture. Seed-derived four-cell habitat bands add coarse temperature/terrain/moisture heterogeneity with bounded fine noise. Cell productivity=fertility×(200+moisture)/1000; regeneration=environment regeneration×productivity/100, capped at1000 resource units/cell. Stable organism-ID order allocates shared food. Spatial temperature affects inherited tolerance; mutation does not respond directionally to habitat.
 
-Elevation represents both resource hardness and rough terrain. Grazer processing factor125−hardness/12 favors soft resources; crusher65+hardness/12 favors hard resources; piercer35 sacrifices plant efficiency. Effective plant conversion combines processing, inherited food efficiency and (1000−carnivory)/1000. Intermediate inherited carnivory can support generalist resource/prey use; no species category assigns diet.
+Elevation represents both resource hardness and rough terrain. Grazer processing factor125−hardness/12 favors soft resources; revision2 crusher65+hardness/12+hardness*clamp(bite_capacity-hardness/20,0,20)/50 favors mechanically processable hard resources; piercer35 sacrifices plant efficiency. Effective plant conversion combines processing, inherited food efficiency and (1000−carnivory)/1000. Intermediate inherited carnivory can support generalist resource/prey use; no species category assigns diet.
 
 Terrain speed=max(1,speed×1000/(1000+roughness×(mass/100+armor/100)/20)). Movement energy=(abs(dx)+abs(dy))×movement coefficient/500. Larger/armored bodies pay more for rough habitats. Thermal loss=excess/(100+mass/50), with inherited tolerance and actual local temperature.
 

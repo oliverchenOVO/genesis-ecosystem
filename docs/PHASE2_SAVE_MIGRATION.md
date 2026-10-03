@@ -1,5 +1,7 @@
 # Phase 2 save and replay policy
 
+Current rules revision2 final result:100*100000,100 survivors/0 technical failures/0 caps; persistent multi-unit17/100 and high-C13/100. Multiple persistent morphology/niche clusters and differentiated trophic roles0/100. Phase2 INCOMPLETE; native UAT remains pending under the biological-first execution order. See PHASE2_REPORT.md for exact data, final package paths/hashes and green code-head CI. Earlier revision1/freeze checkpoints below are historical.
+
 The first authoritative morphology implementation advances simulation version from 4 to 5, once. RNG algorithm/version stays 1: extra genetic loci change stream consumption and world evolution, not the RNG algorithm. The GENESIS1 envelope remains save format 1; simulation version distinguishes the changed bincode state representation.
 
 v4 saves/replays are intentionally unsupported in v5. Their version is checked before payload decoding and rejected with instructions to use the validated v0.1.0 application. There is no migration, no reinterpretation of old loci and no invented morphology/history. Keep v0.1.0 and historical v4 fixtures intact. Frontend file-error handling preserves the current world.

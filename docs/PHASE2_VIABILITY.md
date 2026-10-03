@@ -37,3 +37,19 @@ Validation at this diagnostic milestone:65 Rust tests with all features (63 norm
 ## Bounded candidate decision
 
 Measured tuning is now complete for the initial bounded matrix. The detailed raw runs, source patches, source/executable SHA256 provenance and failures are preserved under benchmarks/phase2-candidate-* and benchmarks/phase2-finalization-provenance. PHASE2_FINALIZATION.md lists all paired results, rejected collapse-prone dietary/density changes and the selected D readiness/feeding/compatibility combination. Diagnostic4 additionally measures actual child retention; high-complexity offspring retention77.287% and multi-unit offspring retention83.037% in D's eight100000-tick worlds support genuinely inherited cohorts, rather than one-off mutants. These are whole-run parent-cohort associations, not global population fractions or a substitute for100-seed acceptance.
+
+
+## Final100-world revision2 cohort evidence
+
+Formal100*100000 completed with100 full replay/save/load/1000-tick continuation passes and900 zero energy/population closure rows.
+
+| C bucket | Intake/tick | Actual expenditure/tick | Completed lifespan | Completed offspring/parent | Mating success/attempt |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| C<80 | 4.442835 | 5.097856 | 1113.914410 | 2.032573 | 0.027165 |
+| 80<=C<140 | 5.375965 | 6.091805 | 1049.576505 | 1.860962 | 0.030581 |
+| 140<=C<200 | 6.443814 | 7.303701 | 982.656578 | 1.828125 | 0.029022 |
+| C>=200 | 8.279355 | 9.376892 | 867.407478 | 1.879436 | 0.026775 |
+
+High-C retention70.149293%,same-lineage77.829523%;75154 actual parent offspring. Whole-run pooled completed lifespan/offspring exclude censored survivors; deficits do not include credited birth energy and are not closure errors. All exact balances/censored totals remain in phase2-final-viability-summary-v2.json.
+
+Persistent multi-unit17/100; high-C13/100 (38 lineages,max12/world); one armor innovation. Multiple persistent morphology/niche clusters and differentiated trophic roles0/100. Speciation20/18 worlds versus R1's34/31 is a measured tradeoff, not a solved diversity gate. See PHASE2_REPORT.md; Phase2 remains INCOMPLETE.

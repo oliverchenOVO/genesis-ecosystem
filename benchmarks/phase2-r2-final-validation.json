@@ -1,0 +1,31 @@
+{
+  "source_head": "0ca7a3b04dd2c2d6f6841c1e97af4b3b5d6a4cbe",
+  "simulation_version": 5,
+  "rules_revision": 2,
+  "rng_version": 1,
+  "save_format_version": 1,
+  "analysis_version": 4,
+  "diagnostic_version": 4,
+  "rust_default_tests": 69,
+  "rust_all_feature_tests": 73,
+  "frontend_tests": 24,
+  "node_checks": 5,
+  "format_clippy_lint_typecheck_build": "PASS after final calibration",
+  "final_seeds": 100,
+  "ticks_per_seed": 100000,
+  "full_save_load_replay_continuations": 100,
+  "cohort_closure_rows_verified": 900,
+  "json_jsonl_rows_verified": 100,
+  "production_build": "PASS; NSIS build-only",
+  "native_uat": "NOT PERFORMED: biological acceptance failed first per user execution order",
+  "biological_acceptance": "INCOMPLETE: morphology/niche/trophic differentiation0/100",
+  "source_ci": {
+    "url": "https://github.com/oliverchenOVO/genesis-ecosystem/actions/runs/37137134444",
+    "conclusion": "success"
+  },
+  "protected_main": "216a92ffca8e66e31789fc0a0e0eaf5085f13d76",
+  "protected_v0_1_0": "ed6c77d4b876b859ed7a4b1d665f7bf9054b9096",
+  "merge": false,
+  "tag_v0_2_0": false,
+  "release": false
+}
