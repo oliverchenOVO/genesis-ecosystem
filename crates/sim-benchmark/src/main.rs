@@ -7,6 +7,7 @@ use sim_core::{
 };
 use sim_core::{Config, World};
 use std::time::Instant;
+mod calibration;
 
 fn argument(name: &str, default: u64) -> u64 {
     let args: Vec<_> = std::env::args().collect();
@@ -17,6 +18,31 @@ fn argument(name: &str, default: u64) -> u64 {
 }
 fn main() -> Result<(), String> {
     let args: Vec<_> = std::env::args().collect();
+    if let Some(pair) = args.windows(2).find(|pair| pair[0] == "--verify-save") {
+        let mut saved = persistence::load(std::path::Path::new(&pair[1]))?;
+        let hash = saved.hash();
+        let mut replayed = Replay::from_world(&saved).verify()?;
+        if replayed.hash() != hash {
+            return Err("Saved world replay mismatch".into());
+        }
+        let restored = serde_json::json!({"seed":saved.state.config.seed,"tick":saved.state.tick,"population":saved.state.organisms.len(),"species":saved.state.species.len(),"lineages":saved.state.lineages.len(),"telemetry_samples":saved.state.telemetry.len(),"commands":saved.state.commands,"rng":saved.state.rng,"hash":hash});
+        let continuation = argument("--continue", 1000);
+        saved.advance(continuation);
+        replayed.advance(continuation);
+        saved.validate()?;
+        replayed.validate()?;
+        if saved.hash() != replayed.hash() {
+            return Err("Saved world continuation mismatch".into());
+        }
+        println!(
+            "{}",
+            serde_json::json!({"path":pair[1],"verified":true,"restored":restored,"continuation_ticks":continuation,"continuation_hash":saved.hash()})
+        );
+        return Ok(());
+    }
+    if args.iter().any(|a| a == "--calibrate") {
+        return calibration::run();
+    }
     if args.iter().any(|a| a == "--golden") {
         return golden();
     }

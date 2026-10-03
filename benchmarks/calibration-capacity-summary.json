@@ -1,0 +1,204 @@
+{
+  "source": "benchmarks/calibration-capacity.json",
+  "scenario": "capacity-1000",
+  "simulation_version": 4,
+  "analysis_version": 1,
+  "seeds": 8,
+  "ticks_per_seed": 20000,
+  "workers": 2,
+  "batch_elapsed_seconds": 365.9440389,
+  "failures": 0,
+  "classifications": {
+    "Collapse": 0,
+    "Healthy": 8,
+    "Rich": 0,
+    "Sterile": 0,
+    "Explosion": 0,
+    "Oscillating": 0
+  },
+  "worlds_with_speciation": 0,
+  "rich_without_speciation": 0,
+  "worlds_surviving": 8,
+  "distributions": {
+    "final_population": {
+      "p95": 1000.0,
+      "mean": 1000.0,
+      "count": 8,
+      "min": 1000.0,
+      "median": 1000.0,
+      "max": 1000.0,
+      "p90": 1000.0
+    },
+    "peak_population": {
+      "p95": 1000.0,
+      "mean": 1000.0,
+      "count": 8,
+      "min": 1000.0,
+      "median": 1000.0,
+      "max": 1000.0,
+      "p90": 1000.0
+    },
+    "minimum_population_after_warmup": {
+      "p95": 1000.0,
+      "mean": 1000.0,
+      "count": 8,
+      "min": 1000.0,
+      "median": 1000.0,
+      "max": 1000.0,
+      "p90": 1000.0
+    },
+    "species_formed": {
+      "p95": 0.0,
+      "mean": 0.0,
+      "count": 8,
+      "min": 0.0,
+      "median": 0.0,
+      "max": 0.0,
+      "p90": 0.0
+    },
+    "maximum_simultaneous_species": {
+      "p95": 1.0,
+      "mean": 1.0,
+      "count": 8,
+      "min": 1.0,
+      "median": 1.0,
+      "max": 1.0,
+      "p90": 1.0
+    },
+    "final_living_species": {
+      "p95": 1.0,
+      "mean": 1.0,
+      "count": 8,
+      "min": 1.0,
+      "median": 1.0,
+      "max": 1.0,
+      "p90": 1.0
+    },
+    "extinct_species": {
+      "p95": 0.0,
+      "mean": 0.0,
+      "count": 8,
+      "min": 0.0,
+      "median": 0.0,
+      "max": 0.0,
+      "p90": 0.0
+    },
+    "first_speciation_tick": {
+      "p95": null,
+      "mean": null,
+      "count": 0,
+      "min": null,
+      "median": null,
+      "max": null,
+      "p90": null
+    },
+    "first_extinction_tick": {
+      "p95": null,
+      "mean": null,
+      "count": 0,
+      "min": null,
+      "median": null,
+      "max": null,
+      "p90": null
+    },
+    "births": {
+      "p95": 13767.0,
+      "mean": 13137.0,
+      "count": 8,
+      "min": 11995.0,
+      "median": 13298.0,
+      "max": 13767.0,
+      "p90": 13766.0
+    },
+    "deaths": {
+      "p95": 12817.0,
+      "mean": 12187.0,
+      "count": 8,
+      "min": 11045.0,
+      "median": 12348.0,
+      "max": 12817.0,
+      "p90": 12816.0
+    },
+    "predations": {
+      "p95": 853.0,
+      "mean": 249.375,
+      "count": 8,
+      "min": 9.0,
+      "median": 35.0,
+      "max": 853.0,
+      "p90": 549.0
+    },
+    "mutations": {
+      "p95": 10536.0,
+      "mean": 9923.875,
+      "count": 8,
+      "min": 9133.0,
+      "median": 10066.0,
+      "max": 10536.0,
+      "p90": 10333.0
+    },
+    "final_mean_genome_distance_to_centroid": {
+      "p95": 42.71847485714281,
+      "mean": 37.85111385714285,
+      "count": 8,
+      "min": 32.545598428571395,
+      "median": 38.19431928571434,
+      "max": 42.71847485714281,
+      "p90": 40.18495628571422
+    },
+    "mean_completed_lifespan": {
+      "p95": 1657.0157537347216,
+      "mean": 1533.1332971182037,
+      "count": 8,
+      "min": 1452.1801654182273,
+      "median": 1544.1198408751866,
+      "max": 1657.0157537347216,
+      "p90": 1583.2772260562194
+    },
+    "population_coefficient_of_variation": {
+      "p95": 0.0,
+      "mean": 0.0,
+      "count": 8,
+      "min": 0.0,
+      "median": 0.0,
+      "max": 0.0,
+      "p90": 0.0
+    },
+    "maximum_persistent_lineages": {
+      "p95": 2.0,
+      "mean": 1.25,
+      "count": 8,
+      "min": 1.0,
+      "median": 1.0,
+      "max": 2.0,
+      "p90": 2.0
+    },
+    "elapsed_seconds": {
+      "p95": 144.8414037,
+      "mean": 91.0217796625,
+      "count": 8,
+      "min": 61.6105203,
+      "median": 82.7753628,
+      "max": 144.8414037,
+      "p90": 144.1107577
+    },
+    "ticks_per_second": {
+      "p95": 324.61988476341435,
+      "mean": 242.96755522608817,
+      "count": 8,
+      "min": 138.08206416878298,
+      "median": 276.0702663096916,
+      "max": 324.61988476341435,
+      "p90": 317.6022624816403
+    },
+    "organism_updates_per_second": {
+      "p95": 316364.60632194986,
+      "mean": 237030.96119272447,
+      "count": 8,
+      "min": 134604.52261551784,
+      "median": 269467.6869995491,
+      "max": 316364.60632194986,
+      "p90": 309375.7921992933
+    }
+  }
+}

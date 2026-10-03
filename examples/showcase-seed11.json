@@ -1,0 +1,20 @@
+{
+  "name": "Showcase · Seed 11",
+  "simulation_version": 4,
+  "rng_version": 1,
+  "config": {
+    "seed": 11,
+    "size": 512,
+    "starting_population": 50,
+    "population_limit": 200,
+    "mutation_multiplier": 100
+  },
+  "initial_environment": { "temperature": 2000, "regeneration": 12 },
+  "commands": [],
+  "observation": {
+    "first_speciation_tick": 48600,
+    "species": "Photovorus minor-2",
+    "origin_generation": 60,
+    "note": "Observed under v4 rules; no state, mutation, species, or history injection. Verify the genuine example save using sim-benchmark --verify-save."
+  }
+}
