@@ -1,0 +1,5009 @@
+{
+  "version": 1,
+  "seeds": 8,
+  "ticks": 50000,
+  "warmup": 5000,
+  "scenarios": [
+    {
+      "name": "control",
+      "mean_world_cross_lineage": 0.5134257979053622,
+      "mean_world_cross_habitat": 0.47032630475988385,
+      "mean_world_mating_distance": 11.954345365250102,
+      "mean_population_CV": 0.2689074159586606,
+      "mean_resource_CV": 0.9071251884166255,
+      "top25_stock_mask_jaccard_bounds": [
+        {
+          "channel": "soft",
+          "bounds": [
+            0.21066665707214674,
+            0.2267271040826543
+          ]
+        },
+        {
+          "channel": "hard",
+          "bounds": [
+            0.20822490232045057,
+            0.22705401101254213
+          ]
+        }
+      ],
+      "predator_ready_compatible_mates_bounds": [
+        0,
+        0
+      ],
+      "predator_prey_and_mate_overlap_bounds": [
+        0,
+        0
+      ],
+      "worlds": [
+        {
+          "seed": 0,
+          "density": [
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 208136,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 765483,
+              "unpaired_candidates": 1146796,
+              "eligible_candidates": 12244,
+              "compatible_candidates": 6333,
+              "successful_pairs": 6328,
+              "eligible_per_unpaired": 0.010676702743992829,
+              "compatible_per_eligible": 0.517232930414897,
+              "pairs_per_search": 0.008266676072492792
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 552103,
+              "unpaired_candidates": 2137082,
+              "eligible_candidates": 17658,
+              "compatible_candidates": 8585,
+              "successful_pairs": 8548,
+              "eligible_per_unpaired": 0.008262668442296553,
+              "compatible_per_eligible": 0.4861819005549892,
+              "pairs_per_search": 0.015482618279560155
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 13365,
+              "unpaired_candidates": 117342,
+              "eligible_candidates": 557,
+              "compatible_candidates": 283,
+              "successful_pairs": 283,
+              "eligible_per_unpaired": 0.004746808474374052,
+              "compatible_per_eligible": 0.5080789946140036,
+              "pairs_per_search": 0.021174710063598952
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 0,
+            "unpaired_candidates": 0,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": null,
+            "compatible_per_eligible": null,
+            "pairs_per_search": null
+          },
+          "predator_snapshot": {
+            "samples": 17,
+            "ready_samples": 0,
+            "mean_visible_prey": 10.647058823529411,
+            "mean_attack_range_prey": 0.29411764705882354,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": null
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.21453627235097017
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.21345209720493913
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 16000,
+              "HardSpecialist": 3000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 20000,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 1,
+          "density": [
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 171640,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 783474,
+              "unpaired_candidates": 1198305,
+              "eligible_candidates": 19730,
+              "compatible_candidates": 7718,
+              "successful_pairs": 7704,
+              "eligible_per_unpaired": 0.016464923370928104,
+              "compatible_per_eligible": 0.391180942726812,
+              "pairs_per_search": 0.009833127838320098
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 711286,
+              "unpaired_candidates": 2805485,
+              "eligible_candidates": 39006,
+              "compatible_candidates": 12733,
+              "successful_pairs": 12662,
+              "eligible_per_unpaired": 0.01390347836470343,
+              "compatible_per_eligible": 0.3264369584166538,
+              "pairs_per_search": 0.017801559428977935
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 21906,
+              "unpaired_candidates": 195609,
+              "eligible_candidates": 1516,
+              "compatible_candidates": 559,
+              "successful_pairs": 554,
+              "eligible_per_unpaired": 0.00775015464523616,
+              "compatible_per_eligible": 0.3687335092348285,
+              "pairs_per_search": 0.02528987492011321
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 0,
+            "unpaired_candidates": 0,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": null,
+            "compatible_per_eligible": null,
+            "pairs_per_search": null
+          },
+          "predator_snapshot": {
+            "samples": 31,
+            "ready_samples": 0,
+            "mean_visible_prey": 16.161290322580644,
+            "mean_attack_range_prey": 0.45161290322580644,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": null
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.22393917253162393
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.21989808849133732
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 8000,
+              "HardSpecialist": 7000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 15000,
+              "HardSpecialist": 5000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 2,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 206,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 89,
+              "unpaired_candidates": 98,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 8,
+              "unpaired_candidates": 26,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 210677,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 1048830,
+              "unpaired_candidates": 1607384,
+              "eligible_candidates": 18429,
+              "compatible_candidates": 7374,
+              "successful_pairs": 7364,
+              "eligible_per_unpaired": 0.011465213041812037,
+              "compatible_per_eligible": 0.4001302295295458,
+              "pairs_per_search": 0.00702115690817387
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 881513,
+              "unpaired_candidates": 3440698,
+              "eligible_candidates": 31602,
+              "compatible_candidates": 11738,
+              "successful_pairs": 11695,
+              "eligible_per_unpaired": 0.00918476425422981,
+              "compatible_per_eligible": 0.3714321878362129,
+              "pairs_per_search": 0.013266962597261754
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 20949,
+              "unpaired_candidates": 183314,
+              "eligible_candidates": 1122,
+              "compatible_candidates": 372,
+              "successful_pairs": 370,
+              "eligible_per_unpaired": 0.006120645449883806,
+              "compatible_per_eligible": 0.3315508021390374,
+              "pairs_per_search": 0.017661940904100434
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 303,
+            "unpaired_candidates": 124,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 13,
+            "ready_samples": 3,
+            "mean_visible_prey": 3.923076923076923,
+            "mean_attack_range_prey": 0,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.2174152542514891
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.20822490232045057
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 9000,
+              "HardSpecialist": 26000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 15000,
+              "HardSpecialist": 30000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 3,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 393,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 150,
+              "unpaired_candidates": 153,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 130946,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 599065,
+              "unpaired_candidates": 916199,
+              "eligible_candidates": 10023,
+              "compatible_candidates": 6324,
+              "successful_pairs": 6317,
+              "eligible_per_unpaired": 0.010939763086403717,
+              "compatible_per_eligible": 0.6309488177192457,
+              "pairs_per_search": 0.010544765593049168
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 538646,
+              "unpaired_candidates": 2140262,
+              "eligible_candidates": 18641,
+              "compatible_candidates": 12120,
+              "successful_pairs": 12081,
+              "eligible_per_unpaired": 0.00870968133807917,
+              "compatible_per_eligible": 0.650179711388874,
+              "pairs_per_search": 0.022428459507728638
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 21359,
+              "unpaired_candidates": 202025,
+              "eligible_candidates": 1269,
+              "compatible_candidates": 588,
+              "successful_pairs": 588,
+              "eligible_per_unpaired": 0.006281400816730603,
+              "compatible_per_eligible": 0.46335697399527187,
+              "pairs_per_search": 0.027529378716232032
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 543,
+            "unpaired_candidates": 153,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 44,
+            "ready_samples": 6,
+            "mean_visible_prey": 29.204545454545453,
+            "mean_attack_range_prey": 0.3409090909090909,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.21066665707214674
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.21209139494395182
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 13000,
+              "HardSpecialist": 6000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 10000,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 4,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 172,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 51,
+              "unpaired_candidates": 60,
+              "eligible_candidates": 1,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0.016666666666666666,
+              "compatible_per_eligible": 0,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 11,
+              "unpaired_candidates": 45,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 132783,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 566021,
+              "unpaired_candidates": 860867,
+              "eligible_candidates": 9501,
+              "compatible_candidates": 6124,
+              "successful_pairs": 6122,
+              "eligible_per_unpaired": 0.0110365480381987,
+              "compatible_per_eligible": 0.6445637301336702,
+              "pairs_per_search": 0.010815853122057309
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 525265,
+              "unpaired_candidates": 2120240,
+              "eligible_candidates": 18352,
+              "compatible_candidates": 10745,
+              "successful_pairs": 10705,
+              "eligible_per_unpaired": 0.00865562389163491,
+              "compatible_per_eligible": 0.5854947689625108,
+              "pairs_per_search": 0.0203801890474332
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 33766,
+              "unpaired_candidates": 322158,
+              "eligible_candidates": 1785,
+              "compatible_candidates": 800,
+              "successful_pairs": 794,
+              "eligible_per_unpaired": 0.005540759503100963,
+              "compatible_per_eligible": 0.4481792717086835,
+              "pairs_per_search": 0.023514778179233548
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 234,
+            "unpaired_candidates": 105,
+            "eligible_candidates": 1,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0.009523809523809525,
+            "compatible_per_eligible": 0,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 14,
+            "ready_samples": 2,
+            "mean_visible_prey": 6.285714285714286,
+            "mean_attack_range_prey": 0.21428571428571427,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.2267271040826543
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.2170529239870215
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 14000,
+              "HardSpecialist": 11000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 15000,
+              "HardSpecialist": 10000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 5,
+          "density": [
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 148003,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 636754,
+              "unpaired_candidates": 967403,
+              "eligible_candidates": 10595,
+              "compatible_candidates": 6315,
+              "successful_pairs": 6304,
+              "eligible_per_unpaired": 0.010952002422981942,
+              "compatible_per_eligible": 0.5960358659745163,
+              "pairs_per_search": 0.009900212640988514
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 550672,
+              "unpaired_candidates": 2183047,
+              "eligible_candidates": 18872,
+              "compatible_candidates": 10405,
+              "successful_pairs": 10371,
+              "eligible_per_unpaired": 0.008644797844480674,
+              "compatible_per_eligible": 0.5513459092835947,
+              "pairs_per_search": 0.018833352703605775
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 25915,
+              "unpaired_candidates": 246088,
+              "eligible_candidates": 1422,
+              "compatible_candidates": 693,
+              "successful_pairs": 689,
+              "eligible_per_unpaired": 0.0057784207275446186,
+              "compatible_per_eligible": 0.4873417721518987,
+              "pairs_per_search": 0.02658691877291144
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 0,
+            "unpaired_candidates": 0,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": null,
+            "compatible_per_eligible": null,
+            "pairs_per_search": null
+          },
+          "predator_snapshot": {
+            "samples": 10,
+            "ready_samples": 0,
+            "mean_visible_prey": 23.4,
+            "mean_attack_range_prey": 0.7,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": null
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.21880756172831414
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.20872502238927235
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 19000,
+              "HardSpecialist": 1000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 15000,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 6,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 154,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 130,
+              "unpaired_candidates": 170,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 19,
+              "unpaired_candidates": 65,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 138196,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 630461,
+              "unpaired_candidates": 969719,
+              "eligible_candidates": 10151,
+              "compatible_candidates": 5746,
+              "successful_pairs": 5741,
+              "eligible_per_unpaired": 0.010467980930558235,
+              "compatible_per_eligible": 0.5660526056546153,
+              "pairs_per_search": 0.009106035107643455
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 574967,
+              "unpaired_candidates": 2256420,
+              "eligible_candidates": 18993,
+              "compatible_candidates": 10028,
+              "successful_pairs": 9986,
+              "eligible_per_unpaired": 0.008417315925226687,
+              "compatible_per_eligible": 0.5279839941030906,
+              "pairs_per_search": 0.017367953291232367
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 17060,
+              "unpaired_candidates": 154463,
+              "eligible_candidates": 665,
+              "compatible_candidates": 391,
+              "successful_pairs": 388,
+              "eligible_per_unpaired": 0.0043052381476470095,
+              "compatible_per_eligible": 0.58796992481203,
+              "pairs_per_search": 0.022743259085580305
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 303,
+            "unpaired_candidates": 235,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 18,
+            "ready_samples": 2,
+            "mean_visible_prey": 11.166666666666666,
+            "mean_attack_range_prey": 0.2222222222222222,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.21547926799796466
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.21931816136343724
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 13000,
+              "HardSpecialist": 16000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 10000,
+              "HardSpecialist": 10000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 7,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 195,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 202,
+              "unpaired_candidates": 232,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 26,
+              "unpaired_candidates": 89,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 131827,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 514963,
+              "unpaired_candidates": 774868,
+              "eligible_candidates": 8056,
+              "compatible_candidates": 6240,
+              "successful_pairs": 6228,
+              "eligible_per_unpaired": 0.010396609487035212,
+              "compatible_per_eligible": 0.7745779543197616,
+              "pairs_per_search": 0.012094072778044248
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 412007,
+              "unpaired_candidates": 1632966,
+              "eligible_candidates": 12011,
+              "compatible_candidates": 9507,
+              "successful_pairs": 9463,
+              "eligible_per_unpaired": 0.0073553276675693184,
+              "compatible_per_eligible": 0.7915244359337275,
+              "pairs_per_search": 0.022968056367974332
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 21725,
+              "unpaired_candidates": 211260,
+              "eligible_candidates": 1141,
+              "compatible_candidates": 657,
+              "successful_pairs": 651,
+              "eligible_per_unpaired": 0.005400927766732936,
+              "compatible_per_eligible": 0.5758106923751095,
+              "pairs_per_search": 0.029965477560414268
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 423,
+            "unpaired_candidates": 321,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 44,
+            "ready_samples": 4,
+            "mean_visible_prey": 17.727272727272727,
+            "mean_attack_range_prey": 0.3181818181818182,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.21312934225941463
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.22705401101254213
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 13000,
+              "HardSpecialist": 1000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 20000,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "patch32",
+      "mean_world_cross_lineage": 0.4715509903790939,
+      "mean_world_cross_habitat": 0.4475923961102868,
+      "mean_world_mating_distance": 11.510764007321225,
+      "mean_population_CV": 0.24746872489672883,
+      "mean_resource_CV": 0.641738552715274,
+      "top25_stock_mask_jaccard_bounds": [
+        {
+          "channel": "soft",
+          "bounds": [
+            0.19964322195364492,
+            0.9978271652864044
+          ]
+        },
+        {
+          "channel": "hard",
+          "bounds": [
+            0.21251561072464623,
+            0.9947923478352366
+          ]
+        }
+      ],
+      "predator_ready_compatible_mates_bounds": [
+        0,
+        0
+      ],
+      "predator_prey_and_mate_overlap_bounds": [
+        0,
+        0
+      ],
+      "worlds": [
+        {
+          "seed": 0,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 62,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 60,
+              "unpaired_candidates": 77,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 15,
+              "unpaired_candidates": 64,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 212394,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 785970,
+              "unpaired_candidates": 1176709,
+              "eligible_candidates": 11364,
+              "compatible_candidates": 6746,
+              "successful_pairs": 6742,
+              "eligible_per_unpaired": 0.009657442919192426,
+              "compatible_per_eligible": 0.5936290038718761,
+              "pairs_per_search": 0.008577935544613662
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 582764,
+              "unpaired_candidates": 2286644,
+              "eligible_candidates": 16829,
+              "compatible_candidates": 9773,
+              "successful_pairs": 9730,
+              "eligible_per_unpaired": 0.007359693944488079,
+              "compatible_per_eligible": 0.5807237506684889,
+              "pairs_per_search": 0.016696295584490463
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 19301,
+              "unpaired_candidates": 171671,
+              "eligible_candidates": 667,
+              "compatible_candidates": 387,
+              "successful_pairs": 384,
+              "eligible_per_unpaired": 0.003885338816690064,
+              "compatible_per_eligible": 0.5802098950524738,
+              "pairs_per_search": 0.019895342210248173
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 137,
+            "unpaired_candidates": 141,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 47,
+            "ready_samples": 2,
+            "mean_visible_prey": 13.914893617021276,
+            "mean_attack_range_prey": 0.574468085106383,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.2131131652277691
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.2336326566719607
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 16000,
+              "HardSpecialist": 3000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 10000,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 1,
+          "density": [],
+          "predator_actual_search": {
+            "searches": 0,
+            "unpaired_candidates": 0,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": null,
+            "compatible_per_eligible": null,
+            "pairs_per_search": null
+          },
+          "predator_snapshot": {
+            "samples": 0,
+            "ready_samples": 0,
+            "mean_visible_prey": null,
+            "mean_attack_range_prey": null,
+            "with_prey_and_compatible_mate_fraction": null,
+            "ready_compatible_mates_per_ready_sample": null
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.9978271652864044
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.9947923478352366
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 0,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 0,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 2,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 698,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 892,
+              "unpaired_candidates": 1248,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 39,
+              "unpaired_candidates": 126,
+              "eligible_candidates": 1,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0.007936507936507936,
+              "compatible_per_eligible": 0,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 176811,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 708548,
+              "unpaired_candidates": 1071651,
+              "eligible_candidates": 15046,
+              "compatible_candidates": 6474,
+              "successful_pairs": 6467,
+              "eligible_per_unpaired": 0.014040018625466687,
+              "compatible_per_eligible": 0.4302804732154725,
+              "pairs_per_search": 0.009127116299813139
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 506175,
+              "unpaired_candidates": 1954910,
+              "eligible_candidates": 20156,
+              "compatible_candidates": 9001,
+              "successful_pairs": 8967,
+              "eligible_per_unpaired": 0.010310449074381941,
+              "compatible_per_eligible": 0.4465667791228418,
+              "pairs_per_search": 0.017715217069195436
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 22915,
+              "unpaired_candidates": 228301,
+              "eligible_candidates": 1190,
+              "compatible_candidates": 439,
+              "successful_pairs": 436,
+              "eligible_per_unpaired": 0.0052124169407930755,
+              "compatible_per_eligible": 0.3689075630252101,
+              "pairs_per_search": 0.019026838315513855
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 1629,
+            "unpaired_candidates": 1374,
+            "eligible_candidates": 1,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0.000727802037845706,
+            "compatible_per_eligible": 0,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 86,
+            "ready_samples": 14,
+            "mean_visible_prey": 19.74418604651163,
+            "mean_attack_range_prey": 0.36046511627906974,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.19964322195364492
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.22780171914152775
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 20000,
+              "HardSpecialist": 4000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 20000,
+              "HardSpecialist": 5000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 3,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 1316,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 645,
+              "unpaired_candidates": 915,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 236,
+              "unpaired_candidates": 992,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 3,
+              "searches": 18,
+              "unpaired_candidates": 151,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 190335,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 714561,
+              "unpaired_candidates": 1073207,
+              "eligible_candidates": 10745,
+              "compatible_candidates": 6337,
+              "successful_pairs": 6331,
+              "eligible_per_unpaired": 0.010012048001923207,
+              "compatible_per_eligible": 0.5897626803164262,
+              "pairs_per_search": 0.008859985361641624
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 540316,
+              "unpaired_candidates": 2122179,
+              "eligible_candidates": 14307,
+              "compatible_candidates": 9149,
+              "successful_pairs": 9116,
+              "eligible_per_unpaired": 0.0067416556284837425,
+              "compatible_per_eligible": 0.6394771790032852,
+              "pairs_per_search": 0.016871608466156842
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 18562,
+              "unpaired_candidates": 167407,
+              "eligible_candidates": 669,
+              "compatible_candidates": 391,
+              "successful_pairs": 388,
+              "eligible_per_unpaired": 0.003996248663437013,
+              "compatible_per_eligible": 0.5844544095665172,
+              "pairs_per_search": 0.020902919943971556
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 2215,
+            "unpaired_candidates": 2058,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 95,
+            "ready_samples": 23,
+            "mean_visible_prey": 12.76842105263158,
+            "mean_attack_range_prey": 0.6842105263157895,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.21359610008812605
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.23633041477285685
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 17000,
+              "HardSpecialist": 3000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 20000,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 4,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 568,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 165,
+              "unpaired_candidates": 197,
+              "eligible_candidates": 2,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0.01015228426395939,
+              "compatible_per_eligible": 0,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 10,
+              "unpaired_candidates": 32,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 3,
+              "searches": 1,
+              "unpaired_candidates": 9,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 232491,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 842622,
+              "unpaired_candidates": 1250801,
+              "eligible_candidates": 13960,
+              "compatible_candidates": 6931,
+              "successful_pairs": 6925,
+              "eligible_per_unpaired": 0.011160848128519245,
+              "compatible_per_eligible": 0.49648997134670486,
+              "pairs_per_search": 0.008218394487682495
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 584408,
+              "unpaired_candidates": 2294470,
+              "eligible_candidates": 20429,
+              "compatible_candidates": 9371,
+              "successful_pairs": 9348,
+              "eligible_per_unpaired": 0.008903581219192231,
+              "compatible_per_eligible": 0.4587106564197954,
+              "pairs_per_search": 0.015995674254972555
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 19937,
+              "unpaired_candidates": 181207,
+              "eligible_candidates": 858,
+              "compatible_candidates": 381,
+              "successful_pairs": 381,
+              "eligible_per_unpaired": 0.004734916421551044,
+              "compatible_per_eligible": 0.44405594405594406,
+              "pairs_per_search": 0.01911019712093093
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 744,
+            "unpaired_candidates": 238,
+            "eligible_candidates": 2,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0.008403361344537815,
+            "compatible_per_eligible": 0,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 63,
+            "ready_samples": 6,
+            "mean_visible_prey": 14.587301587301587,
+            "mean_attack_range_prey": 0.30158730158730157,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.21711587207543795
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.2236684913517878
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 24000,
+              "HardSpecialist": 9000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 20000,
+              "HardSpecialist": 10000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 5,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 137,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 64,
+              "unpaired_candidates": 76,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 71,
+              "unpaired_candidates": 355,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 3,
+              "searches": 25,
+              "unpaired_candidates": 244,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 170346,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 625559,
+              "unpaired_candidates": 930800,
+              "eligible_candidates": 11426,
+              "compatible_candidates": 7281,
+              "successful_pairs": 7269,
+              "eligible_per_unpaired": 0.012275461968199399,
+              "compatible_per_eligible": 0.6372308769473132,
+              "pairs_per_search": 0.011620007065680456
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 442456,
+              "unpaired_candidates": 1727057,
+              "eligible_candidates": 16373,
+              "compatible_candidates": 9539,
+              "successful_pairs": 9498,
+              "eligible_per_unpaired": 0.00948028930139538,
+              "compatible_per_eligible": 0.58260550906981,
+              "pairs_per_search": 0.02146654130580216
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 17573,
+              "unpaired_candidates": 165367,
+              "eligible_candidates": 891,
+              "compatible_candidates": 479,
+              "successful_pairs": 478,
+              "eligible_per_unpaired": 0.0053880157467934954,
+              "compatible_per_eligible": 0.5375982042648709,
+              "pairs_per_search": 0.027200819438911967
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 297,
+            "unpaired_candidates": 675,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 74,
+            "ready_samples": 3,
+            "mean_visible_prey": 24.324324324324323,
+            "mean_attack_range_prey": 0.8378378378378378,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.2114773745988719
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.21915985832882418
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 8000,
+              "HardSpecialist": 2000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 5000,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 6,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 79,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 317,
+              "unpaired_candidates": 383,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 58,
+              "unpaired_candidates": 186,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 196670,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 861327,
+              "unpaired_candidates": 1304187,
+              "eligible_candidates": 15713,
+              "compatible_candidates": 6926,
+              "successful_pairs": 6919,
+              "eligible_per_unpaired": 0.012048118866389559,
+              "compatible_per_eligible": 0.4407815184878763,
+              "pairs_per_search": 0.00803295380267889
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 638125,
+              "unpaired_candidates": 2467149,
+              "eligible_candidates": 22576,
+              "compatible_candidates": 10157,
+              "successful_pairs": 10116,
+              "eligible_per_unpaired": 0.009150643110732267,
+              "compatible_per_eligible": 0.4499025513819986,
+              "pairs_per_search": 0.015852693437806074
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 14174,
+              "unpaired_candidates": 124706,
+              "eligible_candidates": 552,
+              "compatible_candidates": 277,
+              "successful_pairs": 277,
+              "eligible_per_unpaired": 0.004426410918480265,
+              "compatible_per_eligible": 0.5018115942028986,
+              "pairs_per_search": 0.019542824890644843
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 454,
+            "unpaired_candidates": 569,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 71,
+            "ready_samples": 6,
+            "mean_visible_prey": 11,
+            "mean_attack_range_prey": 0.5633802816901409,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.21517501936217798
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.21986526125879824
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 15000,
+              "HardSpecialist": 7000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 10000,
+              "HardSpecialist": 5000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 7,
+          "density": [
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 282370,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 1001344,
+              "unpaired_candidates": 1479413,
+              "eligible_candidates": 17477,
+              "compatible_candidates": 8061,
+              "successful_pairs": 8056,
+              "eligible_per_unpaired": 0.011813469261119106,
+              "compatible_per_eligible": 0.4612347656920524,
+              "pairs_per_search": 0.00804518726831139
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 661781,
+              "unpaired_candidates": 2587236,
+              "eligible_candidates": 26473,
+              "compatible_candidates": 10099,
+              "successful_pairs": 10067,
+              "eligible_per_unpaired": 0.010232155087514244,
+              "compatible_per_eligible": 0.38148302043591586,
+              "pairs_per_search": 0.015211981002778865
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 37298,
+              "unpaired_candidates": 364582,
+              "eligible_candidates": 2659,
+              "compatible_candidates": 662,
+              "successful_pairs": 660,
+              "eligible_per_unpaired": 0.0072932838154379535,
+              "compatible_per_eligible": 0.24896577660774727,
+              "pairs_per_search": 0.017695318783849
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 0,
+            "unpaired_candidates": 0,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": null,
+            "compatible_per_eligible": null,
+            "pairs_per_search": null
+          },
+          "predator_snapshot": {
+            "samples": 11,
+            "ready_samples": 0,
+            "mean_visible_prey": 12.727272727272727,
+            "mean_attack_range_prey": 0.18181818181818182,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": null
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.2086615044061017
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.21251561072464623
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 18000,
+              "HardSpecialist": 15000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 15000,
+              "HardSpecialist": 10000,
+              "PreySpecialist": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "patch64",
+      "mean_world_cross_lineage": 0.49656224304449775,
+      "mean_world_cross_habitat": 0.46437111105076034,
+      "mean_world_mating_distance": 12.050742483327896,
+      "mean_population_CV": 0.2890886582568574,
+      "mean_resource_CV": 0.8045890580386295,
+      "top25_stock_mask_jaccard_bounds": [
+        {
+          "channel": "soft",
+          "bounds": [
+            0.20176673695372727,
+            0.22440591659640993
+          ]
+        },
+        {
+          "channel": "hard",
+          "bounds": [
+            0.20398676582534836,
+            0.24642145845773805
+          ]
+        }
+      ],
+      "predator_ready_compatible_mates_bounds": [
+        0,
+        0
+      ],
+      "predator_prey_and_mate_overlap_bounds": [
+        0,
+        0
+      ],
+      "worlds": [
+        {
+          "seed": 0,
+          "density": [
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 185896,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 638861,
+              "unpaired_candidates": 953479,
+              "eligible_candidates": 7857,
+              "compatible_candidates": 6283,
+              "successful_pairs": 6280,
+              "eligible_per_unpaired": 0.008240349289286917,
+              "compatible_per_eligible": 0.7996690848924526,
+              "pairs_per_search": 0.009829994318012838
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 439254,
+              "unpaired_candidates": 1707425,
+              "eligible_candidates": 10741,
+              "compatible_candidates": 8326,
+              "successful_pairs": 8294,
+              "eligible_per_unpaired": 0.006290759476990204,
+              "compatible_per_eligible": 0.7751605995717344,
+              "pairs_per_search": 0.018882013595778298
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 13107,
+              "unpaired_candidates": 120684,
+              "eligible_candidates": 422,
+              "compatible_candidates": 348,
+              "successful_pairs": 346,
+              "eligible_per_unpaired": 0.003496735275595771,
+              "compatible_per_eligible": 0.8246445497630331,
+              "pairs_per_search": 0.02639810788128481
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 0,
+            "unpaired_candidates": 0,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": null,
+            "compatible_per_eligible": null,
+            "pairs_per_search": null
+          },
+          "predator_snapshot": {
+            "samples": 30,
+            "ready_samples": 0,
+            "mean_visible_prey": 22.533333333333335,
+            "mean_attack_range_prey": 0.4666666666666667,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": null
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.2131989659731022
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.2354682404190269
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 14000,
+              "HardSpecialist": 3000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 25000,
+              "HardSpecialist": 5000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 1,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 972,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 645,
+              "unpaired_candidates": 839,
+              "eligible_candidates": 9,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0.010727056019070322,
+              "compatible_per_eligible": 0,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 117,
+              "unpaired_candidates": 389,
+              "eligible_candidates": 2,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0.005141388174807198,
+              "compatible_per_eligible": 0,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 233311,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 841493,
+              "unpaired_candidates": 1237565,
+              "eligible_candidates": 12025,
+              "compatible_candidates": 7867,
+              "successful_pairs": 7860,
+              "eligible_per_unpaired": 0.00971666134708076,
+              "compatible_per_eligible": 0.6542203742203743,
+              "pairs_per_search": 0.00934054115720511
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 473664,
+              "unpaired_candidates": 1801502,
+              "eligible_candidates": 13809,
+              "compatible_candidates": 9104,
+              "successful_pairs": 9075,
+              "eligible_per_unpaired": 0.007665270424345907,
+              "compatible_per_eligible": 0.6592801795930191,
+              "pairs_per_search": 0.019159150790433725
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 12468,
+              "unpaired_candidates": 114794,
+              "eligible_candidates": 569,
+              "compatible_candidates": 290,
+              "successful_pairs": 288,
+              "eligible_per_unpaired": 0.004956705054271129,
+              "compatible_per_eligible": 0.5096660808435852,
+              "pairs_per_search": 0.023099133782483156
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 1734,
+            "unpaired_candidates": 1228,
+            "eligible_candidates": 11,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0.008957654723127036,
+            "compatible_per_eligible": 0,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 126,
+            "ready_samples": 21,
+            "mean_visible_prey": 14.579365079365079,
+            "mean_attack_range_prey": 0.373015873015873,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.20176673695372727
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.24642145845773805
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 5000,
+              "HardSpecialist": 5000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 5000,
+              "HardSpecialist": 5000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 2,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 184,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 188,
+              "unpaired_candidates": 320,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 8,
+              "unpaired_candidates": 24,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 138672,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 738175,
+              "unpaired_candidates": 1137856,
+              "eligible_candidates": 10381,
+              "compatible_candidates": 6528,
+              "successful_pairs": 6526,
+              "eligible_per_unpaired": 0.00912329855447438,
+              "compatible_per_eligible": 0.6288411521048068,
+              "pairs_per_search": 0.008840722051004165
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 659009,
+              "unpaired_candidates": 2589270,
+              "eligible_candidates": 18449,
+              "compatible_candidates": 12393,
+              "successful_pairs": 12360,
+              "eligible_per_unpaired": 0.00712517427691975,
+              "compatible_per_eligible": 0.6717437259472058,
+              "pairs_per_search": 0.01875543429604148
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 25719,
+              "unpaired_candidates": 240796,
+              "eligible_candidates": 811,
+              "compatible_candidates": 512,
+              "successful_pairs": 508,
+              "eligible_per_unpaired": 0.003367996146115384,
+              "compatible_per_eligible": 0.6313193588162762,
+              "pairs_per_search": 0.019751934367588164
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 380,
+            "unpaired_candidates": 344,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 97,
+            "ready_samples": 3,
+            "mean_visible_prey": 16.68041237113402,
+            "mean_attack_range_prey": 0.4742268041237113,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.22440591659640993
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.20398676582534836
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 7000,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 10000,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 3,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 64,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 10,
+              "unpaired_candidates": 10,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 27,
+              "unpaired_candidates": 82,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 237286,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 923980,
+              "unpaired_candidates": 1381647,
+              "eligible_candidates": 11276,
+              "compatible_candidates": 7443,
+              "successful_pairs": 7432,
+              "eligible_per_unpaired": 0.008161274189427546,
+              "compatible_per_eligible": 0.6600744945015963,
+              "pairs_per_search": 0.008043464144245546
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 655923,
+              "unpaired_candidates": 2569181,
+              "eligible_candidates": 14925,
+              "compatible_candidates": 10494,
+              "successful_pairs": 10460,
+              "eligible_per_unpaired": 0.0058092442688934725,
+              "compatible_per_eligible": 0.7031155778894472,
+              "pairs_per_search": 0.015946993778233116
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 22107,
+              "unpaired_candidates": 200526,
+              "eligible_candidates": 862,
+              "compatible_candidates": 455,
+              "successful_pairs": 455,
+              "eligible_per_unpaired": 0.004298694433639528,
+              "compatible_per_eligible": 0.5278422273781903,
+              "pairs_per_search": 0.020581716198489166
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 101,
+            "unpaired_candidates": 92,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 42,
+            "ready_samples": 1,
+            "mean_visible_prey": 10.523809523809524,
+            "mean_attack_range_prey": 0.3333333333333333,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.2219046853828837
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.22596349657222722
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 14000,
+              "HardSpecialist": 11000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 10000,
+              "HardSpecialist": 10000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 4,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 140,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 71,
+              "unpaired_candidates": 88,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 2,
+              "unpaired_candidates": 9,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 165782,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 598028,
+              "unpaired_candidates": 895902,
+              "eligible_candidates": 9413,
+              "compatible_candidates": 6036,
+              "successful_pairs": 6033,
+              "eligible_per_unpaired": 0.010506729530685276,
+              "compatible_per_eligible": 0.6412408371401254,
+              "pairs_per_search": 0.010088156407392296
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 521857,
+              "unpaired_candidates": 2131354,
+              "eligible_candidates": 15149,
+              "compatible_candidates": 9565,
+              "successful_pairs": 9527,
+              "eligible_per_unpaired": 0.007107688352099182,
+              "compatible_per_eligible": 0.6313948115387155,
+              "pairs_per_search": 0.01825595900792746
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 36712,
+              "unpaired_candidates": 348136,
+              "eligible_candidates": 1493,
+              "compatible_candidates": 815,
+              "successful_pairs": 813,
+              "eligible_per_unpaired": 0.004288553898476458,
+              "compatible_per_eligible": 0.5458807769591426,
+              "pairs_per_search": 0.02214534757027675
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 213,
+            "unpaired_candidates": 97,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 33,
+            "ready_samples": 3,
+            "mean_visible_prey": 11.545454545454545,
+            "mean_attack_range_prey": 0.36363636363636365,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.2168496806178018
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.23266867024876614
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 25000,
+              "HardSpecialist": 21000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 30000,
+              "HardSpecialist": 20000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 5,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 112,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 279,
+              "unpaired_candidates": 319,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 12,
+              "unpaired_candidates": 43,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 190594,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 690700,
+              "unpaired_candidates": 1027045,
+              "eligible_candidates": 10732,
+              "compatible_candidates": 6312,
+              "successful_pairs": 6304,
+              "eligible_per_unpaired": 0.01044939608293697,
+              "compatible_per_eligible": 0.5881475959746553,
+              "pairs_per_search": 0.009126972636455769
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 463537,
+              "unpaired_candidates": 1806971,
+              "eligible_candidates": 13395,
+              "compatible_candidates": 8443,
+              "successful_pairs": 8411,
+              "eligible_per_unpaired": 0.0074129579279357555,
+              "compatible_per_eligible": 0.6303098170959314,
+              "pairs_per_search": 0.018145261327574713
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 16105,
+              "unpaired_candidates": 147442,
+              "eligible_candidates": 653,
+              "compatible_candidates": 419,
+              "successful_pairs": 418,
+              "eligible_per_unpaired": 0.004428860161961992,
+              "compatible_per_eligible": 0.6416539050535988,
+              "pairs_per_search": 0.025954672461968333
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 403,
+            "unpaired_candidates": 362,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 49,
+            "ready_samples": 3,
+            "mean_visible_prey": 11.081632653061224,
+            "mean_attack_range_prey": 0.40816326530612246,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.20936180223325784
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.23341009358850104
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 23000,
+              "HardSpecialist": 3000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 20000,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 6,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 218,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 284,
+              "unpaired_candidates": 439,
+              "eligible_candidates": 47,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0.1070615034168565,
+              "compatible_per_eligible": 0,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 29,
+              "unpaired_candidates": 92,
+              "eligible_candidates": 3,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0.03260869565217391,
+              "compatible_per_eligible": 0,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 169821,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 763046,
+              "unpaired_candidates": 1158908,
+              "eligible_candidates": 11628,
+              "compatible_candidates": 6118,
+              "successful_pairs": 6107,
+              "eligible_per_unpaired": 0.010033583338798249,
+              "compatible_per_eligible": 0.5261437908496732,
+              "pairs_per_search": 0.008003449333329839
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 571299,
+              "unpaired_candidates": 2191937,
+              "eligible_candidates": 20120,
+              "compatible_candidates": 9722,
+              "successful_pairs": 9686,
+              "eligible_per_unpaired": 0.009179095932045493,
+              "compatible_per_eligible": 0.48320079522862824,
+              "pairs_per_search": 0.016954344397592153
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 18283,
+              "unpaired_candidates": 184870,
+              "eligible_candidates": 815,
+              "compatible_candidates": 436,
+              "successful_pairs": 434,
+              "eligible_per_unpaired": 0.004408503272569914,
+              "compatible_per_eligible": 0.5349693251533743,
+              "pairs_per_search": 0.023737898594322595
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 531,
+            "unpaired_candidates": 531,
+            "eligible_candidates": 50,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0.09416195856873823,
+            "compatible_per_eligible": 0,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 45,
+            "ready_samples": 4,
+            "mean_visible_prey": 7.333333333333333,
+            "mean_attack_range_prey": 0.4222222222222222,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.21716492787662567
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.22143051146299292
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 13000,
+              "HardSpecialist": 8000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 10000,
+              "HardSpecialist": 5000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 7,
+          "density": [
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 25,
+              "unpaired_candidates": 30,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 188896,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 645689,
+              "unpaired_candidates": 955016,
+              "eligible_candidates": 15705,
+              "compatible_candidates": 6491,
+              "successful_pairs": 6484,
+              "eligible_per_unpaired": 0.016444750663863222,
+              "compatible_per_eligible": 0.41330786373766315,
+              "pairs_per_search": 0.010041986157422536
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 443500,
+              "unpaired_candidates": 1751943,
+              "eligible_candidates": 20769,
+              "compatible_candidates": 8615,
+              "successful_pairs": 8584,
+              "eligible_per_unpaired": 0.011854837743008762,
+              "compatible_per_eligible": 0.41480090519524293,
+              "pairs_per_search": 0.019355129650507327
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 20969,
+              "unpaired_candidates": 193152,
+              "eligible_candidates": 1534,
+              "compatible_candidates": 493,
+              "successful_pairs": 491,
+              "eligible_per_unpaired": 0.007941931742876078,
+              "compatible_per_eligible": 0.3213820078226858,
+              "pairs_per_search": 0.023415518145834327
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 25,
+            "unpaired_candidates": 30,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 25,
+            "ready_samples": 0,
+            "mean_visible_prey": 13.8,
+            "mean_attack_range_prey": 0.2,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": null
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.20967313829624376
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.24256824207627395
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 22000,
+              "HardSpecialist": 1000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 25000,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "patch128",
+      "mean_world_cross_lineage": 0.40809189220471387,
+      "mean_world_cross_habitat": 0.45353188267423467,
+      "mean_world_mating_distance": 11.485688347243629,
+      "mean_population_CV": 0.2259937476811304,
+      "mean_resource_CV": 0.6782699814261702,
+      "top25_stock_mask_jaccard_bounds": [
+        {
+          "channel": "soft",
+          "bounds": [
+            0.20560021269160297,
+            0.9948989742767956
+          ]
+        },
+        {
+          "channel": "hard",
+          "bounds": [
+            0.19616493494709858,
+            0.990653468435791
+          ]
+        }
+      ],
+      "predator_ready_compatible_mates_bounds": [
+        0,
+        0
+      ],
+      "predator_prey_and_mate_overlap_bounds": [
+        0,
+        0
+      ],
+      "worlds": [
+        {
+          "seed": 0,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 267,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 165,
+              "unpaired_candidates": 210,
+              "eligible_candidates": 3,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0.014285714285714285,
+              "compatible_per_eligible": 0,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 26,
+              "unpaired_candidates": 83,
+              "eligible_candidates": 2,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0.024096385542168676,
+              "compatible_per_eligible": 0,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 154243,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 561320,
+              "unpaired_candidates": 841019,
+              "eligible_candidates": 9335,
+              "compatible_candidates": 7021,
+              "successful_pairs": 7003,
+              "eligible_per_unpaired": 0.011099630329398027,
+              "compatible_per_eligible": 0.7521156936261382,
+              "pairs_per_search": 0.01247594954749519
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 419397,
+              "unpaired_candidates": 1650913,
+              "eligible_candidates": 12996,
+              "compatible_candidates": 9853,
+              "successful_pairs": 9805,
+              "eligible_per_unpaired": 0.007872007792052034,
+              "compatible_per_eligible": 0.7581563558017852,
+              "pairs_per_search": 0.02337880337722969
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 22202,
+              "unpaired_candidates": 213952,
+              "eligible_candidates": 1070,
+              "compatible_candidates": 601,
+              "successful_pairs": 593,
+              "eligible_per_unpaired": 0.005001121746933891,
+              "compatible_per_eligible": 0.5616822429906542,
+              "pairs_per_search": 0.02670930546797586
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 458,
+            "unpaired_candidates": 293,
+            "eligible_candidates": 5,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0.017064846416382253,
+            "compatible_per_eligible": 0,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 31,
+            "ready_samples": 4,
+            "mean_visible_prey": 15.935483870967742,
+            "mean_attack_range_prey": 0.3225806451612903,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.2221506660657367
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.23856797762628665
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 19000,
+              "HardSpecialist": 4000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 25000,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 1,
+          "density": [],
+          "predator_actual_search": {
+            "searches": 0,
+            "unpaired_candidates": 0,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": null,
+            "compatible_per_eligible": null,
+            "pairs_per_search": null
+          },
+          "predator_snapshot": {
+            "samples": 0,
+            "ready_samples": 0,
+            "mean_visible_prey": null,
+            "mean_attack_range_prey": null,
+            "with_prey_and_compatible_mate_fraction": null,
+            "ready_compatible_mates_per_ready_sample": null
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.9948989742767956
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.990653468435791
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 0,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 0,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 2,
+          "density": [
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 1,
+              "unpaired_candidates": 3,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 244950,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 977483,
+              "unpaired_candidates": 1471819,
+              "eligible_candidates": 18129,
+              "compatible_candidates": 8107,
+              "successful_pairs": 8096,
+              "eligible_per_unpaired": 0.012317411312124656,
+              "compatible_per_eligible": 0.447184069722544,
+              "pairs_per_search": 0.008282496984602289
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 687716,
+              "unpaired_candidates": 2644656,
+              "eligible_candidates": 24949,
+              "compatible_candidates": 11200,
+              "successful_pairs": 11150,
+              "eligible_per_unpaired": 0.009433741099031405,
+              "compatible_per_eligible": 0.4489157882079442,
+              "pairs_per_search": 0.016213087960727974
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 17500,
+              "unpaired_candidates": 158047,
+              "eligible_candidates": 944,
+              "compatible_candidates": 370,
+              "successful_pairs": 368,
+              "eligible_per_unpaired": 0.0059729067935487545,
+              "compatible_per_eligible": 0.3919491525423729,
+              "pairs_per_search": 0.021028571428571428
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 1,
+            "unpaired_candidates": 3,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 39,
+            "ready_samples": 0,
+            "mean_visible_prey": 11.948717948717949,
+            "mean_attack_range_prey": 0.20512820512820512,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": null
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.20633376817944987
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.230107163010255
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 7000,
+              "HardSpecialist": 7000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 5000,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 3,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 614,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 195,
+              "unpaired_candidates": 214,
+              "eligible_candidates": 1,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0.004672897196261682,
+              "compatible_per_eligible": 0,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 18,
+              "unpaired_candidates": 66,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 147593,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 531228,
+              "unpaired_candidates": 794907,
+              "eligible_candidates": 9412,
+              "compatible_candidates": 6263,
+              "successful_pairs": 6260,
+              "eligible_per_unpaired": 0.011840378811609409,
+              "compatible_per_eligible": 0.665427114322142,
+              "pairs_per_search": 0.011784017408720926
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 405532,
+              "unpaired_candidates": 1597070,
+              "eligible_candidates": 15195,
+              "compatible_candidates": 8690,
+              "successful_pairs": 8656,
+              "eligible_per_unpaired": 0.009514298058319296,
+              "compatible_per_eligible": 0.5718986508719973,
+              "pairs_per_search": 0.021344801396683863
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 18019,
+              "unpaired_candidates": 168691,
+              "eligible_candidates": 1133,
+              "compatible_candidates": 412,
+              "successful_pairs": 412,
+              "eligible_per_unpaired": 0.006716422334327261,
+              "compatible_per_eligible": 0.36363636363636365,
+              "pairs_per_search": 0.022864753870914037
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 827,
+            "unpaired_candidates": 280,
+            "eligible_candidates": 1,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0.0035714285714285713,
+            "compatible_per_eligible": 0,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 34,
+            "ready_samples": 9,
+            "mean_visible_prey": 11.029411764705882,
+            "mean_attack_range_prey": 0.23529411764705882,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.20560021269160297
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.25134585174833435
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 15000,
+              "HardSpecialist": 7000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 15000,
+              "HardSpecialist": 5000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 4,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 1101,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 617,
+              "unpaired_candidates": 911,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 317,
+              "unpaired_candidates": 1204,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 3,
+              "searches": 67,
+              "unpaired_candidates": 610,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 239486,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 875779,
+              "unpaired_candidates": 1300735,
+              "eligible_candidates": 14419,
+              "compatible_candidates": 9914,
+              "successful_pairs": 9896,
+              "eligible_per_unpaired": 0.01108527101984647,
+              "compatible_per_eligible": 0.6875650183785283,
+              "pairs_per_search": 0.011299654364856887
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 599091,
+              "unpaired_candidates": 2331111,
+              "eligible_candidates": 20935,
+              "compatible_candidates": 12590,
+              "successful_pairs": 12539,
+              "eligible_per_unpaired": 0.008980696328917842,
+              "compatible_per_eligible": 0.6013852400286601,
+              "pairs_per_search": 0.02093004234748978
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 25643,
+              "unpaired_candidates": 254351,
+              "eligible_candidates": 1127,
+              "compatible_candidates": 606,
+              "successful_pairs": 601,
+              "eligible_per_unpaired": 0.004430884879556203,
+              "compatible_per_eligible": 0.5377107364685004,
+              "pairs_per_search": 0.02343719533595913
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 2102,
+            "unpaired_candidates": 2725,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 83,
+            "ready_samples": 21,
+            "mean_visible_prey": 8.325301204819278,
+            "mean_attack_range_prey": 0.18072289156626506,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.21989909947312658
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.21853646467913662
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 16000,
+              "HardSpecialist": 3000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 15000,
+              "HardSpecialist": 5000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 5,
+          "density": [
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 207937,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 917708,
+              "unpaired_candidates": 1383052,
+              "eligible_candidates": 14390,
+              "compatible_candidates": 7167,
+              "successful_pairs": 7161,
+              "eligible_per_unpaired": 0.010404525643287454,
+              "compatible_per_eligible": 0.4980542043085476,
+              "pairs_per_search": 0.007803135637915328
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 689495,
+              "unpaired_candidates": 2663327,
+              "eligible_candidates": 18964,
+              "compatible_candidates": 11175,
+              "successful_pairs": 11135,
+              "eligible_per_unpaired": 0.007120417432782381,
+              "compatible_per_eligible": 0.5892744146804472,
+              "pairs_per_search": 0.01614950072154258
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 20138,
+              "unpaired_candidates": 207821,
+              "eligible_candidates": 1740,
+              "compatible_candidates": 336,
+              "successful_pairs": 334,
+              "eligible_per_unpaired": 0.00837258987301572,
+              "compatible_per_eligible": 0.19310344827586207,
+              "pairs_per_search": 0.01658555963849439
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 0,
+            "unpaired_candidates": 0,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": null,
+            "compatible_per_eligible": null,
+            "pairs_per_search": null
+          },
+          "predator_snapshot": {
+            "samples": 35,
+            "ready_samples": 0,
+            "mean_visible_prey": 11.657142857142857,
+            "mean_attack_range_prey": 0.34285714285714286,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": null
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.22892412989250566
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.19616493494709858
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 26000,
+              "HardSpecialist": 4000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 25000,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 6,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 220,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 57,
+              "unpaired_candidates": 69,
+              "eligible_candidates": 2,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0.028985507246376812,
+              "compatible_per_eligible": 0,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 3,
+              "unpaired_candidates": 12,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 193001,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 761464,
+              "unpaired_candidates": 1131188,
+              "eligible_candidates": 10100,
+              "compatible_candidates": 6329,
+              "successful_pairs": 6324,
+              "eligible_per_unpaired": 0.008928666145680471,
+              "compatible_per_eligible": 0.6266336633663366,
+              "pairs_per_search": 0.008305054474013217
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 436701,
+              "unpaired_candidates": 1646776,
+              "eligible_candidates": 13362,
+              "compatible_candidates": 7882,
+              "successful_pairs": 7853,
+              "eligible_per_unpaired": 0.00811403615306514,
+              "compatible_per_eligible": 0.5898817542284089,
+              "pairs_per_search": 0.01798255557005823
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 8393,
+              "unpaired_candidates": 75033,
+              "eligible_candidates": 487,
+              "compatible_candidates": 208,
+              "successful_pairs": 207,
+              "eligible_per_unpaired": 0.006490477523223116,
+              "compatible_per_eligible": 0.4271047227926078,
+              "pairs_per_search": 0.0246634099845109
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 280,
+            "unpaired_candidates": 81,
+            "eligible_candidates": 2,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0.024691358024691357,
+            "compatible_per_eligible": 0,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 23,
+            "ready_samples": 3,
+            "mean_visible_prey": 13.217391304347826,
+            "mean_attack_range_prey": 0.34782608695652173,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.20762890097798523
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.22673360879881482
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 14000,
+              "HardSpecialist": 25000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 10000,
+              "HardSpecialist": 35000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 7,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 293,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 185,
+              "unpaired_candidates": 238,
+              "eligible_candidates": 1,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0.004201680672268907,
+              "compatible_per_eligible": 0,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 20,
+              "unpaired_candidates": 63,
+              "eligible_candidates": 1,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0.015873015873015872,
+              "compatible_per_eligible": 0,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 300352,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 1004163,
+              "unpaired_candidates": 1467901,
+              "eligible_candidates": 29468,
+              "compatible_candidates": 9222,
+              "successful_pairs": 9200,
+              "eligible_per_unpaired": 0.020074923308860747,
+              "compatible_per_eligible": 0.3129496402877698,
+              "pairs_per_search": 0.009161859180232691
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 537855,
+              "unpaired_candidates": 2044672,
+              "eligible_candidates": 32948,
+              "compatible_candidates": 9164,
+              "successful_pairs": 9125,
+              "eligible_per_unpaired": 0.016114075998497557,
+              "compatible_per_eligible": 0.27813524341386425,
+              "pairs_per_search": 0.01696553903933216
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 19152,
+              "unpaired_candidates": 192091,
+              "eligible_candidates": 1349,
+              "compatible_candidates": 382,
+              "successful_pairs": 377,
+              "eligible_per_unpaired": 0.007022713193226127,
+              "compatible_per_eligible": 0.28317272053372866,
+              "pairs_per_search": 0.019684628237259815
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 498,
+            "unpaired_candidates": 301,
+            "eligible_candidates": 2,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0.006644518272425249,
+            "compatible_per_eligible": 0,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 41,
+            "ready_samples": 4,
+            "mean_visible_prey": 9.439024390243903,
+            "mean_attack_range_prey": 0.24390243902439024,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.20710191534622424
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.2426578585473647
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 19000,
+              "HardSpecialist": 12000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 15000,
+              "HardSpecialist": 15000,
+              "PreySpecialist": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "predator60",
+      "mean_world_cross_lineage": 0.5175720835224944,
+      "mean_world_cross_habitat": 0.47626717497548676,
+      "mean_world_mating_distance": 12.119312461989455,
+      "mean_population_CV": 0.2671826914267567,
+      "mean_resource_CV": 0.7659098688261236,
+      "top25_stock_mask_jaccard_bounds": [
+        {
+          "channel": "soft",
+          "bounds": [
+            0.19942180109079927,
+            0.22311112504120115
+          ]
+        },
+        {
+          "channel": "hard",
+          "bounds": [
+            0.20249887999622262,
+            0.24185658347524472
+          ]
+        }
+      ],
+      "predator_ready_compatible_mates_bounds": [
+        0,
+        0
+      ],
+      "predator_prey_and_mate_overlap_bounds": [
+        0,
+        0
+      ],
+      "worlds": [
+        {
+          "seed": 0,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 96,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 175,
+              "unpaired_candidates": 216,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 52,
+              "unpaired_candidates": 159,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 152453,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 551226,
+              "unpaired_candidates": 829192,
+              "eligible_candidates": 14471,
+              "compatible_candidates": 6380,
+              "successful_pairs": 6370,
+              "eligible_per_unpaired": 0.0174519291068896,
+              "compatible_per_eligible": 0.4408817635270541,
+              "pairs_per_search": 0.011556058676477524
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 417197,
+              "unpaired_candidates": 1645800,
+              "eligible_candidates": 22670,
+              "compatible_candidates": 8642,
+              "successful_pairs": 8593,
+              "eligible_per_unpaired": 0.013774456191517803,
+              "compatible_per_eligible": 0.3812086457873842,
+              "pairs_per_search": 0.02059698415856298
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 20234,
+              "unpaired_candidates": 189725,
+              "eligible_candidates": 1758,
+              "compatible_candidates": 512,
+              "successful_pairs": 506,
+              "eligible_per_unpaired": 0.00926604295691132,
+              "compatible_per_eligible": 0.2912400455062571,
+              "pairs_per_search": 0.02500741326480182
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 323,
+            "unpaired_candidates": 375,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 34,
+            "ready_samples": 5,
+            "mean_visible_prey": 19.470588235294116,
+            "mean_attack_range_prey": 0.08823529411764706,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.2053029109137563
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.23094481579103016
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 24000,
+              "HardSpecialist": 20000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 20000,
+              "HardSpecialist": 15000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 1,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 358,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 130,
+              "unpaired_candidates": 156,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 115,
+              "unpaired_candidates": 582,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 3,
+              "searches": 31,
+              "unpaired_candidates": 300,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 167344,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 790807,
+              "unpaired_candidates": 1208300,
+              "eligible_candidates": 17337,
+              "compatible_candidates": 5750,
+              "successful_pairs": 5747,
+              "eligible_per_unpaired": 0.014348257882976083,
+              "compatible_per_eligible": 0.33166061025552285,
+              "pairs_per_search": 0.007267259900329663
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 642963,
+              "unpaired_candidates": 2517656,
+              "eligible_candidates": 26602,
+              "compatible_candidates": 9853,
+              "successful_pairs": 9821,
+              "eligible_per_unpaired": 0.010566177428528759,
+              "compatible_per_eligible": 0.37038568528682053,
+              "pairs_per_search": 0.015274595894320514
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 31831,
+              "unpaired_candidates": 304252,
+              "eligible_candidates": 1880,
+              "compatible_candidates": 566,
+              "successful_pairs": 561,
+              "eligible_per_unpaired": 0.006179088387257931,
+              "compatible_per_eligible": 0.30106382978723406,
+              "pairs_per_search": 0.017624328484810405
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 634,
+            "unpaired_candidates": 1038,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 48,
+            "ready_samples": 7,
+            "mean_visible_prey": 13.541666666666666,
+            "mean_attack_range_prey": 0.4166666666666667,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.19942180109079927
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.22385380628064866
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 16000,
+              "HardSpecialist": 4000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 15000,
+              "HardSpecialist": 5000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 2,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 39,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 163,
+              "unpaired_candidates": 188,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 3,
+              "unpaired_candidates": 9,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 197523,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 984436,
+              "unpaired_candidates": 1510658,
+              "eligible_candidates": 21290,
+              "compatible_candidates": 7762,
+              "successful_pairs": 7755,
+              "eligible_per_unpaired": 0.014093196474648795,
+              "compatible_per_eligible": 0.36458431188351337,
+              "pairs_per_search": 0.007877607076539258
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 816155,
+              "unpaired_candidates": 3178158,
+              "eligible_candidates": 29903,
+              "compatible_candidates": 13340,
+              "successful_pairs": 13299,
+              "eligible_per_unpaired": 0.009408909185761061,
+              "compatible_per_eligible": 0.4461090860448784,
+              "pairs_per_search": 0.016294698923611323
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 19289,
+              "unpaired_candidates": 167933,
+              "eligible_candidates": 718,
+              "compatible_candidates": 371,
+              "successful_pairs": 370,
+              "eligible_per_unpaired": 0.00427551463976705,
+              "compatible_per_eligible": 0.5167130919220055,
+              "pairs_per_search": 0.019181917154855097
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 205,
+            "unpaired_candidates": 197,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 22,
+            "ready_samples": 2,
+            "mean_visible_prey": 25.5,
+            "mean_attack_range_prey": 0.5454545454545454,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.2190126033487882
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.20968375141892115
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 20000,
+              "HardSpecialist": 3000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 20000,
+              "HardSpecialist": 5000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 3,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 1038,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 681,
+              "unpaired_candidates": 794,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 39,
+              "unpaired_candidates": 134,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 184861,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 802958,
+              "unpaired_candidates": 1218043,
+              "eligible_candidates": 15099,
+              "compatible_candidates": 7195,
+              "successful_pairs": 7190,
+              "eligible_per_unpaired": 0.0123961140944942,
+              "compatible_per_eligible": 0.47652162394860587,
+              "pairs_per_search": 0.00895439113876442
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 620621,
+              "unpaired_candidates": 2401173,
+              "eligible_candidates": 23180,
+              "compatible_candidates": 11948,
+              "successful_pairs": 11905,
+              "eligible_per_unpaired": 0.009653615128939065,
+              "compatible_per_eligible": 0.5154443485763589,
+              "pairs_per_search": 0.019182399564307364
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 12225,
+              "unpaired_candidates": 107128,
+              "eligible_candidates": 600,
+              "compatible_candidates": 262,
+              "successful_pairs": 262,
+              "eligible_per_unpaired": 0.005600776641027556,
+              "compatible_per_eligible": 0.43666666666666665,
+              "pairs_per_search": 0.021431492842535788
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 1758,
+            "unpaired_candidates": 928,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 54,
+            "ready_samples": 17,
+            "mean_visible_prey": 12.518518518518519,
+            "mean_attack_range_prey": 0.18518518518518517,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.21986214114393898
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.2137661191654129
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 15000,
+              "HardSpecialist": 6000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 15000,
+              "HardSpecialist": 5000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 4,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 726,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 452,
+              "unpaired_candidates": 507,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 18,
+              "unpaired_candidates": 61,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 3,
+              "searches": 1,
+              "unpaired_candidates": 9,
+              "eligible_candidates": 1,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0.1111111111111111,
+              "compatible_per_eligible": 0,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 168662,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 664854,
+              "unpaired_candidates": 1000985,
+              "eligible_candidates": 10018,
+              "compatible_candidates": 6507,
+              "successful_pairs": 6497,
+              "eligible_per_unpaired": 0.010008141980149553,
+              "compatible_per_eligible": 0.6495308444799361,
+              "pairs_per_search": 0.009772070259034314
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 530586,
+              "unpaired_candidates": 2094225,
+              "eligible_candidates": 15862,
+              "compatible_candidates": 9574,
+              "successful_pairs": 9548,
+              "eligible_per_unpaired": 0.0075741622796022395,
+              "compatible_per_eligible": 0.6035808851342832,
+              "pairs_per_search": 0.017995197762473943
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 19224,
+              "unpaired_candidates": 174978,
+              "eligible_candidates": 1047,
+              "compatible_candidates": 480,
+              "successful_pairs": 477,
+              "eligible_per_unpaired": 0.005983609368034839,
+              "compatible_per_eligible": 0.4584527220630373,
+              "pairs_per_search": 0.024812734082397005
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 1197,
+            "unpaired_candidates": 577,
+            "eligible_candidates": 1,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0.0017331022530329288,
+            "compatible_per_eligible": 0,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 32,
+            "ready_samples": 12,
+            "mean_visible_prey": 12.8125,
+            "mean_attack_range_prey": 0.25,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.21776024538307076
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.2294682576977438
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 21000,
+              "HardSpecialist": 3000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 20000,
+              "HardSpecialist": 5000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 5,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 4,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 37,
+              "unpaired_candidates": 38,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 182482,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 643051,
+              "unpaired_candidates": 955590,
+              "eligible_candidates": 14437,
+              "compatible_candidates": 6874,
+              "successful_pairs": 6866,
+              "eligible_per_unpaired": 0.01510794378342176,
+              "compatible_per_eligible": 0.4761377017385883,
+              "pairs_per_search": 0.010677224668027886
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 417140,
+              "unpaired_candidates": 1610537,
+              "eligible_candidates": 17125,
+              "compatible_candidates": 8380,
+              "successful_pairs": 8343,
+              "eligible_per_unpaired": 0.010633099394798132,
+              "compatible_per_eligible": 0.48934306569343067,
+              "pairs_per_search": 0.020000479455338734
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 13932,
+              "unpaired_candidates": 130394,
+              "eligible_candidates": 979,
+              "compatible_candidates": 381,
+              "successful_pairs": 379,
+              "eligible_per_unpaired": 0.007508014172431247,
+              "compatible_per_eligible": 0.3891726251276813,
+              "pairs_per_search": 0.027203560149296584
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 41,
+            "unpaired_candidates": 38,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 30,
+            "ready_samples": 0,
+            "mean_visible_prey": 17.1,
+            "mean_attack_range_prey": 0.4,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": null
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.21323246948155627
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.24185658347524472
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 18000,
+              "HardSpecialist": 1000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 25000,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 6,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 526,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 1,
+              "searches": 854,
+              "unpaired_candidates": 1170,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": true,
+              "density": 2,
+              "searches": 229,
+              "unpaired_candidates": 705,
+              "eligible_candidates": 7,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": 0.009929078014184398,
+              "compatible_per_eligible": 0,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 190731,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 881719,
+              "unpaired_candidates": 1341047,
+              "eligible_candidates": 14919,
+              "compatible_candidates": 7673,
+              "successful_pairs": 7662,
+              "eligible_per_unpaired": 0.011124889731679799,
+              "compatible_per_eligible": 0.5143106106307394,
+              "pairs_per_search": 0.008689843362794722
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 668373,
+              "unpaired_candidates": 2568293,
+              "eligible_candidates": 21420,
+              "compatible_candidates": 11884,
+              "successful_pairs": 11829,
+              "eligible_per_unpaired": 0.008340169910520334,
+              "compatible_per_eligible": 0.5548085901027078,
+              "pairs_per_search": 0.017698201453380073
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 12823,
+              "unpaired_candidates": 111687,
+              "eligible_candidates": 450,
+              "compatible_candidates": 264,
+              "successful_pairs": 263,
+              "eligible_per_unpaired": 0.004029117086142523,
+              "compatible_per_eligible": 0.5866666666666667,
+              "pairs_per_search": 0.02051002105591515
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 1609,
+            "unpaired_candidates": 1875,
+            "eligible_candidates": 7,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": 0.0037333333333333333,
+            "compatible_per_eligible": 0,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 66,
+            "ready_samples": 17,
+            "mean_visible_prey": 14.318181818181818,
+            "mean_attack_range_prey": 0.2878787878787879,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": 0
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.2121437312407209
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.20249887999622262
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 13000,
+              "HardSpecialist": 10000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 15000,
+              "HardSpecialist": 10000,
+              "PreySpecialist": 0
+            }
+          ]
+        },
+        {
+          "seed": 7,
+          "density": [
+            {
+              "predator": true,
+              "density": 0,
+              "searches": 4,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 0,
+              "searches": 218368,
+              "unpaired_candidates": 0,
+              "eligible_candidates": 0,
+              "compatible_candidates": 0,
+              "successful_pairs": 0,
+              "eligible_per_unpaired": null,
+              "compatible_per_eligible": null,
+              "pairs_per_search": 0
+            },
+            {
+              "predator": false,
+              "density": 1,
+              "searches": 809760,
+              "unpaired_candidates": 1203136,
+              "eligible_candidates": 13886,
+              "compatible_candidates": 8012,
+              "successful_pairs": 8002,
+              "eligible_per_unpaired": 0.011541504867280174,
+              "compatible_per_eligible": 0.5769840126746363,
+              "pairs_per_search": 0.009881940327998419
+            },
+            {
+              "predator": false,
+              "density": 2,
+              "searches": 512650,
+              "unpaired_candidates": 1963015,
+              "eligible_candidates": 19715,
+              "compatible_candidates": 9939,
+              "successful_pairs": 9909,
+              "eligible_per_unpaired": 0.010043224325845701,
+              "compatible_per_eligible": 0.5041339081917322,
+              "pairs_per_search": 0.019328976884814202
+            },
+            {
+              "predator": false,
+              "density": 3,
+              "searches": 11466,
+              "unpaired_candidates": 103256,
+              "eligible_candidates": 609,
+              "compatible_candidates": 284,
+              "successful_pairs": 281,
+              "eligible_per_unpaired": 0.005897962346013791,
+              "compatible_per_eligible": 0.4663382594417077,
+              "pairs_per_search": 0.02450723879295308
+            }
+          ],
+          "predator_actual_search": {
+            "searches": 4,
+            "unpaired_candidates": 0,
+            "eligible_candidates": 0,
+            "compatible_candidates": 0,
+            "successful_pairs": 0,
+            "eligible_per_unpaired": null,
+            "compatible_per_eligible": null,
+            "pairs_per_search": 0
+          },
+          "predator_snapshot": {
+            "samples": 23,
+            "ready_samples": 0,
+            "mean_visible_prey": 21.608695652173914,
+            "mean_attack_range_prey": 0.43478260869565216,
+            "with_prey_and_compatible_mate_fraction": 0,
+            "ready_compatible_mates_per_ready_sample": null
+          },
+          "resources": [
+            {
+              "channel": "soft",
+              "top25_mean_mask_jaccard": 0.22311112504120115
+            },
+            {
+              "channel": "hard",
+              "top25_mean_mask_jaccard": 0.21418987240693602
+            }
+          ],
+          "diagnostic_longest_ticks": [
+            {
+              "width": 1000,
+              "SoftSpecialist": 14000,
+              "HardSpecialist": 3000,
+              "PreySpecialist": 0
+            },
+            {
+              "width": 5000,
+              "SoftSpecialist": 15000,
+              "HardSpecialist": 0,
+              "PreySpecialist": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "definitions": "World means are arithmetic over non-null per-world values, not pooled mating fractions. Predators use the unchanged carnivory>650/non-Grazer diagnostic. Nonpredator density controls retain Grazer/Crusher mouths. Actual searches exclude paired residents; snapshots occur after matching and do not model paired exclusions. All density rows are world-aware and retained; cross-lineage/window pooling is supplemental only. Zero denominators are null, never fabricated zero. Stock persistence bounds summarize each world/channel mean over top25% masks at1000-tick snapshots after5000; no causal mate-scarcity claim."
+}

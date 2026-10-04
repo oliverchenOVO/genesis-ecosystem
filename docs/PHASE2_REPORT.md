@@ -70,10 +70,44 @@ Initial reference slowdown16.46% exceeded15%, so it was preserved and followed b
 | 16289a1 | Paired unchanged-R3 eight-seed measurements and selection review |
 | 244e465 | Verified compressed per-world sidecars and streamed summaries |
 | 1900adf | Three resource-patch trials, complexity rejection and stronger channel-use review |
-| Closure evidence/report commit | Predator-only rejection, normal benchmark/profile and final report |
+| 5706a0b | Predator-only rejection, normal benchmark/profile and final report |
 
 Biological acceptance remains unmet. Formal rules4 calibration, qualified showcase/replay continuation, five native clean restarts and full controls/file/dirty-guard/WebView regression, installer UAT, merge/main CI/tag/private release remain gated. They are not claimed passed or executed. No final local production EXE/NSIS is rebuilt; protected existing binaries remain intact.
 
 Technical limits were isolated: large inline temporal JSON was addressed with lossless per-seed sidecars; manual isolated Git worktree fallback was used because the app project context names the parent directory; duplicate frontend tests from that temporary checkout were identified and the checkout was removed after source preservation (final default pnpm test runs24 original tests). Archived source patches were normalized and checked against their frozen base, including the corrected newline export for Predator60. Normal benchmark host variability remains unresolved. These issues did not stop the other bounded experiments.
 
 The next justified step is to inspect lineage/window-local resource profitability and predator prey/compatible-mate overlap from the preserved time series, then define one reversible movement/spatial-coupling hypothesis with another explicitly bounded paired matrix. Preserve MC/high-C before pursuing differentiation; do not reduce mating radius again, add reproductive walls, substitute diagnostic roles for acceptance, or strengthen feeding trade-offs without new evidence. No such further rule is implemented in this closure.
+
+**Spatial, mating and variability supplement**
+
+| Scenario | Mean world cross-lineage fraction | Mean world cross-habitat fraction | Mean world mating distance | Mean population CV | Mean resource CV |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| control | 51.34% | 47.03% | 11.9543 | 0.2689 | 0.9071 |
+| patch32 | 47.16% | 44.76% | 11.5108 | 0.2475 | 0.6417 |
+| patch64 | 49.66% | 46.44% | 12.0507 | 0.2891 | 0.8046 |
+| patch128 | 40.81% | 45.35% | 11.4857 | 0.2260 | 0.6783 |
+| predator60 | 51.76% | 47.63% | 12.1193 | 0.2672 | 0.7659 |
+
+These are arithmetic means of non-null world values; they are not pooled whole-matrix pair fractions. Every seed's original mating distance summary and gene-flow matrix are preserved. The sealed R3 formal100-world weighted fractions remain60.74% cross-lineage and49.64% cross-habitat, with mean distance12.91, median14 and p90 15.
+
+| Scenario | Soft stock top25% persistence | Hard stock top25% persistence | Predators: ready compatible mates per ready snapshot | Predators: snapshot prey + compatible-mate overlap |
+| --- | ---: | ---: | ---: | ---: |
+| control | 0.2107–0.2267 | 0.2082–0.2271 | 0.0000–0.0000 | 0.00%–0.00% |
+| patch32 | 0.1996–0.9978 | 0.2125–0.9948 | 0.0000–0.0000 | 0.00%–0.00% |
+| patch64 | 0.2018–0.2244 | 0.2040–0.2464 | 0.0000–0.0000 | 0.00%–0.00% |
+| patch128 | 0.2056–0.9949 | 0.1962–0.9907 | 0.0000–0.0000 | 0.00%–0.00% |
+| predator60 | 0.1994–0.2231 | 0.2025–0.2419 | 0.0000–0.0000 | 0.00%–0.00% |
+
+Persistence ranges are minima/maxima of each world's mean adjacent1000-tick top25% stock-mask Jaccard after warmup. Static productivity masks persist exactly in these runs. Predator ranges summarize per-world post-warmup samples, with zero-denominator worlds omitted and explicitly retained as null. Visibility uses actual perception/can_attack; attack-range prey is separately retained. Snapshot mate opportunities occur after matching and are not successful matching outcomes. [Full spatial/mating supplement](../benchmarks/phase2-r4-final-spatial-mating-review.json) retains every world and all four actual unpaired-neighbour density strata for predators and nonpredator Grazer/Crusher, including searches, eligible/compatible candidates, successes and denominators. These measurements distinguish local prey/mate co-occurrence from global prey abundance; they do not establish a single causal bottleneck or justify compatibility walls.
+
+Post-warmup actual predator matching searches (ticks >=5000) provide a separate check:
+
+| Scenario | Searches | Unpaired neighbour observations | Eligible candidates | Compatible candidates | Successful initiated pairs |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| control | 1806 | 938 | 1 | 0 | 0 |
+| patch32 | 5476 | 5055 | 3 | 0 | 0 |
+| patch64 | 3387 | 2684 | 61 | 0 | 0 |
+| patch128 | 4166 | 3683 | 10 | 0 | 0 |
+| predator60 | 5771 | 5028 | 8 | 0 | 0 |
+
+Counts sum all eight worlds and retain repeated observations; neighbours are not unique organisms. Warmup reproduction is excluded here and remains included in lifetime offspring budgets above. These actual searches support scarce reproductive eligibility/compatibility after warmup; post-matching snapshots alone cannot establish this. The near1 stock persistence maxima in patch32/128 include the naturally extinct, consumer-free world and must not be interpreted as a stable ecological niche.
