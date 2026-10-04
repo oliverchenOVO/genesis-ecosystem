@@ -1,0 +1,293 @@
+{
+  "simulation_version": 5,
+  "rules_revision": 3,
+  "rng_version": 1,
+  "save_format_version": 1,
+  "analysis_version": 5,
+  "scenario": "phase2-r3-final-ecological-differentiation",
+  "initial_environment": {
+    "regeneration": 4,
+    "temperature": 2000
+  },
+  "config": {
+    "mutation_multiplier": 100,
+    "population_limit": 2000,
+    "seed": 0,
+    "size": 512,
+    "starting_population": 50
+  },
+  "seeds": 100,
+  "ticks_per_seed": 100000,
+  "elapsed_seconds": 10891.9436458,
+  "technical_failures": 0,
+  "save_load_replay_continuation_verified": 100,
+  "stability_pass": true,
+  "survival": 99,
+  "natural_world_extinctions": 1,
+  "collapse_classification": 1,
+  "explosion": 0,
+  "classifications": {
+    "Collapse": 1,
+    "Explosion": 0,
+    "Oscillating": 0,
+    "Rich": 99,
+    "Sterile": 0,
+    "Healthy": 0
+  },
+  "speciation_worlds": 7,
+  "species_formed": 9,
+  "extinction_worlds": 5,
+  "extinct_species": 6,
+  "persistent_multicellular_worlds": 12,
+  "longest_multicellular_sampled_ticks": {
+    "min": 0,
+    "median": 0,
+    "p90": 1900,
+    "p95": 5100,
+    "max": 11700,
+    "mean": 729
+  },
+  "maximum_sampled_complexity": {
+    "min": 0,
+    "median": 328,
+    "p90": 385,
+    "p95": 400,
+    "max": 464,
+    "mean": 335.31
+  },
+  "median_species_complexity": {
+    "min": 0,
+    "median": 52,
+    "p90": 58,
+    "p95": 59,
+    "max": 63,
+    "mean": 50.19
+  },
+  "persistent_high_complexity_lineages": {
+    "min": 0,
+    "median": 0,
+    "p90": 1,
+    "p95": 2,
+    "max": 4,
+    "mean": 0.35
+  },
+  "persistent_high_complexity_worlds": 21,
+  "maximum_persistent_morphology_clusters": {
+    "min": 0,
+    "median": 1,
+    "p90": 1,
+    "p95": 1,
+    "max": 1,
+    "mean": 0.99
+  },
+  "multiple_persistent_morphology_cluster_worlds": 0,
+  "maximum_persistent_niche_clusters": {
+    "min": 0,
+    "median": 1,
+    "p90": 1,
+    "p95": 1,
+    "max": 1,
+    "mean": 0.99
+  },
+  "multiple_persistent_niche_cluster_worlds": 0,
+  "realized_feeding_roles": {
+    "maximum_simultaneous_persistent_roles": {
+      "min": 0,
+      "median": 1,
+      "p90": 1,
+      "p95": 1,
+      "max": 1,
+      "mean": 0.99
+    },
+    "differentiated_trophic_worlds": 0,
+    "persistent_prey_income_worlds": 0,
+    "longest_prey_consumer_sampled_ticks": {
+      "min": 0,
+      "median": 0,
+      "p90": 0,
+      "p95": 0,
+      "max": 0,
+      "mean": 0
+    },
+    "longest_resource_consumer_sampled_ticks": {
+      "min": 0,
+      "median": 95000,
+      "p90": 95000,
+      "p95": 95000,
+      "max": 95000,
+      "mean": 94050
+    }
+  },
+  "morphology_mean_distance": {
+    "min": 0,
+    "median": 0,
+    "p90": 0,
+    "p95": 2.2429022082018926,
+    "max": 8.070452155625658,
+    "mean": 0.3400105152471083
+  },
+  "final_morphology_max_distance": {
+    "min": 0,
+    "median": 0,
+    "p90": 0,
+    "p95": 0,
+    "max": 12,
+    "mean": 0.36
+  },
+  "morphology_cluster_mean": {
+    "min": 0,
+    "median": 1,
+    "p90": 1,
+    "p95": 1,
+    "max": 1,
+    "mean": 0.99
+  },
+  "final_morphology_variance": [
+    {
+      "min": 0,
+      "median": 21138,
+      "p90": 40332,
+      "p95": 47932,
+      "max": 60813,
+      "mean": 23499.88
+    },
+    {
+      "min": 0,
+      "median": 5828,
+      "p90": 9830,
+      "p95": 10762,
+      "max": 14070,
+      "mean": 6203.18
+    },
+    {
+      "min": 0,
+      "median": 2408,
+      "p90": 3842,
+      "p95": 4340,
+      "max": 7451,
+      "mean": 2385.09
+    },
+    {
+      "min": 0,
+      "median": 16,
+      "p90": 19,
+      "p95": 20,
+      "max": 22,
+      "mean": 15.57
+    },
+    {
+      "min": 0,
+      "median": 6866,
+      "p90": 11077,
+      "p95": 11287,
+      "max": 15170,
+      "mean": 7006.61
+    },
+    {
+      "min": 0,
+      "median": 376,
+      "p90": 499,
+      "p95": 545,
+      "max": 698,
+      "mean": 381.23
+    }
+  ],
+  "niche_mean_distance": {
+    "min": 0,
+    "median": 0,
+    "p90": 0,
+    "p95": 6.757097791798107,
+    "max": 24.81808622502629,
+    "mean": 0.958590956887487
+  },
+  "final_niche_max_distance": {
+    "min": 0,
+    "median": 0,
+    "p90": 0,
+    "p95": 0,
+    "max": 13,
+    "mean": 0.32
+  },
+  "coexistence_ticks": {
+    "min": 2322,
+    "median": 12730,
+    "p90": 18468,
+    "p95": 20140,
+    "max": 25428,
+    "mean": 13234.19
+  },
+  "predator_prey_ratio": {
+    "min": 0,
+    "median": 0.00011585042320159596,
+    "p90": 0.00017683240119735185,
+    "p95": 0.00018623646772960217,
+    "max": 0.00023878408920529319,
+    "mean": 0.00012032075553284581
+  },
+  "predator_starvation_deaths": 836,
+  "predations": 15855,
+  "population_cv": {
+    "min": 0,
+    "median": 0.21464853972476822,
+    "p90": 0.26357183584905064,
+    "p95": 0.27355244447066407,
+    "max": 0.2988803790042284,
+    "mean": 0.2170815635491241
+  },
+  "resource_cv": {
+    "min": 0.001378735837251185,
+    "median": 0.8875655825903283,
+    "p90": 1.22034945331778,
+    "p95": 1.291297015338763,
+    "max": 1.6435673179897774,
+    "mean": 0.9258168471726713
+  },
+  "final_population": {
+    "min": 0,
+    "median": 1234,
+    "p90": 1302,
+    "p95": 1316,
+    "max": 1336,
+    "mean": 1220.97
+  },
+  "birth_death_turnover_per_organism_tick": {
+    "min": 0.0012369626119029288,
+    "median": 0.0013498881761220749,
+    "p90": 0.0013982681907019794,
+    "p95": 0.0014441648527807017,
+    "max": 0.02292,
+    "mean": 0.0015625814048217934
+  },
+  "species_turnover_per_tick": {
+    "min": 0,
+    "median": 0,
+    "p90": 0,
+    "p95": 0.00001,
+    "max": 0.00004,
+    "mean": 0.0000015
+  },
+  "safety_ceiling_worlds": 0,
+  "safety_ceiling_fraction": {
+    "min": 0,
+    "median": 0,
+    "p90": 0,
+    "p95": 0,
+    "max": 0,
+    "mean": 0
+  },
+  "innovation_species_totals": [
+    0,
+    0,
+    1,
+    0,
+    0
+  ],
+  "innovation_worlds": [
+    0,
+    0,
+    1,
+    0,
+    0
+  ],
+  "definitions": "Distributions are across completed worlds. Pair distances include sampled single-species zero values. Multicellular persistence: >=8 and >=25% living multi-unit organisms for1000 consecutive sampled ticks. High complexity: lineage >=8 members, mean C>=200 for1000 ticks. Niche persistence: same representative ID and drift<150 for1000 ticks. Analysis is read-only; see PHASE2_SIMULATION.md."
+}

@@ -1,0 +1,46 @@
+{
+  "source_commit": "831f8617d19714d856d653278e244e1f9becaa28",
+  "rust_normal_workspace_tests": {
+    "passed": 75,
+    "failed": 0,
+    "suite_counts": [2, 10, 6, 50, 7],
+    "local_log": "artifacts/phase2-r3-optimized-normal-regression.log",
+    "also_verified_on_windows_ci": true
+  },
+  "rust_all_features_workspace_tests": {
+    "passed": 81,
+    "failed": 0,
+    "suite_counts": [2, 10, 7, 55, 7],
+    "local_log": "artifacts/phase2-r3-optimized-all-features-regression.log"
+  },
+  "frontend_tests": {"passed": 24, "failed": 0},
+  "node_evidence_tests": {"passed": 13, "failed": 0},
+  "rust_format": "PASS",
+  "rust_workspace_clippy_all_targets_all_features": "PASS",
+  "frontend_format": "PASS",
+  "frontend_lint": "PASS",
+  "frontend_typecheck": "PASS",
+  "production_frontend_build": "PASS",
+  "current_golden_suite": {"passed": 7, "failed": 0},
+  "protected_v4_golden_ci": {"passed": 4, "failed": 0},
+  "current_r3_golden_matches_frozen_d_probe_checkpoints": 6,
+  "archived_r2_golden_git_blob": "da2e3b0427b8efa077bb2a7674a9ce567cac91f4",
+  "tauri_build": "PASS (Windows CI, build only)",
+  "nsis_build": "PASS (Windows CI, build only)",
+  "ci": {
+    "run_id": 37157748106,
+    "url": "https://github.com/oliverchenOVO/genesis-ecosystem/actions/runs/37157748106",
+    "conclusion": "success",
+    "jobs": {"core": "success", "windows": "success", "legacy-v4": "success"},
+    "downloaded_installer": "artifacts/phase2-r3-ci-build/GENESIS_0.2.0_x64-setup.exe",
+    "installer_sha256": "883875DD6FA40A6E2FA346FE1D18309EE50CBF21114174E9092D26382668A1FA",
+    "installer_uat": "NOT PERFORMED; BUILD ONLY",
+    "raw_exe": "Compiled by CI; not included in the uploaded artifact; no raw EXE hash claimed"
+  },
+  "protected_main": "216a92ffca8e66e31789fc0a0e0eaf5085f13d76",
+  "protected_v0_1_0_target": "ed6c77d4b876b859ed7a4b1d665f7bf9054b9096",
+  "protected_phase1_exe_sha256": "16FB27A061D6F817BDC68FE26897A6C69E1814FDB2110AD23C0A623ABE3C56C9",
+  "protected_phase1_installer_sha256": "EF09F5B0CEDACD1C5B62DF12776A4FF747E398A574E808054F51765821C115F4",
+  "repository_private": true,
+  "note": "Code-head validation is separate from biological acceptance, native UAT and any later evidence-only commit CI. No merge, tag or release is authorized by a build-only PASS."
+}

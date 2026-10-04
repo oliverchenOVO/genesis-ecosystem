@@ -1,0 +1,54 @@
+{
+  "source_commit": "831f8617d19714d856d653278e244e1f9becaa28",
+  "executable": "artifacts/phase2-r3-final-calibration.exe",
+  "executable_sha256": "3B01B8B2BA0478D1F7CBCBA838E2E05C5F27EB238864573F725422E6649A53BF",
+  "simulation_version": 5,
+  "rules_revision": 3,
+  "rng_version": 1,
+  "save_envelope_version": 1,
+  "analysis_version": 5,
+  "ecology_diagnostic_version": 4,
+  "features": [
+    "viability"
+  ],
+  "seeds": 100,
+  "first_seed": 0,
+  "ticks": 100000,
+  "workers": 8,
+  "population": 50,
+  "population_limit": 2000,
+  "world_size": 512,
+  "mutation_multiplier": 100,
+  "temperature": 2000,
+  "regeneration": 4,
+  "started_at": "2026-10-04T06:19:20.9772210+08:00",
+  "protected_r2_commit": "b193c9b13ea000284bcc0daffb8120e5d07a9655",
+  "completed_at": "2026-10-04T01:22:59.425Z",
+  "elapsed_seconds": 10891.9436458,
+  "exit_code": 0,
+  "json_jsonl_full_row_matches": 100,
+  "frozen_d_long_hash_matches": 8,
+  "cohort_energy_population_closures": 900,
+  "temporal_mating_gene_flow_energy_closure": true,
+  "save_load_full_replay_independent_1000_tick_continuations": 100,
+  "files": [
+    {
+      "source": "artifacts/phase2-r3-final-calibration.json",
+      "destination": "benchmarks/phase2-r3-final-calibration.json.gz",
+      "raw_bytes": 217627394,
+      "compressed_bytes": 40371118,
+      "raw_sha256": "fe7acd849c823c2f9db503e4b1668341949dfafdd60d8f565cf76bf11561b646",
+      "compressed_sha256": "e5be0ed493f2e72c119def4493f60dac61ad57c3493daa038a6db8ace223bb60",
+      "gzip_roundtrip_sha256_verified": true
+    },
+    {
+      "source": "artifacts/phase2-r3-final-calibration.jsonl",
+      "destination": "benchmarks/phase2-r3-final-calibration.jsonl.gz",
+      "raw_bytes": 217626820,
+      "compressed_bytes": 40366020,
+      "raw_sha256": "7d30235377320142bdad66dd064a1043ea21e94ff6bbed7c50ef722240c50c99",
+      "compressed_sha256": "dfff2e20e68b52e2ff2be78aa5bd0d84c456940fa54f9513f30ce03fb72defd0",
+      "gzip_roundtrip_sha256_verified": true
+    }
+  ]
+}

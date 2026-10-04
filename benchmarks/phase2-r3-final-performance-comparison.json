@@ -1,0 +1,31 @@
+{
+  "source_commit": "831f8617d19714d856d653278e244e1f9becaa28",
+  "profile_executable_sha256": "83BC8B93F3B241DA2D5198BB7766CC0BAFDD1B110FD382D39A69C9235A1AAE01",
+  "context": "Sequential same-host final R2 then R3; calibration/audit/compiler/native-app task loads stopped; external host load uncontrolled. Profile run after all normal scenarios, only where measured slowdown exceeds30%.",
+  "scenarios": [
+    {
+      "scenario": "reference-200",
+      "r2_tps": 5894.054859009905,
+      "r3_tps": 3567.448191109341,
+      "fractional_slowdown": 0.3947378712201861,
+      "profile_required": true,
+      "profile_json": "benchmarks/phase2-r3-final-profile-reference-200.json",
+      "profile_phases": "benchmarks/phase2-r3-final-profile-reference-200-phases.json",
+      "profile_world_hash_match": true
+    },
+    {
+      "scenario": "medium-1000",
+      "r2_tps": 832.3077013606392,
+      "r3_tps": 586.5427319079399,
+      "fractional_slowdown": 0.2952813833765179,
+      "profile_required": false
+    },
+    {
+      "scenario": "density-5000",
+      "r2_tps": 89.3660164337223,
+      "r3_tps": 82.65501872305617,
+      "fractional_slowdown": 0.07509563454295054,
+      "profile_required": false
+    }
+  ]
+}

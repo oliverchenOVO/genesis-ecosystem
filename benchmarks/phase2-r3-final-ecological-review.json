@@ -1,0 +1,103 @@
+{
+  "source_commit": "831f8617d19714d856d653278e244e1f9becaa28",
+  "gates": {
+    "stability": true,
+    "no_cap_dominance": true,
+    "multicellular": true,
+    "high_C": true,
+    "morphology": false,
+    "niche": false,
+    "feeding_roles": false,
+    "prey_income": false
+  },
+  "biological_acceptance_pass": false,
+  "natural_extinction_seeds": [
+    43
+  ],
+  "persistent_high_C_world_lineage_pairs": 35,
+  "mating": {
+    "pairs": 4413350,
+    "cross_lineage_pairs": 2680774,
+    "cross_habitat_pairs": 2190979,
+    "weighted_cross_lineage_fraction": 0.6074238390338405,
+    "weighted_cross_habitat_fraction": 0.49644351796254543,
+    "pooled_integer_floor_distance_mean": 12.908427838263451,
+    "pooled_distance_median": 14,
+    "pooled_distance_p90": 15,
+    "distance_histogram": {
+      "0": 36283,
+      "1": 65774,
+      "2": 52062,
+      "3": 34310,
+      "4": 33216,
+      "5": 44702,
+      "6": 33147,
+      "7": 48759,
+      "8": 57091,
+      "9": 75121,
+      "10": 104512,
+      "11": 148763,
+      "12": 283353,
+      "13": 557659,
+      "14": 1410710,
+      "15": 1260268,
+      "16": 167620
+    }
+  },
+  "overlaps": {
+    "spatial": {
+      "worlds": 99,
+      "min": 0.2611249323069822,
+      "max": 0.5343886291802982,
+      "mean": 0.3720213039967763,
+      "definition": "Unweighted mean of per-world top16 persistent-lineage pair histogram-intersection means; empty worlds excluded."
+    },
+    "habitat": {
+      "worlds": 99,
+      "min": 0.644717719335056,
+      "max": 0.8799022606401748,
+      "mean": 0.794625946593701,
+      "definition": "Unweighted mean of per-world top16 persistent-lineage pair histogram-intersection means; empty worlds excluded."
+    },
+    "feeding_hardness": {
+      "worlds": 99,
+      "min": 0.8227010574553196,
+      "max": 0.9404901547802189,
+      "mean": 0.8912081221982705,
+      "definition": "Unweighted mean of per-world top16 persistent-lineage pair histogram-intersection means; empty worlds excluded."
+    },
+    "feeding_productivity": {
+      "worlds": 99,
+      "min": 0.8299129283200928,
+      "max": 0.9416938495286609,
+      "mean": 0.8919233504301333,
+      "definition": "Unweighted mean of per-world top16 persistent-lineage pair histogram-intersection means; empty worlds excluded."
+    },
+    "realized_energy_sources": {
+      "worlds": 99,
+      "min": 0.822494532865523,
+      "max": 0.9636227649364436,
+      "mean": 0.9047529960701577,
+      "definition": "Unweighted mean of per-world top16 persistent-lineage pair histogram-intersection means; empty worlds excluded."
+    }
+  },
+  "post_warmup_resource_channels": {
+    "active_worlds": 99,
+    "active_windows": 1881,
+    "windows_with_unused_environmental_channel": [],
+    "worlds_with_permanently_unused_environmental_channel": [],
+    "definition": "Windows5001..10000 through95001..100000. Active means positive credited feeding energy; natural extinction with no post-warmup feeding is excluded."
+  },
+  "requested_hunting_movement_energy_by_mouth": [
+    0,
+    51202,
+    336984
+  ],
+  "predator_like_realized_prey_fraction": 0.8959289854173628,
+  "analytical_limits": [
+    "Legacy species niche vectors combine resource units and prey mass; they have no direct soft/hard energy axis.",
+    "Ecology4 retains temporal mouth-channel energy and lineage occupancy, but only lifetime lineage feeding channels; no continuous1000-tick per-lineage diet proof is claimed.",
+    "Predator-like and mouth cohorts describe inherited traits; prey-income acceptance separately requires sustained actual credited prey energy."
+  ],
+  "recovered_pipeline_issue": "The post-processing process-liveness watcher raced the parent-shell exit-receipt write. Formal process exit0 and all100 rows were already intact. Only post-processing was restarted; no world rerun or rule change."
+}

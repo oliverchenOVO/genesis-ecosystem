@@ -1,0 +1,6 @@
+{
+  "peak_working_set_bytes": 9121792,
+  "measurement": "Windows process peak working set sampled every 250ms; includes replay verification",
+  "context": "Sequential scenarios after formal calibration and evidence audit have completed. No task compilers or native app are running. R2 then R3 are measured on the same host; external host load is not controlled.",
+  "executable_sha256": "63B913E80A964D2E5D7CCA3339AE0102CB38C86BB7B861B32691A070FF2D22DA"
+}
