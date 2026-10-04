@@ -3029,7 +3029,9 @@ dependencies = [
 name = "sim-benchmark"
 version = "0.2.0"
 dependencies = [
+ "flate2",
  "serde_json",
+ "sha2",
  "sim-core",
 ]
 

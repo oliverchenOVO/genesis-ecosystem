@@ -9,6 +9,8 @@ use sim_core::{
 use sim_core::{Config, World};
 use std::time::Instant;
 mod calibration;
+#[cfg(feature = "viability")]
+mod diagnostic_sidecar;
 
 fn argument(name: &str, default: u64) -> u64 {
     let args: Vec<_> = std::env::args().collect();

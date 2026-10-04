@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import { pathToFileURL } from 'node:url'
-import { readCalibration } from './read-calibration.mjs'
+import { readCalibration, readTemporal } from './read-calibration.mjs'
 import { resourceCoherence, correlation } from './resource-coherence.mjs'
 const ratio=(n,d)=>d>0?n/d:null
 const roles=['SoftSpecialist','HardSpecialist','PreySpecialist','Mixed']
@@ -85,10 +85,10 @@ function windows(t,width,ticks) {
   }
   return result
 }
-export function summarizeTemporal(run) {
+export function summarizeTemporal(run, {sourcePath} = {}) {
   if(run.failures!==0||run.results.length!==run.seeds||new Set(run.results.map(r=>r.seed)).size!==run.seeds)throw Error('Incomplete temporal run')
   const worlds=run.results.map(r=> {
-    const e=r.phase2?.viability?.ecology,t=e?.r4_temporal
+    const e=r.phase2?.viability?.ecology,t=readTemporal(r,sourcePath)
     if(!t||t.version!==1||t.sample_interval!==100||t.budget_interval!==1000||!Array.isArray(t.individual_fitness_1000)||!Array.isArray(t.mate_search_density)||r.ticks!==run.ticks_per_seed||!r.phase2.save_load_replay_verified||r.phase2.rng_continuation_ticks!==1000||r.ticks%1000)throw Error('Unverified temporal result')
     const expected=Array.from({length:r.ticks/100+1},(_,i)=>String(i*100))
     if(!Array.isArray(t.resource_snapshots)||t.resource_snapshots.length!==r.ticks/1000+1||t.resource_snapshots.some((s,i)=>s.tick!==i*1000))throw Error('Incomplete resource snapshots')
@@ -143,8 +143,25 @@ export function summarizeTemporal(run) {
   return {version:1,rules_revision:run.rules_revision,analysis_version:run.analysis_version,seeds:run.seeds,ticks_per_seed:run.ticks_per_seed,worlds,
     definitions:'Diagnostic roles: soft>=70%, hard>=70%, prey>=50%, otherwise Mixed; zero credited income NoIncome. Qualification requires>=8 at every100-tick endpoint of full disjoint windows. Role gaps and missing windows break streaks. Warmup excludes first5000ticks. All original biological gates unchanged. Window fitness tracks completed deaths separately from censored living organisms. Snapshot eligibility opportunities are not actual matching attempts. Spatial masks include all positive cells tied at quantile cutoff; uniform fields have null autocorrelation. Correlation length is first axial16-unit lag with Pearson<=exp(-1), capped at128 and reported censored if not crossed. No movement path length inference.'}
 }
+export function writeTemporalSummary(run, sourcePath, outputPath) {
+  if(run.failures!==0||run.results.length!==run.seeds||new Set(run.results.map(r=>r.seed)).size!==run.seeds)
+    throw Error('Incomplete temporal run')
+  // Exclusive output and sequential worlds avoid one multi-gigabyte JSON string.
+  const fd=fs.openSync(outputPath,'wx')
+  try {
+    const {worlds, ...metadata}=summarizeTemporal({...run,seeds:0,results:[]},{sourcePath})
+    metadata.seeds=run.seeds
+    fs.writeSync(fd,JSON.stringify(metadata).slice(0,-1)+',"worlds":[')
+    for(let i=0;i<run.results.length;i++) {
+      const result=summarizeTemporal({...run,seeds:1,results:[run.results[i]]},{sourcePath})
+      fs.writeSync(fd,(i?',':'')+JSON.stringify(result.worlds[0]))
+    }
+    fs.writeSync(fd,']}\n')
+    fs.fsyncSync(fd)
+  } finally { fs.closeSync(fd) }
+}
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href) {
-  const result=summarizeTemporal(readCalibration(process.argv[2]))
-  if(process.argv[3])fs.writeFileSync(process.argv[3],JSON.stringify(result,null,2)+'\n')
-  else console.log(JSON.stringify(result,null,2))
+  const run=readCalibration(process.argv[2])
+  if(process.argv[3])writeTemporalSummary(run,process.argv[2],process.argv[3])
+  else console.log(JSON.stringify(summarizeTemporal(run,{sourcePath:process.argv[2]}),null,2))
 }

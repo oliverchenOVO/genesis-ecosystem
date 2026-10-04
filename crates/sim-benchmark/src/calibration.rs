@@ -507,6 +507,20 @@ pub fn run() -> Result<(), String> {
     }
     .validate()?;
     let sweep = args.iter().any(|a| a == "--temperature-sweep");
+    let diagnostic_path = val("--diagnostics-dir");
+    if diagnostic_path.is_some() && !cfg!(feature = "viability") {
+        return Err("--diagnostics-dir requires the viability feature".into());
+    }
+    #[cfg(feature = "viability")]
+    let diagnostic_directory = diagnostic_path
+        .map(|path| {
+            let journal = val("--output").ok_or("--diagnostics-dir requires --output journal")?;
+            super::diagnostic_sidecar::prepare(
+                std::path::Path::new(&path),
+                std::path::Path::new(&journal),
+            )
+        })
+        .transpose()?;
     let progress = val("--output")
         .map(std::fs::File::create)
         .transpose()
@@ -519,6 +533,8 @@ pub fn run() -> Result<(), String> {
         let next = next.clone();
         let config = config.clone();
         let progress = progress.clone();
+        #[cfg(feature = "viability")]
+        let diagnostic_directory = diagnostic_directory.clone();
         handles.push(std::thread::spawn(move || -> Result<Vec<Value>, String> {
             let mut results = Vec::new();
             loop {
@@ -542,11 +558,23 @@ pub fn run() -> Result<(), String> {
                         sweep,
                     )
                 });
-                let result = match checked {
+                #[allow(unused_mut)]
+                let mut result = match checked {
                     Ok(Ok(v)) => v,
                     Ok(Err(error)) => json!({"seed":seed,"error":error}),
                     Err(_) => json!({"seed":seed,"error":"panic"}),
                 };
+                #[cfg(feature = "viability")]
+                if let Some(directory) = &diagnostic_directory {
+                    if result.get("error").is_none() {
+                        if let Err(error) =
+                            super::diagnostic_sidecar::detach(&mut result, directory)
+                        {
+                            result["error"] =
+                                json!(format!("Temporal diagnostic I/O failed: {error}"));
+                        }
+                    }
+                }
                 if let Some(file) = &progress {
                     let mut f = file.lock().map_err(|e| e.to_string())?;
                     writeln!(f, "{result}").map_err(|e| e.to_string())?;

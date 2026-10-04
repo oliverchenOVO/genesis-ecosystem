@@ -1,0 +1,41 @@
+{
+  "authority": {
+    "simulation": 5,
+    "rules": 3,
+    "rng": 1,
+    "envelope": 1,
+    "analysis": 5
+  },
+  "normal_rust_tests": 75,
+  "all_features_rust_tests": 84,
+  "frontend_authoritative_tests": 24,
+  "node_tests": 25,
+  "build": true,
+  "fmt": true,
+  "clippy": true,
+  "frontend_format_lint_typecheck": true,
+  "smoke": {
+    "seed": 0,
+    "ticks": 1000,
+    "world_hash": "b21177ecbc60aacfb3425b32ec123e478ebd5233d09cd19b0c593ff13e9c5aef",
+    "failures": 0,
+    "save_load_full_replay": true,
+    "continuation": 1000,
+    "complete_temporal_summary_matches_frozen_fixture": true,
+    "reference": {
+      "path": "phase2-r4-sidecar-smoke-worlds/seed-0-tick-1000-temporal1.json.gz",
+      "seed": 0,
+      "sha256": "18dad27c0d99d4303bb920f2ae91d3f38ef49a533ee72ce9d2f7ed4a0bc388fe",
+      "tick": 1000,
+      "uncompressed_bytes": 79862,
+      "version": 1
+    }
+  },
+  "r3_rejection_fixture": {
+    "path": "fixtures/phase2-r3-prerelease-rejection.genesis",
+    "sha256": "ea54d187ac4b0e15a8dfb93e9129ad9239365ebbd7674d12c91fc910ff78d2f3",
+    "generator": "artifacts/phase2-r3-optimized-normal.exe",
+    "generator_sha256": "c245d1c559915499317babc7d4a5f68be12925b2be4305271b124d316880df64"
+  },
+  "notes": "Frontend default discovery counted24 original tests plus24 duplicate tests in the isolated probe checkout. Explicit artifacts/** exclusion verified all24 authoritative frontend tests separately. This is diagnostic I/O validation, not biological or normal-performance acceptance."
+}

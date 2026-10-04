@@ -1,9 +1,56 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { dietRole,rolePersistence,summarizeTemporal } from './summarize-temporal-ecology.mjs'
+import { dietRole,rolePersistence,summarizeTemporal,writeTemporalSummary } from './summarize-temporal-ecology.mjs'
 import { fieldPatches,patchPersistence,correlation } from './resource-coherence.mjs'
-import { readCalibration } from './read-calibration.mjs'
+import { readCalibration,readTemporal } from './read-calibration.mjs'
+import fs from 'node:fs'
+import os from 'node:os'
+import path from 'node:path'
+import { gzipSync } from 'node:zlib'
+import { createHash } from 'node:crypto'
 const fixture=()=>readCalibration(new URL('../fixtures/ecology-r4-observer-smoke.json.gz',import.meta.url))
+function withSidecar(check) {
+  const root=fs.mkdtempSync(path.join(os.tmpdir(),'genesis-evidence-'))
+  const run=fixture(),r=run.results[0],e=r.phase2.viability.ecology
+  const original=structuredClone(run),raw=Buffer.from(JSON.stringify(e.r4_temporal))
+  const file=path.join(root,'world.json.gz'),source=path.join(root,'run.json')
+  fs.writeFileSync(file,gzipSync(raw))
+  delete e.r4_temporal
+  e.r4_temporal_ref={version:1,path:'world.json.gz',seed:r.seed,tick:r.ticks,
+    sha256:createHash('sha256').update(raw).digest('hex'),uncompressed_bytes:raw.length}
+  try { check({run,r,e,original,raw,file,source,root}) }
+  finally {
+    for(const name of fs.readdirSync(root))fs.unlinkSync(path.join(root,name))
+    fs.rmdirSync(root)
+  }
+}
+test('compressed per-world evidence and streamed summaries preserve all ledgers',()=>withSidecar(({run,original,source,root})=> {
+  assert.deepEqual(summarizeTemporal(run,{sourcePath:source}),summarizeTemporal(original))
+  const output=path.join(root,'summary.json')
+  writeTemporalSummary(run,source,output)
+  assert.deepEqual(JSON.parse(fs.readFileSync(output,'utf8')),summarizeTemporal(original))
+  const before=fs.readFileSync(output)
+  assert.throws(()=>writeTemporalSummary(run,source,output),/EEXIST/)
+  assert.deepEqual(fs.readFileSync(output),before)
+}))
+test('temporal references reject corruption, swapped worlds and escaping paths',()=>withSidecar(({r,e,raw,file,source})=> {
+  const ref=e.r4_temporal_ref
+  assert.throws(()=>readTemporal(r),/identity/)
+  ref.seed++
+  assert.throws(()=>readTemporal(r,source),/identity/)
+  ref.seed--
+  ref.path='../world.json.gz'
+  assert.throws(()=>readTemporal(r,source),/path/)
+  ref.path='world.json.gz'
+  ref.uncompressed_bytes++
+  assert.throws(()=>readTemporal(r,source),/integrity/)
+  ref.uncompressed_bytes--
+  const altered=Buffer.from(raw);altered[20]^=1
+  fs.writeFileSync(file,gzipSync(altered))
+  assert.throws(()=>readTemporal(r,source),/integrity/)
+  fs.writeFileSync(file,Buffer.from('invalid gzip'))
+  assert.throws(()=>readTemporal(r,source))
+}))
 test('realized roles honor exact energy boundaries and zero income',()=> {
   assert.equal(dietRole([70,30,0]),'SoftSpecialist')
   assert.equal(dietRole([30,70,0]),'HardSpecialist')
