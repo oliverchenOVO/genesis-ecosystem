@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "authority": {
+    "simulation": 5,
+    "rules": 3,
+    "rng": 1,
+    "envelope": 1,
+    "analysis": 5
+  },
+  "temporal_diagnostic_version": 1,
+  "tests": {
+    "rust_normal": 75,
+    "rust_all_features": 83,
+    "frontend": 24,
+    "node": 23
+  },
+  "rust_logs": [
+    {
+      "file": "artifacts/phase2-r4-normal-tests.log",
+      "passed": 75,
+      "suite_counts": [
+        2,
+        10,
+        6,
+        50,
+        7,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "artifacts/phase2-r4-all-features-tests.log",
+      "passed": 83,
+      "suite_counts": [
+        2,
+        10,
+        7,
+        57,
+        7,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "checks": {
+    "rust_fmt": "PASS",
+    "workspace_all_features_clippy": "PASS",
+    "frontend_format": "PASS",
+    "frontend_lint": "PASS",
+    "frontend_typecheck": "PASS",
+    "frontend_build": "PASS",
+    "rust_benchmark_build": "PASS"
+  },
+  "binaries": [
+    {
+      "file": "artifacts/phase2-r4-diagnostics-control.exe",
+      "sha256": "310c216256c1ccb04b4d81d636a57c761a7d51aa22f3c169c4679b7df58acefd"
+    },
+    {
+      "file": "artifacts/phase2-r4-diagnostics-normal.exe",
+      "sha256": "191110bdc2b452f500a2ba333a0991bac017907c1f1ac5c07abf916bd0cdb439"
+    }
+  ],
+  "smoke": [
+    {
+      "scenario": "phase2-r4-r3-normal-smoke",
+      "ticks": 1000,
+      "world_hash": "b21177ecbc60aacfb3425b32ec123e478ebd5233d09cd19b0c593ff13e9c5aef",
+      "save_load_replay_verified": true,
+      "continuation_ticks": 1000,
+      "ticks_per_second": 1047.8662143098077
+    },
+    {
+      "scenario": "phase2-r4-current-normal-smoke",
+      "ticks": 1000,
+      "world_hash": "b21177ecbc60aacfb3425b32ec123e478ebd5233d09cd19b0c593ff13e9c5aef",
+      "save_load_replay_verified": true,
+      "continuation_ticks": 1000,
+      "ticks_per_second": 1651.3746620668176
+    },
+    {
+      "scenario": "phase2-r4-diagnostics-smoke",
+      "ticks": 1000,
+      "world_hash": "b21177ecbc60aacfb3425b32ec123e478ebd5233d09cd19b0c593ff13e9c5aef",
+      "save_load_replay_verified": true,
+      "continuation_ticks": 1000,
+      "ticks_per_second": 2164.8011132273245
+    }
+  ],
+  "performance_context": "Smoke1000 only, differing host load including concurrent4-worker stage-A diagnostics. Not reference-200 performance acceptance or a speedup claim.",
+  "stage_a_8x50000": "RUNNING",
+  "rules4_candidates": "NOT STARTED; diagnostic evidence required first",
+  "biological_acceptance": "R3 formal remains FAIL; no R4 formal calibration or native UAT"
+}

@@ -92,6 +92,7 @@ struct WindowOccupancy {
 }
 thread_local! { static ACTIVE: RefCell<Option<Collector>> = const { RefCell::new(None) }; }
 pub fn tick(tick: u64) {
+    crate::temporal_ecology::tick(tick);
     ACTIVE.with(|a| {
         if let Some(c) = a.borrow_mut().as_mut() {
             c.tick = tick;
@@ -99,6 +100,7 @@ pub fn tick(tick: u64) {
     });
 }
 pub fn budget(o: &Organism, f: &mut impl FnMut(&mut crate::viability::Cohort)) {
+    crate::temporal_ecology::budget(o, f);
     ACTIVE.with(|a| {
         if let Some(c) = a.borrow_mut().as_mut() {
             let budget = c.mouth_budgets.entry(mouth(o)).or_default();
@@ -152,6 +154,7 @@ pub fn start(world: &World) {
         );
     }
     ACTIVE.with(|a| *a.borrow_mut() = Some(c));
+    crate::temporal_ecology::start(world);
     sample(world);
 }
 pub fn birth(o: &Organism, terrain: &Cell, a: &Organism, b: &Organism) {
@@ -195,6 +198,7 @@ pub fn feeding(
     if energy <= 0 {
         return;
     }
+    crate::temporal_ecology::feeding(o, channel, energy);
     ACTIVE.with(|a| {
         if let Some(c) = a.borrow_mut().as_mut() {
             c.windows
@@ -227,6 +231,7 @@ pub fn feeding(
     });
 }
 pub fn mating(a: &Organism, b: &Organism, ca: &Cell, cb: &Cell) {
+    crate::temporal_ecology::successful_pair(a);
     ACTIVE.with(|active| {
         if let Some(c) = active.borrow_mut().as_mut() {
             let w = c
@@ -263,6 +268,9 @@ pub fn mating(a: &Organism, b: &Organism, ca: &Cell, cb: &Cell) {
     });
 }
 pub fn sample(world: &World) {
+    if world.state.tick > 0 {
+        crate::temporal_ecology::sample(world);
+    }
     ACTIVE.with(|a| {
         let mut active = a.borrow_mut();
         let Some(c) = active.as_mut() else {
@@ -377,6 +385,7 @@ fn distances(h: &BTreeMap<u32, u64>) -> serde_json::Value {
     serde_json::json!({"samples":n,"mean":h.iter().map(|(d,k)| u64::from(*d)*k).sum::<u64>() as f64/n as f64,"p90":p90})
 }
 pub fn finish() -> serde_json::Value {
+    let temporal = crate::temporal_ecology::finish();
     let c = ACTIVE
         .with(|a| a.borrow_mut().take())
         .expect("ecological observer started");
@@ -431,7 +440,7 @@ pub fn finish() -> serde_json::Value {
             .map(|((a, b), n)| serde_json::json!({"a":a,"b":b,"count":n}))
             .collect::<Vec<_>>()
     };
-    serde_json::json!({"version":4,"channel_names":["soft","hard","prey"],"requested_hunting_movement_by_mouth":c.requested_hunting_movement_by_mouth,"requested_hunting_movement_by_lineage":c.requested_hunting_movement_by_lineage,"windows_5000_ticks":c.windows,"samples":c.samples,"lineages":exposure(&c.lineages),"species":exposure(&c.species),"mouth_budgets":c.mouth_budgets,"lineage_budgets":c.lineage_budgets,"gene_flow_matrix":matrix,
+    serde_json::json!({"version":4,"r4_temporal":temporal,"channel_names":["soft","hard","prey"],"requested_hunting_movement_by_mouth":c.requested_hunting_movement_by_mouth,"requested_hunting_movement_by_lineage":c.requested_hunting_movement_by_lineage,"windows_5000_ticks":c.windows,"samples":c.samples,"lineages":exposure(&c.lineages),"species":exposure(&c.species),"mouth_budgets":c.mouth_budgets,"lineage_budgets":c.lineage_budgets,"gene_flow_matrix":matrix,
         "feeding":c.feeding.iter().map(|((lineage,species,mouth),f)| serde_json::json!({"lineage":lineage,"species":species,"mouth":mouth,"totals":f})).collect::<Vec<_>>(),
         "mating":{"pairs":c.mating.pairs,"cross_lineage":c.mating.cross_lineage,"cross_species":c.mating.cross_species,"cross_habitat":c.mating.cross_habitat,"cross_mouth":c.mating.cross_mouth,"genetic_distance_sum":c.mating.genetic_distance_sum,"distance":distances(&c.mating.distance),"lineage_edges":edges(&c.mating.lineage_edges),"child_edges":edges(&c.mating.child_edges)},
         "major_persistent_lineages":major.iter().map(|(id,_)| **id).collect::<Vec<_>>(),"overlap":overlaps,

@@ -12,6 +12,8 @@ pub mod resources;
 pub mod rng;
 pub mod spatial;
 #[cfg(feature = "viability")]
+mod temporal_ecology;
+#[cfg(feature = "viability")]
 pub mod viability;
 pub mod world;
 pub use model::*;

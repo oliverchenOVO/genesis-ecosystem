@@ -1,3 +1,17 @@
+# R4 stabilization — diagnostic stage A in progress
+
+**PHASE 2 INCOMPLETE.** R3 authority remains simulation5 / rules3 / RNG1 / envelope1 / analysis5. No authoritative ecology change, rules4 selection, new biological pass, native UAT, merge, tag or release has occurred.
+
+R3 cfef69e has been preserved as `phase2/r3-frozen-cfef69e`; `PHASE2_REPORT_R3_ARCHIVE.md` and `golden-v5-r3-archive.json` exactly match its Git blobs. The protection manifest is `benchmarks/phase2-r4-r3-preservation.json`.
+
+The optional headless observer now records100-tick per-lineage credited diets and resident traits,1000-tick lifecycle/energy budgets, same-world/same-lineage individual diet/fitness groups, density-controlled actual mating searches and successes, predator budgets and spatial opportunities, plus1000-tick stock/productivity snapshots for deterministic coherence/persistence analysis. Definitions and limits are in `PHASE2_R4_DIAGNOSTICS.md`. The additive nested diagnostic schema is `ecology.r4_temporal.version=1`; the original ecological acceptance is unchanged.
+
+Local validation: normal Rust75, all-features83, frontend24, Node23 PASS; fmt/clippy/frontend lint/typecheck/build PASS. A fixed1000-tick seed0 smoke has identical R3-frozen/current-normal/observed hash `b21177ecbc60aacfb3425b32ec123e478ebd5233d09cd19b0c593ff13e9c5aef`, with save/load/full replay and1000-tick continuation verified. A lossless measured fixture supports independent corruption rejection tests. Code-validation provenance: `benchmarks/phase2-r4-diagnostics-code-validation.json`.
+
+The prescribed unchanged-R3 seeds0..7 ×50000 diagnostic run is in progress. No candidate changes are justified by incomplete measurements; reference-200 candidate performance and frozen R4 100×100k are not reached. Native UAT remains biologically gated. Private branch CI for the new diagnostic code will be recorded after the commit. The complete sealed R3 formal findings follow; they are not R4 results.
+
+---
+
 # Phase 2 ecological differentiation finalization — PHASE 2 INCOMPLETE
 
 Revision3 passed deterministic stability and retained viable complex forms, but **all four ecological acceptance gates remain zero in the formal100-seed study**. Biological acceptance FAIL. Native UAT remains gated. No merge to main, v0.2.0 tag, release, Phase2.1 or Phase3.

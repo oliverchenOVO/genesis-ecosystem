@@ -224,6 +224,7 @@ pub fn mating_attempt(o: &Organism, available: bool) {
     });
 }
 pub fn mate_search(o: &Organism, candidates: [u64; 9]) {
+    crate::temporal_ecology::mate_search(o, candidates);
     update(o, |c| {
         c.initiating_mate_searches += 1;
         c.nearby_unpaired_candidates += candidates[0];

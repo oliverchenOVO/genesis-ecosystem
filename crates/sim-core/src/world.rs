@@ -1265,7 +1265,7 @@ impl World {
     }
 }
 
-fn eligible(o: &Organism, tick: u64) -> bool {
+pub(crate) fn eligible(o: &Organism, tick: u64) -> bool {
     tick - o.birth_tick >= 60 + o.phenotype.morphology.complexity as u64 / 4
         && tick - o.last_mating >= 80 + o.phenotype.morphology.complexity as u64 / 4
         && o.energy >= o.phenotype.reproduction_threshold
