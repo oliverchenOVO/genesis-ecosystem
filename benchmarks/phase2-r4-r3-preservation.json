@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "r3_frozen_head": "cfef69e73597ce93f6f0ac3eec34bad6dc3401cc",
+  "preservation_ref": "phase2/r3-frozen-cfef69e",
+  "source_authority_head": "831f8617d19714d856d653278e244e1f9becaa28",
+  "main": "216a92ffca8e66e31789fc0a0e0eaf5085f13d76",
+  "v0_1_0": "ed6c77d4b876b859ed7a4b1d665f7bf9054b9096",
+  "versions": {
+    "simulation": 5,
+    "rules": 3,
+    "rng": 1,
+    "envelope": 1,
+    "analysis": 5
+  },
+  "archive": [
+    {
+      "file": "docs/PHASE2_REPORT_R3_ARCHIVE.md",
+      "source": "docs/PHASE2_REPORT.md",
+      "git_blob": "705591ea13c631562f6db70feaa42882ae6f9433"
+    },
+    {
+      "file": "fixtures/golden-v5-r3-archive.json",
+      "source": "fixtures/golden-v5.json",
+      "git_blob": "d59005e661fef9eef06c1521d4ee53b7def09acf"
+    }
+  ],
+  "protectedFiles": [
+    {
+      "file": "target/release/genesis-desktop.exe",
+      "sha256": "16fb27a061d6f817bdc68fe26897a6c69e1814fdb2110ad23c0a623abe3c56c9"
+    },
+    {
+      "file": "target/release/bundle/nsis/GENESIS_0.1.0_x64-setup.exe",
+      "sha256": "ef09f5b0cedacd1c5b62df12776a4ff747e398a574e808054f51765821c115f4"
+    },
+    {
+      "file": "target/phase2-r2-final/release/genesis-desktop.exe",
+      "sha256": "ca7788c9baa9506d6ab6aff03b0a610e57eebfbb3e9d805943de30c4dcb565f1"
+    },
+    {
+      "file": "target/phase2-r2-final/release/bundle/nsis/GENESIS_0.2.0_x64-setup.exe",
+      "sha256": "2916f9660d9c9b7c888be1454e46cdc477e3fd66284839128047d5aebe8522f6"
+    },
+    {
+      "file": "examples/phase2-r2-seed7-tick40000.genesis",
+      "sha256": "f5c5a91af0b3735f94a6e45c569bd963e20d11fb7f517fae70f0e9db94b2713c"
+    },
+    {
+      "file": "benchmarks/phase2-r3-final-calibration.json.gz",
+      "sha256": "e5be0ed493f2e72c119def4493f60dac61ad57c3493daa038a6db8ace223bb60"
+    },
+    {
+      "file": "benchmarks/phase2-r3-final-calibration.jsonl.gz",
+      "sha256": "dfff2e20e68b52e2ff2be78aa5bd0d84c456940fa54f9513f30ce03fb72defd0"
+    }
+  ],
+  "formal_result": "PHASE 2 INCOMPLETE",
+  "r3_final_ci": "https://github.com/oliverchenOVO/genesis-ecosystem/actions/runs/37169251810"
+}
