@@ -18,7 +18,7 @@ GENESIS 是一個以 **Rust、Tauri 與 React** 建立的人工生命模擬研�
 | [Release v0.1.0](https://github.com/oliverchenOVO/genesis-ecosystem/releases/tag/v0.1.0) | Phase 1／1.1 的 Windows 發佈與驗證紀錄 |
 | [`phase2/multicellular-ecology`](https://github.com/oliverchenOVO/genesis-ecosystem/tree/phase2/multicellular-ecology) | simulation v5 的形態、生態與診斷研究；**PHASE 2 INCOMPLETE** |
 
-這個 repository 保留原始 commit history、既有 Releases 與 Actions 紀錄，供審閱者追蹤專案的演進。此處沒有 Phase 2A／3D 實作的宣稱；最新研究工作仍位於 Phase 2 分支，未為公開展示而合併進 `main`。
+這個 repository 保留原始 commit history、既有 Releases 與 Actions 紀錄，供審閱者追蹤專案的演進。最新研究工作仍位於 Phase 2 分支，未為公開展示而合併進 `main`。
 
 ## 我們如何觀察演化？
 
