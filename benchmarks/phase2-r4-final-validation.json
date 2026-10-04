@@ -1,0 +1,60 @@
+{
+  "status": "PHASE 2 INCOMPLETE",
+  "frozen_code_head": "1900adf39910e57f3d1e3cb69b6178cbf81913a8",
+  "authority": {
+    "simulation": 5,
+    "rules": 3,
+    "rng": 1,
+    "envelope": 1,
+    "analysis": 5
+  },
+  "local": {
+    "normal_rust_tests": 75,
+    "all_feature_rust_tests": 84,
+    "frontend_tests": 24,
+    "node_tests": 26,
+    "fmt": true,
+    "clippy": true,
+    "frontend_format_lint_typecheck_build": true,
+    "rust_normal_and_profile_build": true
+  },
+  "code_ci": {
+    "run": 37187435268,
+    "head": "1900adf39910e57f3d1e3cb69b6178cbf81913a8",
+    "jobs": [
+      {
+        "name": "core",
+        "conclusion": "success"
+      },
+      {
+        "name": "windows",
+        "conclusion": "success"
+      },
+      {
+        "name": "legacy-v4",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "matrix": {
+    "worlds": 40,
+    "save_load_replay_continuations": 40,
+    "technical_failures": 0,
+    "safety_cap_worlds": 0,
+    "rejected_candidates": 4
+  },
+  "normal_benchmark_verified_worlds": 10,
+  "profile_hash_matches": true,
+  "performance_clearance": false,
+  "protected_artifacts_verified": 7,
+  "formal_rules4_run": "NOT RUN: no viable candidate",
+  "native_uat": "NOT RUN: biology gate fails",
+  "installer_uat": "NOT RUN: biology gate fails",
+  "release": "NOT CREATED",
+  "default_normal_restored": {
+    "sha256": "049347edd245e0752cb8650013ffdfe0ab95ac93248a3cde4b370cae8d4420d9",
+    "smoke_hash": "b21177ecbc60aacfb3425b32ec123e478ebd5233d09cd19b0c593ff13e9c5aef",
+    "r3_fixture_full_replay": true,
+    "continuation_ticks": 1000
+  }
+}

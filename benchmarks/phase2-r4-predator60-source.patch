@@ -1,0 +1,39 @@
+diff --git a/crates/sim-core/src/model.rs b/crates/sim-core/src/model.rs
+index bfbcc4c..69afd12 100644
+--- a/crates/sim-core/src/model.rs
++++ b/crates/sim-core/src/model.rs
+@@ -7,7 +7,7 @@ use std::collections::BTreeMap;
+ 
+ pub const SIMULATION_VERSION: u32 = 5;
+ /// Unreleased v5 revisions are isolated; published v4 remains immutable.
+-pub const SIMULATION_RULES_REVISION: u32 = 3;
++pub const SIMULATION_RULES_REVISION: u32 = 4;
+ pub const TELEMETRY_INTERVAL: u64 = 100;
+ macro_rules! id {
+     ($name:ident) => {
+diff --git a/crates/sim-core/src/persistence.rs b/crates/sim-core/src/persistence.rs
+index e1f88b1..6992bed 100644
+--- a/crates/sim-core/src/persistence.rs
++++ b/crates/sim-core/src/persistence.rs
+@@ -15,7 +15,7 @@ pub const MAX_SAVE_BYTES: u64 = 128 * 1024 * 1024;
+ const MAGIC: &[u8; 8] = b"GENESIS1";
+ const HEADER: usize = 60;
+ // This cannot alias an old valid State: its bytes8..12 are not a valid world size.
+-const PAYLOAD_TAG: &[u8; 16] = b"GENESIS5RULES003";
++const PAYLOAD_TAG: &[u8; 16] = b"GENESIS5R4PC60__";
+ 
+ pub fn encode(world: &World) -> Result<Vec<u8>, String> {
+     world.validate()?;
+diff --git a/crates/sim-core/src/world.rs b/crates/sim-core/src/world.rs
+index c634522..d195f96 100644
+--- a/crates/sim-core/src/world.rs
++++ b/crates/sim-core/src/world.rs
+@@ -473,7 +473,7 @@ impl World {
+                     {
+                         continue;
+                     }
+-                    let gain = prey.energy / 2 + prey.phenotype.morphology.mass / 4;
++                    let gain = prey.energy * 3 / 5 + prey.phenotype.morphology.mass / 4;
+                     let damage = predator.phenotype.morphology.damage(
+                         &prey.phenotype.morphology,
+                         predator.phenotype.aggression,

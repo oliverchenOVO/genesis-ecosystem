@@ -1,6 +1,6 @@
 # R4 bounded resource-patch experiments
 
-Status: all three patch-only candidates rejected. Predator capture-only experiment pending. No rules4 authority has been selected; rules3 and the original biological gates remain in force.
+Status: all three patch-only candidates rejected. Predator capture-only experiment also completed and rejected; see the final PHASE2_REPORT.md. No rules4 authority has been selected; rules3 and the original biological gates remain in force.
 
 Each isolated candidate uses the same seeds0..7 ×50000 ticks, size512, population50, cap2000, regeneration4, mutation100 and temperature2000 as the frozen R3 control. Only the resource productivity field changes. Source is preserved as exact binary Git patches based on321ab99, with executable SHA256 and complete JSON/JSONL evidence. Diagnostic runs are not normal-performance measurements.
 

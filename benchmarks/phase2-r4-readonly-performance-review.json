@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "code_head": "1900adf39910e57f3d1e3cb69b6178cbf81913a8",
+  "authority_rules": 3,
+  "optional_features": false,
+  "pairs": [
+    {
+      "scenario": "reference-200",
+      "control_TPS": 3804.964490891832,
+      "current_TPS": 3178.731974062615,
+      "slowdown_fraction": 0.16458301209597803,
+      "hash": "8058068d8fa57a583784ba49d0a34f9b69f67c3e18c888ef9cde84e84f838ccc",
+      "control_peak_WS": 9228288,
+      "current_peak_WS": 9797632
+    },
+    {
+      "scenario": "medium-1000",
+      "control_TPS": 707.4544382186017,
+      "current_TPS": 683.6128317437204,
+      "slowdown_fraction": 0.03370055396770899,
+      "hash": "35921cc1f2ee8270f382b8b4da1473e6fd6a13d156917f0f5fee040d5b7ad961",
+      "control_peak_WS": 11452416,
+      "current_peak_WS": 11460608
+    },
+    {
+      "scenario": "density-5000",
+      "control_TPS": 40.64180266748245,
+      "current_TPS": 116.81588630636871,
+      "slowdown_fraction": -1.8742791569093766,
+      "hash": "ddc3102ebcf8238be75f933ce244063b4fe677aace461815cfef4c6329982196",
+      "control_peak_WS": 19189760,
+      "current_peak_WS": 20541440
+    }
+  ],
+  "abba": {
+    "order": [
+      "control-before",
+      "current-first",
+      "current-second",
+      "control-after"
+    ],
+    "runs": [
+      {
+        "id": "control-before",
+        "TPS": 3005.425953941282
+      },
+      {
+        "id": "current-first",
+        "TPS": 2009.9986013625733
+      },
+      {
+        "id": "current-second",
+        "TPS": 3365.145670627699
+      },
+      {
+        "id": "control-after",
+        "TPS": 2951.6461853216915
+      }
+    ],
+    "mean_control_TPS": 2978.5360696314865,
+    "mean_current_TPS": 2687.5721359951363,
+    "mean_slowdown_fraction": 0.09768689276687159
+  },
+  "profile": {
+    "executable_sha256": "274e72dbe836bcdb14436791c9747a60f357652947e02e02c344d7c8c2245074",
+    "features": [
+      "sim-profile"
+    ],
+    "perception_fraction": 0.8893631883131167,
+    "phases": [
+      [
+        "death accounting",
+        7872000,
+        50000
+      ],
+      [
+        "feeding",
+        246719100,
+        50000
+      ],
+      [
+        "mating",
+        461212900,
+        50000
+      ],
+      [
+        "metabolism",
+        94937300,
+        50000
+      ],
+      [
+        "movement",
+        153308800,
+        50000
+      ],
+      [
+        "perception",
+        10148694900,
+        50000
+      ],
+      [
+        "population accounting",
+        63693000,
+        50000
+      ],
+      [
+        "predation",
+        11458100,
+        50000
+      ],
+      [
+        "resource regeneration",
+        205468300,
+        50000
+      ],
+      [
+        "species and telemetry",
+        17828500,
+        50000
+      ]
+    ],
+    "world_hash": "8058068d8fa57a583784ba49d0a34f9b69f67c3e18c888ef9cde84e84f838ccc"
+  },
+  "normal_executable_sha256": "f2fd6679519bee71b5c846d87000340b9e14c882d42bd22b0396cfcb1dbcad32",
+  "control_executable_sha256": "c245d1c559915499317babc7d4a5f68be12925b2be4305271b124d316880df64",
+  "reference_followup_script_sha256": "7127c05ac72a9eaad5326f897211d755927385f8b338d0d64e88561a129ef853",
+  "normal_full_replay_save_load_continuations": 10,
+  "conclusion": "Initial reference slowdown16.46% triggered preserved ABBA follow-up and profiling. Large within-binary variation and discordant density timing prevent a stable performance clearance claim. ABBA arithmetic-mean slowdown is reported descriptively, not as a replacement acceptance rule. No ecological candidate was selected and no100-seed R4 run proceeded. Own calibration/archive/compiler jobs were stopped during measurements; external host load is uncontrolled."
+}

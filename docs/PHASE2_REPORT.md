@@ -1,139 +1,79 @@
-# R4 patch experiment milestone
+**PHASE 2 INCOMPLETE**
 
-Three paired8×50000 patch-only candidates completed with deterministic verification. All are rejected for loss of persistent multicellular viability; none improves the original ecological gates. Predator capture-only experiment is still pending. Authority remains rules3; Phase2 remains INCOMPLETE. See [stage B](PHASE2_R4_STAGE_B.md) and the sealed R3 evidence below.
+R4 bounded stabilization experiments are finalized. Every tested ecological change fails mandatory complexity preservation; none is selected. Authority remains simulation 5 / rules 3 / RNG 1 / save envelope 1 / analysis 5. Phase2.1 and Phase3 are not entered. No merge, v0.2.0 tag or release is created.
 
-# R4 stabilization — diagnostic stage A complete; candidate selection pending
+**Preserved authority and evidence**
 
-**PHASE 2 INCOMPLETE.** R3 authority remains simulation5 / rules3 / RNG1 / envelope1 / analysis5. No authoritative ecology change, rules4 selection, new biological pass, native UAT, merge, tag or release has occurred.
+The frozen R3 branch head is cfef69e73597ce93f6f0ac3eec34bad6dc3401cc, protected by phase2/r3-frozen-cfef69e. Physical authority remains `831f8617d19714d856d653278e244e1f9becaa28`; final diagnostic/tooling code is `1900adf39910e57f3d1e3cb69b6178cbf81913a8`. The [R3 report archive](PHASE2_REPORT_R3_ARCHIVE.md) and R3 archived golden exactly retain the frozen Git blobs. main remains `216a92ffca8e66e31789fc0a0e0eaf5085f13d76`; v0.1.0 remains `ed6c77d4b876b859ed7a4b1d665f7bf9054b9096`. The [preservation manifest](../benchmarks/phase2-r4-r3-preservation.json) records seven protected file hashes; all were reverified after final checks. Existing production EXE/installers and R2 showcase are preserved.
 
-R3 cfef69e has been preserved as `phase2/r3-frozen-cfef69e`; `PHASE2_REPORT_R3_ARCHIVE.md` and `golden-v5-r3-archive.json` exactly match its Git blobs. The protection manifest is `benchmarks/phase2-r4-r3-preservation.json`.
+Sealed R3 formal evidence remains100 seeds ×100000 ticks:100/100 deterministic save/load/full replay/1000-tick continuation,99 survivors, one natural extinction, zero technical failures/caps, persistent MC12/100 and high-C21/100. Its four ecological gates remain0/100. These are R3 results, not a new R4 formal run.
 
-The optional headless observer now records100-tick per-lineage credited diets and resident traits,1000-tick lifecycle/energy budgets, same-world/same-lineage individual diet/fitness groups, density-controlled actual mating searches and successes, predator budgets and spatial opportunities, plus1000-tick stock/productivity snapshots for deterministic coherence/persistence analysis. Definitions and limits are in `PHASE2_R4_DIAGNOSTICS.md`. The additive nested diagnostic schema is `ecology.r4_temporal.version=1`; the original ecological acceptance is unchanged.
+**Completed R4 diagnostics**
 
-Local validation: normal Rust75, all-features83, frontend24, Node23 PASS; fmt/clippy/frontend lint/typecheck/build PASS. A fixed1000-tick seed0 smoke has identical R3-frozen/current-normal/observed hash `b21177ecbc60aacfb3425b32ec123e478ebd5233d09cd19b0c593ff13e9c5aef`, with save/load/full replay and1000-tick continuation verified. A lossless measured fixture supports independent corruption rejection tests. Code-validation provenance: `benchmarks/phase2-r4-diagnostics-code-validation.json`.
+Optional headless observations record100-tick lineage diets/population/traits/position/habitat,1000-tick lifecycle budgets and individual realized-diet fitness, density-controlled actual mating searches/successes, local prey/eligible-compatible mate overlap, and1000-tick resource stock/productivity fields. External analysis preserves1000/5000-tick diet windows, role changes/persistence, component areas/perimeters, autocorrelation, nearest-rich distances, patch overlap/centroid/area stability, habitat-diet correlations, predator energetics and gene-flow matrices. Definitions and limits are in [diagnostics](PHASE2_R4_DIAGNOSTICS.md) and [stage A](PHASE2_R4_STAGE_A.md).
 
-The unchanged-R3 seeds0..7 ×50000 diagnostic run completed in850.8393844 seconds:8/8 verified, all hashes identical to sealed R3. Hard-specialist lineage persistence reaches26k and simultaneous Soft/Hard diagnostic coexistence23k; no qualified PreySpecialist window. Generalist reproductive dominance is not supported by matched world/lineage/window comparisons. Fragmented rich productivity masks and predator pre-reproduction deficits support bounded, separately validated experiments. Complete evidence, hypotheses and limitations are in `PHASE2_R4_STAGE_A.md` and `benchmarks/phase2-r4-control*`. Reference-200 candidate performance and frozen R4 100×100k are not reached. Native UAT remains biologically gated. Private branch CI for the new diagnostic code will be recorded after the commit. The complete sealed R3 formal findings follow; they are not R4 results.
+Observers remain outside authoritative State/RNG/save and frontend payloads. Resource snapshots scan the grid outside per-organism perception; organism queries reuse bounded spatial indexing. No LLM is introduced into the core loop. Compressed per-seed sidecars include exact uncompressed SHA256, byte count, seed/tick/schema and safe relative references. Temporal summaries stream one world at a time. Existing evidence cannot be overwritten. Integrity/corruption tests and an actual seed0/tick1000 smoke prove complete equality with inline observations and unchanged world hash.
 
----
+The unchanged R3 diagnostic control uses fixed seeds0..7 ×50000 ticks, population50, limit2000, size512, regeneration4, mutation100 and temperature2000. All eight hashes exactly match frozen R3. Every temporal/individual/energy/population/mating ledger closes. Hard-specialist lineage persistence reaches26000 ticks; simultaneous diagnostic Soft/Hard coexistence reaches23000. No qualified PreySpecialist window occurs. Matched same-world/lineage/window specialist offspring output exceeds Mixed in most comparisons (Soft60–87%, Hard75–91%); generalist reproductive dominance is not supported. Diet-conditioned fitness is descriptive, not a causal survival estimate; completed lifetimes and censored living organisms remain separate. The model has no explicit juvenile/adult stage.100-tick displacement is a lower bound on movement path length.
 
-# Phase 2 ecological differentiation finalization — PHASE 2 INCOMPLETE
+**Bounded paired experiments**
 
-Revision3 passed deterministic stability and retained viable complex forms, but **all four ecological acceptance gates remain zero in the formal100-seed study**. Biological acceptance FAIL. Native UAT remains gated. No merge to main, v0.2.0 tag, release, Phase2.1 or Phase3.
+| Candidate | Survivors | Natural collapse | Persistent MC | High-C | Morphology>1 | Niche>1 | Actual feeding roles>1 | Persistent prey income |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| R3 control | 8/8 | 0 | 3/8 | 2/8 | 0/8 | 0/8 | 0/8 | 0/8 |
+| patch32 | 7/8 | 1 | 0/8 | 0/8 | 0/8 | 0/8 | 0/8 | 0/8 |
+| patch64 | 8/8 | 0 | 0/8 | 2/8 | 0/8 | 0/8 | 0/8 | 0/8 |
+| patch128 | 7/8 | 1 | 0/8 | 0/8 | 0/8 | 0/8 | 0/8 | 0/8 |
+| predator60 | 8/8 | 0 | 0/8 | 0/8 | 0/8 | 0/8 | 0/8 | 0/8 |
 
-## Frozen authority and provenance
+The [machine-readable matrix](../benchmarks/phase2-r4-candidate-matrix.json) preserves speciation/extinction, population/resource CV, gene flow, mating distances, actual mouth diets and channel-use rejection checks. Complete temporal observations and derived summaries are retained in lossless compressed archives, with source patches, executable hashes, per-seed hashes and JSON/JSONL equality in each candidate provenance file. All40 control/candidate worlds pass save/load, full replay and1000-tick continuation, with zero technical failures or cap contacts. No original test or biological threshold is removed or weakened. Diagnostic Soft/Hard labels do not replace the original resource/prey feeding-role gate.
 
-- Branch: `phase2/multicellular-ecology`.
-- Frozen simulation source: `831f8617d19714d856d653278e244e1f9becaa28`; evidence commit: `aa0dce26b7de8bc9a1373e7c65912dd08774dc5b`. Subsequent report changes do not alter simulation rules.
-- Simulation5 / rules3 / RNG1 / save envelope1 / analysis5. Optional viability diagnostic4 and nested ecology4 remain outside State, RNG, save payloads and frontend frame telemetry.
-- Preserved R2 baseline: `b193c9b13ea000284bcc0daffb8120e5d07a9655`, including original100×100k evidence, showcase, benchmarks and golden. The exact original report is [PHASE2_REPORT_R2_ARCHIVE.md](PHASE2_REPORT_R2_ARCHIVE.md).
-- Protected main: `216a92ffca8e66e31789fc0a0e0eaf5085f13d76`; v0.1.0 target: `ed6c77d4b876b859ed7a4b1d665f7bf9054b9096`. No LLM determines world state.
+Patch32/64/128 use only pure seeded integer coarse productivity fields, positive mixed corridors and channel-wise soil-weighted normalization (global potential production changes by less than0.1% from rounding). Original stocks, world RNG draws, feeding efficiency, mating radius16, compatibility, damage and movement are preserved. Cached cell factors and matching carry denominators are tested; all60 all-feature core library tests pass per geometry. No walls, species assignments or geographic sterility are added. Nevertheless, all three geometries lose all persistent MC worlds; Patch32/128 also lose high-C entirely. Patch64 retains two high-C worlds but fails MC. All are rejected. Detail: [stage B](PHASE2_R4_STAGE_B.md).
 
-Diagnostics preceded physical changes. Bounded paired seeds0–7 ×50k evaluated unchanged R2, resource-only B/B2, local-mating C and combined D; B2 was one bounded correction to the newly introduced hard-processing range. Unchanged A and selected D then completed paired8×100k. D retained3 persistent multicellular worlds and2 high-C worlds versus A2/1, with zero completed-world technical/replay/cap failures. Every A long-run hash matches sealed R2; all8 final R3 hashes match frozen D. Rejected candidates and compiled-source patches remain preserved. Details: [diagnostics](PHASE2_ECOLOGICAL_DIAGNOSTICS.md), [candidate matrix](PHASE2_ECOLOGY_CANDIDATES.md).
+Nominal generator scale does not equal actual resource coherence. Initial top25% productivity correlation lengths are: Patch32 soft32–48/hard48–64; Patch64 soft48/hard48–64; Patch128 soft48/hard64–80. Fine-scale soil variation still multiplies the coarse fields. This bounded construction does not establish a sufficiently coherent and complexity-preserving ecology. Areas, perimeters and temporal stock overlap remain available per seed; lower cross-lineage mating alone is not treated as a success. Both channels are used in every surviving world's observed post-warmup data; missing windows in early-extinct worlds are unknown, not fabricated zero use. Rules4+ candidate rejection also checks strict-majority unused-channel worlds.
 
-Selected D adds renewable soft/hard fields, existing morphology-dependent processing and local mating radius16. Costs, readiness, compatibility, dispersal and cluster150/persistence1000 thresholds remain unchanged. No fertility ban or region wall was introduced. The selected-channel efficiency is reused without changing integer operation order or world hashes; completed calibration ledgers are moved rather than cloned into the final report.
+Predator60 changes only actual kill credit from prey.energy/2 + prey.mass/4 to prey.energy*3/5 + prey.mass/4, capacity-clamped. It cannot exceed stored prey energy plus defined quarter-mass biomass and grants no energy on nonlethal damage; attack cost, damage, starvation and reproduction remain unchanged. All57 existing all-feature core library tests and independent actual energy/kill ledgers pass. R3 had pre-reproduction deficits in6/8 worlds and no offspring in5/8. Capture60 still has deficits in5/8, no offspring in3/8, no qualified temporal prey-specialist window and no persistent MC/high-C. Offspring rise mainly in seed1 (329 to628 parent offspring participations), which does not establish stable predator viability. It is rejected. Its raw scenario label remains the historical default because --scenario was ignored by the old CLI; exact paired configuration, seed set, source patch and executable SHA identify the experiment. Raw reports are unchanged.
 
-## Formal100×100000 evidence
+No feeding trade-off is introduced because matched fitness does not support generalist dominance. Reproduction-cost scaling is not the first supported fix while most predator deficits occur before reproduction. No patch/predator combination is run because no independently viable patch exists. No candidate qualifies for authoritative rules4 freeze. Consequently rules4 golden, prerelease migration/rejection implementation and100×100000 formal R4 calibration are NOT RUN. A genuine R3 seed0/tick1000 save is retained solely for future rejection testing; it is not a showcase.
 
-Seeds0–99,512 world,50 founders,limit2000,mutation100,temperature2000,regeneration4,8 workers. Reported wall time10891.9436458 seconds (181.53239409666666 minutes) includes diagnostics, full replay, save/load and independent1000-tick continuation; this is not kernel benchmark TPS.
+**Normal-runtime benchmark and performance limits**
 
-| Measurement | Actual R3 result |
+All own calibration/archive/compiler jobs stopped during sequential normal measurements; external host workload is uncontrolled. The frozen R3 and current normal executables have no optional diagnostic features. Every one of ten normal benchmark/follow-up worlds verifies save/load/full replay/1000 continuation, with identical paired hashes. Full raw timings, memory measurements, hashes and provenance are in the [performance review](../benchmarks/phase2-r4-readonly-performance-review.json).
+
+| Scenario | Frozen R3 TPS | Current rules3 TPS | Observed slowdown |
+| --- | ---: | ---: | ---: |
+| reference-200 | 3804.96 | 3178.73 | 16.46% |
+| medium-1000 | 707.45 | 683.61 | 3.37% |
+| density-5000 | 40.64 | 116.82 | -187.43% |
+
+Initial reference slowdown16.46% exceeded15%, so it was preserved and followed by ABBA ordering: control-before3005.43, current-first2010.00, current-second3365.15, control-after2951.65 TPS. Arithmetic means are2978.54 control and2687.57 current, descriptive slowdown9.77%. Within-binary variation and discordant dense timing prevent stable performance clearance; the mean is not a replacement gate or a claimed optimization. Profiling was completed before any further progression: perception consumes88.94% of marked phase time, with the reference world hash unchanged. No100-seed R4 run proceeded. Sealed R3 performance debt remains: reference3567.45 TPS versus fresh paired R2 5894.05 (~39.47% slower). A future promising candidate still requires a controlled fresh reference comparison and profiling above15% additional regression.
+
+**Final regression and actual private CI**
+
+| Check | Result |
 | --- | --- |
-| Completed / save-load-full-replay-continuation verified |100/100 /100/100 |
-| Technical failures / replay mismatches |0 /0 |
-| Survival / natural world extinction |99/100 /1 (seed43) |
-| Collapse / Explosion / Sterile classifications |1 /0 /0 |
-| Safety-ceiling worlds / maximum fraction |0/100 /0 |
-| Speciation |7/100 worlds;9 new species |
-| Species extinction |5/100 worlds;6 extinct species |
-| Persistent multicellular |12/100; longest11700 sampled ticks |
-| Persistent high-C lineage |21/100;35 world–lineage pairs; maximum4 per world |
-| >1 simultaneous persistent morphology cluster |0/100 |
-| >1 simultaneous persistent niche cluster |0/100 |
-| >1 actual simultaneous persistent feeding role |0/100 |
-| Persistent actual prey-income cohort |0/100; longest qualifying streak0 |
-| Innovation species/world counts [multi-unit,armor,Piercer,mass,sensory] |[0,0,1,0,0] /[0,0,1,0,0] |
-| Final population [min,median,max,mean] |[0,1234,1336,1220.97] |
-| Population CV [median,mean] |[0.21464853972476822,0.2170815635491241] |
-| Resource CV [median,mean] |[0.8875655825903283,0.9258168471726713] |
+| Rust normal / all features | 75 / 84 PASS |
+| Frontend / Node | 24 / 26 PASS |
+| Rust normal/profile benchmark builds; frontend build | PASS |
+| Rust fmt / all-target all-feature clippy | PASS |
+| Frontend format / lint / typecheck | PASS |
+| Protected production/baseline file hashes | 7/7 unchanged |
 
-Compared with sealed R2, multicellular incidence changes17→12, high-C worlds13→21, and high-C world–lineage pairs38→35. These are mixed viability tradeoffs, not universal improvement. Both nonzero complexity gates pass; ecological gates do not. Natural extinction is preserved as an ecological outcome rather than omitted or counted as a technical failure.
+[Final validation record](../benchmarks/phase2-r4-final-validation.json) identifies checked code and measurements. Actual private CI for code head1900adf is [37187435268](https://github.com/oliverchenOVO/genesis-ecosystem/actions/runs/37187435268), with core, Windows and legacy-v4 all GREEN. Earlier diagnostic/control/sidecar heads also have actual GREEN runs321ab99/37182067550,16289a1/37183763076 and244e465/37186144058. The closure evidence/report commit is pushed to the same private branch and its exact final-head CI is verified in the handoff and artifacts/phase2-r4-final-ci.json. Existing Windows CI bundle compilation is a regression build, not native/installer UAT or a qualified release.
 
-Acceptance uses unchanged thresholds: multicellular >=8 and >=25% living multi-unit population for1000 sampled ticks; high-C lineage >=8 members and mean C>=200 for1000 ticks; cluster distance150 with1000-tick persistence. Realized resource consumers require >=8 and >=90% actual resource income per sampled window; prey consumers require >=8 and >=50% actual prey income, with1000 consecutive sampled ticks after warmup. Mouth names do not establish feeding-role persistence.
+**Commits and remaining work**
 
-All100 complete JSONL rows equal their final JSON rows. All900 overlapping cohort energy/population closures are independently recomputed, including world-counter closure; temporal mating, symmetric gene flow and credited-energy ledgers close. The two full raw outputs are retained locally and losslessly compressed into Git, with decompressed SHA256 round-trip verification. No ledgers were cropped.
-
-- [Formal summary](../benchmarks/phase2-r3-final-calibration-summary.json)
-- [Full ecological summary and per-world gene-flow matrices](../benchmarks/phase2-r3-final-calibration-ecology-summary.json)
-- [Viability budgets](../benchmarks/phase2-r3-final-calibration-viability-summary.json)
-- [Biological gate and ecological review](../benchmarks/phase2-r3-final-ecological-review.json)
-- [Provenance, raw/compressed sizes and hashes](../benchmarks/phase2-r3-final-calibration-provenance.json)
-- Full lossless evidence: [JSON.gz](../benchmarks/phase2-r3-final-calibration.json.gz), [JSONL.gz](../benchmarks/phase2-r3-final-calibration.jsonl.gz).
-
-## Realized ecology and gene flow
-
-There are4413350 successful mating pairs:2680774 cross-lineage and2190979 cross-habitat. Pair-weighted fractions are0.6074238390338405 /0.49644351796254543. Unweighted per-world means are0.6017934660410414 /0.4947262877516618. Pooled integer-floor mating distance mean12.908427838263451, median14,p90=15. The original paired8-world A→D cross-lineage means0.48577273560644685→0.5841650703643353 do **not** support reduced cross-lineage mixing; cross-habitat means decrease0.5880522490506069→0.49738592855325925. This paired comparison is separate from the100-world R3 statistic.
-
-Among99 worlds with eligible persistent-lineage overlap samples, unweighted means of each world's top16 lineage-pair histogram intersections are spatial0.3720213039967763, habitat0.794625946593701, feeding hardness0.8912081221982705, productivity0.8919233504301333 and realized energy sources0.9047529960701577. Source-overlap world means range0.822494532865523–0.9636227649364436. Empty overlap data for the extinct world are excluded, not replaced with zero. Lower spatial overlap can coexist with substantial habitat and dietary overlap.
-
-Actual credited whole-run energy, pooled by inherited mouth morphology:
-
-| Mouth cohort | Soft | Hard | Prey | Hard / total | Prey / total |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Grazer |12528576670 |1628599116 |0 |0.11503700601150393 |0 |
-| Crusher |12532998244 |19174166255 |5065752 |0.6046300150837033 |0.0001597412720551327 |
-| Piercer |2817149 |2884667 |6129799 |0.2438100800271138 |0.5180864150836552 |
-
-All1881 active post-warmup5000-tick windows in99 worlds consume both environmental channels. No active window or surviving world permanently leaves either channel unused. These totals demonstrate functional resource processing differences but do not establish continuous lineage-specialist persistence.
-
-The separate predator-like cohort (carnivory>650 and non-Grazer) realizes11195551 prey energy versus1300474 resource energy, prey fraction0.8959289854173628. It perceives prey for2215913/2429770 organism-ticks, hunts1312691 ticks, attempts66186 attacks and kills15855;836 of1889 deaths are starvation. Actual intake per tick5.142883894360372 is below metabolic+attack+reproductive expenditure5.831810418270042; initial/offspring energy is included separately in the closed ledger. It initiates352628 mate searches; candidate-observation counts are1460 nearby eligible and330 compatible (not distinct individuals). It records657 successful matings and1118 offspring. These pooled associations support investigating energetic and reproductive limitations, not imposing absolute carnivory. Requested hunting movement by mouth [Grazer,Crusher,Piercer] is[0,51202,336984]; requested costs are distinct from clamped actual metabolic expenditure.
-
-### Analytical limitation
-
-Legacy species niche vectors combine resource units/prey mass, prey size, received attacks, occupied temperature, elevation and speed; they have no direct soft/hard energy axis. The unchanged realized trophic gate distinguishes resource consumers from prey-income consumers rather than separate soft and hard specialists. Ecology4 stores temporal mouth-channel income and lineage occupancy, but lineage feeding-channel proportions are lifetime aggregates. Therefore zero niche-cluster incidence cannot alone prove complete absence of soft/hard specialization. Nevertheless the sustained actual prey-income gate independently fails. No threshold, persistence interval or acceptance definition was relaxed.
-
-Independent experimental D seed1×100k has15 living lineages>=8, maximum normalized nine-trait distance42 and zero pairs>=150. Its hash matches the final formal seed1. This is one snapshot, not a100-world persistence claim or a qualified ecological showcase. No scripted R3 showcase or validated release asset was created.
-
-## Final performance
-
-Sequential same-host R2 then R3 scenarios after calibration/audit/compiler/native-app task loads stopped. External host load is uncontrolled; small report reads occurred during the sequence. Original R2 benchmark files remain unchanged. Different rules produce different trajectories, so this comparison does not isolate resource mechanics from evolved phenotype distribution.
-
-| Scale | Preserved original R2 TPS | Fresh paired R2 TPS | R3 TPS | Paired slowdown | R3 peak working set bytes |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| reference-200 |8246.500568620953 |5894.054859009905 |3567.448191109341 |39.47378712201861% |9342976 |
-| medium-1000 |1405.6247649268284 |832.3077013606392 |586.5427319079399 |29.52813833765179% |11472896 |
-| density-5000 |153.6327225408394 |89.3660164337223 |82.65501872305617 |7.509563454295054% |19308544 |
-
-Reference exceeds30% and was profiled on the frozen optimized source: perception11.6716762 of13.1044635 marked seconds (89.0664177133234%). The endpoint hash matches the normal benchmark. Two-channel opportunity scoring adds processing work within perception; the earlier redundant third efficiency calculation has been removed with identical golden and benchmark hashes. There is residual reference slowdown, not a claim of performance parity. New mating queries reuse the spatial index; resource opportunities traverse bounded nearby cells rather than scanning the entire population. Spatial/full-scan oracle tests cover query boundaries. Profile phases locate the bottleneck but do not separately attribute every cost to channel arithmetic versus changed trajectories.
-
-[Performance comparison](../benchmarks/phase2-r3-final-performance-comparison.json) includes exact normal TPS and profile provenance; individual benchmark/memory JSONs preserve hashes and updates/second. Profile: [result](../benchmarks/phase2-r3-final-profile-reference-200.json), [phases](../benchmarks/phase2-r3-final-profile-reference-200-phases.json).
-
-## Regression, builds and compatibility
-
-Rust75 normal /81 all-features; frontend24; Node13: all PASS. The targeted debug autosave recheck also passes (188.44s total including3 replay verifications) with its120-second advance deadline unchanged; it is not counted twice. Rust fmt, workspace clippy all targets/features, frontend format/lint/typecheck and production frontend build PASS. Current golden suite7 PASS, all6 R3 checkpoints match frozen D; protected v4 CI golden4 PASS. R2 golden is archived exactly at blob `da2e3b0427b8efa077bb2a7674a9ce567cac91f4`. Details: [code validation receipt](../benchmarks/phase2-r3-final-code-validation.json).
-
-Frozen code-head private CI [37157748106](https://github.com/oliverchenOVO/genesis-ecosystem/actions/runs/37157748106) is GREEN for core/windows/legacy-v4. Windows CI builds the production frontend, Tauri EXE and NSIS installer. Final evidence/report commits are pushed to the same private branch and their actual CI status is verified at delivery; the code-head receipt refers specifically to831f861.
-
-Rules3 payload tag is `GENESIS5RULES003`. Real R2, R1, v4 and experimental probe saves reject explicitly before incompatible State decoding; no silent migration. See [save/replay policy](PHASE2_SAVE_MIGRATION.md). Backend/golden rejection and corruption tests pass; native rejection UX remains untested.
-
-| Artifact | SHA256 / status |
+| Commit | Completed milestone |
 | --- | --- |
-| Frozen headless formal calibration EXE |`3B01B8B2BA0478D1F7CBCBA838E2E05C5F27EB238864573F725422E6649A53BF` |
-| Frozen normal R3 benchmark EXE |`C245D1C559915499317BABC7D4A5F68BE12925B2BE4305271B124D316880DF64` |
-| Frozen optimized R3 profile EXE |`83BC8B93F3B241DA2D5198BB7766CC0BAFDD1B110FD382D39A69C9235A1AAE01` |
-| Downloaded R3 code-head CI NSIS |`883875DD6FA40A6E2FA346FE1D18309EE50CBF21114174E9092D26382668A1FA`; BUILD ONLY |
-| R3 raw desktop EXE |Compiled by CI; raw EXE is not in the uploaded artifact. No raw desktop EXE SHA or validated release EXE is claimed. |
-| Protected Phase1 desktop EXE |`16FB27A061D6F817BDC68FE26897A6C69E1814FDB2110AD23C0A623ABE3C56C9` |
-| Protected Phase1 NSIS |`EF09F5B0CEDACD1C5B62DF12776A4FF747E398A574E808054F51765821C115F4` |
-| Preserved R2 showcase |`F5C5A91AF0B3735F94A6E45C569BD963E20D11FB7F517FAE70F0E9DB94B2713C` |
+| c1d82be | Preserve frozen R3 report/golden/validation evidence |
+| 321ab99 | Optional temporal/coherence/individual-fitness and predator diagnostics |
+| 16289a1 | Paired unchanged-R3 eight-seed measurements and selection review |
+| 244e465 | Verified compressed per-world sidecars and streamed summaries |
+| 1900adf | Three resource-patch trials, complexity rejection and stronger channel-use review |
+| Closure evidence/report commit | Predator-only rejection, normal benchmark/profile and final report |
 
-Native5-cycle restart, clean/Save/Discard close, New World, speed controls/MAX return, save/load/continue/replay, dirty dialogs, legacy/invalid/checksum UX, resize and ecological inspection: **NOT PERFORMED — biological gate FAIL**. Installer install/launch/restart/uninstall: **NOT PERFORMED; BUILD ONLY**. CI build success does not establish native or installation PASS. Main CI after merge, v0.2.0 tag/release and release hashes: NOT APPLICABLE; no merge/release occurred.
+Biological acceptance remains unmet. Formal rules4 calibration, qualified showcase/replay continuation, five native clean restarts and full controls/file/dirty-guard/WebView regression, installer UAT, merge/main CI/tag/private release remain gated. They are not claimed passed or executed. No final local production EXE/NSIS is rebuilt; protected existing binaries remain intact.
 
-## Recovered technical issues and next hypothesis
+Technical limits were isolated: large inline temporal JSON was addressed with lossless per-seed sidecars; manual isolated Git worktree fallback was used because the app project context names the parent directory; duplicate frontend tests from that temporary checkout were identified and the checkout was removed after source preservation (final default pnpm test runs24 original tests). Archived source patches were normalized and checked against their frozen base, including the corrected newline export for Predator60. Normal benchmark host variability remains unresolved. These issues did not stop the other bounded experiments.
 
-Git milestones: `7703ef1` deterministic ecological diagnostics; `cc639813` paired R2 measurements; `89d622cc` bounded candidates; `00b1786e` selected rules3/resources/local mating and compatibility; `831f8617` bit-identical efficiency/report-memory improvement; `aa0dce26` complete formal ecology and paired performance evidence. Final report and validation receipt updates follow on the same private branch.
-
-The earlier unchanged-R2 A long-run four-worker invocation aborted with allocation failure /exit0xC0000409 before any completed seed. Raw failure evidence is retained; the exact unchanged one-worker recovery completes all8 and matches sealed R2 hashes. Formal R3 runs once, completes all100 and exits0. Its post-processing liveness watcher raced the parent-shell exit-receipt write; only post-processing was restarted after adding a bounded30-second receipt grace period. No world data, tests, standards or authoritative rules were altered to recover. The earlier debug autosave timeout under concurrent calibration/build load is resolved by the unchanged targeted recheck after task load subsides; the prior overlapping executable-link lock was resolved by waiting for the owning build to finish.
-
-Next Phase2 hypothesis: measure per-lineage temporal soft/hard realized diets and reproduction alongside spatial resource correlation/coherence before further physical tuning. Fine independent cells may not provide durable contiguous resource patches; this is an inference requiring measurement. Use existing actual hunting/mating budgets to distinguish energetic insufficiency from scarcity of compatible predator mates. Descendant-localization evidence does not justify global dispersal penalties. Do not shorten persistence, relax cluster thresholds, introduce reproductive walls or begin a later Phase.
-
-**PHASE 2 INCOMPLETE.** Deterministic finalization and evidence are complete; stable ecological differentiation and the gated native/release acceptance remain unfinished.
+The next justified step is to inspect lineage/window-local resource profitability and predator prey/compatible-mate overlap from the preserved time series, then define one reversible movement/spatial-coupling hypothesis with another explicitly bounded paired matrix. Preserve MC/high-C before pursuing differentiation; do not reduce mating radius again, add reproductive walls, substitute diagnostic roles for acceptance, or strengthen feeding trade-offs without new evidence. No such further rule is implemented in this closure.

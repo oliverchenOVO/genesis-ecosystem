@@ -1,0 +1,6 @@
+{
+  "executable_sha256": "F2FD6679519BEE71B5C846D87000340B9E14C882D42BD22B0396CFCB1DBCAD32",
+  "measurement": "Windows process peak working set sampled every 250ms; includes replay verification",
+  "context": "Diagnostics-only normal-runtime verification. All own R4 calibration, archive and compilation jobs finished. External host workload is not controlled. Frozen R3 control then current rules3 executable, no optional features; no R4 ecological authority selected.",
+  "peak_working_set_bytes": 9797632
+}
