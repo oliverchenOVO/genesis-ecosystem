@@ -2,6 +2,19 @@
 
 A deterministic Windows artificial-life ecosystem. Rust owns simulation truth; Tauri 2 and React display its recorded evidence. This is an artificial-life model, not a scientifically predictive simulator.
 
+這是一個以 Rust 建立、可固定 seed 重現的人工生命研究原型。專案重點是把演化結果連結到實際模擬紀錄，並以 save/load、replay、測試與有界實驗檢查結果。LLM 不參與核心世界狀態的決策。
+
+### Review this project
+
+- [作品介紹與可引用成果](docs/PORTFOLIO.md)：architecture, measured evidence, negative results and a suggested review path.
+- [AI 協作與貢獻說明](docs/AI_COLLABORATION.md)：what assistance was used and what still needs author confirmation.
+- [公開準備清單](docs/GITHUB_PUBLICATION.md)：publication scope, privacy/history review, license and presentation tasks.
+- [Phase 2 acceptance report](docs/PHASE2_REPORT.md)：full measurements and unresolved gates.
+
+R4 finalization verified 40 paired control/probe worlds and rejected all four ecological candidates because they lost persistent multicellular viability. Biological Phase 2 acceptance remains incomplete. This is a research prototype, not a qualified Phase 2 desktop release. Benchmark variation does not support a stable performance clearance.
+
+No project license has been selected yet. Public visibility and permission to reuse the code are separate decisions; see the publication checklist. The repository remains private while these preparations are reviewed.
+
 Current branch implements simulation v5 / Phase2 and is **INCOMPLETE** pending native production UAT and sustained complex-niche evidence. Protected v0.1.0 remains the accepted v4 baseline. See [Phase2 report](docs/PHASE2_REPORT.md) for exact tests,100-seed calibration, benchmark results and review artifacts. v4 saves require v0.1.0 and are explicitly rejected by v5.
 
 ## Run
