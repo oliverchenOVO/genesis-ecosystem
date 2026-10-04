@@ -15,6 +15,14 @@
   },
   "frontend_tests": {"passed": 24, "failed": 0},
   "node_evidence_tests": {"passed": 13, "failed": 0},
+  "targeted_debug_autosave_recheck": {
+    "passed": 1,
+    "failed": 0,
+    "elapsed_seconds": 188.44,
+    "unchanged_advance_deadline_seconds": 120,
+    "note": "The deadline governs reaching15100 ticks; subsequent verification of all3 rotating saves/replays is included in total test time. This test already belongs to the75-test release suite and is not counted twice.",
+    "log": "artifacts/phase2-r3-final-debug-autosave.log"
+  },
   "rust_format": "PASS",
   "rust_workspace_clippy_all_targets_all_features": "PASS",
   "frontend_format": "PASS",

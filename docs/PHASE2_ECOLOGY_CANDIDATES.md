@@ -143,3 +143,50 @@ realized resource separation in pooled lifetime data, not proof of continuous
 combined resource/prey mass and do not directly encode a soft/hard axis. Formal
 acceptance definitions remain unchanged; this analytical limitation must be kept
 separate from the genuine failure of the unchanged sustained prey-income gate.
+
+## Completed formal expansion of the frozen D candidate
+
+Source831f861 / simulation5 / rules3 / RNG1 / envelope1 / analysis5 / ecology4
+completes100 seeds×100000 ticks in10891.9436458 reported seconds. All100
+verify save/load/full replay/independent1000-tick continuation; all900
+overlapping cohort closures and temporal mating/gene-flow/energy closures
+pass. Complete JSONL rows equal final JSON, and the first8 endpoint hashes
+match frozen D exactly. Full raw ledgers are preserved as lossless gzip
+with byte-for-byte decompressed SHA256 verification; no data are cropped.
+
+Survival99, natural extinction1(seed43), technical/replay/cap failures0.
+Persistent multicellular12/100, high-C21/100 (35 world–lineage pairs).
+Speciation7 worlds/9 new species; extinction5 worlds/6 extinct species.
+Persistent morphology/niche differentiation, actual differentiated feeding
+roles and sustained prey income all remain0/100. **PHASE2 INCOMPLETE**;
+no additional tuning, later Phase, merge, tag or release follows this result.
+
+Successful mating pairs4413350; pair-weighted cross-lineage0.6074238390338405
+and cross-habitat0.49644351796254543; pooled distance mean12.908427838263451,
+median14,p90=15. No reduced cross-lineage mixing is demonstrated by the
+paired A/D extension. Lifetime source-overlap world means average
+0.9047529960701577 across99 eligible worlds; this is partial resource-use
+separation, not temporal lineage-specialist acceptance.
+
+Both environmental channels supply credited energy in all1881 active
+post-warmup windows of99 worlds. Pooled Grazer hard fraction0.11503700601150393,
+Crusher0.6046300150837033, Piercer actual prey fraction0.5180864150836552.
+The strict predator-like cohort's actual prey fraction0.8959289854173628
+still does not yield a qualifying sustained prey cohort. Species niche
+vectors combine resource units/prey mass without a direct soft/hard axis;
+ecology4 has temporal mouth income and lineage occupancy, but lifetime-only
+lineage diet data. Preserve this analytical limitation and the unchanged
+acceptance failure separately.
+
+Final R3 TPS3567.448191109341 /586.5427319079399 /82.65501872305617.
+Same-host fresh R2 TPS5894.054859009905 /832.3077013606392 /89.3660164337223.
+Reference slowdown39.47378712201861% triggers profiling: perception
+11.6716762/13.1044635 marked seconds, with identical normal endpoint hash.
+No new whole-population resource/mate scan is introduced. External host
+load is uncontrolled; original R2 benchmarks remain preserved.
+
+Final regression75 normal /81 all-feature Rust, frontend24, Node13 passes;
+targeted debug autosave recovery also passes without changing its120-second
+advance deadline. Tauri/NSIS CI builds pass and remain BUILD ONLY. Native
+UAT is not performed before biological acceptance. PHASE2_REPORT.md records
+full provenance, hashes, CI and the next measured Phase2 hypothesis.

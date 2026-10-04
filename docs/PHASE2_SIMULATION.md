@@ -10,11 +10,15 @@ actual prey-income persistence definitions remain unchanged. Headless ecology
 diagnostic schema4 reports real soft/hard/prey income; it stays outside State
 and frontend frame payloads. The compact food layer reports soft+hard stock.
 
-The D extension has8 survivors, zero completed-run technical/replay/cap failures,
-3 persistent multi-unit worlds and2 high-C worlds. Morphology/niche/trophic
-differentiation and persistent prey income remain zero. Formal100×100k,
-final regression and biological acceptance are pending. **PHASE2 INCOMPLETE**;
-native UAT, merge, tag and release are gated on acceptance. The revision2
+The frozen source831f861 has completed formal100×100k with99 survivors,
+one natural extinction, zero technical/replay/cap failures,12 persistent
+multicellular worlds and21 high-C worlds (35 world–lineage pairs).
+Morphology/niche/trophic differentiation and persistent prey income remain zero.
+Rust75/81, frontend24, Node13, builds and code-head CI pass; paired final
+benchmarks and the required reference slowdown profile are complete.
+**PHASE2 INCOMPLETE**; native UAT, merge, tag and release remain gated by
+failed biological acceptance. See PHASE2_REPORT.md for exact evidence and
+the analytical soft/hard niche-vector limitation. The revision2
 descriptions below preserve the earlier sealed baseline; see candidate evidence
 and save policy for current revision3 provenance.
 

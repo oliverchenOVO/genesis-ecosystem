@@ -2,11 +2,14 @@
 
 ## Current ecological validation candidate: revision3
 
-The bounded ecological D candidate is selected after completed8×100k:
-8 survivors, zero technical/replay/cap failures,3 persistent multi-unit worlds
-and2 high-C worlds. Biology remains **PHASE2 INCOMPLETE**: differentiated
-persistent morphology/niche/trophic and prey-income gates are still zero.
-Formal100×100k and final acceptance remain pending.
+The bounded ecological D candidate was selected after paired8×100k and is
+frozen at source831f861. Formal100×100k completes with99 survivors, one
+natural extinction, zero technical/replay/cap failures,12 persistent
+multicellular and21 high-C worlds. Biology remains **PHASE2 INCOMPLETE**:
+persistent morphology/niche/trophic differentiation and prey-income gates
+are zero. Save/load, full replay and independent1000-tick continuation
+pass for all100 worlds. Native/release acceptance remains gated; see
+PHASE2_REPORT.md for final results.
 
 Current simulation5 / rules3 / RNG1 / envelope1 / analysis5 adds two independent
 renewable resource fields and mate radius16. Checksummed payloads use
