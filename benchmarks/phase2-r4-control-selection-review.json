@@ -1,0 +1,1689 @@
+{
+  "version": 1,
+  "seeds": 8,
+  "ticks": 50000,
+  "worlds": [
+    {
+      "seed": 0,
+      "matched": [
+        {
+          "role": "SoftSpecialist",
+          "matched_lineage_windows": 306,
+          "higher_offspring_per_tick": 246,
+          "zero_mixed_offspring_pairs": 0,
+          "mean_ratio_positive_denominator": 1.4623835772276697
+        },
+        {
+          "role": "HardSpecialist",
+          "matched_lineage_windows": 265,
+          "higher_offspring_per_tick": 214,
+          "zero_mixed_offspring_pairs": 0,
+          "mean_ratio_positive_denominator": 1.7320027435964895
+        }
+      ],
+      "mating": [
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 0,
+          "searches": 112892,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 1,
+          "searches": 352071,
+          "unpaired_candidates": 520293,
+          "eligible_candidates": 6223,
+          "compatible_candidates": 3186,
+          "successful_pairs": 3167,
+          "eligible_fraction": 0.011960568372051901,
+          "compatible_fraction": 0.5119717178209867,
+          "success_per_search": 0.00899534468899739
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 2,
+          "searches": 231391,
+          "unpaired_candidates": 886927,
+          "eligible_candidates": 8728,
+          "compatible_candidates": 3846,
+          "successful_pairs": 3763,
+          "eligible_fraction": 0.009840719698464473,
+          "compatible_fraction": 0.4406507791017415,
+          "success_per_search": 0.016262516692524775
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 3,
+          "searches": 6882,
+          "unpaired_candidates": 69662,
+          "eligible_candidates": 463,
+          "compatible_candidates": 290,
+          "successful_pairs": 254,
+          "eligible_fraction": 0.00664637822629267,
+          "compatible_fraction": 0.6263498920086393,
+          "success_per_search": 0.036907875617553036
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 0,
+          "searches": 112442,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 1,
+          "searches": 435537,
+          "unpaired_candidates": 657827,
+          "eligible_candidates": 6734,
+          "compatible_candidates": 3759,
+          "successful_pairs": 3747,
+          "eligible_fraction": 0.010236733974129976,
+          "compatible_fraction": 0.5582120582120582,
+          "success_per_search": 0.008603172635160732
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 2,
+          "searches": 344152,
+          "unpaired_candidates": 1353151,
+          "eligible_candidates": 10074,
+          "compatible_candidates": 5533,
+          "successful_pairs": 5488,
+          "eligible_fraction": 0.007444845401584893,
+          "compatible_fraction": 0.5492356561445305,
+          "success_per_search": 0.015946442269694786
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 3,
+          "searches": 14746,
+          "unpaired_candidates": 144399,
+          "eligible_candidates": 602,
+          "compatible_candidates": 383,
+          "successful_pairs": 358,
+          "eligible_fraction": 0.004169003940470502,
+          "compatible_fraction": 0.6362126245847176,
+          "success_per_search": 0.0242777702427777
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 0,
+          "searches": 1504,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 1,
+          "searches": 64,
+          "unpaired_candidates": 78,
+          "eligible_candidates": 5,
+          "compatible_candidates": 1,
+          "successful_pairs": 1,
+          "eligible_fraction": 0.0641025641025641,
+          "compatible_fraction": 0.2,
+          "success_per_search": 0.015625
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 2,
+          "searches": 56,
+          "unpaired_candidates": 216,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        }
+      ],
+      "simultaneous": [
+        {
+          "width": 1000,
+          "simultaneous_soft_hard_windows": 6,
+          "longest_simultaneous_diagnostic_ticks": 3000
+        },
+        {
+          "width": 5000,
+          "simultaneous_soft_hard_windows": 0,
+          "longest_simultaneous_diagnostic_ticks": 0
+        }
+      ]
+    },
+    {
+      "seed": 1,
+      "matched": [
+        {
+          "role": "SoftSpecialist",
+          "matched_lineage_windows": 423,
+          "higher_offspring_per_tick": 317,
+          "zero_mixed_offspring_pairs": 0,
+          "mean_ratio_positive_denominator": 1.3236392510997177
+        },
+        {
+          "role": "HardSpecialist",
+          "matched_lineage_windows": 331,
+          "higher_offspring_per_tick": 267,
+          "zero_mixed_offspring_pairs": 0,
+          "mean_ratio_positive_denominator": 1.4935449741254843
+        }
+      ],
+      "mating": [
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 0,
+          "searches": 67868,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 1,
+          "searches": 263446,
+          "unpaired_candidates": 398251,
+          "eligible_candidates": 6192,
+          "compatible_candidates": 2868,
+          "successful_pairs": 2849,
+          "eligible_fraction": 0.015547983558107827,
+          "compatible_fraction": 0.4631782945736434,
+          "success_per_search": 0.010814360438192267
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 2,
+          "searches": 217461,
+          "unpaired_candidates": 849676,
+          "eligible_candidates": 10870,
+          "compatible_candidates": 4114,
+          "successful_pairs": 4039,
+          "eligible_fraction": 0.012793111727293699,
+          "compatible_fraction": 0.37847286108555656,
+          "success_per_search": 0.018573445353419694
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 3,
+          "searches": 7218,
+          "unpaired_candidates": 71359,
+          "eligible_candidates": 549,
+          "compatible_candidates": 295,
+          "successful_pairs": 268,
+          "eligible_fraction": 0.007693493462632604,
+          "compatible_fraction": 0.5373406193078324,
+          "success_per_search": 0.0371293987254087
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 0,
+          "searches": 121460,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 1,
+          "searches": 545604,
+          "unpaired_candidates": 836478,
+          "eligible_candidates": 14449,
+          "compatible_candidates": 5668,
+          "successful_pairs": 5651,
+          "eligible_fraction": 0.017273616281599756,
+          "compatible_fraction": 0.39227628209564674,
+          "success_per_search": 0.010357328758586814
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 2,
+          "searches": 516176,
+          "unpaired_candidates": 2052828,
+          "eligible_candidates": 29131,
+          "compatible_candidates": 9476,
+          "successful_pairs": 9397,
+          "eligible_fraction": 0.014190667703285418,
+          "compatible_fraction": 0.3252892108063575,
+          "success_per_search": 0.01820503084219336
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 3,
+          "searches": 21488,
+          "unpaired_candidates": 206997,
+          "eligible_candidates": 1366,
+          "compatible_candidates": 617,
+          "successful_pairs": 597,
+          "eligible_fraction": 0.006599129455982454,
+          "compatible_fraction": 0.45168374816983897,
+          "success_per_search": 0.02778294862248697
+        },
+        {
+          "predator": false,
+          "mouth": 2,
+          "density": 1,
+          "searches": 4,
+          "unpaired_candidates": 8,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 2,
+          "density": 2,
+          "searches": 6,
+          "unpaired_candidates": 18,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 0,
+          "searches": 11637,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 1,
+          "searches": 3855,
+          "unpaired_candidates": 4834,
+          "eligible_candidates": 102,
+          "compatible_candidates": 55,
+          "successful_pairs": 55,
+          "eligible_fraction": 0.021100537856847332,
+          "compatible_fraction": 0.5392156862745098,
+          "success_per_search": 0.014267185473411154
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 2,
+          "searches": 847,
+          "unpaired_candidates": 3345,
+          "eligible_candidates": 62,
+          "compatible_candidates": 24,
+          "successful_pairs": 24,
+          "eligible_fraction": 0.018535127055306428,
+          "compatible_fraction": 0.3870967741935484,
+          "success_per_search": 0.02833530106257379
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 3,
+          "searches": 126,
+          "unpaired_candidates": 1276,
+          "eligible_candidates": 18,
+          "compatible_candidates": 5,
+          "successful_pairs": 5,
+          "eligible_fraction": 0.014106583072100314,
+          "compatible_fraction": 0.2777777777777778,
+          "success_per_search": 0.03968253968253968
+        }
+      ],
+      "simultaneous": [
+        {
+          "width": 1000,
+          "simultaneous_soft_hard_windows": 17,
+          "longest_simultaneous_diagnostic_ticks": 9000
+        },
+        {
+          "width": 5000,
+          "simultaneous_soft_hard_windows": 2,
+          "longest_simultaneous_diagnostic_ticks": 5000
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "matched": [
+        {
+          "role": "SoftSpecialist",
+          "matched_lineage_windows": 378,
+          "higher_offspring_per_tick": 251,
+          "zero_mixed_offspring_pairs": 0,
+          "mean_ratio_positive_denominator": 1.2439896684206517
+        },
+        {
+          "role": "HardSpecialist",
+          "matched_lineage_windows": 367,
+          "higher_offspring_per_tick": 294,
+          "zero_mixed_offspring_pairs": 0,
+          "mean_ratio_positive_denominator": 1.4515308566972978
+        }
+      ],
+      "mating": [
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 0,
+          "searches": 67929,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 1,
+          "searches": 277540,
+          "unpaired_candidates": 420205,
+          "eligible_candidates": 4018,
+          "compatible_candidates": 2121,
+          "successful_pairs": 2105,
+          "eligible_fraction": 0.009561999500243928,
+          "compatible_fraction": 0.5278745644599303,
+          "success_per_search": 0.007584492325430569
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 2,
+          "searches": 205483,
+          "unpaired_candidates": 786628,
+          "eligible_candidates": 6711,
+          "compatible_candidates": 3203,
+          "successful_pairs": 3137,
+          "eligible_fraction": 0.008531351541007948,
+          "compatible_fraction": 0.47727611384294444,
+          "success_per_search": 0.01526646973228929
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 3,
+          "searches": 4731,
+          "unpaired_candidates": 50999,
+          "eligible_candidates": 240,
+          "compatible_candidates": 188,
+          "successful_pairs": 159,
+          "eligible_fraction": 0.00470597462695347,
+          "compatible_fraction": 0.7833333333333333,
+          "success_per_search": 0.033608116677235254
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 0,
+          "searches": 167468,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 1,
+          "searches": 811104,
+          "unpaired_candidates": 1242946,
+          "eligible_candidates": 15468,
+          "compatible_candidates": 5959,
+          "successful_pairs": 5950,
+          "eligible_fraction": 0.012444627522032332,
+          "compatible_fraction": 0.3852469614688389,
+          "success_per_search": 0.007335680751173709
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 2,
+          "searches": 700457,
+          "unpaired_candidates": 2754634,
+          "eligible_candidates": 25963,
+          "compatible_candidates": 9287,
+          "successful_pairs": 9240,
+          "eligible_fraction": 0.009425208575803538,
+          "compatible_fraction": 0.35770134422062166,
+          "success_per_search": 0.013191387908179945
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 3,
+          "searches": 21203,
+          "unpaired_candidates": 192918,
+          "eligible_candidates": 1206,
+          "compatible_candidates": 465,
+          "successful_pairs": 423,
+          "eligible_fraction": 0.006251360681740429,
+          "compatible_fraction": 0.3855721393034826,
+          "success_per_search": 0.019950007074470595
+        },
+        {
+          "predator": true,
+          "mouth": 1,
+          "density": 0,
+          "searches": 206,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 1,
+          "density": 1,
+          "searches": 89,
+          "unpaired_candidates": 98,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 1,
+          "density": 2,
+          "searches": 8,
+          "unpaired_candidates": 26,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 0,
+          "searches": 489,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 1,
+          "searches": 43,
+          "unpaired_candidates": 55,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 2,
+          "searches": 15,
+          "unpaired_candidates": 59,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 3,
+          "searches": 10,
+          "unpaired_candidates": 126,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        }
+      ],
+      "simultaneous": [
+        {
+          "width": 1000,
+          "simultaneous_soft_hard_windows": 31,
+          "longest_simultaneous_diagnostic_ticks": 23000
+        },
+        {
+          "width": 5000,
+          "simultaneous_soft_hard_windows": 4,
+          "longest_simultaneous_diagnostic_ticks": 20000
+        }
+      ]
+    },
+    {
+      "seed": 3,
+      "matched": [
+        {
+          "role": "SoftSpecialist",
+          "matched_lineage_windows": 287,
+          "higher_offspring_per_tick": 173,
+          "zero_mixed_offspring_pairs": 5,
+          "mean_ratio_positive_denominator": 1.238027007356274
+        },
+        {
+          "role": "HardSpecialist",
+          "matched_lineage_windows": 269,
+          "higher_offspring_per_tick": 245,
+          "zero_mixed_offspring_pairs": 0,
+          "mean_ratio_positive_denominator": 1.7188114636021883
+        }
+      ],
+      "mating": [
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 0,
+          "searches": 57809,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 1,
+          "searches": 196533,
+          "unpaired_candidates": 291148,
+          "eligible_candidates": 3314,
+          "compatible_candidates": 2324,
+          "successful_pairs": 2318,
+          "eligible_fraction": 0.011382527099619438,
+          "compatible_fraction": 0.7012673506336753,
+          "success_per_search": 0.011794456910544286
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 2,
+          "searches": 128686,
+          "unpaired_candidates": 499035,
+          "eligible_candidates": 4381,
+          "compatible_candidates": 3141,
+          "successful_pairs": 3094,
+          "eligible_fraction": 0.008778943360686124,
+          "compatible_fraction": 0.7169595982652363,
+          "success_per_search": 0.024043019442674417
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 3,
+          "searches": 7360,
+          "unpaired_candidates": 80735,
+          "eligible_candidates": 387,
+          "compatible_candidates": 252,
+          "successful_pairs": 236,
+          "eligible_fraction": 0.004793460085464793,
+          "compatible_fraction": 0.6511627906976745,
+          "success_per_search": 0.03206521739130435
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 0,
+          "searches": 88739,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 1,
+          "searches": 426046,
+          "unpaired_candidates": 658647,
+          "eligible_candidates": 7484,
+          "compatible_candidates": 4584,
+          "successful_pairs": 4575,
+          "eligible_fraction": 0.0113626874486637,
+          "compatible_fraction": 0.6125066809192945,
+          "success_per_search": 0.01073827708745065
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 2,
+          "searches": 434785,
+          "unpaired_candidates": 1752143,
+          "eligible_candidates": 15314,
+          "compatible_candidates": 9710,
+          "successful_pairs": 9665,
+          "eligible_fraction": 0.00874015419974283,
+          "compatible_fraction": 0.6340603369465848,
+          "success_per_search": 0.02222937773842244
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 3,
+          "searches": 23024,
+          "unpaired_candidates": 228580,
+          "eligible_candidates": 1264,
+          "compatible_candidates": 652,
+          "successful_pairs": 632,
+          "eligible_fraction": 0.005529792632776271,
+          "compatible_fraction": 0.5158227848101266,
+          "success_per_search": 0.027449617790132035
+        },
+        {
+          "predator": true,
+          "mouth": 1,
+          "density": 0,
+          "searches": 393,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 1,
+          "density": 1,
+          "searches": 150,
+          "unpaired_candidates": 153,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 0,
+          "searches": 4804,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 1,
+          "searches": 678,
+          "unpaired_candidates": 865,
+          "eligible_candidates": 19,
+          "compatible_candidates": 7,
+          "successful_pairs": 7,
+          "eligible_fraction": 0.021965317919075144,
+          "compatible_fraction": 0.3684210526315789,
+          "success_per_search": 0.01032448377581121
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 2,
+          "searches": 141,
+          "unpaired_candidates": 595,
+          "eligible_candidates": 1,
+          "compatible_candidates": 1,
+          "successful_pairs": 1,
+          "eligible_fraction": 0.0016806722689075631,
+          "compatible_fraction": 1,
+          "success_per_search": 0.0070921985815602835
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 3,
+          "searches": 18,
+          "unpaired_candidates": 170,
+          "eligible_candidates": 1,
+          "compatible_candidates": 1,
+          "successful_pairs": 1,
+          "eligible_fraction": 0.0058823529411764705,
+          "compatible_fraction": 1,
+          "success_per_search": 0.05555555555555555
+        }
+      ],
+      "simultaneous": [
+        {
+          "width": 1000,
+          "simultaneous_soft_hard_windows": 11,
+          "longest_simultaneous_diagnostic_ticks": 5000
+        },
+        {
+          "width": 5000,
+          "simultaneous_soft_hard_windows": 0,
+          "longest_simultaneous_diagnostic_ticks": 0
+        }
+      ]
+    },
+    {
+      "seed": 4,
+      "matched": [
+        {
+          "role": "SoftSpecialist",
+          "matched_lineage_windows": 270,
+          "higher_offspring_per_tick": 234,
+          "zero_mixed_offspring_pairs": 11,
+          "mean_ratio_positive_denominator": 1.6486955168578084
+        },
+        {
+          "role": "HardSpecialist",
+          "matched_lineage_windows": 208,
+          "higher_offspring_per_tick": 174,
+          "zero_mixed_offspring_pairs": 6,
+          "mean_ratio_positive_denominator": 1.8868781890593935
+        }
+      ],
+      "mating": [
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 0,
+          "searches": 62867,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 1,
+          "searches": 210544,
+          "unpaired_candidates": 312227,
+          "eligible_candidates": 3268,
+          "compatible_candidates": 2463,
+          "successful_pairs": 2446,
+          "eligible_fraction": 0.010466743747337675,
+          "compatible_fraction": 0.753671970624235,
+          "success_per_search": 0.01161752412797325
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 2,
+          "searches": 145843,
+          "unpaired_candidates": 570109,
+          "eligible_candidates": 4566,
+          "compatible_candidates": 3344,
+          "successful_pairs": 3289,
+          "eligible_fraction": 0.008008994771175337,
+          "compatible_fraction": 0.7323696890056942,
+          "success_per_search": 0.022551648005046523
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 3,
+          "searches": 9362,
+          "unpaired_candidates": 103071,
+          "eligible_candidates": 415,
+          "compatible_candidates": 290,
+          "successful_pairs": 271,
+          "eligible_fraction": 0.004026350767917261,
+          "compatible_fraction": 0.6987951807228916,
+          "success_per_search": 0.028946806237983336
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 0,
+          "searches": 86283,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 1,
+          "searches": 375950,
+          "unpaired_candidates": 578038,
+          "eligible_candidates": 6858,
+          "compatible_candidates": 4276,
+          "successful_pairs": 4267,
+          "eligible_fraction": 0.0118642718990793,
+          "compatible_fraction": 0.6235053951589384,
+          "success_per_search": 0.011349913552334086
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 2,
+          "searches": 405415,
+          "unpaired_candidates": 1666982,
+          "eligible_candidates": 14699,
+          "compatible_candidates": 8175,
+          "successful_pairs": 8111,
+          "eligible_fraction": 0.008817731685165166,
+          "compatible_fraction": 0.5561602830124498,
+          "success_per_search": 0.020006659842383732
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 3,
+          "searches": 35326,
+          "unpaired_candidates": 352488,
+          "eligible_candidates": 1935,
+          "compatible_candidates": 939,
+          "successful_pairs": 899,
+          "eligible_fraction": 0.005489548580377204,
+          "compatible_fraction": 0.48527131782945737,
+          "success_per_search": 0.025448678027515145
+        },
+        {
+          "predator": true,
+          "mouth": 1,
+          "density": 0,
+          "searches": 303,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 1,
+          "density": 1,
+          "searches": 69,
+          "unpaired_candidates": 81,
+          "eligible_candidates": 1,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0.012345679012345678,
+          "compatible_fraction": 0,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 1,
+          "density": 2,
+          "searches": 15,
+          "unpaired_candidates": 58,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 0,
+          "searches": 876,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 1,
+          "searches": 95,
+          "unpaired_candidates": 106,
+          "eligible_candidates": 1,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0.009433962264150943,
+          "compatible_fraction": 0,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 2,
+          "searches": 10,
+          "unpaired_candidates": 39,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        }
+      ],
+      "simultaneous": [
+        {
+          "width": 1000,
+          "simultaneous_soft_hard_windows": 21,
+          "longest_simultaneous_diagnostic_ticks": 11000
+        },
+        {
+          "width": 5000,
+          "simultaneous_soft_hard_windows": 2,
+          "longest_simultaneous_diagnostic_ticks": 10000
+        }
+      ]
+    },
+    {
+      "seed": 5,
+      "matched": [
+        {
+          "role": "SoftSpecialist",
+          "matched_lineage_windows": 273,
+          "higher_offspring_per_tick": 236,
+          "zero_mixed_offspring_pairs": 0,
+          "mean_ratio_positive_denominator": 1.422779995135368
+        },
+        {
+          "role": "HardSpecialist",
+          "matched_lineage_windows": 247,
+          "higher_offspring_per_tick": 202,
+          "zero_mixed_offspring_pairs": 0,
+          "mean_ratio_positive_denominator": 1.480410259550831
+        }
+      ],
+      "mating": [
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 0,
+          "searches": 81143,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 1,
+          "searches": 297816,
+          "unpaired_candidates": 446972,
+          "eligible_candidates": 5009,
+          "compatible_candidates": 3080,
+          "successful_pairs": 3067,
+          "eligible_fraction": 0.011206518529124868,
+          "compatible_fraction": 0.6148931922539429,
+          "success_per_search": 0.010298304993687377
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 2,
+          "searches": 218887,
+          "unpaired_candidates": 854078,
+          "eligible_candidates": 7146,
+          "compatible_candidates": 4345,
+          "successful_pairs": 4290,
+          "eligible_fraction": 0.008366917307318535,
+          "compatible_fraction": 0.6080324657150854,
+          "success_per_search": 0.019599153901328083
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 3,
+          "searches": 11727,
+          "unpaired_candidates": 125569,
+          "eligible_candidates": 683,
+          "compatible_candidates": 420,
+          "successful_pairs": 379,
+          "eligible_fraction": 0.0054392405768939785,
+          "compatible_fraction": 0.6149341142020498,
+          "success_per_search": 0.03231858105227253
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 0,
+          "searches": 81997,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 1,
+          "searches": 360180,
+          "unpaired_candidates": 551134,
+          "eligible_candidates": 6193,
+          "compatible_candidates": 3752,
+          "successful_pairs": 3741,
+          "eligible_fraction": 0.011236831696102944,
+          "compatible_fraction": 0.6058453092200872,
+          "success_per_search": 0.01038647342995169
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 2,
+          "searches": 353080,
+          "unpaired_candidates": 1423766,
+          "eligible_candidates": 12653,
+          "compatible_candidates": 6724,
+          "successful_pairs": 6694,
+          "eligible_fraction": 0.00888699407065487,
+          "compatible_fraction": 0.5314154745910061,
+          "success_per_search": 0.01895887617537102
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 3,
+          "searches": 22612,
+          "unpaired_candidates": 225584,
+          "eligible_candidates": 1254,
+          "compatible_candidates": 627,
+          "successful_pairs": 613,
+          "eligible_fraction": 0.00555890488687141,
+          "compatible_fraction": 0.5,
+          "success_per_search": 0.02710949938085972
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 0,
+          "searches": 3145,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 1,
+          "searches": 755,
+          "unpaired_candidates": 972,
+          "eligible_candidates": 16,
+          "compatible_candidates": 6,
+          "successful_pairs": 6,
+          "eligible_fraction": 0.01646090534979424,
+          "compatible_fraction": 0.375,
+          "success_per_search": 0.007947019867549669
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 2,
+          "searches": 242,
+          "unpaired_candidates": 992,
+          "eligible_candidates": 24,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0.024193548387096774,
+          "compatible_fraction": 0,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 3,
+          "searches": 39,
+          "unpaired_candidates": 407,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        }
+      ],
+      "simultaneous": [
+        {
+          "width": 1000,
+          "simultaneous_soft_hard_windows": 1,
+          "longest_simultaneous_diagnostic_ticks": 1000
+        },
+        {
+          "width": 5000,
+          "simultaneous_soft_hard_windows": 0,
+          "longest_simultaneous_diagnostic_ticks": 0
+        }
+      ]
+    },
+    {
+      "seed": 6,
+      "matched": [
+        {
+          "role": "SoftSpecialist",
+          "matched_lineage_windows": 352,
+          "higher_offspring_per_tick": 268,
+          "zero_mixed_offspring_pairs": 2,
+          "mean_ratio_positive_denominator": 1.3877679774586817
+        },
+        {
+          "role": "HardSpecialist",
+          "matched_lineage_windows": 313,
+          "higher_offspring_per_tick": 236,
+          "zero_mixed_offspring_pairs": 3,
+          "mean_ratio_positive_denominator": 1.5025513349111321
+        }
+      ],
+      "mating": [
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 0,
+          "searches": 60067,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 1,
+          "searches": 223616,
+          "unpaired_candidates": 341100,
+          "eligible_candidates": 3884,
+          "compatible_candidates": 2440,
+          "successful_pairs": 2428,
+          "eligible_fraction": 0.011386690120199355,
+          "compatible_fraction": 0.6282183316168898,
+          "success_per_search": 0.010857899255867201
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 2,
+          "searches": 193576,
+          "unpaired_candidates": 757767,
+          "eligible_candidates": 6623,
+          "compatible_candidates": 3700,
+          "successful_pairs": 3637,
+          "eligible_fraction": 0.008740153635616225,
+          "compatible_fraction": 0.5586592178770949,
+          "success_per_search": 0.018788486175972226
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 3,
+          "searches": 7940,
+          "unpaired_candidates": 79703,
+          "eligible_candidates": 441,
+          "compatible_candidates": 319,
+          "successful_pairs": 256,
+          "eligible_fraction": 0.005533041416257857,
+          "compatible_fraction": 0.7233560090702947,
+          "success_per_search": 0.03224181360201511
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 0,
+          "searches": 93288,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 1,
+          "searches": 429956,
+          "unpaired_candidates": 661669,
+          "eligible_candidates": 6901,
+          "compatible_candidates": 3829,
+          "successful_pairs": 3817,
+          "eligible_fraction": 0.010429686142164737,
+          "compatible_fraction": 0.5548471236052746,
+          "success_per_search": 0.008877652597009927
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 2,
+          "searches": 400601,
+          "unpaired_candidates": 1580356,
+          "eligible_candidates": 13132,
+          "compatible_candidates": 6965,
+          "successful_pairs": 6889,
+          "eligible_fraction": 0.008309520133438289,
+          "compatible_fraction": 0.5303837953091685,
+          "success_per_search": 0.017196662015321978
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 3,
+          "searches": 13553,
+          "unpaired_candidates": 128794,
+          "eligible_candidates": 595,
+          "compatible_candidates": 432,
+          "successful_pairs": 378,
+          "eligible_fraction": 0.004619780424553938,
+          "compatible_fraction": 0.7260504201680672,
+          "success_per_search": 0.027890503947465506
+        },
+        {
+          "predator": true,
+          "mouth": 1,
+          "density": 0,
+          "searches": 154,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 1,
+          "density": 1,
+          "searches": 130,
+          "unpaired_candidates": 170,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 1,
+          "density": 2,
+          "searches": 19,
+          "unpaired_candidates": 65,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 0,
+          "searches": 423,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 1,
+          "searches": 25,
+          "unpaired_candidates": 33,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 2,
+          "searches": 15,
+          "unpaired_candidates": 46,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        }
+      ],
+      "simultaneous": [
+        {
+          "width": 1000,
+          "simultaneous_soft_hard_windows": 20,
+          "longest_simultaneous_diagnostic_ticks": 16000
+        },
+        {
+          "width": 5000,
+          "simultaneous_soft_hard_windows": 2,
+          "longest_simultaneous_diagnostic_ticks": 10000
+        }
+      ]
+    },
+    {
+      "seed": 7,
+      "matched": [
+        {
+          "role": "SoftSpecialist",
+          "matched_lineage_windows": 284,
+          "higher_offspring_per_tick": 227,
+          "zero_mixed_offspring_pairs": 1,
+          "mean_ratio_positive_denominator": 1.4894198238690348
+        },
+        {
+          "role": "HardSpecialist",
+          "matched_lineage_windows": 228,
+          "higher_offspring_per_tick": 199,
+          "zero_mixed_offspring_pairs": 1,
+          "mean_ratio_positive_denominator": 1.598832869314362
+        }
+      ],
+      "mating": [
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 0,
+          "searches": 69824,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 1,
+          "searches": 238799,
+          "unpaired_candidates": 355596,
+          "eligible_candidates": 3915,
+          "compatible_candidates": 3128,
+          "successful_pairs": 3115,
+          "eligible_fraction": 0.01100968514831438,
+          "compatible_fraction": 0.7989782886334611,
+          "success_per_search": 0.013044443234686912
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 2,
+          "searches": 177901,
+          "unpaired_candidates": 703745,
+          "eligible_candidates": 5346,
+          "compatible_candidates": 4191,
+          "successful_pairs": 4124,
+          "eligible_fraction": 0.007596501573723437,
+          "compatible_fraction": 0.7839506172839507,
+          "success_per_search": 0.02318143236968876
+        },
+        {
+          "predator": false,
+          "mouth": 0,
+          "density": 3,
+          "searches": 11208,
+          "unpaired_candidates": 117813,
+          "eligible_candidates": 650,
+          "compatible_candidates": 421,
+          "successful_pairs": 365,
+          "eligible_fraction": 0.005517217964061691,
+          "compatible_fraction": 0.6476923076923077,
+          "success_per_search": 0.03256602426837973
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 0,
+          "searches": 77163,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 1,
+          "searches": 296793,
+          "unpaired_candidates": 448690,
+          "eligible_candidates": 4781,
+          "compatible_candidates": 3665,
+          "successful_pairs": 3655,
+          "eligible_fraction": 0.010655463683166552,
+          "compatible_fraction": 0.7665760301192219,
+          "success_per_search": 0.012314980474606881
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 2,
+          "searches": 252409,
+          "unpaired_candidates": 1007498,
+          "eligible_candidates": 7501,
+          "compatible_candidates": 5952,
+          "successful_pairs": 5896,
+          "eligible_fraction": 0.007445176069828426,
+          "compatible_fraction": 0.7934942007732302,
+          "success_per_search": 0.023358913509423197
+        },
+        {
+          "predator": false,
+          "mouth": 1,
+          "density": 3,
+          "searches": 16210,
+          "unpaired_candidates": 163328,
+          "eligible_candidates": 894,
+          "compatible_candidates": 541,
+          "successful_pairs": 500,
+          "eligible_fraction": 0.005473648119122257,
+          "compatible_fraction": 0.6051454138702461,
+          "success_per_search": 0.030845157310302282
+        },
+        {
+          "predator": true,
+          "mouth": 1,
+          "density": 0,
+          "searches": 234,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 1,
+          "density": 1,
+          "searches": 215,
+          "unpaired_candidates": 248,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 1,
+          "density": 2,
+          "searches": 26,
+          "unpaired_candidates": 89,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 0,
+          "searches": 1494,
+          "unpaired_candidates": 0,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": null,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 1,
+          "searches": 106,
+          "unpaired_candidates": 119,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 2,
+          "searches": 32,
+          "unpaired_candidates": 132,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        },
+        {
+          "predator": true,
+          "mouth": 2,
+          "density": 3,
+          "searches": 8,
+          "unpaired_candidates": 102,
+          "eligible_candidates": 0,
+          "compatible_candidates": 0,
+          "successful_pairs": 0,
+          "eligible_fraction": 0,
+          "compatible_fraction": null,
+          "success_per_search": 0
+        }
+      ],
+      "simultaneous": [
+        {
+          "width": 1000,
+          "simultaneous_soft_hard_windows": 1,
+          "longest_simultaneous_diagnostic_ticks": 1000
+        },
+        {
+          "width": 5000,
+          "simultaneous_soft_hard_windows": 0,
+          "longest_simultaneous_diagnostic_ticks": 0
+        }
+      ]
+    }
+  ],
+  "definitions": "Matched individual role comparisons share world,lineage and1000-tick window, >=8 observed individuals in both groups, after5000 warmup. Descriptive contemporaneous realized diet, not causal survival. Mating density uses actual unpaired local-candidate strata; eligible and compatible rates exclude zero denominator. Diagnostic simultaneous Soft/Hard roles are not original resource/prey acceptance."
+}

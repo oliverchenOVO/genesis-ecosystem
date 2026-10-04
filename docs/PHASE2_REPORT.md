@@ -1,4 +1,4 @@
-# R4 stabilization — diagnostic stage A in progress
+# R4 stabilization — diagnostic stage A complete; candidate selection pending
 
 **PHASE 2 INCOMPLETE.** R3 authority remains simulation5 / rules3 / RNG1 / envelope1 / analysis5. No authoritative ecology change, rules4 selection, new biological pass, native UAT, merge, tag or release has occurred.
 
@@ -8,7 +8,7 @@ The optional headless observer now records100-tick per-lineage credited diets an
 
 Local validation: normal Rust75, all-features83, frontend24, Node23 PASS; fmt/clippy/frontend lint/typecheck/build PASS. A fixed1000-tick seed0 smoke has identical R3-frozen/current-normal/observed hash `b21177ecbc60aacfb3425b32ec123e478ebd5233d09cd19b0c593ff13e9c5aef`, with save/load/full replay and1000-tick continuation verified. A lossless measured fixture supports independent corruption rejection tests. Code-validation provenance: `benchmarks/phase2-r4-diagnostics-code-validation.json`.
 
-The prescribed unchanged-R3 seeds0..7 ×50000 diagnostic run is in progress. No candidate changes are justified by incomplete measurements; reference-200 candidate performance and frozen R4 100×100k are not reached. Native UAT remains biologically gated. Private branch CI for the new diagnostic code will be recorded after the commit. The complete sealed R3 formal findings follow; they are not R4 results.
+The unchanged-R3 seeds0..7 ×50000 diagnostic run completed in850.8393844 seconds:8/8 verified, all hashes identical to sealed R3. Hard-specialist lineage persistence reaches26k and simultaneous Soft/Hard diagnostic coexistence23k; no qualified PreySpecialist window. Generalist reproductive dominance is not supported by matched world/lineage/window comparisons. Fragmented rich productivity masks and predator pre-reproduction deficits support bounded, separately validated experiments. Complete evidence, hypotheses and limitations are in `PHASE2_R4_STAGE_A.md` and `benchmarks/phase2-r4-control*`. Reference-200 candidate performance and frozen R4 100×100k are not reached. Native UAT remains biologically gated. Private branch CI for the new diagnostic code will be recorded after the commit. The complete sealed R3 formal findings follow; they are not R4 results.
 
 ---
 

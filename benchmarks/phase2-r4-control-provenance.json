@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "authority_source": "831f8617d19714d856d653278e244e1f9becaa28",
+  "diagnostic_code_head": "321ab99f3d4c83a2bb1a365907f03cf29429e6c8",
+  "executable_sha256": "310c216256c1ccb04b4d81d636a57c761a7d51aa22f3c169c4679b7df58acefd",
+  "elapsed_seconds": 850.8393844,
+  "workers": 4,
+  "seeds": 8,
+  "ticks_per_seed": 50000,
+  "all_eight_hashes_match_frozen_R3": true,
+  "jsonl_rows_equal_final_results": true,
+  "save_load_replay_continuation_verified": 8,
+  "files": [
+    {
+      "source": "artifacts/phase2-r4-control.json",
+      "destination": "benchmarks/phase2-r4-control.json.gz",
+      "raw_bytes": 122054159,
+      "gzip_bytes": 17122242,
+      "raw_sha256": "a93c439e3efe21f5f50e1ee0d5b074d1d5fca734e1808b730c30719cf87180ed",
+      "gzip_sha256": "85ba20c17ffe6a326ecbeddc564f46a92f340fc001eb7397fec3b591426c72e0"
+    },
+    {
+      "source": "artifacts/phase2-r4-control.jsonl",
+      "destination": "benchmarks/phase2-r4-control.jsonl.gz",
+      "raw_bytes": 122053601,
+      "gzip_bytes": 17122181,
+      "raw_sha256": "c026f6be08349b5532e6e23e92217b28f5f5a8007acdc669f137aedf2f41d40d",
+      "gzip_sha256": "1f092adcf99229dff40dfb7586ed9a8c5b6fc8be51b1d84ce58896740c2a9090"
+    },
+    {
+      "source": "artifacts/phase2-r4-interim-temporal-summary.json",
+      "destination": "benchmarks/phase2-r4-control-temporal-summary.json.gz",
+      "raw_bytes": 117285778,
+      "gzip_bytes": 11574619,
+      "raw_sha256": "dfa33f3ce259182b2ee29a5a9e4b233efa62a8941b026859c3fbb6642573a913",
+      "gzip_sha256": "a86eaa5467f058bf1be21c71b34669ee0b8f320c00c9fbf8b53a0210fff06f11"
+    }
+  ],
+  "stage": "Diagnostics only; not rules4 formal acceptance"
+}
