@@ -1,0 +1,282 @@
+diff --git a/crates/sim-core/src/lib.rs b/crates/sim-core/src/lib.rs
+index cda4424..1280eff 100644
+--- a/crates/sim-core/src/lib.rs
++++ b/crates/sim-core/src/lib.rs
+@@ -8,6 +8,7 @@ pub mod persistence;
+ #[cfg(feature = "profile")]
+ pub mod profile;
+ pub mod replay;
++pub mod resource_patches;
+ pub mod resources;
+ pub mod rng;
+ pub mod spatial;
+diff --git a/crates/sim-core/src/model.rs b/crates/sim-core/src/model.rs
+index bfbcc4c..d217403 100644
+--- a/crates/sim-core/src/model.rs
++++ b/crates/sim-core/src/model.rs
+@@ -7,7 +7,7 @@ use std::collections::BTreeMap;
+ 
+ pub const SIMULATION_VERSION: u32 = 5;
+ /// Unreleased v5 revisions are isolated; published v4 remains immutable.
+-pub const SIMULATION_RULES_REVISION: u32 = 3;
++pub const SIMULATION_RULES_REVISION: u32 = 4;
+ pub const TELEMETRY_INTERVAL: u64 = 100;
+ macro_rules! id {
+     ($name:ident) => {
+@@ -65,6 +65,7 @@ pub struct Cell {
+     pub food: i32,
+     pub hard_food: i32,
+     pub resource_remainders: [i64; 2],
++    pub productivity_factors: [u16; 2],
+     pub fertility: i32,
+     pub temperature_offset: i32,
+     pub elevation: i32,
+diff --git a/crates/sim-core/src/persistence.rs b/crates/sim-core/src/persistence.rs
+index e1f88b1..0d71907 100644
+--- a/crates/sim-core/src/persistence.rs
++++ b/crates/sim-core/src/persistence.rs
+@@ -15,7 +15,7 @@ pub const MAX_SAVE_BYTES: u64 = 128 * 1024 * 1024;
+ const MAGIC: &[u8; 8] = b"GENESIS1";
+ const HEADER: usize = 60;
+ // This cannot alias an old valid State: its bytes8..12 are not a valid world size.
+-const PAYLOAD_TAG: &[u8; 16] = b"GENESIS5RULES003";
++const PAYLOAD_TAG: &[u8; 16] = b"GENESIS5R4P128__";
+ 
+ pub fn encode(world: &World) -> Result<Vec<u8>, String> {
+     world.validate()?;
+diff --git a/crates/sim-core/src/resource_patches.rs b/crates/sim-core/src/resource_patches.rs
+new file mode 100644
+index 0000000..191d7dc
+--- /dev/null
++++ b/crates/sim-core/src/resource_patches.rs
+@@ -0,0 +1,115 @@
++//! Experimental integer spatial productivity; never a region or mating label.
++use crate::{spatial::CELL_SIZE, Cell};
++pub const PATCH_SCALE: i32 = 128;
++fn node(seed: u64, x: u64, y: u64) -> i64 {
++    let mut v = seed ^ x.wrapping_mul(0x9e3779b97f4a7c15) ^ y.wrapping_mul(0xd1b54a32d192ed03);
++    v = (v ^ (v >> 30)).wrapping_mul(0xbf58476d1ce4e5b9);
++    v = (v ^ (v >> 27)).wrapping_mul(0x94d049bb133111eb);
++    v ^= v >> 31;
++    500 + (v % 1001) as i64
++}
++fn field(seed: u64, x: i32, y: i32) -> i64 {
++    let scale = i64::from(PATCH_SCALE);
++    let (cx, cy) = ((x / PATCH_SCALE) as u64, (y / PATCH_SCALE) as u64);
++    let (dx, dy) = (i64::from(x % PATCH_SCALE), i64::from(y % PATCH_SCALE));
++    (node(seed, cx, cy) * (scale - dx) * (scale - dy)
++        + node(seed, cx + 1, cy) * dx * (scale - dy)
++        + node(seed, cx, cy + 1) * (scale - dx) * dy
++        + node(seed, cx + 1, cy + 1) * dx * dy)
++        / (scale * scale)
++}
++pub fn initialize(seed: u64, size: i32, cells: &mut [Cell]) {
++    let side = (size / CELL_SIZE) as usize;
++    let raw = (0..cells.len())
++        .map(|i| {
++            let soft = field(
++                seed,
++                (i % side) as i32 * CELL_SIZE + CELL_SIZE / 2,
++                (i / side) as i32 * CELL_SIZE + CELL_SIZE / 2,
++            );
++            [soft, 2000 - soft]
++        })
++        .collect::<Vec<_>>();
++    let mut base = [0_i128; 2];
++    let mut weighted = [0_i128; 2];
++    for (cell, f) in cells.iter().zip(&raw) {
++        for (channel, n) in cell.base_productivity().into_iter().enumerate() {
++            base[channel] += i128::from(n);
++            weighted[channel] += i128::from(n) * i128::from(f[channel]);
++        }
++    }
++    for (cell, f) in cells.iter_mut().zip(raw) {
++        for channel in 0..2 {
++            cell.productivity_factors[channel] = if weighted[channel] == 0 {
++                1000
++            } else {
++                (i128::from(f[channel]) * base[channel] * 1000 / weighted[channel]) as u16
++            };
++        }
++    }
++}
++#[cfg(test)]
++mod tests {
++    use super::*;
++    #[test]
++    fn field_is_integer_continuous_positive_and_seeded() {
++        assert_ne!(field(0, 8, 8), field(1, 8, 8));
++        for seed in 0..8 {
++            for y in (8..512).step_by(16) {
++                for x in (8..496).step_by(16) {
++                    let v = field(seed, x, y);
++                    assert!((500..=1500).contains(&v));
++                    assert!(
++                        (v - field(seed, x + 16, y)).abs()
++                            <= 1000 * i64::from(CELL_SIZE) / i64::from(PATCH_SCALE) + 1
++                    );
++                }
++            }
++        }
++    }
++    #[test]
++    fn normalization_preserves_both_global_growth_budgets_without_rng() {
++        for seed in 0..8 {
++            let w = crate::World::new(crate::Config {
++                seed,
++                ..Default::default()
++            })
++            .unwrap();
++            let mut cells = w.state.environment.cells.clone();
++            initialize(seed, w.state.config.size, &mut cells);
++            assert_eq!(cells, w.state.environment.cells);
++            for channel in 0..2 {
++                let base = cells
++                    .iter()
++                    .map(|c| c.base_productivity()[channel])
++                    .sum::<i64>();
++                let scaled = cells
++                    .iter()
++                    .map(|c| c.productivity_numerators()[channel])
++                    .sum::<i64>();
++                assert!(scaled <= base * 1000 && base * 1000 - scaled < base);
++                assert!(cells
++                    .iter()
++                    .all(|c| (333..=3000).contains(&c.productivity_factors[channel])));
++            }
++        }
++    }
++    #[test]
++    fn restored_patch_carries_and_future_are_exact() {
++        let mut w = crate::World::new(crate::Config::default()).unwrap();
++        w.advance(1234);
++        let bytes = crate::persistence::encode(&w).unwrap();
++        let mut loaded = crate::persistence::decode(&bytes).unwrap();
++        assert_eq!(w.state.environment, loaded.state.environment);
++        w.advance(1000);
++        loaded.advance(1000);
++        assert_eq!(w.hash(), loaded.hash());
++        assert_eq!(
++            w.hash(),
++            crate::replay::Replay::from_world(&w)
++                .verify()
++                .unwrap()
++                .hash()
++        );
++    }
++}
+diff --git a/crates/sim-core/src/resources.rs b/crates/sim-core/src/resources.rs
+index eb1cca7..800f9e7 100644
+--- a/crates/sim-core/src/resources.rs
++++ b/crates/sim-core/src/resources.rs
+@@ -1,8 +1,21 @@
+ //! Independent renewable fields. Integer remainder accumulation avoids rounding
+ //! slow renewable hard resources permanently to zero. No extra RNG or species rules.
+ use crate::{Cell, Organism};
+-pub const DENOMINATORS: [i64; 2] = [300_000, 300_000_000];
++pub const DENOMINATORS: [i64; 2] = [300_000_000, 300_000_000_000];
+ impl Cell {
++    pub fn base_productivity(&self) -> [i64; 2] {
++        [
++            i64::from(self.fertility) * i64::from(200 + self.moisture) * 2,
++            i64::from(self.fertility) * i64::from(1200 - self.moisture) * i64::from(self.elevation),
++        ]
++    }
++    pub fn productivity_numerators(&self) -> [i64; 2] {
++        let base = self.base_productivity();
++        [
++            base[0] * i64::from(self.productivity_factors[0]),
++            base[1] * i64::from(self.productivity_factors[1]),
++        ]
++    }
+     pub fn total_food(&self) -> i32 {
+         self.food + self.hard_food
+     }
+@@ -13,11 +26,9 @@ impl Cell {
+         self.food = soft;
+     }
+     pub fn regenerate_channels(&mut self, regeneration: i32) {
+-        let rate = i64::from(regeneration) * i64::from(self.fertility);
+-        let numerators = [
+-            rate * i64::from(200 + self.moisture) * 2,
+-            rate * i64::from(1200 - self.moisture) * i64::from(self.elevation),
+-        ];
++        let numerators = self
++            .productivity_numerators()
++            .map(|n| n * i64::from(regeneration));
+         for channel in 0..2 {
+             let numerator = numerators[channel] + self.resource_remainders[channel];
+             let growth = (numerator / DENOMINATORS[channel]) as i32;
+@@ -83,7 +94,7 @@ mod tests {
+         assert!(dry.hard_food > 0 && wet.hard_food > 0);
+         assert_eq!(
+             dry.resource_remainders[1],
+-            (100 * 4 * 100 * 1100 * 900) % DENOMINATORS[1]
++            (100 * 4 * 100 * 1100 * 900 * i64::from(dry.productivity_factors[1])) % DENOMINATORS[1]
+         );
+         let paused = dry.clone();
+         dry.regenerate_channels(0);
+diff --git a/crates/sim-core/src/temporal_ecology.rs b/crates/sim-core/src/temporal_ecology.rs
+index 9b69778..5fc0f8d 100644
+--- a/crates/sim-core/src/temporal_ecology.rs
++++ b/crates/sim-core/src/temporal_ecology.rs
+@@ -341,11 +341,11 @@ pub fn sample(world: &World) {
+         c.previous_positions = positions;
+         if tick > 0 && tick.is_multiple_of(1000) { flush_individuals(c); }
+         if tick.is_multiple_of(1000) {
+-            c.fields.push(serde_json::json!({"tick":tick,"side":side,"cell_size":CELL_SIZE,
++            c.fields.push(serde_json::json!({"tick":tick,"side":side,"cell_size":CELL_SIZE,"productivity_denominators":crate::resources::DENOMINATORS,
+                 "soft":world.state.environment.cells.iter().map(|c| c.food).collect::<Vec<_>>(),
+                 "hard":world.state.environment.cells.iter().map(|c| c.hard_food).collect::<Vec<_>>(),
+-                "soft_productivity":world.state.environment.cells.iter().map(|c| i64::from(c.fertility)*i64::from(200+c.moisture)*2).collect::<Vec<_>>(),
+-                "hard_productivity":world.state.environment.cells.iter().map(|c| i64::from(c.fertility)*i64::from(1200-c.moisture)*i64::from(c.elevation)).collect::<Vec<_>>() }));
++                "soft_productivity":world.state.environment.cells.iter().map(|c| c.productivity_numerators()[0]).collect::<Vec<_>>(),
++                "hard_productivity":world.state.environment.cells.iter().map(|c| c.productivity_numerators()[1]).collect::<Vec<_>>() }));
+         }
+     });
+ }
+@@ -361,7 +361,7 @@ pub fn finish() -> serde_json::Value {
+         "resource_snapshots":c.fields,
+         "individual_fitness_1000":c.individual_fitness,
+         "mate_search_density":c.mate_density.iter().map(|((window,lineage,mouth,predator,density),v)|serde_json::json!({"window":window,"lineage":lineage,"mouth":mouth,"predator":predator,"density":density,"searches":v[0],"unpaired_candidates":v[1],"eligible_candidates":v[2],"compatible_candidates":v[3],"successful_pairs":v[4]})).collect::<Vec<_>>(),
+-        "definitions":"R3 authority unchanged. Credited diet income over disjoint100 ticks; endpoints sampled every100 ticks including zero. Budgets disjoint1000 ticks, founders in first and censored survivors in last; births by child, offspring/matings by parent. Local eligibility uses authoritative age/cooldown/energy at end-of-tick; no paired exclusions, snapshot opportunities not matching outcomes. Density strata count other residents within16:0/1..2/3..7/8+. Visible prey uses current vision and authoritative can_attack, close prey within8 (attack distance). End-to-end displacement over100 ticks is a lower bound on path length. Resource stocks and uncapped productivity numerators every1000 ticks. Integer arrays permit deterministic analysis outside simulation. No juvenile/adult state exists; completed lifespan is not adult lifespan."})
++        "definitions":"Experimental R4 patch prototype; not selected authority. Credited diet income over disjoint100 ticks; endpoints sampled every100 ticks including zero. Budgets disjoint1000 ticks, founders in first and censored survivors in last; births by child, offspring/matings by parent. Local eligibility uses authoritative age/cooldown/energy at end-of-tick; no paired exclusions, snapshot opportunities not matching outcomes. Density strata count other residents within16:0/1..2/3..7/8+. Visible prey uses current vision and authoritative can_attack, close prey within8 (attack distance). End-to-end displacement over100 ticks is a lower bound on path length. Resource stocks and uncapped productivity numerators every1000 ticks. Integer arrays permit deterministic analysis outside simulation. No juvenile/adult state exists; completed lifespan is not adult lifespan."})
+ }
+ 
+ #[cfg(test)]
+diff --git a/crates/sim-core/src/world.rs b/crates/sim-core/src/world.rs
+index c634522..0fe331e 100644
+--- a/crates/sim-core/src/world.rs
++++ b/crates/sim-core/src/world.rs
+@@ -23,11 +23,12 @@ impl World {
+         config.validate()?;
+         let mut rng = Streams::new(config.seed);
+         let side = config.size / CELL_SIZE;
+-        let cells: Vec<Cell> = (0..side * side)
++        let mut cells: Vec<Cell> = (0..side * side)
+             .map(|index| Cell {
+                 food: 300 + rng.world.below(700) as i32,
+                 hard_food: 0,
+                 resource_remainders: [0; 2],
++                productivity_factors: [1000; 2],
+                 fertility: 60 + rng.world.below(81) as i32,
+                 temperature_offset: ((index / side / 4 + (config.seed % 7) as i32) % 5 - 2) * 250
+                     + rng.world.below(201) as i32
+@@ -42,6 +43,7 @@ impl World {
+                 cell
+             })
+             .collect();
++        crate::resource_patches::initialize(config.seed, config.size, &mut cells);
+         let mut base = Genome([500; LOCI]);
+         base.0[14..].copy_from_slice(&[200, 500, 125, 200, 100, 200, 300, 200]);
+         let mut organisms = Vec::new();
+@@ -1135,6 +1137,9 @@ impl World {
+                     .iter()
+                     .zip(crate::resources::DENOMINATORS)
+                     .any(|(n, d)| !(0..d).contains(n))
++                || c.productivity_factors
++                    .iter()
++                    .any(|f| !(333..=3000).contains(f))
+                 || !(60..=140).contains(&c.fertility)
+                 || !(0..=1000).contains(&c.elevation)
+                 || !(0..=1000).contains(&c.moisture)

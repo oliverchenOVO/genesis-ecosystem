@@ -4,11 +4,17 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { gzipSync } from 'node:zlib'
-import { evaluateCandidate } from './evaluate-ecology-candidates.mjs'
+import { evaluateCandidate,resourceChannelReview } from './evaluate-ecology-candidates.mjs'
 import { readCalibration } from './read-calibration.mjs'
 
 // Exercise evidence validation against a complete, immutable measured R2 run.
 const control = JSON.parse(fs.readFileSync(new URL('../benchmarks/phase2-r3-diagnostics-r2-v3.json', import.meta.url), 'utf8'))
+test('R4 resource use rejects a strictly greater than half unused-world count',()=> {
+  const unused=[[8,0],[5,0]],active=[[8,2],[5,0]]
+  assert.deepEqual(resourceChannelReview([unused,unused,unused,active]).majority_unused,[false,true])
+  assert.deepEqual(resourceChannelReview([unused,unused,active,active]).majority_unused,[false,false])
+  assert.deepEqual(resourceChannelReview([[],active]).unused_worlds,[0,0])
+})
 
 test('paired evaluation rejects altered founder conditions and environments', () => {
   const candidate = structuredClone(control)

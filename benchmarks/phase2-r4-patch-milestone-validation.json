@@ -1,0 +1,29 @@
+{
+  "authority": {
+    "simulation": 5,
+    "rules": 3,
+    "rng": 1,
+    "envelope": 1,
+    "analysis": 5
+  },
+  "normal_rust_tests": 75,
+  "all_features_rust_tests": 84,
+  "frontend_tests": 24,
+  "node_tests": 26,
+  "rust_benchmark_build": true,
+  "frontend_build": true,
+  "fmt": true,
+  "clippy": true,
+  "frontend_format_lint_typecheck": true,
+  "benchmarks": {
+    "candidate_worlds": 24,
+    "ticks_per_world": 50000,
+    "save_load_replay_continuations": 24,
+    "technical_failures": 0,
+    "candidates_rejected": 3,
+    "normal_performance_claim": false
+  },
+  "protected_artifacts_verified": 7,
+  "private_repository": true,
+  "notes": "All three independent resource patch candidates fail required complexity preservation. No authoritative rules change or selected rules4 golden."
+}

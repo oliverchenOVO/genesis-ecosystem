@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "stage": "Isolated R4 exploratory candidate, not selected authority or100-seed formal acceptance",
+  "source_base": "321ab99f3d4c83a2bb1a365907f03cf29429e6c8",
+  "source_patch_sha256": "86a5c5582e0461587d623026d6a2f25e6c74f2386bdb12ba2860337f3af28d1f",
+  "executable_sha256": "e618b1129ecd89bc2f4978c64b1f1f0619e7b2ea9e9076b39e9ee31788050252",
+  "elapsed_seconds": 907.1423798,
+  "workers": 2,
+  "seeds": 8,
+  "ticks_per_seed": 50000,
+  "jsonl_equals_final": true,
+  "full_replay_save_load_continuations": 8,
+  "normal_performance_claim": false,
+  "files": [
+    {
+      "destination": "benchmarks/phase2-r4-patch32.json.gz",
+      "raw_bytes": 123113310,
+      "gzip_bytes": 16619036,
+      "raw_sha256": "1465c862c2365ff952fa330eddb8fdd402c9ff86db296088583284260c34c5de",
+      "gzip_sha256": "715811c5a408b3bad06c1bae37ce9f014689a9bd77c3ca7f3f3f548701af2d6c"
+    },
+    {
+      "destination": "benchmarks/phase2-r4-patch32.jsonl.gz",
+      "raw_bytes": 123112762,
+      "gzip_bytes": 16619629,
+      "raw_sha256": "69f6ebc7aed5f9c4d23e2956da0d48847329a09c921dbd62751666225b6cfa8a",
+      "gzip_sha256": "cd8f4ab11bb5f7aa43af4280e8fb623803b39fb72909f2ebda51d0d40ae84d38"
+    },
+    {
+      "destination": "benchmarks/phase2-r4-patch32-temporal-summary.json.gz",
+      "raw_bytes": 114781427,
+      "gzip_bytes": 11366614,
+      "raw_sha256": "972df990283caa2b42839bba268ae14e30fa747deceb3e990e28d5e6332e748c",
+      "gzip_sha256": "c63c916fa482e08279b4d14ab168de55c1ae290b795dec952e4e3b0a03d86cb5"
+    }
+  ],
+  "world_hashes": [
+    {
+      "seed": 0,
+      "hash": "59a2eb967fa470450cb3db63ff905de19c36a89932d71cdf738e1bce82e27033"
+    },
+    {
+      "seed": 1,
+      "hash": "2be4eb5df8ddb8453b19182b637db3aad5d5e32816da2fc8d75254a1c1ae55d5"
+    },
+    {
+      "seed": 2,
+      "hash": "656bf29f83db90905369fb01a5efec96adc67517380e9690976059af7ba4a765"
+    },
+    {
+      "seed": 3,
+      "hash": "fbdb65ac33ebd644f448e1b0573da64a9068b8b2aa9c48c013ff5e21653b6396"
+    },
+    {
+      "seed": 4,
+      "hash": "9887afbecb02c4a9b599f601d131501374e74fb93625bb369997a777b6f50fb9"
+    },
+    {
+      "seed": 5,
+      "hash": "e632a459067816623839658265e27e5534b0f1e30e582ae7276b29a614b0e7b5"
+    },
+    {
+      "seed": 6,
+      "hash": "c68e408c71d300ab4887723b014ee4056470343ae5a1b68e859ee78b221f45bf"
+    },
+    {
+      "seed": 7,
+      "hash": "82a68ff780592daf77b8ba7e04fbac7edc5ac44c0d81793353007da811afe970"
+    }
+  ]
+}

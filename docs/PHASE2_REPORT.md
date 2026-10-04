@@ -1,3 +1,7 @@
+# R4 patch experiment milestone
+
+Three paired8×50000 patch-only candidates completed with deterministic verification. All are rejected for loss of persistent multicellular viability; none improves the original ecological gates. Predator capture-only experiment is still pending. Authority remains rules3; Phase2 remains INCOMPLETE. See [stage B](PHASE2_R4_STAGE_B.md) and the sealed R3 evidence below.
+
 # R4 stabilization — diagnostic stage A complete; candidate selection pending
 
 **PHASE 2 INCOMPLETE.** R3 authority remains simulation5 / rules3 / RNG1 / envelope1 / analysis5. No authoritative ecology change, rules4 selection, new biological pass, native UAT, merge, tag or release has occurred.

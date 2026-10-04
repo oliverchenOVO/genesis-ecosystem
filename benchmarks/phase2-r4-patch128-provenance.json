@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "stage": "Isolated R4 exploratory candidate, not selected authority or100-seed formal acceptance",
+  "source_base": "321ab99f3d4c83a2bb1a365907f03cf29429e6c8",
+  "source_patch_sha256": "bf1010ed7f7fc9e19d52dac39394b78e59c462b13610f5b2322c3f2fc098ad96",
+  "executable_sha256": "45d040d9b0cc180e1195eb35ca6873263ff1e336bcb575c138384ff4dd4f8612",
+  "elapsed_seconds": 1310.7234595,
+  "workers": 2,
+  "seeds": 8,
+  "ticks_per_seed": 50000,
+  "jsonl_equals_final": true,
+  "full_replay_save_load_continuations": 8,
+  "normal_performance_claim": false,
+  "files": [
+    {
+      "destination": "benchmarks/phase2-r4-patch128.json.gz",
+      "raw_bytes": 98378343,
+      "gzip_bytes": 13505554,
+      "raw_sha256": "cc5629b1a3818eb3a2572b913ca6acbafec9d0eaaca53ccf69830e03b178ccb5",
+      "gzip_sha256": "3a94d003807fa12aedba466f115f74419dc89c778706632e22c5f913295d09a1"
+    },
+    {
+      "destination": "benchmarks/phase2-r4-patch128.jsonl.gz",
+      "raw_bytes": 98377792,
+      "gzip_bytes": 13505507,
+      "raw_sha256": "64c09d82487c265ae01903c836802a607212d4b198af5bdb8ac46132df01481d",
+      "gzip_sha256": "960f83637f825019bc9618ef0aafc406aefbd413cb53122285e3f04fd1ece4cc"
+    },
+    {
+      "destination": "benchmarks/phase2-r4-patch128-temporal-summary.json.gz",
+      "raw_bytes": 93896260,
+      "gzip_bytes": 9166211,
+      "raw_sha256": "bf193bb53dc73444a0bc824b5c4528a35795c6a868b5fa5f50e93d71f008ef76",
+      "gzip_sha256": "af60a227b4b5b9892fabb6a521439bfe6b93c2fce2329210d9bf686e2d908208"
+    }
+  ],
+  "world_hashes": [
+    {
+      "seed": 0,
+      "hash": "65d5c2a2e66363510eaaa0d82e499667d0aa376586a68c006ad48179428cecc9"
+    },
+    {
+      "seed": 1,
+      "hash": "36b1299d2d5d6017d949f7699ffa0dd72932adde5f4df885dc9ee20f98ed2ed0"
+    },
+    {
+      "seed": 2,
+      "hash": "a6bdd84c2fc9842fd1d893af5004aa55f721bc680d57af362706be3b1e6c8cd4"
+    },
+    {
+      "seed": 3,
+      "hash": "29bd7fc2249f3a905d551ff482af09a6820f4cacb03bf8fd0a23da140009ce11"
+    },
+    {
+      "seed": 4,
+      "hash": "c179b9b588defef465d9372f595974347078c4a5d838d14ee011e3570379607c"
+    },
+    {
+      "seed": 5,
+      "hash": "574889fdc3538fb07e454becc8ab94b4f652d6d5d0cc6bb5ab7be73dc00539b1"
+    },
+    {
+      "seed": 6,
+      "hash": "902b2f6d5febd4f33b9ab5298480cb561b4bf029adfa77dcdbb39d33f6efbfc2"
+    },
+    {
+      "seed": 7,
+      "hash": "dd9dbc36772106151114267d9dc627a1bb3cedaf94a0959b91e3bb8f22aedd00"
+    }
+  ]
+}
