@@ -8,6 +8,52 @@ import os from 'node:os'
 import path from 'node:path'
 import { gzipSync } from 'node:zlib'
 import { createHash } from 'node:crypto'
+import { windowProfitability, predatorPeriod } from './window-profitability.mjs'
+
+const fitnessGroup = (window, lineage, role, income, ticks, offspring) => ({ window, lineage, role,
+  totals: { energy: [income, 0, 0], stock: [20, 10], efficiency: [70, 30], samples: 2,
+    organism_ticks: ticks, actual_metabolic_energy: 10, attack_energy: 2, reproductive_energy: 3, offspring } })
+const profitabilityFixture = rows => ({version: 1, analysis_version: 5, seeds: 1, ticks_per_seed: 6000,
+  worlds: [{seed: 0, world_hash: 'fixture', individual_fitness: rows, predators: []}]})
+
+test('profitability matches only same lineage and window, excludes warmup and absent Mixed', () => {
+  const rows = [fitnessGroup(4, 1, 'Mixed', 100, 10, 2), fitnessGroup(4, 1, 'SoftSpecialist', 100, 10, 2),
+    fitnessGroup(5, 1, 'Mixed', 50, 100, 2), fitnessGroup(5, 1, 'SoftSpecialist', 30, 10, 1),
+    fitnessGroup(5, 2, 'HardSpecialist', 500, 100, 5)]
+  const [world] = windowProfitability(profitabilityFixture(rows))
+  assert.equal(world.comparisons.length, 1)
+  assert.equal(world.comparisons[0].specialist.net_before_reproduction_per_tick, 1.8)
+  assert.equal(world.comparisons[0].mixed.net_before_reproduction_per_tick, 0.38)
+  assert.equal(world.matched_roles[0].specialist_offspring_higher, 1)
+  assert.equal(world.matched_roles[1].mean_net_advantage_per_tick, null)
+})
+test('profitability keeps zero denominators unknown and rejects duplicate or corrupt evidence', () => {
+  const rows = [fitnessGroup(5, 1, 'Mixed', 0, 0, 0), fitnessGroup(5, 1, 'SoftSpecialist', 30, 10, 1)]
+  const summary = profitabilityFixture(rows)
+  assert.equal(windowProfitability(summary)[0].comparisons.length, 0)
+  rows.push(rows[0])
+  assert.throws(() => windowProfitability(summary), /Duplicate fitness/)
+  rows.pop(); rows[1].totals.organism_ticks = -1
+  assert.throws(() => windowProfitability(summary), /counter/)
+})
+test('predator period separates warmup, reproductive debit and observed extinction', () => {
+  const make = (window, food, prey, metabolism, offspring) => ({window, lineage: 1, budgets: {
+    food_energy: food, prey_energy: prey, actual_metabolic_energy: metabolism, attack_energy: 1,
+    reproductive_energy: 9, organism_ticks: 10, offspring_produced: offspring }})
+  const rows = [make(4, 100, 20, 10, 5), make(5, 2, 3, 8, 0)]
+  const post = predatorPeriod(rows, 5000, 6000)
+  assert.equal(post.net_before_reproduction, -4)
+  assert.equal(post.net_after_reproduction, -13)
+  assert.equal(post.totals.offspring_produced, 0)
+  assert.equal(predatorPeriod([], 5000, 6000).net_before_reproduction_per_tick, null)
+  assert.throws(() => predatorPeriod([...rows, rows[1]], 5000, 6000), /Duplicate predator/)
+})
+test('profitability rejects incomplete worlds and out-of-range windows', () => {
+  const summary = profitabilityFixture([fitnessGroup(6, 1, 'Mixed', 10, 10, 0)])
+  assert.throws(() => windowProfitability(summary), /Out-of-range/)
+  summary.worlds = []
+  assert.throws(() => windowProfitability(summary), /Incomplete/)
+})
 const fixture=()=>readCalibration(new URL('../fixtures/ecology-r4-observer-smoke.json.gz',import.meta.url))
 function withSidecar(check) {
   const root=fs.mkdtempSync(path.join(os.tmpdir(),'genesis-evidence-'))

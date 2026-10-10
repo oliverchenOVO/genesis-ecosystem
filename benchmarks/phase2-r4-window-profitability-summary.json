@@ -1,0 +1,2575 @@
+{
+  "version": 1,
+  "authority_changed": false,
+  "archive": "benchmarks/phase2-r4-window-profitability-review.json.gz",
+  "archive_sha256": "9538f04bd55c745df77a51b27332ae68afc27c3a64df4090277cd814b253513b",
+  "uncompressed_bytes": 79667006,
+  "definitions": "Reuses sealed temporal summaries; no simulation execution. Same seed/lineage/disjoint1000-tick window, post5000 warmup, realized individual fitness groups with nonzero organism-ticks. All observed groups included; these are not >=8-endpoint qualified lineage roles or acceptance gates. Rates use each group organism-ticks; matched means are unweighted across comparisons. Net subtracts actual total metabolism and attack costs; movement allocation is unavailable. Reproductive debit shown separately; birth/death stock transfers are not ecological income. Stocks/efficiencies use observed samples. Warmup and post-warmup predator budgets are separate. Missing groups/zero denominators remain absent/null. Descriptive diet conditioning cannot establish causal survival, generalist dominance, or a movement intervention.",
+  "scenarios": [
+    {
+      "source": "benchmarks/phase2-r4-control-temporal-summary.json.gz",
+      "source_sha256": "a86eaa5467f058bf1be21c71b34669ee0b8f320c00c9fbf8b53a0210fff06f11",
+      "rules_revision": 3,
+      "seeds": 8,
+      "ticks_per_seed": 50000,
+      "worlds": [
+        {
+          "seed": 0,
+          "world_hash": "741738ae7550d269e59e4f39106557cef283e0150a974cb309bf2f37cb92768f",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 7682,
+              "prey_energy": 45888,
+              "actual_metabolic_energy": 49718,
+              "attack_energy": 5650,
+              "reproductive_energy": 3579,
+              "organism_ticks": 8338,
+              "offspring_produced": 2
+            },
+            "net_before_reproduction": -1798,
+            "net_after_reproduction": -5377,
+            "net_before_reproduction_per_tick": -0.2156392420244663,
+            "prey_income_fraction": 0.8565988426358037,
+            "offspring_per_tick": 0.00023986567522187575
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 0,
+              "prey_energy": 5272,
+              "actual_metabolic_energy": 5796,
+              "attack_energy": 2128,
+              "reproductive_energy": 0,
+              "organism_ticks": 1734,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -2652,
+            "net_after_reproduction": -2652,
+            "net_before_reproduction_per_tick": -1.5294117647058822,
+            "prey_income_fraction": 1,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 671,
+              "specialist_net_higher": 434,
+              "specialist_offspring_higher": 452,
+              "mean_net_advantage_per_tick": 0.27716861348022076
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 604,
+              "specialist_net_higher": 362,
+              "specialist_offspring_higher": 390,
+              "mean_net_advantage_per_tick": 0.020599286632602153
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 1,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -3.2297761665813995
+            }
+          ]
+        },
+        {
+          "seed": 1,
+          "world_hash": "bdbabeda1113836f07ef9348d439d2051a131e28313d7657624cce48258a0b62",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 39255,
+              "prey_energy": 1120766,
+              "actual_metabolic_energy": 926194,
+              "attack_energy": 122869,
+              "reproductive_energy": 241557,
+              "organism_ticks": 167724,
+              "offspring_produced": 329
+            },
+            "net_before_reproduction": 110958,
+            "net_after_reproduction": -130599,
+            "net_before_reproduction_per_tick": 0.6615511196966445,
+            "prey_income_fraction": 0.9661600953775836,
+            "offspring_per_tick": 0.001961555889437409
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 383,
+              "prey_energy": 10777,
+              "actual_metabolic_energy": 9435,
+              "attack_energy": 4104,
+              "reproductive_energy": 0,
+              "organism_ticks": 3165,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -2379,
+            "net_after_reproduction": -2379,
+            "net_before_reproduction_per_tick": -0.7516587677725118,
+            "prey_income_fraction": 0.9656810035842294,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 1051,
+              "specialist_net_higher": 621,
+              "specialist_offspring_higher": 591,
+              "mean_net_advantage_per_tick": 0.0006688579104671225
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 1019,
+              "specialist_net_higher": 707,
+              "specialist_offspring_higher": 646,
+              "mean_net_advantage_per_tick": 0.558688373644609
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 3,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -1.7528049446480543
+            }
+          ]
+        },
+        {
+          "seed": 2,
+          "world_hash": "8dde43491e172545dbbe50b25de49731fde1f3a21591f77132b026c27b26f9e0",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 3947,
+              "prey_energy": 7796,
+              "actual_metabolic_energy": 14712,
+              "attack_energy": 1686,
+              "reproductive_energy": 0,
+              "organism_ticks": 2991,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -4655,
+            "net_after_reproduction": -4655,
+            "net_before_reproduction_per_tick": -1.5563356736877298,
+            "prey_income_fraction": 0.6638848675806863,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 616,
+              "prey_energy": 6446,
+              "actual_metabolic_energy": 5927,
+              "attack_energy": 1102,
+              "reproductive_energy": 0,
+              "organism_ticks": 1315,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 33,
+            "net_after_reproduction": 33,
+            "net_before_reproduction_per_tick": 0.025095057034220533,
+            "prey_income_fraction": 0.9127725856697819,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 862,
+              "specialist_net_higher": 421,
+              "specialist_offspring_higher": 464,
+              "mean_net_advantage_per_tick": -0.2469931932419699
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 873,
+              "specialist_net_higher": 554,
+              "specialist_offspring_higher": 525,
+              "mean_net_advantage_per_tick": 0.1505378938923814
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 2,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -1.6752858568341789
+            }
+          ]
+        },
+        {
+          "seed": 3,
+          "world_hash": "366f3ea5aa6c2f2be90599ce1d0707edc53d01e6e2a026ce7c216c84a0c3c1ea",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 18970,
+              "prey_energy": 188992,
+              "actual_metabolic_energy": 145603,
+              "attack_energy": 24168,
+              "reproductive_energy": 26304,
+              "organism_ticks": 27116,
+              "offspring_produced": 32
+            },
+            "net_before_reproduction": 38191,
+            "net_after_reproduction": 11887,
+            "net_before_reproduction_per_tick": 1.4084304469685793,
+            "prey_income_fraction": 0.9087814119887287,
+            "offspring_per_tick": 0.001180115061218469
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 808,
+              "prey_energy": 14478,
+              "actual_metabolic_energy": 12836,
+              "attack_energy": 4688,
+              "reproductive_energy": 0,
+              "organism_ticks": 4233,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -2238,
+            "net_after_reproduction": -2238,
+            "net_before_reproduction_per_tick": -0.5287030474840538,
+            "prey_income_fraction": 0.9471411749313097,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 594,
+              "specialist_net_higher": 242,
+              "specialist_offspring_higher": 297,
+              "mean_net_advantage_per_tick": -0.3973896819482293
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 577,
+              "specialist_net_higher": 446,
+              "specialist_offspring_higher": 425,
+              "mean_net_advantage_per_tick": 0.6610979314976118
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 4,
+              "specialist_net_higher": 1,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -1.060484933798703
+            }
+          ]
+        },
+        {
+          "seed": 4,
+          "world_hash": "e7a4d727f03e84c6481a45b54b7c5fb4fabf9b62f23f13620b6198cd9c6a9ac4",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 10235,
+              "prey_energy": 18421,
+              "actual_metabolic_energy": 28223,
+              "attack_energy": 3300,
+              "reproductive_energy": 0,
+              "organism_ticks": 5653,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -2867,
+            "net_after_reproduction": -2867,
+            "net_before_reproduction_per_tick": -0.507164337519901,
+            "prey_income_fraction": 0.6428322166387493,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 2743,
+              "prey_energy": 7410,
+              "actual_metabolic_energy": 8695,
+              "attack_energy": 1240,
+              "reproductive_energy": 0,
+              "organism_ticks": 1443,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 218,
+            "net_after_reproduction": 218,
+            "net_before_reproduction_per_tick": 0.15107415107415106,
+            "prey_income_fraction": 0.7298335467349552,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 649,
+              "specialist_net_higher": 412,
+              "specialist_offspring_higher": 430,
+              "mean_net_advantage_per_tick": 0.2296220109719843
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 617,
+              "specialist_net_higher": 393,
+              "specialist_offspring_higher": 382,
+              "mean_net_advantage_per_tick": 0.4319078325450724
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 2,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -1.3947597447868039
+            }
+          ]
+        },
+        {
+          "seed": 5,
+          "world_hash": "aefe58b7e1a54cf7676c0216e1f9ca73208712f22cbc1a1fe72fd46ef422ccd3",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 16696,
+              "prey_energy": 112707,
+              "actual_metabolic_energy": 121623,
+              "attack_energy": 15114,
+              "reproductive_energy": 17842,
+              "organism_ticks": 22748,
+              "offspring_produced": 12
+            },
+            "net_before_reproduction": -7334,
+            "net_after_reproduction": -25176,
+            "net_before_reproduction_per_tick": -0.32240196940390364,
+            "prey_income_fraction": 0.8709767161503211,
+            "offspring_per_tick": 0.0005275189027606822
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 0,
+              "prey_energy": 5239,
+              "actual_metabolic_energy": 4120,
+              "attack_energy": 2348,
+              "reproductive_energy": 0,
+              "organism_ticks": 1050,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -1229,
+            "net_after_reproduction": -1229,
+            "net_before_reproduction_per_tick": -1.1704761904761904,
+            "prey_income_fraction": 1,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 555,
+              "specialist_net_higher": 373,
+              "specialist_offspring_higher": 381,
+              "mean_net_advantage_per_tick": 0.35296099529297686
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 483,
+              "specialist_net_higher": 299,
+              "specialist_offspring_higher": 310,
+              "mean_net_advantage_per_tick": 0.10455976233917534
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 2,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -1.755542990165945
+            }
+          ]
+        },
+        {
+          "seed": 6,
+          "world_hash": "4abc090d21f782578a9d7769e95b3a17fc3226d4f1e8d0572e3e777ae1abbb8a",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 5272,
+              "prey_energy": 14792,
+              "actual_metabolic_energy": 27804,
+              "attack_energy": 2798,
+              "reproductive_energy": 0,
+              "organism_ticks": 5286,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -10538,
+            "net_after_reproduction": -10538,
+            "net_before_reproduction_per_tick": -1.9935679152478245,
+            "prey_income_fraction": 0.7372408293460925,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 503,
+              "prey_energy": 7590,
+              "actual_metabolic_energy": 5457,
+              "attack_energy": 1332,
+              "reproductive_energy": 0,
+              "organism_ticks": 1744,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 1304,
+            "net_after_reproduction": 1304,
+            "net_before_reproduction_per_tick": 0.7477064220183486,
+            "prey_income_fraction": 0.9378475225503522,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 787,
+              "specialist_net_higher": 441,
+              "specialist_offspring_higher": 452,
+              "mean_net_advantage_per_tick": -0.043929639924859196
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 731,
+              "specialist_net_higher": 479,
+              "specialist_offspring_higher": 426,
+              "mean_net_advantage_per_tick": 0.26609491583042494
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 2,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -0.922153343609243
+            }
+          ]
+        },
+        {
+          "seed": 7,
+          "world_hash": "314ebcc777a23132004f3005f3aae60d748629e12be48b77f7b74a329e2bfca9",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 9829,
+              "prey_energy": 40854,
+              "actual_metabolic_energy": 58055,
+              "attack_energy": 7922,
+              "reproductive_energy": 0,
+              "organism_ticks": 10473,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -15294,
+            "net_after_reproduction": -15294,
+            "net_before_reproduction_per_tick": -1.4603265539959898,
+            "prey_income_fraction": 0.8060690961466369,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 2098,
+              "prey_energy": 18219,
+              "actual_metabolic_energy": 15274,
+              "attack_energy": 4262,
+              "reproductive_energy": 0,
+              "organism_ticks": 4362,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 781,
+            "net_after_reproduction": 781,
+            "net_before_reproduction_per_tick": 0.17904630903255386,
+            "prey_income_fraction": 0.8967367229413792,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 739,
+              "specialist_net_higher": 493,
+              "specialist_offspring_higher": 491,
+              "mean_net_advantage_per_tick": 0.3502987137571746
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 631,
+              "specialist_net_higher": 374,
+              "specialist_offspring_higher": 385,
+              "mean_net_advantage_per_tick": 0.04900356884663816
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 2,
+              "specialist_net_higher": 1,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": 0.1815067577049322
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": "benchmarks/phase2-r4-patch32-temporal-summary.json.gz",
+      "source_sha256": "c63c916fa482e08279b4d14ab168de55c1ae290b795dec952e4e3b0a03d86cb5",
+      "rules_revision": 4,
+      "seeds": 8,
+      "ticks_per_seed": 50000,
+      "worlds": [
+        {
+          "seed": 0,
+          "world_hash": "59a2eb967fa470450cb3db63ff905de19c36a89932d71cdf738e1bce82e27033",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 8644,
+              "prey_energy": 35730,
+              "actual_metabolic_energy": 46986,
+              "attack_energy": 4429,
+              "reproductive_energy": 1470,
+              "organism_ticks": 7825,
+              "offspring_produced": 1
+            },
+            "net_before_reproduction": -7041,
+            "net_after_reproduction": -8511,
+            "net_before_reproduction_per_tick": -0.8998083067092651,
+            "prey_income_fraction": 0.8052012439716951,
+            "offspring_per_tick": 0.00012779552715654952
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 10,
+              "prey_energy": 26571,
+              "actual_metabolic_energy": 19587,
+              "attack_energy": 8800,
+              "reproductive_energy": 0,
+              "organism_ticks": 4750,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -1806,
+            "net_after_reproduction": -1806,
+            "net_before_reproduction_per_tick": -0.3802105263157895,
+            "prey_income_fraction": 0.9996237914299688,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 654,
+              "specialist_net_higher": 449,
+              "specialist_offspring_higher": 458,
+              "mean_net_advantage_per_tick": 0.3595559929304702
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 612,
+              "specialist_net_higher": 371,
+              "specialist_offspring_higher": 409,
+              "mean_net_advantage_per_tick": 0.15917146455482004
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 5,
+              "specialist_net_higher": 1,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -0.7338125107875035
+            }
+          ]
+        },
+        {
+          "seed": 1,
+          "world_hash": "2be4eb5df8ddb8453b19182b637db3aad5d5e32816da2fc8d75254a1c1ae55d5",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 147631,
+              "prey_energy": 896285,
+              "actual_metabolic_energy": 904550,
+              "attack_energy": 88941,
+              "reproductive_energy": 292833,
+              "organism_ticks": 153985,
+              "offspring_produced": 370
+            },
+            "net_before_reproduction": 50425,
+            "net_after_reproduction": -242408,
+            "net_before_reproduction_per_tick": 0.32746696106763645,
+            "prey_income_fraction": 0.8585796175171182,
+            "offspring_per_tick": 0.0024028314446212294
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 0,
+              "prey_energy": 0,
+              "actual_metabolic_energy": 0,
+              "attack_energy": 0,
+              "reproductive_energy": 0,
+              "organism_ticks": 0,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 0,
+            "net_after_reproduction": 0,
+            "net_before_reproduction_per_tick": null,
+            "prey_income_fraction": null,
+            "offspring_per_tick": null
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 0,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": null
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 0,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": null
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 0,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": null
+            }
+          ]
+        },
+        {
+          "seed": 2,
+          "world_hash": "656bf29f83db90905369fb01a5efec96adc67517380e9690976059af7ba4a765",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 3019,
+              "prey_energy": 5761,
+              "actual_metabolic_energy": 11969,
+              "attack_energy": 920,
+              "reproductive_energy": 0,
+              "organism_ticks": 2437,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -4109,
+            "net_after_reproduction": -4109,
+            "net_before_reproduction_per_tick": -1.686089454247025,
+            "prey_income_fraction": 0.6561503416856492,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 1804,
+              "prey_energy": 33684,
+              "actual_metabolic_energy": 27698,
+              "attack_energy": 11501,
+              "reproductive_energy": 0,
+              "organism_ticks": 8636,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -3711,
+            "net_after_reproduction": -3711,
+            "net_before_reproduction_per_tick": -0.4297128300138953,
+            "prey_income_fraction": 0.949165915238954,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 878,
+              "specialist_net_higher": 393,
+              "specialist_offspring_higher": 460,
+              "mean_net_advantage_per_tick": -0.4053846496259022
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 906,
+              "specialist_net_higher": 630,
+              "specialist_offspring_higher": 609,
+              "mean_net_advantage_per_tick": 0.36785084224610504
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 5,
+              "specialist_net_higher": 2,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -0.8600098431431974
+            }
+          ]
+        },
+        {
+          "seed": 3,
+          "world_hash": "fbdb65ac33ebd644f448e1b0573da64a9068b8b2aa9c48c013ff5e21653b6396",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 10056,
+              "prey_energy": 42226,
+              "actual_metabolic_energy": 43943,
+              "attack_energy": 5586,
+              "reproductive_energy": 5852,
+              "organism_ticks": 8282,
+              "offspring_produced": 4
+            },
+            "net_before_reproduction": 2753,
+            "net_after_reproduction": -3099,
+            "net_before_reproduction_per_tick": 0.33240763100700316,
+            "prey_income_fraction": 0.80765846754141,
+            "offspring_per_tick": 0.0004829751267809708
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 2571,
+              "prey_energy": 46515,
+              "actual_metabolic_energy": 33403,
+              "attack_energy": 12462,
+              "reproductive_energy": 0,
+              "organism_ticks": 9360,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 3221,
+            "net_after_reproduction": 3221,
+            "net_before_reproduction_per_tick": 0.3441239316239316,
+            "prey_income_fraction": 0.9476225400317809,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 572,
+              "specialist_net_higher": 303,
+              "specialist_offspring_higher": 360,
+              "mean_net_advantage_per_tick": 0.03460015967708112
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 544,
+              "specialist_net_higher": 389,
+              "specialist_offspring_higher": 375,
+              "mean_net_advantage_per_tick": 0.38500463871984825
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 8,
+              "specialist_net_higher": 2,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": 0.0248343957396379
+            }
+          ]
+        },
+        {
+          "seed": 4,
+          "world_hash": "9887afbecb02c4a9b599f601d131501374e74fb93625bb369997a777b6f50fb9",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 6268,
+              "prey_energy": 35050,
+              "actual_metabolic_energy": 35240,
+              "attack_energy": 4690,
+              "reproductive_energy": 3519,
+              "organism_ticks": 7061,
+              "offspring_produced": 4
+            },
+            "net_before_reproduction": 1388,
+            "net_after_reproduction": -2131,
+            "net_before_reproduction_per_tick": 0.19657272341028184,
+            "prey_income_fraction": 0.8482985623699114,
+            "offspring_per_tick": 0.000566491998300524
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 2781,
+              "prey_energy": 29014,
+              "actual_metabolic_energy": 23692,
+              "attack_energy": 7883,
+              "reproductive_energy": 0,
+              "organism_ticks": 6196,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 220,
+            "net_after_reproduction": 220,
+            "net_before_reproduction_per_tick": 0.035506778566817304,
+            "prey_income_fraction": 0.9125334172039629,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 829,
+              "specialist_net_higher": 516,
+              "specialist_offspring_higher": 522,
+              "mean_net_advantage_per_tick": 0.3155009354719584
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 794,
+              "specialist_net_higher": 587,
+              "specialist_offspring_higher": 545,
+              "mean_net_advantage_per_tick": 0.6642852980045766
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 6,
+              "specialist_net_higher": 3,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": 0.42212466680905897
+            }
+          ]
+        },
+        {
+          "seed": 5,
+          "world_hash": "e632a459067816623839658265e27e5534b0f1e30e582ae7276b29a614b0e7b5",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 15676,
+              "prey_energy": 109391,
+              "actual_metabolic_energy": 116854,
+              "attack_energy": 12815,
+              "reproductive_energy": 14892,
+              "organism_ticks": 22460,
+              "offspring_produced": 14
+            },
+            "net_before_reproduction": -4602,
+            "net_after_reproduction": -19494,
+            "net_before_reproduction_per_tick": -0.20489759572573463,
+            "prey_income_fraction": 0.8746591826780845,
+            "offspring_per_tick": 0.0006233303650934996
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 758,
+              "prey_energy": 31014,
+              "actual_metabolic_energy": 22720,
+              "attack_energy": 9995,
+              "reproductive_energy": 0,
+              "organism_ticks": 7499,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -943,
+            "net_after_reproduction": -943,
+            "net_before_reproduction_per_tick": -0.12575010001333511,
+            "prey_income_fraction": 0.9761425154223845,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 1012,
+              "specialist_net_higher": 634,
+              "specialist_offspring_higher": 611,
+              "mean_net_advantage_per_tick": 0.21444924075694896
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 866,
+              "specialist_net_higher": 524,
+              "specialist_offspring_higher": 519,
+              "mean_net_advantage_per_tick": 0.1337882561431971
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 7,
+              "specialist_net_higher": 1,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -0.9683243602636679
+            }
+          ]
+        },
+        {
+          "seed": 6,
+          "world_hash": "c68e408c71d300ab4887723b014ee4056470343ae5a1b68e859ee78b221f45bf",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 5981,
+              "prey_energy": 14913,
+              "actual_metabolic_energy": 28849,
+              "attack_energy": 2352,
+              "reproductive_energy": 0,
+              "organism_ticks": 5463,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -10307,
+            "net_after_reproduction": -10307,
+            "net_before_reproduction_per_tick": -1.8866922936115686,
+            "prey_income_fraction": 0.7137455728917392,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 86,
+              "prey_energy": 34674,
+              "actual_metabolic_energy": 24336,
+              "attack_energy": 10337,
+              "reproductive_energy": 0,
+              "organism_ticks": 7034,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 87,
+            "net_after_reproduction": 87,
+            "net_before_reproduction_per_tick": 0.012368495877168042,
+            "prey_income_fraction": 0.9975258918296893,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 1470,
+              "specialist_net_higher": 815,
+              "specialist_offspring_higher": 826,
+              "mean_net_advantage_per_tick": 0.07557155759384868
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 1393,
+              "specialist_net_higher": 855,
+              "specialist_offspring_higher": 797,
+              "mean_net_advantage_per_tick": 0.11735398358832377
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 7,
+              "specialist_net_higher": 1,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -0.4848090640480424
+            }
+          ]
+        },
+        {
+          "seed": 7,
+          "world_hash": "82a68ff780592daf77b8ba7e04fbac7edc5ac44c0d81793353007da811afe970",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 8034,
+              "prey_energy": 22486,
+              "actual_metabolic_energy": 44723,
+              "attack_energy": 3763,
+              "reproductive_energy": 0,
+              "organism_ticks": 8242,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -17966,
+            "net_after_reproduction": -17966,
+            "net_before_reproduction_per_tick": -2.1798107255520507,
+            "prey_income_fraction": 0.7367627785058978,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 0,
+              "prey_energy": 3617,
+              "actual_metabolic_energy": 3279,
+              "attack_energy": 1591,
+              "reproductive_energy": 0,
+              "organism_ticks": 1112,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -1253,
+            "net_after_reproduction": -1253,
+            "net_before_reproduction_per_tick": -1.1267985611510791,
+            "prey_income_fraction": 1,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 482,
+              "specialist_net_higher": 317,
+              "specialist_offspring_higher": 328,
+              "mean_net_advantage_per_tick": 0.28857593765479045
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 457,
+              "specialist_net_higher": 251,
+              "specialist_offspring_higher": 273,
+              "mean_net_advantage_per_tick": -0.00740044578096294
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 2,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -2.1735761841599763
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": "benchmarks/phase2-r4-patch64-temporal-summary.json.gz",
+      "source_sha256": "edbc4b06f28756616ba9dc2871e26ee40fd788bb18e2cf27836c06ff90ede0de",
+      "rules_revision": 4,
+      "seeds": 8,
+      "ticks_per_seed": 50000,
+      "worlds": [
+        {
+          "seed": 0,
+          "world_hash": "2817cd71837119badab0655c6f29fb642fd9f57330945c83695fd3ae5ac9ade0",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 8338,
+              "prey_energy": 44784,
+              "actual_metabolic_energy": 50989,
+              "attack_energy": 6133,
+              "reproductive_energy": 2985,
+              "organism_ticks": 8285,
+              "offspring_produced": 2
+            },
+            "net_before_reproduction": -4000,
+            "net_after_reproduction": -6985,
+            "net_before_reproduction_per_tick": -0.4828002414001207,
+            "prey_income_fraction": 0.843040548172132,
+            "offspring_per_tick": 0.00024140012070006034
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 58,
+              "prey_energy": 10980,
+              "actual_metabolic_energy": 9193,
+              "attack_energy": 4843,
+              "reproductive_energy": 0,
+              "organism_ticks": 2850,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -2998,
+            "net_after_reproduction": -2998,
+            "net_before_reproduction_per_tick": -1.0519298245614035,
+            "prey_income_fraction": 0.9947454248958144,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 454,
+              "specialist_net_higher": 291,
+              "specialist_offspring_higher": 311,
+              "mean_net_advantage_per_tick": 0.3163707095755369
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 400,
+              "specialist_net_higher": 246,
+              "specialist_offspring_higher": 281,
+              "mean_net_advantage_per_tick": 0.06688704338479408
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 2,
+              "specialist_net_higher": 1,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -1.3518946147884263
+            }
+          ]
+        },
+        {
+          "seed": 1,
+          "world_hash": "ce4b0b2eab65343ced55d3a40dbf97815153e69603c5769ad84fd7cbc3f60508",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 22593,
+              "prey_energy": 610992,
+              "actual_metabolic_energy": 459308,
+              "attack_energy": 80821,
+              "reproductive_energy": 85797,
+              "organism_ticks": 85363,
+              "offspring_produced": 114
+            },
+            "net_before_reproduction": 93456,
+            "net_after_reproduction": 7659,
+            "net_before_reproduction_per_tick": 1.0948068835443927,
+            "prey_income_fraction": 0.9643410118610762,
+            "offspring_per_tick": 0.0013354732143903095
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 6991,
+              "prey_energy": 49056,
+              "actual_metabolic_energy": 45214,
+              "attack_energy": 14787,
+              "reproductive_energy": 0,
+              "organism_ticks": 12531,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -3954,
+            "net_after_reproduction": -3954,
+            "net_before_reproduction_per_tick": -0.31553746708163755,
+            "prey_income_fraction": 0.8752654022516816,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 830,
+              "specialist_net_higher": 499,
+              "specialist_offspring_higher": 503,
+              "mean_net_advantage_per_tick": 0.17780322122842185
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 827,
+              "specialist_net_higher": 552,
+              "specialist_offspring_higher": 533,
+              "mean_net_advantage_per_tick": 0.3722365744986031
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 14,
+              "specialist_net_higher": 3,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -1.087901462010626
+            }
+          ]
+        },
+        {
+          "seed": 2,
+          "world_hash": "74c162a79eb1175555382e14d3fcee5534d956a2aefbd1dd0f6efe3dd0361751",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 4145,
+              "prey_energy": 4210,
+              "actual_metabolic_energy": 12082,
+              "attack_energy": 610,
+              "reproductive_energy": 0,
+              "organism_ticks": 2445,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -4337,
+            "net_after_reproduction": -4337,
+            "net_before_reproduction_per_tick": -1.7738241308793457,
+            "prey_income_fraction": 0.5038898862956314,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 2103,
+              "prey_energy": 42978,
+              "actual_metabolic_energy": 32386,
+              "attack_energy": 15790,
+              "reproductive_energy": 0,
+              "organism_ticks": 9813,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -3095,
+            "net_after_reproduction": -3095,
+            "net_before_reproduction_per_tick": -0.3153979415061653,
+            "prey_income_fraction": 0.9533506355227258,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 432,
+              "specialist_net_higher": 235,
+              "specialist_offspring_higher": 286,
+              "mean_net_advantage_per_tick": 0.04776075561276253
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 422,
+              "specialist_net_higher": 298,
+              "specialist_offspring_higher": 300,
+              "mean_net_advantage_per_tick": 0.3383908744743949
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 12,
+              "specialist_net_higher": 3,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -1.0831827542352113
+            }
+          ]
+        },
+        {
+          "seed": 3,
+          "world_hash": "dd7e2cdf1a394f2fd30df3df9504c546416a91b750455cb3104da554ccc53dd9",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 11203,
+              "prey_energy": 45365,
+              "actual_metabolic_energy": 47015,
+              "attack_energy": 5586,
+              "reproductive_energy": 5906,
+              "organism_ticks": 8627,
+              "offspring_produced": 6
+            },
+            "net_before_reproduction": 3967,
+            "net_after_reproduction": -1939,
+            "net_before_reproduction_per_tick": 0.4598354004868436,
+            "prey_income_fraction": 0.8019551690001414,
+            "offspring_per_tick": 0.0006954909006607164
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 419,
+              "prey_energy": 17255,
+              "actual_metabolic_energy": 13299,
+              "attack_energy": 6201,
+              "reproductive_energy": 0,
+              "organism_ticks": 4281,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -1826,
+            "net_after_reproduction": -1826,
+            "net_before_reproduction_per_tick": -0.4265358561083859,
+            "prey_income_fraction": 0.9762928595677266,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 370,
+              "specialist_net_higher": 208,
+              "specialist_offspring_higher": 216,
+              "mean_net_advantage_per_tick": -0.008310517007221047
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 348,
+              "specialist_net_higher": 259,
+              "specialist_offspring_higher": 264,
+              "mean_net_advantage_per_tick": 0.6032303945398384
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 7,
+              "specialist_net_higher": 1,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -1.4784198201948793
+            }
+          ]
+        },
+        {
+          "seed": 4,
+          "world_hash": "3e3cd114d8725215a3dad8b1f27a62a11645919b26c2e8f5dfce9c7f4531efcc",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 5921,
+              "prey_energy": 11308,
+              "actual_metabolic_energy": 20024,
+              "attack_energy": 1278,
+              "reproductive_energy": 0,
+              "organism_ticks": 4157,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -4073,
+            "net_after_reproduction": -4073,
+            "net_before_reproduction_per_tick": -0.9797931200384893,
+            "prey_income_fraction": 0.6563352487085727,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 569,
+              "prey_energy": 15800,
+              "actual_metabolic_energy": 11530,
+              "attack_energy": 4218,
+              "reproductive_energy": 0,
+              "organism_ticks": 3261,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 621,
+            "net_after_reproduction": 621,
+            "net_before_reproduction_per_tick": 0.19043238270469182,
+            "prey_income_fraction": 0.9652391716048628,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 1156,
+              "specialist_net_higher": 679,
+              "specialist_offspring_higher": 726,
+              "mean_net_advantage_per_tick": 0.07295098189986118
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 1087,
+              "specialist_net_higher": 765,
+              "specialist_offspring_higher": 773,
+              "mean_net_advantage_per_tick": 0.7281731347778282
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 6,
+              "specialist_net_higher": 3,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -0.8065666078603192
+            }
+          ]
+        },
+        {
+          "seed": 5,
+          "world_hash": "0165c392273fcf7f3328099ef2787944c489e1460173b4cd2134ab096592d8a6",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 15054,
+              "prey_energy": 78281,
+              "actual_metabolic_energy": 101484,
+              "attack_energy": 11168,
+              "reproductive_energy": 8689,
+              "organism_ticks": 19543,
+              "offspring_produced": 8
+            },
+            "net_before_reproduction": -19317,
+            "net_after_reproduction": -28006,
+            "net_before_reproduction_per_tick": -0.9884357570485596,
+            "prey_income_fraction": 0.838710023035303,
+            "offspring_per_tick": 0.0004093537327943509
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 1641,
+              "prey_energy": 19813,
+              "actual_metabolic_energy": 15174,
+              "attack_energy": 5385,
+              "reproductive_energy": 0,
+              "organism_ticks": 4943,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 895,
+            "net_after_reproduction": 895,
+            "net_before_reproduction_per_tick": 0.18106413109447703,
+            "prey_income_fraction": 0.9235107672228955,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 1016,
+              "specialist_net_higher": 642,
+              "specialist_offspring_higher": 646,
+              "mean_net_advantage_per_tick": 0.3281236100528726
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 896,
+              "specialist_net_higher": 543,
+              "specialist_offspring_higher": 523,
+              "mean_net_advantage_per_tick": 0.04578862190219577
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 7,
+              "specialist_net_higher": 2,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": 0.2820215676603207
+            }
+          ]
+        },
+        {
+          "seed": 6,
+          "world_hash": "ce5b13f00c7c1f5fc9f3ad39b699924634278b57f60ac7dc1412a8c6923d58e1",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 5077,
+              "prey_energy": 10152,
+              "actual_metabolic_energy": 23501,
+              "attack_energy": 1870,
+              "reproductive_energy": 0,
+              "organism_ticks": 4598,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -10142,
+            "net_after_reproduction": -10142,
+            "net_before_reproduction_per_tick": -2.2057416267942584,
+            "prey_income_fraction": 0.6666228905377898,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 421,
+              "prey_energy": 22666,
+              "actual_metabolic_energy": 17599,
+              "attack_energy": 4964,
+              "reproductive_energy": 0,
+              "organism_ticks": 4383,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 524,
+            "net_after_reproduction": 524,
+            "net_before_reproduction_per_tick": 0.11955281770476843,
+            "prey_income_fraction": 0.9817646294451423,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 688,
+              "specialist_net_higher": 386,
+              "specialist_offspring_higher": 390,
+              "mean_net_advantage_per_tick": -0.0844968887571154
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 662,
+              "specialist_net_higher": 466,
+              "specialist_offspring_higher": 432,
+              "mean_net_advantage_per_tick": 0.514384197618044
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 4,
+              "specialist_net_higher": 1,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -0.1464103494312169
+            }
+          ]
+        },
+        {
+          "seed": 7,
+          "world_hash": "438b2a1de071dccfd2808968c8423e8010e55d4b8bd5c65037c3ef8900ca7e2d",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 6028,
+              "prey_energy": 51806,
+              "actual_metabolic_energy": 63393,
+              "attack_energy": 7929,
+              "reproductive_energy": 3077,
+              "organism_ticks": 11122,
+              "offspring_produced": 4
+            },
+            "net_before_reproduction": -13488,
+            "net_after_reproduction": -16565,
+            "net_before_reproduction_per_tick": -1.2127315231073548,
+            "prey_income_fraction": 0.8957706539405886,
+            "offspring_per_tick": 0.0003596475454055026
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 104,
+              "prey_energy": 11823,
+              "actual_metabolic_energy": 10258,
+              "attack_energy": 4191,
+              "reproductive_energy": 0,
+              "organism_ticks": 2544,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -2522,
+            "net_after_reproduction": -2522,
+            "net_before_reproduction_per_tick": -0.9913522012578616,
+            "prey_income_fraction": 0.9912802884212292,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 997,
+              "specialist_net_higher": 673,
+              "specialist_offspring_higher": 671,
+              "mean_net_advantage_per_tick": 0.4930956814253013
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 885,
+              "specialist_net_higher": 496,
+              "specialist_offspring_higher": 524,
+              "mean_net_advantage_per_tick": -0.036773994890635715
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 3,
+              "specialist_net_higher": 1,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -1.3327680394089538
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": "benchmarks/phase2-r4-patch128-temporal-summary.json.gz",
+      "source_sha256": "af60a227b4b5b9892fabb6a521439bfe6b93c2fce2329210d9bf686e2d908208",
+      "rules_revision": 4,
+      "seeds": 8,
+      "ticks_per_seed": 50000,
+      "worlds": [
+        {
+          "seed": 0,
+          "world_hash": "65d5c2a2e66363510eaaa0d82e499667d0aa376586a68c006ad48179428cecc9",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 6346,
+              "prey_energy": 26640,
+              "actual_metabolic_energy": 36928,
+              "attack_energy": 3002,
+              "reproductive_energy": 0,
+              "organism_ticks": 6232,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -6944,
+            "net_after_reproduction": -6944,
+            "net_before_reproduction_per_tick": -1.1142490372272145,
+            "prey_income_fraction": 0.8076153519675013,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 16,
+              "prey_energy": 16245,
+              "actual_metabolic_energy": 11699,
+              "attack_energy": 4224,
+              "reproductive_energy": 0,
+              "organism_ticks": 3140,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 338,
+            "net_after_reproduction": 338,
+            "net_before_reproduction_per_tick": 0.10764331210191083,
+            "prey_income_fraction": 0.9990160506733903,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 799,
+              "specialist_net_higher": 495,
+              "specialist_offspring_higher": 505,
+              "mean_net_advantage_per_tick": 0.09147483655326635
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 741,
+              "specialist_net_higher": 490,
+              "specialist_offspring_higher": 483,
+              "mean_net_advantage_per_tick": 0.21239341762017191
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 5,
+              "specialist_net_higher": 1,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -0.14265512072465503
+            }
+          ]
+        },
+        {
+          "seed": 1,
+          "world_hash": "36b1299d2d5d6017d949f7699ffa0dd72932adde5f4df885dc9ee20f98ed2ed0",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 151955,
+              "prey_energy": 876809,
+              "actual_metabolic_energy": 884898,
+              "attack_energy": 85517,
+              "reproductive_energy": 296498,
+              "organism_ticks": 170921,
+              "offspring_produced": 402
+            },
+            "net_before_reproduction": 58349,
+            "net_after_reproduction": -238149,
+            "net_before_reproduction_per_tick": 0.34137993575979547,
+            "prey_income_fraction": 0.852293626137773,
+            "offspring_per_tick": 0.0023519637727371125
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 0,
+              "prey_energy": 0,
+              "actual_metabolic_energy": 0,
+              "attack_energy": 0,
+              "reproductive_energy": 0,
+              "organism_ticks": 0,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 0,
+            "net_after_reproduction": 0,
+            "net_before_reproduction_per_tick": null,
+            "prey_income_fraction": null,
+            "offspring_per_tick": null
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 0,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": null
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 0,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": null
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 0,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": null
+            }
+          ]
+        },
+        {
+          "seed": 2,
+          "world_hash": "a6bdd84c2fc9842fd1d893af5004aa55f721bc680d57af362706be3b1e6c8cd4",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 3871,
+              "prey_energy": 6143,
+              "actual_metabolic_energy": 13555,
+              "attack_energy": 900,
+              "reproductive_energy": 0,
+              "organism_ticks": 2813,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -4441,
+            "net_after_reproduction": -4441,
+            "net_before_reproduction_per_tick": -1.5787415570565233,
+            "prey_income_fraction": 0.6134411823447175,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 568,
+              "prey_energy": 15934,
+              "actual_metabolic_energy": 12441,
+              "attack_energy": 4729,
+              "reproductive_energy": 0,
+              "organism_ticks": 3812,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -668,
+            "net_after_reproduction": -668,
+            "net_before_reproduction_per_tick": -0.17523609653725078,
+            "prey_income_fraction": 0.9655799297054902,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 563,
+              "specialist_net_higher": 304,
+              "specialist_offspring_higher": 335,
+              "mean_net_advantage_per_tick": -0.023950628063733596
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 562,
+              "specialist_net_higher": 408,
+              "specialist_offspring_higher": 357,
+              "mean_net_advantage_per_tick": 0.3664888074308974
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 4,
+              "specialist_net_higher": 2,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": 0.7946347308174837
+            }
+          ]
+        },
+        {
+          "seed": 3,
+          "world_hash": "29bd7fc2249f3a905d551ff482af09a6820f4cacb03bf8fd0a23da140009ce11",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 8739,
+              "prey_energy": 24244,
+              "actual_metabolic_energy": 30489,
+              "attack_energy": 3002,
+              "reproductive_energy": 0,
+              "organism_ticks": 5517,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -508,
+            "net_after_reproduction": -508,
+            "net_before_reproduction_per_tick": -0.09207902845749502,
+            "prey_income_fraction": 0.7350453263802565,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 31,
+              "prey_energy": 16502,
+              "actual_metabolic_energy": 12243,
+              "attack_energy": 4108,
+              "reproductive_energy": 0,
+              "organism_ticks": 3400,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 182,
+            "net_after_reproduction": 182,
+            "net_before_reproduction_per_tick": 0.05352941176470588,
+            "prey_income_fraction": 0.9981249621968185,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 561,
+              "specialist_net_higher": 285,
+              "specialist_offspring_higher": 310,
+              "mean_net_advantage_per_tick": -0.06880728049487078
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 562,
+              "specialist_net_higher": 416,
+              "specialist_offspring_higher": 386,
+              "mean_net_advantage_per_tick": 0.7706990887854416
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 6,
+              "specialist_net_higher": 2,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": 0.5321388919930246
+            }
+          ]
+        },
+        {
+          "seed": 4,
+          "world_hash": "c179b9b588defef465d9372f595974347078c4a5d838d14ee011e3570379607c",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 6251,
+              "prey_energy": 10824,
+              "actual_metabolic_energy": 19746,
+              "attack_energy": 1859,
+              "reproductive_energy": 0,
+              "organism_ticks": 4079,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -4530,
+            "net_after_reproduction": -4530,
+            "net_before_reproduction_per_tick": -1.1105663152733514,
+            "prey_income_fraction": 0.633909224011713,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 3767,
+              "prey_energy": 31418,
+              "actual_metabolic_energy": 27938,
+              "attack_energy": 5550,
+              "reproductive_energy": 0,
+              "organism_ticks": 8201,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 1697,
+            "net_after_reproduction": 1697,
+            "net_before_reproduction_per_tick": 0.20692598463602,
+            "prey_income_fraction": 0.8929373312491118,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 520,
+              "specialist_net_higher": 378,
+              "specialist_offspring_higher": 367,
+              "mean_net_advantage_per_tick": 0.7203446571636506
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 472,
+              "specialist_net_higher": 316,
+              "specialist_offspring_higher": 308,
+              "mean_net_advantage_per_tick": 0.5343608693092798
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 11,
+              "specialist_net_higher": 2,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -0.8220033681877102
+            }
+          ]
+        },
+        {
+          "seed": 5,
+          "world_hash": "574889fdc3538fb07e454becc8ab94b4f652d6d5d0cc6bb5ab7be73dc00539b1",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 19701,
+              "prey_energy": 233548,
+              "actual_metabolic_energy": 199744,
+              "attack_energy": 30474,
+              "reproductive_energy": 49237,
+              "organism_ticks": 39199,
+              "offspring_produced": 34
+            },
+            "net_before_reproduction": 23031,
+            "net_after_reproduction": -26206,
+            "net_before_reproduction_per_tick": 0.5875404984821041,
+            "prey_income_fraction": 0.9222069978558651,
+            "offspring_per_tick": 0.0008673690655373862
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 0,
+              "prey_energy": 11049,
+              "actual_metabolic_energy": 9871,
+              "attack_energy": 5130,
+              "reproductive_energy": 0,
+              "organism_ticks": 3329,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -3952,
+            "net_after_reproduction": -3952,
+            "net_before_reproduction_per_tick": -1.1871432862721538,
+            "prey_income_fraction": 1,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 408,
+              "specialist_net_higher": 304,
+              "specialist_offspring_higher": 301,
+              "mean_net_advantage_per_tick": 0.45938096685698737
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 376,
+              "specialist_net_higher": 214,
+              "specialist_offspring_higher": 241,
+              "mean_net_advantage_per_tick": -0.016910798220745274
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 0,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": null
+            }
+          ]
+        },
+        {
+          "seed": 6,
+          "world_hash": "902b2f6d5febd4f33b9ab5298480cb561b4bf029adfa77dcdbb39d33f6efbfc2",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 4925,
+              "prey_energy": 9987,
+              "actual_metabolic_energy": 22980,
+              "attack_energy": 1420,
+              "reproductive_energy": 0,
+              "organism_ticks": 4458,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -9488,
+            "net_after_reproduction": -9488,
+            "net_before_reproduction_per_tick": -2.1283086585912967,
+            "prey_income_fraction": 0.6697290772532188,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 385,
+              "prey_energy": 12065,
+              "actual_metabolic_energy": 9858,
+              "attack_energy": 3049,
+              "reproductive_energy": 0,
+              "organism_ticks": 2237,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -457,
+            "net_after_reproduction": -457,
+            "net_before_reproduction_per_tick": -0.20429146177916854,
+            "prey_income_fraction": 0.9690763052208835,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 494,
+              "specialist_net_higher": 290,
+              "specialist_offspring_higher": 306,
+              "mean_net_advantage_per_tick": 0.08114411012211237
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 478,
+              "specialist_net_higher": 299,
+              "specialist_offspring_higher": 292,
+              "mean_net_advantage_per_tick": 0.18985108641472914
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 2,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -0.7617573776837638
+            }
+          ]
+        },
+        {
+          "seed": 7,
+          "world_hash": "dd9dbc36772106151114267d9dc627a1bb3cedaf94a0959b91e3bb8f22aedd00",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 7447,
+              "prey_energy": 35758,
+              "actual_metabolic_energy": 53761,
+              "attack_energy": 5700,
+              "reproductive_energy": 2964,
+              "organism_ticks": 10017,
+              "offspring_produced": 4
+            },
+            "net_before_reproduction": -16256,
+            "net_after_reproduction": -19220,
+            "net_before_reproduction_per_tick": -1.6228411700109813,
+            "prey_income_fraction": 0.8276356903136212,
+            "offspring_per_tick": 0.0003993211540381352
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 2396,
+              "prey_energy": 21219,
+              "actual_metabolic_energy": 20629,
+              "attack_energy": 5268,
+              "reproductive_energy": 0,
+              "organism_ticks": 4146,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -2282,
+            "net_after_reproduction": -2282,
+            "net_before_reproduction_per_tick": -0.5504100337674868,
+            "prey_income_fraction": 0.8985390641541393,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 1015,
+              "specialist_net_higher": 650,
+              "specialist_offspring_higher": 618,
+              "mean_net_advantage_per_tick": 0.36542074706739025
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 923,
+              "specialist_net_higher": 551,
+              "specialist_offspring_higher": 533,
+              "mean_net_advantage_per_tick": 0.2023604773209109
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 4,
+              "specialist_net_higher": 1,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -0.6863486469391521
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": "benchmarks/phase2-r4-predator60-temporal-summary.json.gz",
+      "source_sha256": "1f4cc9b0dea8d823c569960da6a6f07585f627239cedfaa850fa7a70e903a735",
+      "rules_revision": 4,
+      "seeds": 8,
+      "ticks_per_seed": 50000,
+      "worlds": [
+        {
+          "seed": 0,
+          "world_hash": "757a71df6065e6e04529ba1f1556adff427df3e400b4912324a6232475b3126f",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 7760,
+              "prey_energy": 50728,
+              "actual_metabolic_energy": 56123,
+              "attack_energy": 5532,
+              "reproductive_energy": 6530,
+              "organism_ticks": 9314,
+              "offspring_produced": 4
+            },
+            "net_before_reproduction": -3167,
+            "net_after_reproduction": -9697,
+            "net_before_reproduction_per_tick": -0.3400257676615847,
+            "prey_income_fraction": 0.8673232115989604,
+            "offspring_per_tick": 0.00042946102641185313
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 271,
+              "prey_energy": 13274,
+              "actual_metabolic_energy": 13690,
+              "attack_energy": 4221,
+              "reproductive_energy": 0,
+              "organism_ticks": 3400,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -4366,
+            "net_after_reproduction": -4366,
+            "net_before_reproduction_per_tick": -1.2841176470588236,
+            "prey_income_fraction": 0.9799926172019195,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 1014,
+              "specialist_net_higher": 593,
+              "specialist_offspring_higher": 593,
+              "mean_net_advantage_per_tick": 0.008457200445190625
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 891,
+              "specialist_net_higher": 584,
+              "specialist_offspring_higher": 581,
+              "mean_net_advantage_per_tick": 0.30418826400033283
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 3,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -2.3917570149245915
+            }
+          ]
+        },
+        {
+          "seed": 1,
+          "world_hash": "da331005ef5f1c264e48e446349ab5a75c681a7a68041be59fa1ce81eb6e4b13",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 132728,
+              "prey_energy": 1385193,
+              "actual_metabolic_energy": 1301767,
+              "attack_energy": 113159,
+              "reproductive_energy": 501411,
+              "organism_ticks": 252774,
+              "offspring_produced": 628
+            },
+            "net_before_reproduction": 102995,
+            "net_after_reproduction": -398416,
+            "net_before_reproduction_per_tick": 0.4074588367474503,
+            "prey_income_fraction": 0.9125593492678473,
+            "offspring_per_tick": 0.002484432734379327
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 1021,
+              "prey_energy": 22108,
+              "actual_metabolic_energy": 18210,
+              "attack_energy": 6940,
+              "reproductive_energy": 0,
+              "organism_ticks": 4803,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -2021,
+            "net_after_reproduction": -2021,
+            "net_before_reproduction_per_tick": -0.42077867999167184,
+            "prey_income_fraction": 0.9558562843183882,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 804,
+              "specialist_net_higher": 396,
+              "specialist_offspring_higher": 470,
+              "mean_net_advantage_per_tick": -0.2751093253741015
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 737,
+              "specialist_net_higher": 511,
+              "specialist_offspring_higher": 509,
+              "mean_net_advantage_per_tick": 0.4629874792887685
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 7,
+              "specialist_net_higher": 2,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -1.3877607753494121
+            }
+          ]
+        },
+        {
+          "seed": 2,
+          "world_hash": "c6b6e733f62e41e07a192dfa837639c15d206cd8c574eb60349a3ed857f78947",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 3949,
+              "prey_energy": 9020,
+              "actual_metabolic_energy": 14292,
+              "attack_energy": 1336,
+              "reproductive_energy": 0,
+              "organism_ticks": 2875,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -2659,
+            "net_after_reproduction": -2659,
+            "net_before_reproduction_per_tick": -0.9248695652173913,
+            "prey_income_fraction": 0.6955046649703138,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 430,
+              "prey_energy": 11207,
+              "actual_metabolic_energy": 6422,
+              "attack_energy": 3223,
+              "reproductive_energy": 0,
+              "organism_ticks": 2140,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 1992,
+            "net_after_reproduction": 1992,
+            "net_before_reproduction_per_tick": 0.930841121495327,
+            "prey_income_fraction": 0.9630488957635129,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 849,
+              "specialist_net_higher": 402,
+              "specialist_offspring_higher": 446,
+              "mean_net_advantage_per_tick": -0.15106723469760858
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 817,
+              "specialist_net_higher": 570,
+              "specialist_offspring_higher": 542,
+              "mean_net_advantage_per_tick": 0.4174146902978702
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 3,
+              "specialist_net_higher": 2,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": 0.41791317222667373
+            }
+          ]
+        },
+        {
+          "seed": 3,
+          "world_hash": "8bb96df4ef6f61608f30f735edc738f4166a961abb80092e195e21605c507993",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 16950,
+              "prey_energy": 154955,
+              "actual_metabolic_energy": 121990,
+              "attack_energy": 18490,
+              "reproductive_energy": 20755,
+              "organism_ticks": 23724,
+              "offspring_produced": 28
+            },
+            "net_before_reproduction": 31425,
+            "net_after_reproduction": 10670,
+            "net_before_reproduction_per_tick": 1.3246079919069298,
+            "prey_income_fraction": 0.9013990285332015,
+            "offspring_per_tick": 0.0011802394199966278
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 2049,
+              "prey_energy": 19316,
+              "actual_metabolic_energy": 19473,
+              "attack_energy": 4065,
+              "reproductive_energy": 0,
+              "organism_ticks": 5406,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -2173,
+            "net_after_reproduction": -2173,
+            "net_before_reproduction_per_tick": -0.4019607843137255,
+            "prey_income_fraction": 0.9040954832670255,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 885,
+              "specialist_net_higher": 453,
+              "specialist_offspring_higher": 472,
+              "mean_net_advantage_per_tick": -0.0666298606125546
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 861,
+              "specialist_net_higher": 637,
+              "specialist_offspring_higher": 584,
+              "mean_net_advantage_per_tick": 0.49531101532028327
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 7,
+              "specialist_net_higher": 1,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -1.1217474589051362
+            }
+          ]
+        },
+        {
+          "seed": 4,
+          "world_hash": "b8d40f05166ce590340c1e8e8b77857d05e1f6fe81ecd28cc405e0fbbf2447a0",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 6959,
+              "prey_energy": 28264,
+              "actual_metabolic_energy": 30499,
+              "attack_energy": 5306,
+              "reproductive_energy": 2980,
+              "organism_ticks": 6670,
+              "offspring_produced": 4
+            },
+            "net_before_reproduction": -582,
+            "net_after_reproduction": -3562,
+            "net_before_reproduction_per_tick": -0.08725637181409296,
+            "prey_income_fraction": 0.8024302302472816,
+            "offspring_per_tick": 0.0005997001499250374
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 446,
+              "prey_energy": 15660,
+              "actual_metabolic_energy": 12491,
+              "attack_energy": 2629,
+              "reproductive_energy": 0,
+              "organism_ticks": 3148,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 986,
+            "net_after_reproduction": 986,
+            "net_before_reproduction_per_tick": 0.31321473951715373,
+            "prey_income_fraction": 0.9723084564758475,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 739,
+              "specialist_net_higher": 454,
+              "specialist_offspring_higher": 490,
+              "mean_net_advantage_per_tick": 0.2807651922755515
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 667,
+              "specialist_net_higher": 433,
+              "specialist_offspring_higher": 426,
+              "mean_net_advantage_per_tick": 0.31132388720419624
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 5,
+              "specialist_net_higher": 2,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": 0.600762884349989
+            }
+          ]
+        },
+        {
+          "seed": 5,
+          "world_hash": "d9fca9cf738b57a73b24dba6a9da294251803f41f885d77668aab32baa588e96",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 19822,
+              "prey_energy": 99719,
+              "actual_metabolic_energy": 113576,
+              "attack_energy": 10922,
+              "reproductive_energy": 14780,
+              "organism_ticks": 21852,
+              "offspring_produced": 10
+            },
+            "net_before_reproduction": -4957,
+            "net_after_reproduction": -19737,
+            "net_before_reproduction_per_tick": -0.22684422478491673,
+            "prey_income_fraction": 0.8341824144017533,
+            "offspring_per_tick": 0.00045762401610836536
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 467,
+              "prey_energy": 9712,
+              "actual_metabolic_energy": 9072,
+              "attack_energy": 3822,
+              "reproductive_energy": 0,
+              "organism_ticks": 3054,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -2715,
+            "net_after_reproduction": -2715,
+            "net_before_reproduction_per_tick": -0.8889980353634578,
+            "prey_income_fraction": 0.954121229983299,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 930,
+              "specialist_net_higher": 656,
+              "specialist_offspring_higher": 626,
+              "mean_net_advantage_per_tick": 0.48686723446973873
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 776,
+              "specialist_net_higher": 467,
+              "specialist_offspring_higher": 443,
+              "mean_net_advantage_per_tick": -0.03315731406391379
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 5,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -1.850625941418278
+            }
+          ]
+        },
+        {
+          "seed": 6,
+          "world_hash": "5abb1bce247bd92ab8813ca789482e36bed465fa553a5115360d8d060fb5ff65",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 5299,
+              "prey_energy": 17177,
+              "actual_metabolic_energy": 28529,
+              "attack_energy": 2978,
+              "reproductive_energy": 0,
+              "organism_ticks": 5415,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -9031,
+            "net_after_reproduction": -9031,
+            "net_before_reproduction_per_tick": -1.667774699907664,
+            "prey_income_fraction": 0.7642374087916,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 2855,
+              "prey_energy": 27263,
+              "actual_metabolic_energy": 22582,
+              "attack_energy": 5539,
+              "reproductive_energy": 0,
+              "organism_ticks": 6600,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": 1997,
+            "net_after_reproduction": 1997,
+            "net_before_reproduction_per_tick": 0.30257575757575755,
+            "prey_income_fraction": 0.9052061889899727,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 862,
+              "specialist_net_higher": 485,
+              "specialist_offspring_higher": 520,
+              "mean_net_advantage_per_tick": 0.059056711768371836
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 820,
+              "specialist_net_higher": 523,
+              "specialist_offspring_higher": 485,
+              "mean_net_advantage_per_tick": 0.2759592797618803
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 6,
+              "specialist_net_higher": 2,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -1.0292168757136215
+            }
+          ]
+        },
+        {
+          "seed": 7,
+          "world_hash": "2e0c11456215190bf0194ffe3dcfa631c1da2e3758e7712c484575c135dd19f1",
+          "predator_warmup": {
+            "start": 0,
+            "end": 5000,
+            "totals": {
+              "food_energy": 8277,
+              "prey_energy": 28605,
+              "actual_metabolic_energy": 48984,
+              "attack_energy": 4731,
+              "reproductive_energy": 0,
+              "organism_ticks": 8825,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -16833,
+            "net_after_reproduction": -16833,
+            "net_before_reproduction_per_tick": -1.9074220963172805,
+            "prey_income_fraction": 0.7755815845127705,
+            "offspring_per_tick": 0
+          },
+          "predator_post_warmup": {
+            "start": 5000,
+            "end": 50000,
+            "totals": {
+              "food_energy": 125,
+              "prey_energy": 7063,
+              "actual_metabolic_energy": 6855,
+              "attack_energy": 2708,
+              "reproductive_energy": 0,
+              "organism_ticks": 2324,
+              "offspring_produced": 0
+            },
+            "net_before_reproduction": -2375,
+            "net_after_reproduction": -2375,
+            "net_before_reproduction_per_tick": -1.0219449225473323,
+            "prey_income_fraction": 0.9826099053978854,
+            "offspring_per_tick": 0
+          },
+          "matched_roles": [
+            {
+              "role": "SoftSpecialist",
+              "comparisons": 375,
+              "specialist_net_higher": 266,
+              "specialist_offspring_higher": 251,
+              "mean_net_advantage_per_tick": 0.36304405791664657
+            },
+            {
+              "role": "HardSpecialist",
+              "comparisons": 333,
+              "specialist_net_higher": 203,
+              "specialist_offspring_higher": 195,
+              "mean_net_advantage_per_tick": 0.054087566152300856
+            },
+            {
+              "role": "PreySpecialist",
+              "comparisons": 2,
+              "specialist_net_higher": 0,
+              "specialist_offspring_higher": 0,
+              "mean_net_advantage_per_tick": -2.2393343328694053
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

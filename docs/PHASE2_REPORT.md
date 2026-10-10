@@ -4,7 +4,7 @@ R4 bounded stabilization experiments are finalized. Every tested ecological chan
 
 **Preserved authority and evidence**
 
-The frozen R3 branch head is cfef69e73597ce93f6f0ac3eec34bad6dc3401cc, protected by phase2/r3-frozen-cfef69e. Physical authority remains `831f8617d19714d856d653278e244e1f9becaa28`; final diagnostic/tooling code is `1900adf39910e57f3d1e3cb69b6178cbf81913a8`. The [R3 report archive](PHASE2_REPORT_R3_ARCHIVE.md) and R3 archived golden exactly retain the frozen Git blobs. main remains `216a92ffca8e66e31789fc0a0e0eaf5085f13d76`; v0.1.0 remains `ed6c77d4b876b859ed7a4b1d665f7bf9054b9096`. The [preservation manifest](../benchmarks/phase2-r4-r3-preservation.json) records seven protected file hashes; all were reverified after final checks. Existing production EXE/installers and R2 showcase are preserved.
+The frozen R3 branch head is cfef69e73597ce93f6f0ac3eec34bad6dc3401cc, protected by phase2/r3-frozen-cfef69e. Physical authority remains `831f8617d19714d856d653278e244e1f9becaa28`; the original R4 closure diagnostic/tooling code is `1900adf39910e57f3d1e3cb69b6178cbf81913a8`. The [R3 report archive](PHASE2_REPORT_R3_ARCHIVE.md) and R3 archived golden exactly retain the frozen Git blobs. The main head at that closure was `216a92ffca8e66e31789fc0a0e0eaf5085f13d76`; current public main is `edff2ad1d3b82db5e19b72163297abfa4562bbf2` with subsequent portfolio/documentation work. v0.1.0 remains `ed6c77d4b876b859ed7a4b1d665f7bf9054b9096`. The [preservation manifest](../benchmarks/phase2-r4-r3-preservation.json) retains the historical refs and seven protected file hashes; all were reverified after final checks. Existing production EXE/installers and R2 showcase are preserved.
 
 Sealed R3 formal evidence remains100 seeds ×100000 ticks:100/100 deterministic save/load/full replay/1000-tick continuation,99 survivors, one natural extinction, zero technical failures/caps, persistent MC12/100 and high-C21/100. Its four ecological gates remain0/100. These are R3 results, not a new R4 formal run.
 
@@ -48,7 +48,7 @@ All own calibration/archive/compiler jobs stopped during sequential normal measu
 
 Initial reference slowdown16.46% exceeded15%, so it was preserved and followed by ABBA ordering: control-before3005.43, current-first2010.00, current-second3365.15, control-after2951.65 TPS. Arithmetic means are2978.54 control and2687.57 current, descriptive slowdown9.77%. Within-binary variation and discordant dense timing prevent stable performance clearance; the mean is not a replacement gate or a claimed optimization. Profiling was completed before any further progression: perception consumes88.94% of marked phase time, with the reference world hash unchanged. No100-seed R4 run proceeded. Sealed R3 performance debt remains: reference3567.45 TPS versus fresh paired R2 5894.05 (~39.47% slower). A future promising candidate still requires a controlled fresh reference comparison and profiling above15% additional regression.
 
-**Final regression and actual private CI**
+**Original R4 closure regression and historical CI**
 
 | Check | Result |
 | --- | --- |
@@ -111,3 +111,45 @@ Post-warmup actual predator matching searches (ticks >=5000) provide a separate 
 | predator60 | 5771 | 5028 | 8 | 0 | 0 |
 
 Counts sum all eight worlds and retain repeated observations; neighbours are not unique organisms. Warmup reproduction is excluded here and remains included in lifetime offspring budgets above. These actual searches support scarce reproductive eligibility/compatibility after warmup; post-matching snapshots alone cannot establish this. The near1 stock persistence maxima in patch32/128 include the naturally extinct, consumer-free world and must not be interpreted as a stable ecological niche.
+
+**2026-10-11 R4 續作：局部收益與暖機後繁殖診斷**
+
+狀態仍為 **PHASE 2 INCOMPLETE**。本次核對的起始分支是 `phase2/multicellular-ecology`，head `cea168e5b9517f4926c3cb164d56fbb0b1d0d6b6`；[CI 38087167068](https://github.com/oliverchenOVO/genesis-ecosystem/actions/runs/38087167068) 的 core、Windows、legacy-v4 均實際成功。Repository 已 PUBLIC；前文 private CI 是當時的歷史紀錄。保留 main `edff2ad1d3b82db5e19b72163297abfa4562bbf2`，其 [CI 38086317051](https://github.com/oliverchenOVO/genesis-ecosystem/actions/runs/38086317051) 亦成功，並未合併 R4。v0.1.0、兩份 R3 archive blob 與七項保護檔案雜湊再次核對一致。
+
+新增 [window-profitability 分析器](../scripts/window-profitability.mjs)，重用上述五組已封存的 8×50000 temporal summaries；不重跑 40 個世界、不修改 simulation、RNG、save 或分析版本。每項輸入的 SHA256 記於 [精簡結果](../benchmarks/phase2-r4-window-profitability-summary.json)；所有配對、個別分母、收益、局部 stock 與 processing efficiency 保留於 [完整壓縮結果](../benchmarks/phase2-r4-window-profitability-review.json.gz)。壓縮前後位元組一致，精簡結果記錄 archive SHA256 及展開長度。
+
+從 repository root 可重現單組結果；將其他情境的 temporal-summary 路徑接在後面即可合併分析。輸出是離線診斷，不能用作驗收候選選擇器。
+
+```powershell
+node scripts/window-profitability.mjs benchmarks/phase2-r4-control-temporal-summary.json.gz > artifacts/r4-profitability-review.json
+```
+
+配對限制為同 seed、lineage、1000-tick 視窗，排除前 5000 tick，並要求 specialist 與 Mixed 的 organism-ticks 分母皆非零。這裡比較的是**個體實際飲食分組**，包含所有有觀測的分組；不套用、不取代 lineage 每個 endpoint ≥8 的原驗收條件。因此下列數量和先前 qualified lineage/window 的 fitness 分析不同，不應直接混用。
+
+| 情境 | Soft 配對／淨收益較高／繁殖率較高 | Hard 配對／淨收益較高／繁殖率較高 | Prey 配對／淨收益較高／繁殖率較高 |
+| --- | ---: | ---: | ---: |
+| control | 5908 / 3437 / 3558 | 5535 / 3614 / 3489 | 18 / 2 / 0 |
+| patch32 | 5897 / 3427 / 3565 | 5572 / 3607 / 3527 | 40 / 10 / 0 |
+| patch64 | 5943 / 3613 / 3749 | 5527 / 3625 / 3630 | 55 / 15 / 0 |
+| patch128 | 4360 / 2706 / 2742 | 4114 / 2694 / 2600 | 32 / 8 / 0 |
+| predator60 | 6458 / 3705 / 3868 | 5902 / 3928 / 3765 | 38 / 9 / 0 |
+
+淨收益率為 `(實際 food + prey credit − actual metabolism − attack debit) / organism-ticks`；繁殖 debit 另列。這不是資源生成潛力，也不是扣除獨立實際移動成本的結果；目前 ledger 無法分離 actual metabolism 的移動分攤。Stock/efficiency 是觀測樣本平均，不能推論存活因果。此補查仍不支持「Mixed 普遍壓倒 specialist」；不能據此加上 feeding trade-off。零分母保留 null，缺少配對不造假補零。
+
+捕食者定義沿用 observer 的原始 predator 分組，另將 lifetime 收支拆成暖機期與暖機後。後者只計 `[5000,50000)` 的實際 budgets；無 predator organism-ticks 的世界不是零收益存活世界。
+
+| 情境 | 暖機後有捕食者觀測的世界 | 淨收益正／負的世界 | 暖機後 offspring parent participations |
+| --- | ---: | ---: | ---: |
+| control | 8/8 | 4 / 4 | 0 |
+| patch32 | 7/8 | 3 / 4 | 0 |
+| patch64 | 8/8 | 3 / 5 | 0 |
+| patch128 | 7/8 | 3 / 4 | 0 |
+| predator60 | 8/8 | 3 / 5 | 0 |
+
+這與前述暖機後實際 matching 的 compatible candidates／initiated pairs 全部為零一致；某些世界仍有正淨收益並不等於具備繁殖族群。Lifetime 的 predator60 seed1 offspring 增加集中在暖機期，不能作為暖機後穩定性證據。資料支持先分解局部繁殖 eligibility／compatibility 的原因，尚不足以指定唯一因果機制或合理化再加 kill credit、降低 mating radius、加入生殖隔離牆。原本四個 ecological gates 仍全為零，四個候選仍全部拒絕。
+
+本次只增加離線診斷與其回歸測試，保留全部原有測試及門檻。四項新測試涵蓋同 lineage/window 配對、暖機排除、零分母、缺失 Mixed、duplicate／counter／範圍錯誤，以及 reproductive debit 分離。沒有選出新候選；rules4、R4 100×100000 formal run、native／installer UAT、merge、v0.2.0 tag／release 仍未進行。已有 benchmark/profile 的 TPS 與未解決效能限制維持前表，不將離線分析或 CI stress 的執行時間冒充 simulation 性能改善。
+
+本次 [本機驗證紀錄](../benchmarks/phase2-r4-resumption-validation.json)：Rust normal **75 PASS**、all-features **84 PASS**（兩種組合各包含桌面 IPC／close 權限 **2 PASS**）；frontend **31 PASS**、Node **30 PASS**。Rust fmt／all-target all-feature clippy、前端 format／lint／typecheck／build 全通過。隔離 target 的 Tauri EXE／NSIS build 通過，僅標示 **BUILD ONLY**；SHA256 保留於驗證紀錄，未覆寫七項保護檔案，也未執行 gated native／installer UAT。
+
+[固定 seed sanity stress](../benchmarks/phase2-r4-resumption-stress.json) 為 10×2000 tick、初始 population50／limit200、四 workers：零失敗，save/load continuation 與 full replay 一致，elapsed **2.6328246 秒**。這是短程回歸，不是 R4 生態矩陣或可與 reference-200 比較的 TPS。真實 R3 seed0/tick1000 save 再次通過 full replay 與 +1000 continuation；還原 hash `b21177ecbc60aacfb3425b32ec123e478ebd5233d09cd19b0c593ff13e9c5aef`，續推 hash `391d03e4e2002825d6f0afd0d898205465f11330b4eb043652863b07aee6c8c5`。

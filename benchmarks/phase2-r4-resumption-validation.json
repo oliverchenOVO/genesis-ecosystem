@@ -1,0 +1,69 @@
+{
+  "status": "PHASE 2 INCOMPLETE",
+  "date": "2026-10-11",
+  "starting_head": "cea168e5b9517f4926c3cb164d56fbb0b1d0d6b6",
+  "main_preserved": "edff2ad1d3b82db5e19b72163297abfa4562bbf2",
+  "authority_changed": false,
+  "versions": {
+    "simulation": 5,
+    "rules": 3,
+    "rng": 1,
+    "save_envelope": 1,
+    "analysis": 5
+  },
+  "tests": {
+    "rust_normal": 75,
+    "rust_all_features": 84,
+    "desktop_included": 2,
+    "desktop_normal": 2,
+    "desktop_all_features": 2,
+    "frontend": 31,
+    "node": 30
+  },
+  "checks": {
+    "rust_fmt": true,
+    "all_target_all_feature_clippy": true,
+    "frontend_format_lint_typecheck_build": true,
+    "diagnostic_reproduction_byte_identical": true,
+    "compressed_roundtrip_identical": true,
+    "protected_files": 7,
+    "archive_blobs": 2,
+    "secrets_scan": true
+  },
+  "stress": {
+    "source": "benchmarks/phase2-r4-resumption-stress.json",
+    "seeds": 10,
+    "ticks_per_seed": 2000,
+    "failures": 0,
+    "elapsed_seconds": 2.6328246,
+    "scope": "Sanity stress including save/load continuation and full replay; not a biological calibration or controlled TPS comparison."
+  },
+  "r3_save": {
+    "source": "fixtures/phase2-r3-prerelease-rejection.genesis",
+    "full_replay_verified": true,
+    "restored_hash": "b21177ecbc60aacfb3425b32ec123e478ebd5233d09cd19b0c593ff13e9c5aef",
+    "continued_ticks": 1000,
+    "continued_hash": "391d03e4e2002825d6f0afd0d898205465f11330b4eb043652863b07aee6c8c5"
+  },
+  "native_build": {
+    "status": "BUILD ONLY",
+    "isolated_target": "target/phase2-review",
+    "exe_sha256": "090fb42787f43958c88c579ea33ca382eff0e5cd0069c6be46d777de0222c291",
+    "nsis_sha256": "e82cf015159920d7acd2e77578ef7e3b8d4071325356ca9c48d5fb3ebdd75063"
+  },
+  "starting_head_ci": {
+    "run": 38087167068,
+    "head": "cea168e5b9517f4926c3cb164d56fbb0b1d0d6b6",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      "core",
+      "windows",
+      "legacy-v4"
+    ]
+  },
+  "formal_rules4": "NOT RUN: no candidate selected",
+  "native_installer_uat": "NOT RUN: biology gates fail",
+  "merge_tag_release": "NOT DONE",
+  "performance": "No authoritative or normal-runtime source change. Preserved controlled comparison/profile results remain uncleared; no new TPS improvement claimed."
+}
