@@ -494,6 +494,16 @@ footer button {
   text-align: left;
   gap: 12px;
 }
+.species-search {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.species-search input {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
 .species-row.selected {
   background: #23362b;
 }

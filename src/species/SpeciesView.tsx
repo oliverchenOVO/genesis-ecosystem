@@ -9,6 +9,24 @@ const traitNames = [
   "Thermal tolerance",
   "Aggression",
 ];
+export type SpeciesFilter = "All" | "Living" | "Extinct";
+export function filterSpecies(
+  species: Species[],
+  filter: SpeciesFilter,
+  query: string,
+) {
+  const term = query.trim().toLocaleLowerCase();
+  return species.filter(
+    (s) =>
+      (filter === "All" ||
+        (filter === "Living"
+          ? s.extinct_tick === null
+          : s.extinct_tick !== null)) &&
+      (!term ||
+        s.name.toLocaleLowerCase().includes(term) ||
+        String(s.id) === term.replace(/^#/, "")),
+  );
+}
 export function formatTrait(index: number, value: number): string {
   if (index === 4) return `${(value / 100).toFixed(2)} °C`;
   if (index === 5) return `${(value / 10).toFixed(1)}%`;
@@ -25,8 +43,10 @@ export function SpeciesView({
   selected: number | null;
   select: (id: number) => void;
 }) {
-  const [filter, setFilter] = useState("All");
-  const detail = species.find((s) => s.id === selected) ?? species[0];
+  const [filter, setFilter] = useState<SpeciesFilter>("All");
+  const [query, setQuery] = useState("");
+  const visible = filterSpecies(species, filter, query);
+  const detail = visible.find((s) => s.id === selected) ?? visible[0];
   const samples = telemetry.map((t) => ({
     tick: t.tick,
     data: t.species.find((s) => s.species === detail?.id),
@@ -38,41 +58,47 @@ export function SpeciesView({
     <div className="species-workspace">
       <section className="species-list rail">
         <h2>Species registry</h2>
+        <label className="species-search">
+          Search species
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Name or #ID"
+          />
+        </label>
         <div className="segments">
-          {["All", "Living", "Extinct"].map((f) => (
+          {(["All", "Living", "Extinct"] as const).map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
               className={filter === f ? "active" : ""}
+              aria-pressed={filter === f}
             >
               {f}
             </button>
           ))}
         </div>
-        {species
-          .filter(
-            (s) =>
-              filter === "All" ||
-              (filter === "Living"
-                ? s.extinct_tick === null
-                : s.extinct_tick !== null),
-          )
-          .map((s) => (
-            <button
-              className={`species-row ${detail?.id === s.id ? "selected" : ""}`}
-              key={s.id}
-              onClick={() => select(s.id)}
-            >
-              <span
-                className={`species-dot ${s.extinct_tick !== null ? "extinct" : ""}`}
-              />
-              <span>
-                <strong>{s.name}</strong>
-                <small>Origin tick {s.origin_tick.toLocaleString()}</small>
-              </span>
-              <b>{s.population.toLocaleString()}</b>
-            </button>
-          ))}
+        <p className="muted note" role="status">
+          {visible.length} of {species.length} species
+        </p>
+        {visible.map((s) => (
+          <button
+            className={`species-row ${detail?.id === s.id ? "selected" : ""}`}
+            key={s.id}
+            onClick={() => select(s.id)}
+            aria-pressed={detail?.id === s.id}
+          >
+            <span
+              className={`species-dot ${s.extinct_tick !== null ? "extinct" : ""}`}
+            />
+            <span>
+              <strong>{s.name}</strong>
+              <small>Origin tick {s.origin_tick.toLocaleString()}</small>
+            </span>
+            <b>{s.population.toLocaleString()}</b>
+          </button>
+        ))}
         <p className="muted note">
           A new species requires sustained genetic divergence and restricted
           gene flow. Extinct records remain available.
@@ -118,7 +144,11 @@ export function SpeciesView({
             {detail.ancestor ? (
               <button
                 className="inline-link"
-                onClick={() => select(detail.ancestor!)}
+                onClick={() => {
+                  setFilter("All");
+                  setQuery("");
+                  select(detail.ancestor!);
+                }}
               >
                 {species.find((s) => s.id === detail.ancestor)?.name ??
                   `#${detail.ancestor}`}
@@ -241,7 +271,11 @@ export function SpeciesView({
           </div>
         </section>
       ) : (
-        <p>No species recorded.</p>
+        <p>
+          {species.length
+            ? "No species match this search and filter."
+            : "No species recorded."}
+        </p>
       )}
     </div>
   );
