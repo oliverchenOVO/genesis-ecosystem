@@ -2,9 +2,13 @@
 
 ### 從單細胞出發，讓每一次演化都有可追溯的證據
 
+[![main 持續整合](https://github.com/oliverchenOVO/genesis-ecosystem/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/oliverchenOVO/genesis-ecosystem/actions/workflows/validate.yml?query=branch%3Amain)
+
 GENESIS 是一個以 **Rust、Tauri 與 React** 建立的人工生命模擬研究原型。個體的移動、攝食、能量消耗、繁殖與遺傳由模擬規則決定；介面讓使用者觀察性狀、親代、物種與歷史紀錄。
 
 這個專案關注兩個問題：**演化現象如何從局部規則產生？我們如何確認看到的結果可以重現，而不是展示腳本或敘事生成？**
+
+推甄或技術審閱可從 [審閱與重現指南](docs/REVIEW_GUIDE.md) 開始：包含閱讀路徑、主張與證據對照，以及真實保存檔的 replay 驗證指令。上方 CI 標章只表示 main 的自動檢查狀態，生態與原生驗收仍依下方各版本報告判定。
 
 ![GENESIS 真實運行畫面：環境控制、世界地圖與族群趨勢](docs/images/world.png)
 
