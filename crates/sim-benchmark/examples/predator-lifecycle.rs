@@ -32,7 +32,7 @@ fn run(seed: u64) -> Result<serde_json::Value, String> {
     predator_lifecycle::start(&world);
     world.advance(TICKS);
     world.validate()?;
-    let report = predator_lifecycle::finish();
+    let report = predator_lifecycle::finish(&world);
     let hash = world.hash();
     if hash != FROZEN[seed as usize] {
         return Err(format!("seed {seed} hash {hash} differs from frozen R3"));
@@ -81,6 +81,20 @@ fn period(worlds: &[serde_json::Value], table: &str, from: u64, to: u64) -> serd
     serde_json::Value::Object(target)
 }
 
+/// Adds every numeric field and array element of `add` into `acc`.
+fn merge(acc: &mut serde_json::Value, add: &serde_json::Value) {
+    for (k, v) in add.as_object().expect("object") {
+        match (&mut acc[k], v) {
+            (serde_json::Value::Array(a), serde_json::Value::Array(b)) => {
+                for (x, y) in a.iter_mut().zip(b) {
+                    *x = (x.as_u64().unwrap() + y.as_u64().unwrap()).into();
+                }
+            }
+            (x, y) => *x = (x.as_u64().unwrap() + y.as_u64().unwrap()).into(),
+        }
+    }
+}
+
 fn main() -> Result<(), String> {
     let handles: Vec<_> = (0..8u64)
         .map(|seed| std::thread::spawn(move || run(seed)))
@@ -100,13 +114,37 @@ fn main() -> Result<(), String> {
                 "deaths":period(&worlds,"deaths",from,to),"presence":period(&worlds,"presence",from,to)}),
         );
     }
+    let mut lifetimes: BTreeMap<String, serde_json::Value> = BTreeMap::new();
+    for w in &worlds {
+        for row in w["lifecycle"]["lifetime_energy"]
+            .as_array()
+            .expect("lifetimes")
+        {
+            let key = format!(
+                "{}|{}|{}",
+                row["origin"].as_str().unwrap(),
+                if row["born_after_warmup"].as_bool().unwrap() {
+                    "post"
+                } else {
+                    "warmup"
+                },
+                row["outcome"].as_str().unwrap()
+            );
+            match lifetimes.get_mut(&key) {
+                Some(acc) => merge(acc, &row["totals"]),
+                None => {
+                    lifetimes.insert(key, row["totals"].clone());
+                }
+            }
+        }
+    }
     println!(
         "{}",
         serde_json::json!({"scenario":"phase2-r4-predator-lifecycle-unchanged-r3","simulation_version":5,"rules_revision":3,
             "seeds":8,"ticks_per_seed":TICKS,"population":50,"limit":2000,"size":512,"regeneration":4,"mutation":100,"temperature":2000,
             "warmup_ticks":WARMUP_WINDOWS*1000,"all_hashes_match_frozen_r3":true,
             "predator_founders":worlds.iter().map(|w|w["lifecycle"]["predator_founders"].as_u64().unwrap()).sum::<u64>(),
-            "summary":summary,"worlds":worlds})
+            "summary":summary,"lifetime_energy":lifetimes,"worlds":worlds})
     );
     Ok(())
 }

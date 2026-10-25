@@ -207,3 +207,44 @@ node scripts/window-profitability.mjs benchmarks/phase2-r4-control-temporal-summ
 對下一步的意涵：資料指出應優先處理 **founder 期 predator 的能量與存活**，以及 **門檻性狀在小族群中的延續**，而不是暖機後的交配規則或 kill credit（predator60 已被拒絕）。依 §73 的規則，下一步要先定義一個有界、可逆的候選並用配對 seed 比較；本次未選出候選，也未改動模擬規則。rules4、formal R4、native／installer UAT、merge、tag／release 仍未進行。
 
 本次驗證：Rust normal **75 PASS**、all-features **87 PASS**（前節 86 + 新增 1），rustfmt check、all-target all-feature clippy（`-D warnings`）通過。前節 commit `3f7bacc` 的 [CI 40226289401](https://github.com/oliverchenOVO/genesis-ecosystem/actions/runs/40226289401) core、windows、legacy-v4 皆實際成功。前端未改動。
+
+**2026-10-26 R4 續作：Predator Energetic Viability — Step 1 能量收支分解**
+
+狀態仍為 **PHASE 2 INCOMPLETE**。起始 head `cdf2236`（[CI 40227480440](https://github.com/oliverchenOVO/genesis-ecosystem/actions/runs/40227480440) core、legacy-v4、windows 皆實際成功）。待驗證的假說是：捕食表型在兩次成功捕獵之間的實際能量收支為負，主因是搜尋、追捕與狩獵的支出，而不只是捕殺報酬不足。依指示，在拆解閉合之前不修改任何權威規則。
+
+[`predator_lifecycle`](../crates/sim-core/src/predator_lifecycle.rs) 升為 version 2，為每一隻 predator 建立終生能量帳本，把能量流掛在 viability 既有的 food／kill／attack／metabolism／reproduction hook 上。收入分成環境資源與獵物；代謝分成 basal（`metabolism − maintenance_cost`）、morphology maintenance、依「該 tick 已提交的行為」分開的移動成本（Hunt 移動即追捕成本）以及 thermal；另外記錄 attack 與 reproduction 支出。每一隻個體在死亡或結束時都必須滿足 `初始 + 環境 + 獵物 = 實際代謝 + attack + reproduction + 剩餘`，否則程式直接 assert 失敗；測試也證明 14 個分項與移動總和都與 viability `predator-like` cohort 完全一致。Requested 代謝分項是權威成本式中的各項；實際扣除受儲存能量限制，兩者的差值另列為 shortfall。重跑未改動的 R3 對照（seed 0..7 × 50000）：**8/8 雜湊一致**，耗時 74.02 秒。證據見 [summary](../benchmarks/phase2-r4-predator-energy-summary.json) 與 [壓縮檔](../benchmarks/phase2-r4-predator-energy.json.gz)。
+
+| 終生合計 | 暖機期 founder 系（founders 與其 predator 後代，n = 232） | 暖機後 de novo 突變體（n = 13） |
+| --- | ---: | ---: |
+| 總攝入 | 1,643,397 | 75,520 |
+| 獵物攝入（占比） | 1,537,105（93.5%） | 68,985（91.3%） |
+| 環境資源攝入 | 106,292 | 6,535 |
+| Basal | 924,203（59.7%） | 41,575（50.6%） |
+| Morphology maintenance | 248,939（16.1%） | 17,731（21.6%） |
+| 一般移動 | 69,263（4.5%） | 2,328（2.8%） |
+| **追捕（Hunt）移動** | **123,461（8.0%）** | **432（0.5%）** |
+| Thermal | 2,386（0.2%） | 0 |
+| Attack | 180,121（11.6%） | 20,102（24.5%） |
+| Reproduction | 289,282 | 0 |
+| 繁殖前淨收支（攝入 − 實際代謝 − attack） | +107,787 | −6,195 |
+| 終生子代參與數 | 375（187 個 predator 子代） | 0 |
+| 餓死 / 老死 | 107 / 125 | 7 / 6 |
+
+括號內百分比是占「requested 代謝 + attack」的比例。實際代謝 1,355,489，shortfall 12,763。Founder 系整體在繁殖前是正收支，但繁殖支出（289,282）超過正收支，差額由初始能量（424,012）支付；187 個 predator 子代 ÷ 232 隻 predator ≈ 0.81，低於 1 的替換水準。
+
+依結局細分（每 organism-tick 平均）：
+
+| Founder 系 | 攝入 | 成本 | 其中追捕移動 | 淨收支 | 每次 attack 需要的 Hunt ticks | 每次 kill 需要的 Hunt ticks | Hunt tick 占比 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 子代，老死（n = 88） | 8.04 | 6.36 | 0.48 | +1.69 | 22.7 | 71.2 | 52% |
+| 子代，餓死（n = 99） | 4.83 | 6.27 | 0.81 | −1.27 | **52.4** | **189.4** | 83% |
+| Founder，老死（n = 37） | 6.13 | 6.00 | 0.18 | +0.13 | 21.3 | 68.8 | 35% |
+| Founder，餓死（n = 8） | 3.52 | 6.34 | 0.23 | −2.71 | 48.8 | 207.0 | 63% |
+
+**Step 1 結論：追捕移動成本不是主要瓶頸。** 它只占 founder 系終生成本的 8.0%，每個 Hunt tick 只花約 1 點能量。即使是 HuntCost70 這種 −30% 的調整，對餓死子代來說每 tick 只省約 0.24，仍不足以抵銷 −1.27 的赤字。餓死組與老死組的**成本幾乎相同**（6.27 對 6.36），差別在**攝入**（4.83 對 8.04）：餓死組有 83% 的 tick 在追捕，卻要 52 個 Hunt tick 才能出手一次、189 個 Hunt tick 才捕殺一隻，是老死組的 2.3 到 2.7 倍。每次 kill 的獵物能量兩組相同（約 1,086 對 1,067），每次 attack 的成功率也接近（0.28 對 0.32）。所以拖累餓死組的不是單次捕殺報酬，也不是追捕的移動成本，而是**追捕過程中耗掉的時間**：basal 每 tick 照扣（約 3.7），而且依現有規則，處於 Hunt 的 tick 完全不能進食環境資源。
+
+依照指示的 Step 6，**本次不執行 HuntCost90／80／70**。成本中最大的單項是 basal（59.7%），但 basal 由 genome locus 3 與體型決定，所有生物適用同一條式子。若只對 predator 降低，等同給予捕食者能量優惠，違反「不得給 predator bonus energy」；若對所有生物一起降低，則會同時改變整個生態，而不是只測試這一個變數。分解結果指向的可介入變數是指示中列出的 **prey acquisition／encounter inefficiency**；具體要測哪一個單一候選，留待下一步決定。本次未修改任何權威規則，也未選出候選；rules4、formal R4、native／installer UAT、merge、tag／release 仍未進行。
+
+假說 A（同類聚集移動）**維持 deferred**：暖機期的 predators 已經能夠繁殖，暖機後同時存活的 predator 最多 1 隻，聚集無法產生不存在的配偶。只有當未來某個候選讓多隻 predator 同時存活、卻因空間分離而無法相遇交配時，A 才需要重新檢討。
+
+本次驗證：Rust normal **75 PASS**、all-features **87 PASS**，rustfmt check 與 all-target all-feature clippy（`-D warnings`）通過。

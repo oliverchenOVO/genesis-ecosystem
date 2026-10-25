@@ -1,0 +1,317 @@
+{
+  "version": 1,
+  "scenario": "phase2-r4-predator-energy-unchanged-r3",
+  "base_head": "cdf2236",
+  "authority_source": "831f8617d19714d856d653278e244e1f9becaa28",
+  "command": "cargo build --release -p sim-benchmark --features viability --example predator-lifecycle; target/release/examples/predator-lifecycle.exe",
+  "executable_sha256": "3e83bd6a4c8bca9306ca1e23ee62d4920a07c2bc5d2ebef8940571c6e6aef164",
+  "elapsed_seconds": 74.02,
+  "workers": 8,
+  "seeds": 8,
+  "ticks_per_seed": 50000,
+  "warmup_ticks": 5000,
+  "all_eight_hashes_match_frozen_R3": true,
+  "world_hashes": [
+    {
+      "seed": 0,
+      "hash": "741738ae7550d269e59e4f39106557cef283e0150a974cb309bf2f37cb92768f"
+    },
+    {
+      "seed": 1,
+      "hash": "bdbabeda1113836f07ef9348d439d2051a131e28313d7657624cce48258a0b62"
+    },
+    {
+      "seed": 2,
+      "hash": "8dde43491e172545dbbe50b25de49731fde1f3a21591f77132b026c27b26f9e0"
+    },
+    {
+      "seed": 3,
+      "hash": "366f3ea5aa6c2f2be90599ce1d0707edc53d01e6e2a026ce7c216c84a0c3c1ea"
+    },
+    {
+      "seed": 4,
+      "hash": "e7a4d727f03e84c6481a45b54b7c5fb4fabf9b62f23f13620b6198cd9c6a9ac4"
+    },
+    {
+      "seed": 5,
+      "hash": "aefe58b7e1a54cf7676c0216e1f9ca73208712f22cbc1a1fe72fd46ef422ccd3"
+    },
+    {
+      "seed": 6,
+      "hash": "4abc090d21f782578a9d7769e95b3a17fc3226d4f1e8d0572e3e777ae1abbb8a"
+    },
+    {
+      "seed": 7,
+      "hash": "314ebcc777a23132004f3005f3aae60d748629e12be48b77f7b74a329e2bfca9"
+    }
+  ],
+  "archive": {
+    "path": "benchmarks/phase2-r4-predator-energy.json.gz",
+    "uncompressed_bytes": 179307,
+    "uncompressed_sha256": "2160cb6a47d6d245f51ec426a106fc9c9d65c798ca5ece1ee61f51d3761c029b",
+    "gzip_sha256": "6acadfc882eb321e1522d95a81d805e5a93408678b40d8f08f1f3423bd3db127"
+  },
+  "movement_index": [
+    "SeekFood",
+    "SeekMate",
+    "Flee",
+    "Hunt",
+    "Explore",
+    "Rest"
+  ],
+  "lifetime_energy": {
+    "DeNovo|post|Age": {
+      "actual_metabolic": 36956,
+      "attack_cost": 9306,
+      "attacks": 249,
+      "basal": 24244,
+      "behavior_ticks": [
+        6499,
+        0,
+        0,
+        3457,
+        0,
+        0
+      ],
+      "final_energy": 13971,
+      "food_income": 5956,
+      "individuals": 6,
+      "initial_energy": 10317,
+      "kills": 61,
+      "maintenance": 9956,
+      "matings": 0,
+      "metabolic_shortfall": 0,
+      "movement": [
+        2328,
+        0,
+        0,
+        428,
+        0,
+        0
+      ],
+      "offspring": 0,
+      "organism_ticks": 9956,
+      "prey_income": 43960,
+      "reproduction_cost": 0,
+      "starving_ticks": 0,
+      "thermal": 0
+    },
+    "DeNovo|post|Starvation": {
+      "actual_metabolic": 24657,
+      "attack_cost": 10796,
+      "attacks": 293,
+      "basal": 17331,
+      "behavior_ticks": [
+        564,
+        0,
+        0,
+        7211,
+        0,
+        0
+      ],
+      "final_energy": 0,
+      "food_income": 579,
+      "individuals": 7,
+      "initial_energy": 9849,
+      "kills": 57,
+      "maintenance": 7775,
+      "matings": 0,
+      "metabolic_shortfall": 453,
+      "movement": [
+        0,
+        0,
+        0,
+        4,
+        0,
+        0
+      ],
+      "offspring": 0,
+      "organism_ticks": 7775,
+      "prey_income": 25025,
+      "reproduction_cost": 0,
+      "starving_ticks": 140,
+      "thermal": 0
+    },
+    "DeNovo|warmup|Age": {
+      "actual_metabolic": 22370,
+      "attack_cost": 4488,
+      "attacks": 136,
+      "basal": 14226,
+      "behavior_ticks": [
+        2649,
+        0,
+        0,
+        1625,
+        0,
+        0
+      ],
+      "final_energy": 5878,
+      "food_income": 6210,
+      "individuals": 3,
+      "initial_energy": 6969,
+      "kills": 24,
+      "maintenance": 4274,
+      "matings": 0,
+      "metabolic_shortfall": 0,
+      "movement": [
+        2021,
+        0,
+        0,
+        1849,
+        0,
+        0
+      ],
+      "offspring": 0,
+      "organism_ticks": 4274,
+      "prey_income": 19557,
+      "reproduction_cost": 0,
+      "starving_ticks": 0,
+      "thermal": 0
+    },
+    "FounderDescended|warmup|Age": {
+      "actual_metabolic": 670616,
+      "attack_cost": 105442,
+      "attacks": 2770,
+      "basal": 447092,
+      "behavior_ticks": [
+        58214,
+        923,
+        0,
+        62984,
+        0,
+        0
+      ],
+      "final_energy": 161444,
+      "food_income": 37631,
+      "individuals": 88,
+      "initial_energy": 136858,
+      "kills": 885,
+      "maintenance": 123489,
+      "matings": 126,
+      "metabolic_shortfall": 437,
+      "movement": [
+        38016,
+        855,
+        0,
+        59215,
+        0,
+        0
+      ],
+      "offspring": 248,
+      "organism_ticks": 122121,
+      "prey_income": 944417,
+      "reproduction_cost": 181404,
+      "starving_ticks": 82,
+      "thermal": 2386
+    },
+    "FounderDescended|warmup|Starvation": {
+      "actual_metabolic": 358634,
+      "attack_cost": 37925,
+      "attacks": 1027,
+      "basal": 243779,
+      "behavior_ticks": [
+        11142,
+        87,
+        0,
+        53784,
+        0,
+        0
+      ],
+      "final_energy": 0,
+      "food_income": 5179,
+      "individuals": 99,
+      "initial_energy": 138971,
+      "kills": 284,
+      "maintenance": 65214,
+      "matings": 39,
+      "metabolic_shortfall": 11319,
+      "movement": [
+        7896,
+        83,
+        0,
+        52981,
+        0,
+        0
+      ],
+      "offspring": 77,
+      "organism_ticks": 65013,
+      "prey_income": 308545,
+      "reproduction_cost": 56136,
+      "starving_ticks": 2018,
+      "thermal": 0
+    },
+    "Founder|warmup|Age": {
+      "actual_metabolic": 278916,
+      "attack_cost": 32806,
+      "attacks": 845,
+      "basal": 196529,
+      "behavior_ticks": [
+        33769,
+        202,
+        0,
+        18035,
+        0,
+        0
+      ],
+      "final_energy": 81073,
+      "food_income": 56424,
+      "individuals": 37,
+      "initial_energy": 121317,
+      "kills": 262,
+      "maintenance": 52006,
+      "matings": 31,
+      "metabolic_shortfall": 127,
+      "movement": [
+        20984,
+        178,
+        0,
+        9346,
+        0,
+        0
+      ],
+      "offspring": 47,
+      "organism_ticks": 52006,
+      "prey_income": 262195,
+      "reproduction_cost": 47141,
+      "starving_ticks": 26,
+      "thermal": 0
+    },
+    "Founder|warmup|Starvation": {
+      "actual_metabolic": 47323,
+      "attack_cost": 3948,
+      "attacks": 106,
+      "basal": 36803,
+      "behavior_ticks": [
+        3002,
+        53,
+        0,
+        5175,
+        0,
+        0
+      ],
+      "final_energy": 0,
+      "food_income": 7058,
+      "individuals": 8,
+      "initial_energy": 26866,
+      "kills": 25,
+      "maintenance": 8230,
+      "matings": 3,
+      "metabolic_shortfall": 880,
+      "movement": [
+        1237,
+        14,
+        0,
+        1919,
+        0,
+        0
+      ],
+      "offspring": 3,
+      "organism_ticks": 8230,
+      "prey_income": 21948,
+      "reproduction_cost": 4601,
+      "starving_ticks": 160,
+      "thermal": 0
+    }
+  },
+  "stage": "Diagnostics only; R3 authority unchanged; not a candidate selector or rules4 acceptance"
+}

@@ -151,6 +151,7 @@ pub fn movement(o: &Organism, speed: i32, hunt: bool) {
 }
 pub fn food(o: &Organism, available: i32, efficiency: i32, quota: i32, amount: i32, gained: i32) {
     income(o, gained as u64, 0);
+    crate::predator_lifecycle::energy(o, |b| b.food_income += gained as u64);
     update(o, |c| {
         c.food_attempt_ticks += 1;
         c.available_resource_sum += available as u64;
@@ -162,6 +163,10 @@ pub fn food(o: &Organism, available: i32, efficiency: i32, quota: i32, amount: i
     });
 }
 pub fn attack(o: &Organism, spent: i32) {
+    crate::predator_lifecycle::energy(o, |b| {
+        b.attacks += 1;
+        b.attack_cost += spent as u64;
+    });
     update(o, |c| {
         c.attacks += 1;
         c.attack_energy += spent as u64;
@@ -169,6 +174,10 @@ pub fn attack(o: &Organism, spent: i32) {
 }
 pub fn kill(o: &Organism, gained: i32) {
     income(o, 0, gained as u64);
+    crate::predator_lifecycle::energy(o, |b| {
+        b.kills += 1;
+        b.prey_income += gained as u64;
+    });
     update(o, |c| {
         c.kills += 1;
         c.prey_energy += gained as u64;
@@ -193,6 +202,7 @@ pub fn take_energy_window() -> [[u64; 2]; 2] {
     })
 }
 pub fn metabolism(o: &Organism, components: [i32; 4], actual: i32, starving: bool) {
+    crate::predator_lifecycle::metabolism(o, components, actual, starving);
     update(o, |c| {
         c.requested_basal_energy += components[0] as u64;
         c.requested_morphology_energy += components[1] as u64;
@@ -239,6 +249,11 @@ pub fn mate_search(o: &Organism, candidates: [u64; 9]) {
     });
 }
 pub fn reproduction(o: &Organism, spent: i32, children: u32) {
+    crate::predator_lifecycle::energy(o, |b| {
+        b.matings += u64::from(children > 0);
+        b.offspring += u64::from(children);
+        b.reproduction_cost += spent as u64;
+    });
     update(o, |c| {
         c.successful_matings += u64::from(children > 0);
         c.offspring_produced += u64::from(children);

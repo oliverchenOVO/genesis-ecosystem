@@ -39,12 +39,128 @@ struct Presence {
     ticks_with_two_or_more: u64,
     peak_living: u64,
 }
+/// Lifetime energy ledger of one predator, closed exactly at death or at finish.
+/// Requested metabolic components are the authoritative cost terms; the actual debit is
+/// clamped to stored energy, and the difference is the starvation shortfall.
+#[derive(Clone, Copy, Default, Serialize)]
+pub struct Budget {
+    pub(crate) individuals: u64,
+    pub(crate) organism_ticks: u64,
+    pub(crate) initial_energy: u64,
+    pub(crate) food_income: u64,
+    pub(crate) prey_income: u64,
+    pub(crate) basal: u64,
+    pub(crate) maintenance: u64,
+    /// Movement indexed by the tick's committed behavior: SeekFood, SeekMate, Flee, Hunt,
+    /// Explore, Rest. Hunt movement is the pursuit cost.
+    pub(crate) movement: [u64; 6],
+    pub(crate) behavior_ticks: [u64; 6],
+    pub(crate) thermal: u64,
+    pub(crate) actual_metabolic: u64,
+    pub(crate) metabolic_shortfall: u64,
+    pub(crate) starving_ticks: u64,
+    pub(crate) attacks: u64,
+    pub(crate) attack_cost: u64,
+    pub(crate) kills: u64,
+    pub(crate) reproduction_cost: u64,
+    pub(crate) matings: u64,
+    pub(crate) offspring: u64,
+    pub(crate) final_energy: u64,
+}
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+enum Origin {
+    Founder,
+    FounderDescended,
+    DeNovo,
+    DeNovoDescended,
+}
 #[derive(Default)]
 struct Collector {
     founders: u64,
     births: BTreeMap<u64, Births>,
     deaths: BTreeMap<u64, Deaths>,
     presence: BTreeMap<u64, Presence>,
+    living: BTreeMap<u64, (Origin, u64, Budget)>,
+    /// (origin, born after warmup, outcome) -> summed lifetime budgets.
+    lifetimes: BTreeMap<(Origin, bool, &'static str), Budget>,
+}
+const WARMUP: u64 = 5000;
+fn origin_name(o: Origin) -> &'static str {
+    match o {
+        Origin::Founder => "Founder",
+        Origin::FounderDescended => "FounderDescended",
+        Origin::DeNovo => "DeNovo",
+        Origin::DeNovoDescended => "DeNovoDescended",
+    }
+}
+fn add(total: &mut Budget, b: &Budget) {
+    macro_rules! sum { ($($f:ident),*) => { $(total.$f += b.$f;)* } }
+    sum!(
+        individuals,
+        organism_ticks,
+        initial_energy,
+        food_income,
+        prey_income,
+        basal,
+        maintenance,
+        thermal,
+        actual_metabolic,
+        metabolic_shortfall,
+        starving_ticks,
+        attacks,
+        attack_cost,
+        kills,
+        reproduction_cost,
+        matings,
+        offspring,
+        final_energy
+    );
+    for i in 0..6 {
+        total.movement[i] += b.movement[i];
+        total.behavior_ticks[i] += b.behavior_ticks[i];
+    }
+}
+/// Applies `f` to the living predator's budget; non-predators and inactive collectors no-op.
+pub fn energy(o: &Organism, f: impl FnOnce(&mut Budget)) {
+    if !predator(o) {
+        return;
+    }
+    ACTIVE.with(|a| {
+        if let Some(c) = a.borrow_mut().as_mut() {
+            f(&mut c.living.get_mut(&o.id.0).expect("tracked predator").2);
+        }
+    });
+}
+pub fn metabolism(o: &Organism, components: [i32; 4], actual: i32, starving: bool) {
+    energy(o, |b| {
+        b.organism_ticks += 1;
+        b.basal += components[0] as u64;
+        b.maintenance += components[1] as u64;
+        b.movement[o.behavior as usize] += components[2] as u64;
+        b.behavior_ticks[o.behavior as usize] += 1;
+        b.thermal += components[3] as u64;
+        b.actual_metabolic += actual as u64;
+        b.metabolic_shortfall += (components.iter().sum::<i32>() - actual) as u64;
+        b.starving_ticks += u64::from(starving);
+    });
+}
+fn close(c: &mut Collector, o: &Organism, outcome: &'static str) {
+    let (origin, born, mut b) = c.living.remove(&o.id.0).expect("tracked predator");
+    b.individuals = 1;
+    b.final_energy = o.energy.max(0) as u64;
+    let input = b.initial_energy + b.food_income + b.prey_income;
+    let output = b.actual_metabolic + b.attack_cost + b.reproduction_cost + b.final_energy;
+    assert_eq!(
+        input, output,
+        "predator {} energy ledger must close",
+        o.id.0
+    );
+    add(
+        c.lifetimes
+            .entry((origin, born >= WARMUP, outcome))
+            .or_default(),
+        &b,
+    );
 }
 thread_local! { static ACTIVE: RefCell<Option<Collector>> = const { RefCell::new(None) }; }
 
@@ -56,10 +172,23 @@ fn window(tick: u64) -> u64 {
 }
 
 pub fn start(world: &World) {
-    let founders = world.state.organisms.iter().filter(|o| predator(o)).count() as u64;
+    let living: BTreeMap<_, _> = world
+        .state
+        .organisms
+        .iter()
+        .filter(|o| predator(o))
+        .map(|o| {
+            let budget = Budget {
+                initial_energy: o.energy.max(0) as u64,
+                ..Default::default()
+            };
+            (o.id.0, (Origin::Founder, world.state.tick, budget))
+        })
+        .collect();
     ACTIVE.with(|a| {
         *a.borrow_mut() = Some(Collector {
-            founders,
+            founders: living.len() as u64,
+            living,
             ..Default::default()
         })
     });
@@ -88,6 +217,25 @@ pub fn birth(child: &Organism, a: &Organism, b: &Organism, tick: u64) {
             return;
         }
         r.predator_children[parents] += 1;
+        let parent_origins: Vec<_> = [a, b]
+            .iter()
+            .filter_map(|p| c.living.get(&p.id.0).map(|l| l.0))
+            .collect();
+        let origin = if parent_origins
+            .iter()
+            .any(|o| matches!(o, Origin::Founder | Origin::FounderDescended))
+        {
+            Origin::FounderDescended
+        } else if parent_origins.is_empty() {
+            Origin::DeNovo
+        } else {
+            Origin::DeNovoDescended
+        };
+        let budget = Budget {
+            initial_energy: child.energy.max(0) as u64,
+            ..Default::default()
+        };
+        c.living.insert(child.id.0, (origin, tick, budget));
         r.predator_child_carnivory_sum += child.phenotype.carnivory as u64;
         r.predator_child_energy_sum += child.energy.max(0) as u64;
         r.predator_child_threshold_sum += child.phenotype.reproduction_threshold as u64;
@@ -124,13 +272,28 @@ pub fn death(o: &Organism, tick: u64, cause: DeathCause) {
         d.offspring_sum += u64::from(o.offspring);
         d.before_maturity += u64::from(age < 60 + o.phenotype.morphology.complexity as u64 / 4);
         d.without_offspring += u64::from(o.offspring == 0);
+        close(
+            c,
+            o,
+            match cause {
+                DeathCause::Starvation => "Starvation",
+                DeathCause::Predation => "Predation",
+                DeathCause::Environment => "Environment",
+                DeathCause::Age => "Age",
+            },
+        );
     });
 }
-pub fn finish() -> serde_json::Value {
-    let c = ACTIVE
+pub fn finish(world: &World) -> serde_json::Value {
+    let mut c = ACTIVE
         .with(|a| a.borrow_mut().take())
         .expect("predator lifecycle started");
-    serde_json::json!({"version":1,"window_ticks":1000,"predator_founders":c.founders,
+    for o in world.state.organisms.iter().filter(|o| predator(o)) {
+        close(&mut c, o, "Censored");
+    }
+    assert!(c.living.is_empty(), "every tracked predator is closed");
+    serde_json::json!({"version":2,"window_ticks":1000,"predator_founders":c.founders,
+        "lifetime_energy":c.lifetimes.iter().map(|((origin,post,outcome),v)|serde_json::json!({"origin":origin_name(*origin),"born_after_warmup":post,"outcome":outcome,"totals":v})).collect::<Vec<_>>(),
         "births":c.births.iter().map(|(w,v)|serde_json::json!({"window":w,"totals":v})).collect::<Vec<_>>(),
         "deaths":c.deaths.iter().map(|(w,v)|serde_json::json!({"window":w,"totals":v})).collect::<Vec<_>>(),
         "presence":c.presence.iter().map(|(w,v)|serde_json::json!({"window":w,"totals":v})).collect::<Vec<_>>(),
@@ -167,7 +330,7 @@ mod tests {
         crate::viability::start(&world);
         super::start(&world);
         world.advance(3000);
-        let p = super::finish();
+        let p = super::finish(&world);
         let v = crate::viability::finish(&world);
         assert_eq!(world.hash(), plain.hash());
         let cohort = v["cohorts"]
@@ -196,6 +359,34 @@ mod tests {
             sum(&p["presence"], "/predator_organism_ticks"),
             get("organism_ticks") - get("initial_population") + get("final_population")
         );
+        let life = |k: &str| sum(&p["lifetime_energy"], &format!("/{k}"));
+        for (mine, theirs) in [
+            ("food_income", "food_energy"),
+            ("prey_income", "prey_energy"),
+            ("attack_cost", "attack_energy"),
+            ("reproduction_cost", "reproductive_energy"),
+            ("actual_metabolic", "actual_metabolic_energy"),
+            ("organism_ticks", "organism_ticks"),
+            ("offspring", "offspring_produced"),
+            ("matings", "successful_matings"),
+            ("attacks", "attacks"),
+            ("kills", "kills"),
+            ("starving_ticks", "starvation_ticks"),
+            ("basal", "requested_basal_energy"),
+            ("maintenance", "requested_morphology_energy"),
+            ("thermal", "requested_thermal_energy"),
+        ] {
+            assert_eq!(life(mine), get(theirs), "{mine}");
+        }
+        let movement: u64 = (0..6)
+            .map(|i| sum(&p["lifetime_energy"], &format!("/movement/{i}")))
+            .sum();
+        assert_eq!(movement, get("requested_movement_energy"));
+        assert_eq!(
+            sum(&p["lifetime_energy"], "/individuals"),
+            p["predator_founders"].as_u64().unwrap() + born
+        );
+        assert!(life("prey_income") > 0 && life("kills") > 0);
         let all: u64 = (0..3)
             .map(|i| sum(&p["births"], &format!("/children/{i}")))
             .sum();
