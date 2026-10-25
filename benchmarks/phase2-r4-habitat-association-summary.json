@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "scenario": "phase2-r4-habitat-association-unchanged-r3",
+  "base_head": "c610ab8",
+  "executable_sha256": "466efd14125fcd8df9e131fa8721197c6867f1b3e1e9e34845e5ecae7154c5b3",
+  "seeds": 8,
+  "ticks_per_seed": 50000,
+  "all_eight_hashes_match_frozen_R3": true,
+  "archive": {
+    "path": "benchmarks/phase2-r4-habitat-association.json.gz",
+    "uncompressed_bytes": 2585812,
+    "uncompressed_sha256": "c2c1791d1d2e4d8b47dd56755d4bcf22b83385e83016cc08c304288389e7d4bd",
+    "gzip_sha256": "82aefa66f8a2e00b3ea5c0625687d0728543217fade5d13b686c49aa1f343bb0"
+  },
+  "mask_area_fraction": {
+    "soft": 0.25,
+    "hard": 0.25,
+    "overlap": 0.0345458984375
+  },
+  "by_mouth_channel": {
+    "Grazer/soft": {
+      "energy": 505376537,
+      "energy_in_soft_mask": 253179216,
+      "energy_in_hard_mask": 31508157
+    },
+    "Grazer/hard": {
+      "energy": 67993509,
+      "energy_in_soft_mask": 25224418,
+      "energy_in_hard_mask": 6755951
+    },
+    "Crusher/soft": {
+      "energy": 470256790,
+      "energy_in_soft_mask": 161173647,
+      "energy_in_hard_mask": 159440667
+    },
+    "Crusher/hard": {
+      "energy": 740164796,
+      "energy_in_soft_mask": 111589295,
+      "energy_in_hard_mask": 411054406
+    },
+    "Piercer/soft": {
+      "energy": 98765,
+      "energy_in_soft_mask": 42961,
+      "energy_in_hard_mask": 24045
+    },
+    "Piercer/hard": {
+      "energy": 121435,
+      "energy_in_soft_mask": 22028,
+      "energy_in_hard_mask": 74016
+    }
+  },
+  "lineage_window_post_warmup": {
+    "soft": {
+      "lineage_windows": 6238,
+      "own_mask_share_p10": 0.17467476149176062,
+      "median": 0.42292279674269284,
+      "p90": 0.6570929431186191,
+      "fraction_above_half": 0.2843860211606284
+    },
+    "hard": {
+      "lineage_windows": 5813,
+      "own_mask_share_p10": 0.1121665582303188,
+      "median": 0.484783508813439,
+      "p90": 0.8614762386248737,
+      "fraction_above_half": 0.47410975399965594
+    }
+  },
+  "speciation_24_seed_paired": {
+    "control": {
+      "worlds": 24,
+      "speciation_worlds": 1,
+      "multiple_simultaneous_species_worlds": 1,
+      "final_multiple_living_species_worlds": 0,
+      "longest_multiple_species_sampled_ticks": 14600
+    },
+    "catch100": {
+      "worlds": 24,
+      "speciation_worlds": 4,
+      "multiple_simultaneous_species_worlds": 4,
+      "final_multiple_living_species_worlds": 3,
+      "longest_multiple_species_sampled_ticks": 40200
+    },
+    "catchadv50": {
+      "worlds": 24,
+      "speciation_worlds": 3,
+      "multiple_simultaneous_species_worlds": 3,
+      "final_multiple_living_species_worlds": 0,
+      "longest_multiple_species_sampled_ticks": 24700
+    },
+    "catchadv100": {
+      "worlds": 24,
+      "speciation_worlds": 1,
+      "multiple_simultaneous_species_worlds": 1,
+      "final_multiple_living_species_worlds": 1,
+      "longest_multiple_species_sampled_ticks": 26200
+    }
+  },
+  "gate_definition_note": "Morphology and niche cluster gates count species (population>=8) representatives >=150 apart, so a single-species world cannot exceed one cluster. Speciation needs a lineage with >=8 members, distance >=100 from its ancestor founder, cross-lineage births <=20%, sustained 200 ticks.",
+  "stage": "Diagnostics only; R3 authority unchanged"
+}

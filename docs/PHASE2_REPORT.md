@@ -368,3 +368,51 @@ hunt_utility = (hunger + 300 + aggression / 4) × (W + (1000 − W) × catch / 1
 **Predator energetic viability 這條線在允許的變數內已經用盡。** 已排除的有：追捕移動成本（8%）、attack 成本（每次 kill 約 120，對比約 1,000 的收益）、捕殺報酬（predator60 已拒絕，而且不允許再增加）、狩獵目標選擇（H1／H1b）。Stage 3（配偶稀缺）與 Stage 4（子代表型延續）都不是瓶頸：Catch100 暖機後出現 140 個雙 predator 親代的子代，雙 predator 親代的表型延續率是 100%。剩下的赤字來自 predator 表型本身的能量速率權衡：bite 能力需要較大的體型與 mass，因而 basal 較高，而 Piercer 處理環境資源的效率只有 35。要改變這點，就必須給予 predator 能量優惠（禁止）或改動通用的代謝式（會同時改變整個生態，不是單一變數測試）。**沒有候選晉升**；CatchAdv100 作為 complexity-neutral 的已知變體記錄下來，但它不改善任何生態 gate，依規則不能只因為 predator 存活或複雜度沒變差就選取。
 
 **轉向佇列項目 6 的前置檢查（唯讀）。** 「棲地存在但 lineage 沒有留在棲地」是 movement preference 假說的前提。從已保存的 R3 對照 raw journal（每 100 ticks 的 lineage 位置和與平方和）計算暖機後 ≥8 成員 lineage 的徑向空間標準差：8 個世界的中位數為 112–163，整體中位數 **147**；若均勻分布在 512² 世界上會是 209。對比之下，productivity 的相關長度是 **48（soft）／64（hard）**，交配半徑是 16。也就是說，可持續的生產性棲地確實存在（productivity mask 完全靜態），但 lineage 的分布範圍是棲地尺度的 2–3 倍，並沒有和特定棲地綁在一起。下一步依循環步驟 A，先量化「個體實際進食的位置是否落在自己口器對應通道的高生產力棲地」，再決定是否需要測試 movement preference 候選。
+
+**2026-10-26 R4 診斷：棲地關聯與物種層級 gate（研究循環停止點）**
+
+佇列項目 6（movement preference）的前提是「可持續的生產性棲地存在，但生物沒有留在棲地上」。為了檢驗這個前提，新增唯讀觀測器 [`habitat_association`](../crates/sim-core/src/habitat_association.rs)：以每個通道在世界中前 25% 的靜態 productivity（與資源生長式相同的 numerator）建立 mask，記錄每一次成功的環境進食是否落在各 mask 內。測試證明它與 viability 的 food energy 完全閉合、mask 確實是四分位，且不影響 world hash。R3 對照 8/8 雜湊一致；證據見 [summary](../benchmarks/phase2-r4-habitat-association-summary.json)。
+
+| R3 對照 8 seeds | 占全部資源能量 | 落在 soft mask（面積 25%） | 落在 hard mask（面積 25%） |
+| --- | ---: | ---: | ---: |
+| Grazer 吃 soft | 28.3% | **50.1%** | 6.2% |
+| Crusher 吃 hard | 41.5% | 15.1% | **55.5%** |
+| Crusher 吃 soft | 26.4% | 34.3% | 33.9% |
+| Grazer 吃 hard | 3.8% | 37.1% | 9.9% |
+
+暖機後，每個 lineage-window（該通道能量 ≥ 5,000）在自己通道 mask 內取得的能量占比，中位數為 0.42（soft）與 0.48（hard），沒有關聯時應為 0.25。**實際進食已經以約 2 倍於隨機的比例集中在對應棲地**，Grazer 與 Crusher 也在空間上分配了棲地。前一節「lineage 空間範圍是棲地尺度的 2–3 倍」只代表 lineage 分布廣，不代表沒有棲地關聯。項目 6 的前提**被直接證據否定**，因此依規則不執行 movement preference 候選。
+
+**關鍵發現：morphology／niche cluster gate 是在物種層級計算的。** `analysis::morphology_cluster_representatives` 與 `niche_cluster_representatives` 的對象是 `world.state.species` 中 population ≥ 8 的物種，代表點之間距離需 ≥ 150。只有一個存活物種的世界，cluster 數永遠不可能超過 1，不論物種內部的 Grazer／Crusher 棲地分化有多明顯。物種的形成條件是：lineage 有 ≥ 8 個成員、與祖先 founder 的距離 ≥ 100、跨 lineage 出生比例 **≤ 20%**，並維持 200 ticks。實測的跨 lineage 交配約 50%（R3 正式 100 × 100k 為 60.7%），所以隔離幾乎不會發生：
+
+| 24 seeds × 50k | 曾發生物種形成的世界 | 曾有 >1 個同時存活物種的世界 | 結束時 >1 個存活物種的世界 |
+| --- | ---: | ---: | ---: |
+| R3 對照 | 1 | 1 | 0 |
+| Catch100 | 4 | 4 | 3 |
+| CatchAdv50 | 3 | 3 | 0 |
+| CatchAdv100 | 1 | 1 | 1 |
+
+即使在物種形成最多的 Catch100，>1 morphology／niche cluster 仍是 0：形成的物種沒有同時滿足族群規模、≥ 150 的 profile 距離與 ≥ 1000 ticks 的持續性。
+
+**研究循環在此停止：PHASE 2 INCOMPLETE。** 符合停止條件 B 與 C，並可能涉及 D。
+
+*已證實：*
+
+- Predator 繁殖的瓶頸是能量，不是配偶，也不是子代表型延續：雙 predator 親代的表型延續率 100%，Catch100 暖機後有 140 個雙 predator 親代的子代。
+- 追捕移動成本只占 8%；攝入不足來自追不上的獵物，其中速度相同的情況占 35–68%。
+- 改進追捕決策（CatchAdv100）會提高效率但降低狩獵量，淨收支下降。
+- 資源進食已經約 2 倍集中在對應棲地，Grazer／Crusher 在物種內分配棲地。
+- 8 seeds 的「MC 全部消失」拒絕條件在 MC 基礎比率約 12–17% 時檢定力不足；24 seeds 顯示相同 seed 的世界會混沌地分歧，配對只代表配置相同。
+
+*已否定（在允許的單一變數內）：* Catch25 是無效候選（逐位元相同）。H1（Catch50／100）與 H1b（CatchAdv50／100）都不足以讓 predator 持續存在，每隻 predator 的子代參與數為 1.39–1.76，低於替換水準 2.00。Movement preference 的前提不成立。Specialist／generalist trade-off 早已被 window-profitability 否定（Mixed 沒有支配優勢）。資源 patch 幾何（patch32/64/128）沒有改善任何分化 gate。
+
+*目前最佳假說：* 生態分化 gate 失敗的主因不是生態機制本身，而是**基因流讓物種內的生態分化無法成為物種層級的分群**。若跨 lineage 交配不降到約 20% 以下，Grazer／Crusher 的棲地分化就不會被計為兩個 niche／morphology cluster。Trophic gate 則另外受限於 predator 表型本身的能量權衡。
+
+*需要使用者決定的研究方向（均屬於基礎原則，研究循環不能自行選擇）：*
+
+1. **生殖隔離架構**（停止條件 B）：例如讓交配偏好依生態相似度（assortative mating，以 mouth／棲地或 niche profile 為依據），或依實際基因流調整物種判定。這會改變 mating 模型；先前的指示是不降低交配半徑、不加生殖隔離牆、不改相容性。
+2. **Gate 定義是否合理**（停止條件 D）：morphology／niche cluster 目前只在物種層級計算，物種內已實證的生態分化不會被計入。是否應改為（或另外加上）以 lineage 或表型 cohort 計算，需要審查，不能自行放寬。
+3. **Predator 能量模型**（停止條件 C）：要讓 predator 達到替換水準，需要改變通用代謝式、Piercer 的資源處理效率或獵物能量價值。目前的規則禁止 predator 能量優惠與再提高捕殺報酬。
+
+未選出任何候選，rules revision 保持 3，未凍結 rules4。100 × 100k formal calibration、native／installer UAT、merge main、v0.2.0 tag／release 都沒有執行。
+
+本輪驗證：Rust normal **75 PASS**、all-features **88 PASS**（新增 habitat association 閉合測試），rustfmt check 與 clippy（`-D warnings`）通過。前端未改動。

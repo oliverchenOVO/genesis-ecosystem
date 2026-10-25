@@ -21,3 +21,7 @@ required-features = ["viability"]
 [[example]]
 name = "predator-lifecycle"
 required-features = ["viability"]
+
+[[example]]
+name = "habitat-association"
+required-features = ["viability"]

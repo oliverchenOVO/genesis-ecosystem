@@ -211,6 +211,8 @@ impl World {
         #[cfg(feature = "viability")]
         crate::ecological_diagnostics::tick(s.tick);
         #[cfg(feature = "viability")]
+        crate::habitat_association::tick(s.tick);
+        #[cfg(feature = "viability")]
         for o in &s.organisms {
             crate::viability::tick(o, eligible(o, s.tick));
             crate::mating_decomposition::readiness(o, s.tick);
@@ -444,6 +446,13 @@ impl World {
                 (amount * efficiency / 100).min(o.phenotype.energy_capacity - o.energy),
                 0,
                 cell.hardness(channel),
+            );
+            #[cfg(feature = "viability")]
+            crate::habitat_association::feeding(
+                o,
+                (o.y / CELL_SIZE * side + o.x / CELL_SIZE) as usize,
+                channel,
+                (amount * efficiency / 100).min(o.phenotype.energy_capacity - o.energy),
             );
             s.species
                 .get_mut(&o.species_id)
