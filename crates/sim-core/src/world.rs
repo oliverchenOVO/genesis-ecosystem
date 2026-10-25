@@ -213,6 +213,7 @@ impl World {
         #[cfg(feature = "viability")]
         for o in &s.organisms {
             crate::viability::tick(o, eligible(o, s.tick));
+            crate::mating_decomposition::readiness(o, s.tick);
         }
         for cell in &mut s.environment.cells {
             cell.regenerate_channels(s.environment.regeneration);
@@ -654,6 +655,19 @@ impl World {
                     }
                 }
                 crate::viability::mate_search(a, candidates);
+                crate::mating_decomposition::search(
+                    a,
+                    mating_spatial
+                        .nearby(a.x, a.y, 16)
+                        .filter(|j| {
+                            *j != i
+                                && !deaths.contains_key(j)
+                                && !paired.contains(j)
+                                && distance_squared(a.x, a.y, s.organisms[*j].x, s.organisms[*j].y)
+                                    <= 16 * 16
+                        })
+                        .map(|j| &s.organisms[j]),
+                );
             }
             #[cfg(feature = "viability")]
             crate::viability::mating_attempt(a, mate.is_some());
@@ -792,6 +806,7 @@ impl World {
             #[cfg(feature = "viability")]
             {
                 if s.organisms[i].offspring > a.offspring {
+                    crate::mating_decomposition::successful_pair(&a);
                     crate::ecological_diagnostics::mating(
                         &a,
                         &b,

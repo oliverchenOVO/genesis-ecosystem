@@ -153,3 +153,30 @@ node scripts/window-profitability.mjs benchmarks/phase2-r4-control-temporal-summ
 本次 [本機驗證紀錄](../benchmarks/phase2-r4-resumption-validation.json)：Rust normal **75 PASS**、all-features **84 PASS**（兩種組合各包含桌面 IPC／close 權限 **2 PASS**）；frontend **31 PASS**、Node **30 PASS**。Rust fmt／all-target all-feature clippy、前端 format／lint／typecheck／build 全通過。隔離 target 的 Tauri EXE／NSIS build 通過，僅標示 **BUILD ONLY**；SHA256 保留於驗證紀錄，未覆寫七項保護檔案，也未執行 gated native／installer UAT。
 
 [固定 seed sanity stress](../benchmarks/phase2-r4-resumption-stress.json) 為 10×2000 tick、初始 population50／limit200、四 workers：零失敗，save/load continuation 與 full replay 一致，elapsed **2.6328246 秒**。這是短程回歸，不是 R4 生態矩陣或可與 reference-200 比較的 TPS。真實 R3 seed0/tick1000 save 再次通過 full replay 與 +1000 continuation；還原 hash `b21177ecbc60aacfb3425b32ec123e478ebd5233d09cd19b0c593ff13e9c5aef`，續推 hash `391d03e4e2002825d6f0afd0d898205465f11330b4eb043652863b07aee6c8c5`。
+
+**2026-10-26 R4 續作：暖機後交配條件分解**
+
+狀態仍為 **PHASE 2 INCOMPLETE**。起始 head `8651f31`。新增獨立的選用觀測器 [`mating_decomposition`](../crates/sim-core/src/mating_decomposition.rs)（僅 `viability` feature；不進 State／RNG／save／前端），把每次實際 matching search 依權威 `eligible` 的年齡／冷卻／能量三個條件，以及 `compatible` 的 loci 0..13 單點 400 上限與平均距離門檻逐項拆開，並依 initiator／鄰居是否為 predator、是否同 lineage 分組。以 [example](../crates/sim-benchmark/examples/mating-decomposition.rs) 重跑未改動的 R3 對照（seed 0..7 × 50000、population 50、limit 2000、size 512、regeneration 4、mutation 100、temperature 2000）：**8/8 世界雜湊與凍結 R3 完全一致**，耗時 124.36 秒（8 threads）。精簡結果與 SHA256 見 [summary](../benchmarks/phase2-r4-mating-decomposition-summary.json)，逐世界逐視窗完整資料見 [壓縮檔](../benchmarks/phase2-r4-mating-decomposition.json.gz)。執行檔建置後，僅對新檔案做過 rustfmt 排版。
+
+交叉核對：對照組暖機後 predator 的 1806 次 search、938 個 unpaired 鄰居觀測、1 個 eligible、0 個 compatible，與前文 matching 表逐項一致；新增兩項測試證明各計數與既有 viability ledger（organism-ticks、ready ticks、searches、unpaired／eligible／compatible candidates）及 temporal successful pairs 完全閉合，且不影響 world hash。
+
+| 暖機後（tick ≥ 5000，8 世界合計） | Predator | 非 predator |
+| --- | ---: | ---: |
+| Organism-ticks | 19,046 | 336,293,176 |
+| 平均同時存活數／世界 | 0.053 | 934 |
+| Start-of-tick ready 比例 | 9.49% | 3.45% |
+| 未 ready 中「僅能量不足」比例 | 93.03% | 85.39% |
+| Searches／有鄰居／有 predator 鄰居 | 1806 / 686 / **0** | 11,739,773 / 10,467,565 / 21 |
+| 有 eligible 鄰居的 searches | 1 | 280,733 |
+| 成功配對 | 0 | 141,936 |
+
+主要發現：
+
+1. **暖機後的 predator 繁殖瓶頸是族群規模，而非相容性規則本身。** 8 個世界中 predator 僅在 2–8 個 1000-tick 視窗出現，平均同時存活 0.023–0.097 隻；1806 次 predator search 裡**沒有任何一次附近出現另一隻 predator**。938 個鄰居觀測全是非 predator，其中 850 個（90.6%）在年齡、冷卻都通過的情況下只因能量不足而不 eligible。唯一一個 eligible 鄰居只被 locus 13（carnivory）擋下。
+2. Predator 自身的 ready 比例（9.49%）高於非 predator（3.45%），因此「predator 很少能進入可繁殖狀態」不是主因。
+3. 在所有組別中，平均距離門檻都**從未單獨成為拒絕原因**（`mean_only_rejected = 0`，`capped_and_mean_rejected = 0`）；不相容全部來自 loci 0..13 的單點上限。非 predator 的 eligible 鄰居中約 50% 被拒，主要卡在 locus 0（體型）、5（繁殖門檻）、1、2、12；跨 lineage 的拒絕率（56.6%）高於同 lineage（37.2%）。
+4. 暖機期與暖機後落差很大（例如 seed 1：暖機 167,724 vs 暖機後 3,165 predator organism-ticks）。Predator 會在早期出現，但沒有在暖機後建立可以互相相遇的族群。
+
+限制：這些是描述性的重複觀測計數，不是唯一個體，也不是因果估計。Start-of-tick 的 readiness 與 matching 時的 eligibility 取樣時點不同。本次只有 R3 對照，未對 patch／predator60 重跑。資料不支持放寬 compatibility（唯一的跨群組 eligible 觀測只有 1 次），也不支持以加入配偶吸引移動作為第一個假說，因為暖機後沒有任何 predator 能同時看到另一隻 predator。下一步較合理的是追蹤 predator 在暖機期如何出現與消失（來自哪些親代 lineage、子代是否仍是 predator、死因），再決定要測試的單一可逆假說。本次未選出候選、未改模擬規則；rules4、formal R4、native／installer UAT、merge、tag／release 仍未進行。
+
+本次驗證：Rust normal **75 PASS**、all-features **86 PASS**（原 84 + 新增 2），rustfmt check、all-target all-feature clippy（`-D warnings`）通過。前端未改動，未重跑。

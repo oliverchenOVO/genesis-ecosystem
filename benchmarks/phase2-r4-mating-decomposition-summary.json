@@ -1,0 +1,375 @@
+{
+  "version": 1,
+  "scenario": "phase2-r4-mating-decomposition-unchanged-r3",
+  "base_head": "8651f31",
+  "authority_source": "831f8617d19714d856d653278e244e1f9becaa28",
+  "command": "cargo build --release -p sim-benchmark --features viability --example mating-decomposition; target/release/examples/mating-decomposition.exe",
+  "executable_sha256": "db1dc142e4f4d4be3dd54401a04bcda742a0daccd1d4f06e84c641ea917672d5",
+  "elapsed_seconds": 124.36,
+  "workers": 8,
+  "seeds": 8,
+  "ticks_per_seed": 50000,
+  "post_warmup_from_tick": 5000,
+  "all_eight_hashes_match_frozen_R3": true,
+  "world_hashes": [
+    {
+      "seed": 0,
+      "hash": "741738ae7550d269e59e4f39106557cef283e0150a974cb309bf2f37cb92768f"
+    },
+    {
+      "seed": 1,
+      "hash": "bdbabeda1113836f07ef9348d439d2051a131e28313d7657624cce48258a0b62"
+    },
+    {
+      "seed": 2,
+      "hash": "8dde43491e172545dbbe50b25de49731fde1f3a21591f77132b026c27b26f9e0"
+    },
+    {
+      "seed": 3,
+      "hash": "366f3ea5aa6c2f2be90599ce1d0707edc53d01e6e2a026ce7c216c84a0c3c1ea"
+    },
+    {
+      "seed": 4,
+      "hash": "e7a4d727f03e84c6481a45b54b7c5fb4fabf9b62f23f13620b6198cd9c6a9ac4"
+    },
+    {
+      "seed": 5,
+      "hash": "aefe58b7e1a54cf7676c0216e1f9ca73208712f22cbc1a1fe72fd46ef422ccd3"
+    },
+    {
+      "seed": 6,
+      "hash": "4abc090d21f782578a9d7769e95b3a17fc3226d4f1e8d0572e3e777ae1abbb8a"
+    },
+    {
+      "seed": 7,
+      "hash": "314ebcc777a23132004f3005f3aae60d748629e12be48b77f7b74a329e2bfca9"
+    }
+  ],
+  "archive": {
+    "path": "benchmarks/phase2-r4-mating-decomposition.json.gz",
+    "uncompressed_bytes": 614190,
+    "uncompressed_sha256": "cd68d3f91834fb12341bb94a8455ecbcb28b14d00cf0a20b773b844141b882fc",
+    "gzip_sha256": "c9ec328f721505ab89ea6673481f61769d6118a3538af61c547706acaeaaf1fd"
+  },
+  "post_warmup_summary": {
+    "neighbours": {
+      "initiator_predator=false,neighbour_predator=false,same_lineage=false": {
+        "age_blocked": 513335,
+        "capped_and_mean_rejected": 0,
+        "capped_locus_failures": [
+          35459,
+          12603,
+          10556,
+          255,
+          2668,
+          17346,
+          4451,
+          4835,
+          4870,
+          3410,
+          188,
+          3306,
+          9136,
+          0
+        ],
+        "capped_locus_rejected": 103584,
+        "compatible": 79341,
+        "cooldown_blocked": 1476323,
+        "eligible": 182925,
+        "eligible_mean_distance_sum": 14046716,
+        "energy_blocked": 15653273,
+        "energy_only_blocked": 14258840,
+        "energy_only_deficit_sum": 16410149097,
+        "mean_only_rejected": 0,
+        "single_capped_locus_failures": [
+          33006,
+          11328,
+          9540,
+          203,
+          2425,
+          15422,
+          4083,
+          3948,
+          3909,
+          3086,
+          160,
+          2577,
+          8508,
+          0
+        ],
+        "unpaired": 15918088
+      },
+      "initiator_predator=false,neighbour_predator=false,same_lineage=true": {
+        "age_blocked": 386090,
+        "capped_and_mean_rejected": 0,
+        "capped_locus_failures": [
+          8290,
+          3569,
+          3511,
+          209,
+          3748,
+          7568,
+          1130,
+          1223,
+          1094,
+          2396,
+          62,
+          1634,
+          3744,
+          0
+        ],
+        "capped_locus_rejected": 37378,
+        "compatible": 63037,
+        "cooldown_blocked": 1131535,
+        "eligible": 100415,
+        "eligible_mean_distance_sum": 6208362,
+        "energy_blocked": 12714687,
+        "energy_only_blocked": 11639967,
+        "energy_only_deficit_sum": 14350162587,
+        "mean_only_rejected": 0,
+        "single_capped_locus_failures": [
+          7767,
+          3458,
+          3331,
+          205,
+          3601,
+          7421,
+          1130,
+          1223,
+          1092,
+          2396,
+          62,
+          1507,
+          3385,
+          0
+        ],
+        "unpaired": 12871917
+      },
+      "initiator_predator=false,neighbour_predator=true,same_lineage=false": {
+        "age_blocked": 0,
+        "capped_and_mean_rejected": 0,
+        "capped_locus_failures": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "capped_locus_rejected": 0,
+        "compatible": 0,
+        "cooldown_blocked": 0,
+        "eligible": 0,
+        "eligible_mean_distance_sum": 0,
+        "energy_blocked": 1,
+        "energy_only_blocked": 1,
+        "energy_only_deficit_sum": 253,
+        "mean_only_rejected": 0,
+        "single_capped_locus_failures": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "unpaired": 1
+      },
+      "initiator_predator=false,neighbour_predator=true,same_lineage=true": {
+        "age_blocked": 0,
+        "capped_and_mean_rejected": 0,
+        "capped_locus_failures": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "capped_locus_rejected": 1,
+        "compatible": 0,
+        "cooldown_blocked": 0,
+        "eligible": 1,
+        "eligible_mean_distance_sum": 72,
+        "energy_blocked": 19,
+        "energy_only_blocked": 19,
+        "energy_only_deficit_sum": 9532,
+        "mean_only_rejected": 0,
+        "single_capped_locus_failures": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "unpaired": 20
+      },
+      "initiator_predator=true,neighbour_predator=false,same_lineage=false": {
+        "age_blocked": 19,
+        "capped_and_mean_rejected": 0,
+        "capped_locus_failures": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "capped_locus_rejected": 0,
+        "compatible": 0,
+        "cooldown_blocked": 54,
+        "eligible": 0,
+        "eligible_mean_distance_sum": 0,
+        "energy_blocked": 679,
+        "energy_only_blocked": 625,
+        "energy_only_deficit_sum": 1163701,
+        "mean_only_rejected": 0,
+        "single_capped_locus_failures": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "unpaired": 679
+      },
+      "initiator_predator=true,neighbour_predator=false,same_lineage=true": {
+        "age_blocked": 16,
+        "capped_and_mean_rejected": 0,
+        "capped_locus_failures": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "capped_locus_rejected": 1,
+        "compatible": 0,
+        "cooldown_blocked": 33,
+        "eligible": 1,
+        "eligible_mean_distance_sum": 72,
+        "energy_blocked": 258,
+        "energy_only_blocked": 225,
+        "energy_only_deficit_sum": 396822,
+        "mean_only_rejected": 0,
+        "single_capped_locus_failures": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "unpaired": 259
+      }
+    },
+    "readiness": {
+      "predator=false": {
+        "age_blocked": 17655355,
+        "cooldown_blocked": 47428627,
+        "energy_blocked": 324067857,
+        "energy_only_blocked": 277259216,
+        "energy_only_deficit_sum": 311168248322,
+        "organism_ticks": 336293176,
+        "ready": 11605333
+      },
+      "predator=true": {
+        "age_blocked": 941,
+        "cooldown_blocked": 1201,
+        "energy_blocked": 17200,
+        "energy_only_blocked": 16038,
+        "energy_only_deficit_sum": 16297652,
+        "organism_ticks": 19046,
+        "ready": 1807
+      }
+    },
+    "searches": {
+      "initiator_predator=false": {
+        "searches": 11739773,
+        "successful_pairs": 141936,
+        "with_compatible": 141936,
+        "with_eligible": 280733,
+        "with_eligible_predator": 1,
+        "with_neighbour": 10467565,
+        "with_predator_neighbour": 21
+      },
+      "initiator_predator=true": {
+        "searches": 1806,
+        "successful_pairs": 0,
+        "with_compatible": 0,
+        "with_eligible": 1,
+        "with_eligible_predator": 0,
+        "with_neighbour": 686,
+        "with_predator_neighbour": 0
+      }
+    }
+  },
+  "stage": "Diagnostics only; R3 authority unchanged; not a candidate selector or rules4 acceptance"
+}
