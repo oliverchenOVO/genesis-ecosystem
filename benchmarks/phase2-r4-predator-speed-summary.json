@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "scenario": "phase2-r4-predator-pursuit-speed-split-unchanged-r3",
+  "base_head": "71b77c7",
+  "executable_sha256": "d9dedf2db2553c4cb783cbf2e011df216b17c24b0405de47db264bf8ca064491",
+  "seeds": 8,
+  "ticks_per_seed": 50000,
+  "all_eight_hashes_match_frozen_R3": true,
+  "archive": {
+    "path": "benchmarks/phase2-r4-predator-speed.json.gz",
+    "uncompressed_bytes": 189764,
+    "uncompressed_sha256": "b3405749ca43f9e2d071a852cc52de00d1b928c493d2e18a2a0ba7e52afa740c",
+    "gzip_sha256": "031b9c81644e6bcbc906a7b651b19f8b32778a052f289d11a2b60c441e6e960c"
+  },
+  "speed_split": {
+    "DeNovo|post|Age": {
+      "pursuit_ticks_with_living_target": 3457,
+      "prey_strictly_faster": 226,
+      "prey_equal_speed": 1832,
+      "prey_slower": 1399,
+      "mean_own_speed": 3.708706971362453,
+      "mean_prey_speed": 3.106739947931733
+    },
+    "DeNovo|post|Starvation": {
+      "pursuit_ticks_with_living_target": 7211,
+      "prey_strictly_faster": 2962,
+      "prey_equal_speed": 3073,
+      "prey_slower": 1176,
+      "mean_own_speed": 1.860906947718763,
+      "mean_prey_speed": 2.5537373457218138
+    },
+    "DeNovo|warmup|Age": {
+      "pursuit_ticks_with_living_target": 1625,
+      "prey_strictly_faster": 175,
+      "prey_equal_speed": 365,
+      "prey_slower": 1085,
+      "mean_own_speed": 7.457846153846154,
+      "mean_prey_speed": 5.793846153846154
+    },
+    "FounderDescended|warmup|Age": {
+      "pursuit_ticks_with_living_target": 62617,
+      "prey_strictly_faster": 22435,
+      "prey_equal_speed": 25829,
+      "prey_slower": 14353,
+      "mean_own_speed": 4.88555823498411,
+      "mean_prey_speed": 5.162783269719086
+    },
+    "FounderDescended|warmup|Starvation": {
+      "pursuit_ticks_with_living_target": 52999,
+      "prey_strictly_faster": 31360,
+      "prey_equal_speed": 18713,
+      "prey_slower": 2926,
+      "mean_own_speed": 4.814807826562765,
+      "mean_prey_speed": 5.762901186814846
+    },
+    "Founder|warmup|Age": {
+      "pursuit_ticks_with_living_target": 18027,
+      "prey_strictly_faster": 4834,
+      "prey_equal_speed": 9201,
+      "prey_slower": 3992,
+      "mean_own_speed": 3.667887058301437,
+      "mean_prey_speed": 3.744938148333056
+    },
+    "Founder|warmup|Starvation": {
+      "pursuit_ticks_with_living_target": 5174,
+      "prey_strictly_faster": 1671,
+      "prey_equal_speed": 3503,
+      "prey_slower": 0,
+      "mean_own_speed": 3,
+      "mean_prey_speed": 3.4466563587166603
+    }
+  },
+  "stage": "Diagnostics only; R3 authority unchanged"
+}

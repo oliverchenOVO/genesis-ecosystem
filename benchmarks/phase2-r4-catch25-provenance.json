@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "stage": "Isolated R4 exploratory candidate, not selected authority or100-seed formal acceptance",
+  "source_base": "71b77c7e352843208c2d69e225405d003e124ca2",
+  "source_patch_sha256": "eace3f4eb675cb8ddb1834c464bb7d9cebb12eed24696548281fe69048e7788f",
+  "executable_sha256": "e3e7157fed522d0d07cc9f0687e0a4f2cc744a94503cdc38bb70f57e61f83946",
+  "elapsed_seconds": 577.622369,
+  "workers": 4,
+  "seeds": 8,
+  "ticks_per_seed": 50000,
+  "jsonl_equals_final": true,
+  "full_replay_save_load_continuations": 8,
+  "normal_performance_claim": false,
+  "files": [
+    {
+      "destination": "benchmarks/phase2-r4-catch25.json.gz",
+      "raw_bytes": 122054134,
+      "gzip_bytes": 17122224,
+      "raw_sha256": "0c184296d6a0e172bd0a8e257515d581b799eba9d8984ef86dcc6e93fb5fde5f",
+      "gzip_sha256": "c6dea9f4ee37f4cb78ec55f54c99d2755eb6c5c3b54919ab158cb91a5ecd73d4"
+    },
+    {
+      "destination": "benchmarks/phase2-r4-catch25.jsonl.gz",
+      "raw_bytes": 122053586,
+      "gzip_bytes": 17122157,
+      "raw_sha256": "a840a08a890946ceff9e95900e4e7b7acb7dd3333ee8ef292bd905cb838d189d",
+      "gzip_sha256": "8d898554081e110cd51db6e1280f8c2b9791695b90c2f2ebdc823baadf40219d"
+    },
+    {
+      "destination": "benchmarks/phase2-r4-catch25-temporal-summary.json.gz",
+      "raw_bytes": 117285778,
+      "gzip_bytes": 11574374,
+      "raw_sha256": "c08c27ddca4079b8ba5c2e9a98b7c4ed752a44533ac8d4e0e9adc7b40c639e1e",
+      "gzip_sha256": "27f4ca71b47a2bc77aaf2d0fd8e6cf829d744920f376803054be1d14d4aab668"
+    }
+  ],
+  "world_hashes": [
+    {
+      "seed": 0,
+      "hash": "741738ae7550d269e59e4f39106557cef283e0150a974cb309bf2f37cb92768f"
+    },
+    {
+      "seed": 1,
+      "hash": "bdbabeda1113836f07ef9348d439d2051a131e28313d7657624cce48258a0b62"
+    },
+    {
+      "seed": 2,
+      "hash": "8dde43491e172545dbbe50b25de49731fde1f3a21591f77132b026c27b26f9e0"
+    },
+    {
+      "seed": 3,
+      "hash": "366f3ea5aa6c2f2be90599ce1d0707edc53d01e6e2a026ce7c216c84a0c3c1ea"
+    },
+    {
+      "seed": 4,
+      "hash": "e7a4d727f03e84c6481a45b54b7c5fb4fabf9b62f23f13620b6198cd9c6a9ac4"
+    },
+    {
+      "seed": 5,
+      "hash": "aefe58b7e1a54cf7676c0216e1f9ca73208712f22cbc1a1fe72fd46ef422ccd3"
+    },
+    {
+      "seed": 6,
+      "hash": "4abc090d21f782578a9d7769e95b3a17fc3226d4f1e8d0572e3e777ae1abbb8a"
+    },
+    {
+      "seed": 7,
+      "hash": "314ebcc777a23132004f3005f3aae60d748629e12be48b77f7b74a329e2bfca9"
+    }
+  ],
+  "lifecycle": {
+    "path": "benchmarks/phase2-r4-catch25-lifecycle.json.gz",
+    "uncompressed_bytes": 186295,
+    "uncompressed_sha256": "fad504fafe366256fa1affbebb98fed5a862e89e37f39dd9daaf59db6b80f1c0",
+    "gzip_sha256": "257e447907ec837c6f1ed19f5fd94e6e08ba62577c35168e31cf8559e4c85b8c",
+    "executable_sha256": "cb6b746750c942c52c74165be1a53bf75f778f7ae11dc6ed7dbba97923c75495",
+    "world_hashes_equal_calibration": true
+  },
+  "hunt_weight_W": 750,
+  "raw_journals_committed": false,
+  "raw_journal_note": "All eight world hashes are bit-identical to frozen R3 (benchmarks/phase2-r4-control*), so the raw calibration/temporal journals duplicate that archive and are not committed; their SHA256 values remain listed in files[]."
+}

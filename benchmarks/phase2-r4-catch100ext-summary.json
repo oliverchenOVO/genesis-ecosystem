@@ -1,0 +1,696 @@
+{
+  "archive": {
+    "path": "benchmarks/phase2-r4-catch100ext.jsonl.gz",
+    "raw_bytes": 242876204,
+    "raw_sha256": "2f53bd95376249e8cb4928021cc70bca6937c45e27805cd57f0a9ec04f79b79a",
+    "gzip_sha256": "f7f8b09dce2f717a5446c195810f8d29eecef4d18ee09f3888836d3ace4f7ee2"
+  },
+  "executable_sha256": "b88164a0b670d03fd76e3ff5c3bdbc396942b51cc6c4f24bfcd77a7c47dec2f9",
+  "seeds": "8..23",
+  "ticks_per_seed": 50000,
+  "elapsed_seconds": 801.7524751,
+  "workers": 8,
+  "world_hashes": [
+    {
+      "seed": 8,
+      "hash": "b953a4799607925d97ce8ad80def50775a8b859db533c6d0a9728b3ecccc5f78"
+    },
+    {
+      "seed": 9,
+      "hash": "4e7b953a44ca9e01beabb05d73c90e5c9cc53d6b91e7a4421ab72b4a912f798c"
+    },
+    {
+      "seed": 10,
+      "hash": "acfcd9a587792aea1753850880beabe20aaca630d1f013ea4fb3698a7e899362"
+    },
+    {
+      "seed": 11,
+      "hash": "b65a1c348ae62bfd98b4f6ea9e220e3c25f0d72b306feb5ea05dc2073e265816"
+    },
+    {
+      "seed": 12,
+      "hash": "9fd37ef4536f2185159865370a13f6adbb6411214eeb19fd52b451fb7953efe6"
+    },
+    {
+      "seed": 13,
+      "hash": "a325a6bd1bfc1d6b1e0f6059eaa97b8e5daeb4a24a587dc86a92cd5adae681ef"
+    },
+    {
+      "seed": 14,
+      "hash": "b7f38c997fa3d3bb9c6ad31a5aad9c400d6792d7672049b207bf7ff78b58dd79"
+    },
+    {
+      "seed": 15,
+      "hash": "0ae1373e2757aeeb9a6e7529d3930595ef56e59cef452976628656b6cdd776c2"
+    },
+    {
+      "seed": 16,
+      "hash": "4ba4058afcda15f060165eedcd17fedeff2d730320419d6e6bd857235d8493e3"
+    },
+    {
+      "seed": 17,
+      "hash": "39e872929464896f5181b7bd551f873aab6d5fdc2f23b066c957cad5626a2e43"
+    },
+    {
+      "seed": 18,
+      "hash": "26f27bc338bcb6a9b6c7eafed08a73bc06241f3ba0cc2c451d5480a79508313b"
+    },
+    {
+      "seed": 19,
+      "hash": "68eab4ffe3e14c80566ad1c5e788b22d1c912bbc8524f648a5077e5ae9ee3be1"
+    },
+    {
+      "seed": 20,
+      "hash": "60c6a939f40da9fc521b0b0ff7f4c221b8aca8de38fe735d3005c21b6556063f"
+    },
+    {
+      "seed": 21,
+      "hash": "9cc33d78649d0d412283730bb7fa8c88204268c5c1b19f74435d93ae912bee93"
+    },
+    {
+      "seed": 22,
+      "hash": "d941990c813162bf2e5abd1548d7847b35e337d0580ddb2bfdfb878c64ea0f66"
+    },
+    {
+      "seed": 23,
+      "hash": "8c2d0559b12879face518528052c9a246af7c6d823020d64017e34198870ff07"
+    }
+  ],
+  "paired_24_seed_evaluation": {
+    "scenario": "phase2-r4-catch100ext",
+    "simulation_version": 5,
+    "rules_revision": 4,
+    "analysis_version": 5,
+    "seeds": 24,
+    "ticks_per_seed": 50000,
+    "technical_failures": 0,
+    "verified_save_load_replay_continuations": 24,
+    "survival": 24,
+    "natural_collapse": 0,
+    "collapse_classifications": 0,
+    "safety_ceiling_worlds": 0,
+    "maximum_safety_ceiling_fraction": 0,
+    "persistent_multicellular_worlds": 2,
+    "persistent_high_C_worlds": 4,
+    "persistent_high_C_lineages": 7,
+    "multiple_persistent_morphology_worlds": 0,
+    "multiple_persistent_niche_worlds": 0,
+    "multiple_persistent_realized_feeding_worlds": 1,
+    "persistent_prey_income_worlds": 1,
+    "speciation_worlds": 4,
+    "new_species": 4,
+    "extinction_worlds": 1,
+    "extinct_species": 1,
+    "mean_population_CV": 0.2716372887882969,
+    "mean_resource_CV": 0.8081618545876706,
+    "cross_lineage": {
+      "min": 0.25122690929142544,
+      "median": 0.5091096970685811,
+      "max": 0.6643927648578811,
+      "mean": 0.4950670946206137
+    },
+    "cross_habitat": {
+      "min": 0.41405684754521965,
+      "median": 0.4719621306699958,
+      "max": 0.49766546048791876,
+      "mean": 0.46901274519338926
+    },
+    "mating_distance_by_seed": [
+      {
+        "seed": 0,
+        "mean": 9.591369509043927,
+        "p90": 15,
+        "samples": 19350
+      },
+      {
+        "seed": 1,
+        "mean": 12.030201005025125,
+        "p90": 15,
+        "samples": 19900
+      },
+      {
+        "seed": 2,
+        "mean": 12.482409850483728,
+        "p90": 15,
+        "samples": 25014
+      },
+      {
+        "seed": 3,
+        "mean": 10.595607450653322,
+        "p90": 15,
+        "samples": 17985
+      },
+      {
+        "seed": 4,
+        "mean": 12.252541314100744,
+        "p90": 15,
+        "samples": 17609
+      },
+      {
+        "seed": 5,
+        "mean": 12.680086306704558,
+        "p90": 15,
+        "samples": 19002
+      },
+      {
+        "seed": 6,
+        "mean": 12.359515208017713,
+        "p90": 15,
+        "samples": 17162
+      },
+      {
+        "seed": 7,
+        "mean": 12.000328659070991,
+        "p90": 15,
+        "samples": 18256
+      },
+      {
+        "seed": 8,
+        "mean": 12.140449438202246,
+        "p90": 15,
+        "samples": 19224
+      },
+      {
+        "seed": 9,
+        "mean": 11.423657937379122,
+        "p90": 15,
+        "samples": 19131
+      },
+      {
+        "seed": 10,
+        "mean": 12.387447653233263,
+        "p90": 15,
+        "samples": 18387
+      },
+      {
+        "seed": 11,
+        "mean": 12.50665785248843,
+        "p90": 15,
+        "samples": 21178
+      },
+      {
+        "seed": 12,
+        "mean": 11.054396620015844,
+        "p90": 15,
+        "samples": 15148
+      },
+      {
+        "seed": 13,
+        "mean": 12.039050641644819,
+        "p90": 15,
+        "samples": 21741
+      },
+      {
+        "seed": 14,
+        "mean": 12.41466776950648,
+        "p90": 15,
+        "samples": 18135
+      },
+      {
+        "seed": 15,
+        "mean": 12.681653448185305,
+        "p90": 15,
+        "samples": 19039
+      },
+      {
+        "seed": 16,
+        "mean": 12.104523519117569,
+        "p90": 15,
+        "samples": 18857
+      },
+      {
+        "seed": 17,
+        "mean": 11.677391566524529,
+        "p90": 15,
+        "samples": 23217
+      },
+      {
+        "seed": 18,
+        "mean": 12.832462777642178,
+        "p90": 15,
+        "samples": 20485
+      },
+      {
+        "seed": 19,
+        "mean": 11.778536126147328,
+        "p90": 15,
+        "samples": 16996
+      },
+      {
+        "seed": 20,
+        "mean": 12.724055068836044,
+        "p90": 15,
+        "samples": 19975
+      },
+      {
+        "seed": 21,
+        "mean": 12.620590269771732,
+        "p90": 15,
+        "samples": 17348
+      },
+      {
+        "seed": 22,
+        "mean": 12.407705668719407,
+        "p90": 15,
+        "samples": 18999
+      },
+      {
+        "seed": 23,
+        "mean": 12.465332088245594,
+        "p90": 15,
+        "samples": 17134
+      }
+    ],
+    "actual_mouth_diets": [
+      {
+        "mouth": 0,
+        "food_events": 245980235,
+        "prey_events": 0,
+        "food_energy": 1675361244,
+        "prey_energy": 0,
+        "hardness": 32410709571,
+        "productivity": 20769944105,
+        "starvation_deaths": 61887,
+        "offspring": 493156,
+        "organism_ticks": 334002178,
+        "channels": [
+          1471811172,
+          203550072,
+          0
+        ],
+        "mean_food_hardness": 131.76143835702896,
+        "mean_productivity": 84.43745126513925,
+        "mean_food_energy": 6.810958791058964,
+        "mean_prey_energy": null,
+        "prey_energy_fraction": 0,
+        "starvation_deaths_per_organism_tick": 0.000185289210898499,
+        "offspring_per_organism_tick": 0.0014765053418304356
+      },
+      {
+        "mouth": 1,
+        "food_events": 545475357,
+        "prey_events": 696,
+        "food_energy": 3476151819,
+        "prey_energy": 533751,
+        "hardness": 154970661692,
+        "productivity": 34067022568,
+        "starvation_deaths": 89378,
+        "offspring": 960290,
+        "organism_ticks": 686037827,
+        "channels": [
+          1350888060,
+          2125263759,
+          533751
+        ],
+        "mean_food_hardness": 284.1020399973816,
+        "mean_productivity": 62.45374545892302,
+        "mean_food_energy": 6.372701854247103,
+        "mean_prey_energy": 766.8836206896551,
+        "prey_energy_fraction": 0.00015352294282971354,
+        "starvation_deaths_per_organism_tick": 0.00013028144583636785,
+        "offspring_per_organism_tick": 0.0013997624652845855
+      },
+      {
+        "mouth": 2,
+        "food_events": 454896,
+        "prey_events": 4274,
+        "food_energy": 840390,
+        "prey_energy": 4387215,
+        "hardness": 116257170,
+        "productivity": 32987866,
+        "starvation_deaths": 821,
+        "offspring": 1066,
+        "organism_ticks": 1070555,
+        "channels": [
+          376476,
+          463914,
+          4387215
+        ],
+        "mean_food_hardness": 255.56867943442018,
+        "mean_productivity": 71.84238081756212,
+        "mean_food_energy": 1.8474332594702965,
+        "mean_prey_energy": 1026.4892372484792,
+        "prey_energy_fraction": 0.8392399578774601,
+        "starvation_deaths_per_organism_tick": 0.0007668919392277837,
+        "offspring_per_organism_tick": 0.0009957451975844305
+      }
+    ],
+    "final_environmental_channel_income": [
+      [
+        13444699,
+        9282756
+      ],
+      [
+        13275075,
+        11418600
+      ],
+      [
+        13229223,
+        13328312
+      ],
+      [
+        13348732,
+        11332859
+      ],
+      [
+        13833645,
+        11564214
+      ],
+      [
+        13405938,
+        9895774
+      ],
+      [
+        12698841,
+        11298378
+      ],
+      [
+        13361795,
+        8871324
+      ],
+      [
+        12909792,
+        10782639
+      ],
+      [
+        13329088,
+        12817023
+      ],
+      [
+        13737776,
+        13608299
+      ],
+      [
+        13932049,
+        11482908
+      ],
+      [
+        13018846,
+        9117190
+      ],
+      [
+        13299218,
+        12195595
+      ],
+      [
+        12734417,
+        8753335
+      ],
+      [
+        13298558,
+        11283849
+      ],
+      [
+        13016445,
+        12405561
+      ],
+      [
+        12737154,
+        10670646
+      ],
+      [
+        13906730,
+        11451055
+      ],
+      [
+        13236996,
+        10167300
+      ],
+      [
+        13021263,
+        11593924
+      ],
+      [
+        13488966,
+        9802123
+      ],
+      [
+        13289404,
+        13003916
+      ],
+      [
+        12737063,
+        12355831
+      ]
+    ],
+    "resource_channel_review": {
+      "worlds": 24,
+      "worlds_with_windows": 24,
+      "unused_worlds": [
+        0,
+        0
+      ],
+      "majority_unused": [
+        false,
+        false
+      ]
+    },
+    "rejection_reasons": [],
+    "requires_cap_dominance_review": false,
+    "required_complexity_and_differentiation_nonzero": false,
+    "definitions": "Paired configurations/seeds and unchanged analytical gates. No new acceptance threshold. Cap fractions reported for independent persistence review; natural collapse and isolated cap contacts are not automatically classified as technical or biological gate failures. Rejection flags exact total loss of previously nonzero complex cohorts or a persistently unused resource channel. For rules4+, strict-majority unused worlds are also rejected; zero sampled windows are unknown, not unused. No complexity incidence quota. Natural collapse is reported separately. Prey persistence uses unchanged observed-income >=50%, members >=8, post-warmup 1000 sampled ticks. Resource windows follow diagnostic schema; compare habitat definitions only when compatible."
+  },
+  "per_seed": [
+    {
+      "seed": 0,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 3,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 1,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 2,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 3,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 2,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 4,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 5,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 6,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 7,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 8,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 9,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 10,
+      "persistent_multicellular": true,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 11,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 12,
+      "persistent_multicellular": true,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 13,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 1,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 14,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 15,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 16,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 17,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 18,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 19,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 2,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 20,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 1,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 21,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 22,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    },
+    {
+      "seed": 23,
+      "persistent_multicellular": false,
+      "persistent_high_C_lineages": 0,
+      "max_persistent_morphology_clusters": 1,
+      "max_persistent_niche_clusters": 1,
+      "max_simultaneous_persistent_roles": 1,
+      "save_load_replay_verified": true,
+      "classification": "Rich"
+    }
+  ],
+  "definitions": "24-seed set = seeds 0..7 (archived probe) + 8..23 (this extension). Gates are the unchanged evaluateCandidate; same-seed worlds diverge after the first differing decision, so seeds pair configurations, not outcomes."
+}

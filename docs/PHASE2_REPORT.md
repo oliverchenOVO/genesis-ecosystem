@@ -278,3 +278,63 @@ hunt_utility = (hunger + 300 + aggression / 4) × weight / 1000
   `W = 750 / 500 / 0` 分別對應 **Catch25 / Catch50 / Catch100**（速度比的影響強度 25% / 50% / 100%）。只要獵物比較慢（catch = 1000），效用就和原本完全相同；不使用 predator 布林、SpeciesId、LineageId 或 founder 狀態；不新增任何能量；不改變捕殺報酬、攻擊、代謝、交配或突變。使用表型速度，而非依地形調整後的速度。
 
 本次診斷驗證：Rust normal **75 PASS**、all-features **87 PASS**（pursuit 斷言併入既有 lifecycle 測試），rustfmt check 與 clippy（`-D warnings`）通過。`scripts/archive-r4-probe.mjs` 改為從 receipt 讀取候選的 source base（舊候選沒有這個欄位時，沿用原本的 `321ab99`）。`predator-lifecycle` example 新增 `--candidate` 模式：此模式下不比對凍結的 R3 雜湊，改為與同一候選的 calibration world hash 交叉比對。
+
+**2026-10-26 R4 候選：Catch25／Catch50／Catch100（假說 H1）**
+
+依上一節的 H1 公式，從 `71b77c7` 建立三個隔離候選。每個候選各自使用一個 git worktree、只套一個 Hunt 效用 patch、用獨立的 payload tag 避免存檔混用，並建置自己的執行檔。被拒絕的候選**不**遞增權威的 rules revision；候選 build 內部標示 rules 4 只是為了隔離。所有世界都以 R3 對照相同的設定與 seed 0..7 × 50000 執行。Source patch、執行檔 SHA256、world hashes 與 lifecycle ledger 都保存於 `benchmarks/phase2-r4-catch{25,50,100}-*`；Catch25 的原始 journals 與 R3 對照逐位元相同，因此只保留其 SHA256，不重複提交。每個候選的 lifecycle 重跑都與它自己的 calibration world hash 完全一致。
+
+| 8 seeds × 50k | R3 對照 | Catch25 | Catch50 | Catch100 |
+| --- | ---: | ---: | ---: | ---: |
+| 技術失敗／collapse／cap 接觸 | 0/0/0 | 0/0/0 | 0/0/0 | 0/0/0 |
+| save/load/replay | 8/8 | 8/8 | 8/8 | 8/8 |
+| Persistent MC | 3 | 3 | **0** | **0** |
+| Persistent high-C worlds | 2 | 2 | 1 | 1 |
+| >1 persistent realized feeding role | 0 | 0 | 0 | **1** |
+| Persistent prey-income | 0 | 0 | 0 | **1** |
+| Predator 出生 | 203 | 203 | 182 | **524** |
+| Predator 餓死比例 | 46.0% | 46.0% | 40.1% | 52.9% |
+| 終生子代參與數 | 375 | 375 | 325 | **999** |
+| 暖機後同時存活峰值 | 1 | 1 | 1 | **58** |
+| 暖機後 ≥2 隻同時存活的 ticks | 0 | 0 | 0 | **8,070** |
+| tick 50000 時存活的 predator | 0 | 0 | 0 | 0 |
+| 獵物收入占 predator 攝入 | 93.2% | 93.2% | 92.2% | 95.3% |
+
+**Catch25 是無效候選**：8 個世界的雜湊與凍結 R3 **逐位元相同**。在 25% 強度下，整數效用的差距從未改變任何一次決策。Catch50 與 Catch100 在 8 seeds 上都觸發既有的 "Lost all paired persistent multicellular worlds" 拒絕條件。
+
+**為了不讓欠檢定的樣本誤判，擴充為 24 個配對 seeds。** R3 正式 100 × 100k 的 persistent MC 只有 12/100；若真實比率約 12%，8 個世界全部為 0 的機率約 0.88⁸ ≈ 36%。而 R4 裡每一個擾動（patch32/64/128、predator60、catch50、catch100）在 seed 0..7 都是 MC 0。因此依研究循環允許的「較長配對確認」，把對照與 Catch100 延伸到 seed 8..23。對照組延伸使用 `71b77c7` 的 R3 authority 執行檔；R3 規則未改變，seed 0..7 的雜湊已經驗證。結果保存於 `benchmarks/phase2-r4-{controlext,catch100ext}-*`；`scripts/archive-r4-probe.mjs` 已改為依 receipt 的 seed 數，並在 24 seeds 時對應 24 個 seeds 的對照組。
+
+| 24 seeds × 50k（seed 0..23） | R3 對照 | Catch100 |
+| --- | ---: | ---: |
+| 技術失敗／collapse／cap | 0/0/0 | 0/0/0 |
+| save/load/replay | 24/24 | 24/24 |
+| Persistent MC worlds（seeds） | 4（1, 5, 7, 9） | 2（10, 12） |
+| Persistent high-C worlds（lineages） | 6（8） | 4（7） |
+| >1 persistent morphology／niche | 0 / 0 | 0 / 0 |
+| >1 persistent realized feeding role | 0 | 1（seed 3） |
+| Persistent prey-income | 0 | 1 |
+| Mean population CV／resource CV | 0.274 / 0.865 | 0.272 / 0.808 |
+
+兩組的 MC worlds **完全沒有重疊**：只要有一次決策不同，同一個 seed 的世界就會混沌地分歧，所以配對 seed 只代表配置相同，無法逐世界配對結果。8 seeds 的「MC 全部消失」有一部分是取樣造成的：Catch100 其實有 MC 世界，只是落在 seed 0..7 之外。4/24 對 2/24 在統計上無法區分（Fisher exact p ≈ 0.67），但 MC 與 high-C 的方向都是下降，因此只記為「弱化」，不算通過。
+
+**H1 的假說專屬結果：機制部分成立，但不足以讓 predator 持續存在。** Catch100 讓 predator 活得更久，子代數是 2.7 倍，暖機後首次出現多隻 predator 同時存活。但 8/8 個世界的 predator 最後仍然滅絕，每隻 predator 的子代參與數從 1.51 升到 1.76，仍低於雙親繁殖的替換水準 2.00，而餓死比例反而上升。照 Step 5 的標準：(1)(2)(4)(5) 成立，(3) 不成立，(6) 弱化。**Catch25／Catch50／Catch100 都不晉升**。
+
+**H1 在設定上有錯。** Catch100 下，餓死的 predator 仍有 93–95% 的追捕目標不比自己慢。把「目標不比自己慢」拆開後（唯讀診斷，R3 對照 8/8 雜湊一致，見 [summary](../benchmarks/phase2-r4-predator-speed-summary.json)）：
+
+| R3 對照的追捕目標 | 嚴格更快 | **速度相同** | 更慢 |
+| --- | ---: | ---: | ---: |
+| Founder 系子代，老死 | 35.8% | 41.2% | 22.9% |
+| Founder 系子代，餓死 | 59.2% | 35.3% | **5.5%** |
+| Founder，餓死 | 32.3% | **67.7%** | 0.0% |
+
+表型速度是小整數，速度相同的情況占全部追捕的 35–68%。H1 的公式卻把相同速度視為完全追得上（catch = 1000）。一隻速度相同、正在逃跑的獵物，每 tick 不可能被拉近距離。
+
+**假說 H1b：closing-speed catchability。** 只修正 catchability 的定義，其他完全不變：
+
+```text
+catch = min(1000, predator.speed × 1000 / (prey.speed + 1))
+hunt_utility = (hunger + 300 + aggression / 4) × (W + (1000 − W) × catch / 1000) / 1000
+```
+
+要取得完整的 Hunt 效用，必須有至少一個整數單位的速度優勢；速度相同時效用乘以 `s/(s+1)`（例如 4 對 4 為 0.8，2 對 2 為 0.67）。仍然是連續、由表型推導、沒有 predator 布林，也不增加任何能量。因為 8 seeds 對 MC 的檢定力不足，候選 **CatchAdv100（W = 0）** 與 **CatchAdv50（W = 500）** 直接以 24 個配對 seeds 執行。
+
+本輪驗證：Rust normal **75 PASS**、all-features **87 PASS**（新增速度相同 ≤ 不比自己慢的斷言），rustfmt check 與 clippy（`-D warnings`）通過。

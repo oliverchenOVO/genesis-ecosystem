@@ -73,6 +73,11 @@ pub struct Budget {
     pub(crate) pursuit_in_range_cooldown: u64,
     pub(crate) pursuit_prey_fleeing: u64,
     pub(crate) pursuit_prey_faster: u64,
+    /// Subset of `pursuit_prey_faster` where both phenotype speeds are exactly equal.
+    pub(crate) pursuit_prey_equal_speed: u64,
+    /// Predator phenotype speed summed over pursuit ticks, and target speed likewise.
+    pub(crate) pursuit_own_speed_sum: u64,
+    pub(crate) pursuit_prey_speed_sum: u64,
     pub(crate) pursuit_distance_sum: u64,
 }
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
@@ -128,6 +133,9 @@ fn add(total: &mut Budget, b: &Budget) {
         pursuit_in_range_cooldown,
         pursuit_prey_fleeing,
         pursuit_prey_faster,
+        pursuit_prey_equal_speed,
+        pursuit_own_speed_sum,
+        pursuit_prey_speed_sum,
         pursuit_distance_sum
     );
     for i in 0..6 {
@@ -175,6 +183,9 @@ pub fn pursuit(predator: &Organism, prey: &Organism, target_died: bool, tick: u6
         }
         b.pursuit_prey_fleeing += u64::from(prey.behavior == crate::Behavior::Flee);
         b.pursuit_prey_faster += u64::from(prey.phenotype.speed >= predator.phenotype.speed);
+        b.pursuit_prey_equal_speed += u64::from(prey.phenotype.speed == predator.phenotype.speed);
+        b.pursuit_own_speed_sum += predator.phenotype.speed as u64;
+        b.pursuit_prey_speed_sum += prey.phenotype.speed as u64;
     });
 }
 fn close(c: &mut Collector, o: &Organism, outcome: &'static str) {
@@ -426,6 +437,7 @@ mod tests {
             sum(&p["lifetime_energy"], "/behavior_ticks/3")
         );
         assert!(life("pursuit_in_range") - life("pursuit_in_range_cooldown") >= life("attacks"));
+        assert!(life("pursuit_prey_equal_speed") <= life("pursuit_prey_faster"));
         let all: u64 = (0..3)
             .map(|i| sum(&p["births"], &format!("/children/{i}")))
             .sum();

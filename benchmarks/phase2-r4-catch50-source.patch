@@ -1,0 +1,44 @@
+diff --git a/crates/sim-core/src/model.rs b/crates/sim-core/src/model.rs
+index bfbcc4c..69afd12 100644
+--- a/crates/sim-core/src/model.rs
++++ b/crates/sim-core/src/model.rs
+@@ -7,7 +7,7 @@ use std::collections::BTreeMap;
+ 
+ pub const SIMULATION_VERSION: u32 = 5;
+ /// Unreleased v5 revisions are isolated; published v4 remains immutable.
+-pub const SIMULATION_RULES_REVISION: u32 = 3;
++pub const SIMULATION_RULES_REVISION: u32 = 4;
+ pub const TELEMETRY_INTERVAL: u64 = 100;
+ macro_rules! id {
+     ($name:ident) => {
+diff --git a/crates/sim-core/src/persistence.rs b/crates/sim-core/src/persistence.rs
+index e1f88b1..eae4dc6 100644
+--- a/crates/sim-core/src/persistence.rs
++++ b/crates/sim-core/src/persistence.rs
+@@ -15,7 +15,7 @@ pub const MAX_SAVE_BYTES: u64 = 128 * 1024 * 1024;
+ const MAGIC: &[u8; 8] = b"GENESIS1";
+ const HEADER: usize = 60;
+ // This cannot alias an old valid State: its bytes8..12 are not a valid world size.
+-const PAYLOAD_TAG: &[u8; 16] = b"GENESIS5RULES003";
++const PAYLOAD_TAG: &[u8; 16] = b"GENESIS5R4CT50__";
+ 
+ pub fn encode(world: &World) -> Result<Vec<u8>, String> {
+     world.validate()?;
+diff --git a/crates/sim-core/src/world.rs b/crates/sim-core/src/world.rs
+index 8304c27..dc6eeae 100644
+--- a/crates/sim-core/src/world.rs
++++ b/crates/sim-core/src/world.rs
+@@ -291,8 +291,12 @@ impl World {
+                 let hunger = (p.energy_capacity - o.energy) * 1000 / p.energy_capacity;
+                 if let Some((_, _, j)) = best_prey.filter(|_| o.energy < p.energy_capacity / 2) {
+                     let t = &s.organisms[j];
++                    // R4 candidate: pursuit utility scales with phenotype speed ratio,
++                    // catch = min(1000, own speed * 1000 / prey speed) permille.
++                    let catch = (p.speed * 1000 / t.phenotype.speed.max(1)).min(1000);
++                    let weight = 500 + (1000 - 500) * catch / 1000;
+                     choices.push((
+-                        hunger + 300 + p.aggression / 4,
++                        (hunger + 300 + p.aggression / 4) * weight / 1000,
+                         1,
+                         Intent {
+                             behavior: Behavior::Hunt,
