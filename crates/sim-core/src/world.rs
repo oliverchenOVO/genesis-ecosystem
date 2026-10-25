@@ -458,6 +458,15 @@ impl World {
             if intent.behavior != Behavior::Hunt || deaths.contains_key(&i) {
                 continue;
             }
+            #[cfg(feature = "viability")]
+            if let Some(j) = intent.target {
+                crate::predator_lifecycle::pursuit(
+                    &s.organisms[i],
+                    &s.organisms[j],
+                    deaths.contains_key(&j),
+                    s.tick,
+                );
+            }
             if let Some(j) = intent.target {
                 if deaths.contains_key(&j) {
                     continue;

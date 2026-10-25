@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "scenario": "phase2-r4-predator-pursuit-unchanged-r3",
+  "base_head": "0fd0f4a",
+  "authority_source": "831f8617d19714d856d653278e244e1f9becaa28",
+  "command": "cargo build --release -p sim-benchmark --features viability --example predator-lifecycle; target/release/examples/predator-lifecycle.exe",
+  "executable_sha256": "507a717d7435cc3862923fcb227581cc1e82e28c1aeafe1266fb2c645d26022d",
+  "elapsed_seconds": 73.02,
+  "workers": 8,
+  "seeds": 8,
+  "ticks_per_seed": 50000,
+  "all_eight_hashes_match_frozen_R3": true,
+  "world_hashes": [
+    {
+      "seed": 0,
+      "hash": "741738ae7550d269e59e4f39106557cef283e0150a974cb309bf2f37cb92768f"
+    },
+    {
+      "seed": 1,
+      "hash": "bdbabeda1113836f07ef9348d439d2051a131e28313d7657624cce48258a0b62"
+    },
+    {
+      "seed": 2,
+      "hash": "8dde43491e172545dbbe50b25de49731fde1f3a21591f77132b026c27b26f9e0"
+    },
+    {
+      "seed": 3,
+      "hash": "366f3ea5aa6c2f2be90599ce1d0707edc53d01e6e2a026ce7c216c84a0c3c1ea"
+    },
+    {
+      "seed": 4,
+      "hash": "e7a4d727f03e84c6481a45b54b7c5fb4fabf9b62f23f13620b6198cd9c6a9ac4"
+    },
+    {
+      "seed": 5,
+      "hash": "aefe58b7e1a54cf7676c0216e1f9ca73208712f22cbc1a1fe72fd46ef422ccd3"
+    },
+    {
+      "seed": 6,
+      "hash": "4abc090d21f782578a9d7769e95b3a17fc3226d4f1e8d0572e3e777ae1abbb8a"
+    },
+    {
+      "seed": 7,
+      "hash": "314ebcc777a23132004f3005f3aae60d748629e12be48b77f7b74a329e2bfca9"
+    }
+  ],
+  "archive": {
+    "path": "benchmarks/phase2-r4-predator-pursuit.json.gz",
+    "uncompressed_bytes": 186296,
+    "uncompressed_sha256": "4ff5c99459ece61244581707f43aa11b4253362275b046edff845b441d267682",
+    "gzip_sha256": "54fdee807d90b336fb9cba361cef8c1ae6f3c8d5d040ac6c65268755693cd679"
+  },
+  "pursuit": {
+    "DeNovo|post|Age": {
+      "individuals": 6,
+      "pursuit_ticks": 3457,
+      "target_lost": 0,
+      "in_range": 2030,
+      "in_range_cooldown": 1781,
+      "prey_fleeing": 3307,
+      "prey_faster": 2058,
+      "distance_sum": 19422,
+      "attacks": 249,
+      "kills": 61
+    },
+    "DeNovo|post|Starvation": {
+      "individuals": 7,
+      "pursuit_ticks": 7211,
+      "target_lost": 0,
+      "in_range": 2197,
+      "in_range_cooldown": 1904,
+      "prey_fleeing": 6282,
+      "prey_faster": 6035,
+      "distance_sum": 65654,
+      "attacks": 293,
+      "kills": 57
+    },
+    "DeNovo|warmup|Age": {
+      "individuals": 3,
+      "pursuit_ticks": 1625,
+      "target_lost": 0,
+      "in_range": 1148,
+      "in_range_cooldown": 1012,
+      "prey_fleeing": 1511,
+      "prey_faster": 540,
+      "distance_sum": 8128,
+      "attacks": 136,
+      "kills": 24
+    },
+    "FounderDescended|warmup|Age": {
+      "individuals": 88,
+      "pursuit_ticks": 62984,
+      "target_lost": 367,
+      "in_range": 17096,
+      "in_range_cooldown": 14326,
+      "prey_fleeing": 54785,
+      "prey_faster": 48264,
+      "distance_sum": 768439,
+      "attacks": 2770,
+      "kills": 885
+    },
+    "FounderDescended|warmup|Starvation": {
+      "individuals": 99,
+      "pursuit_ticks": 53784,
+      "target_lost": 785,
+      "in_range": 5399,
+      "in_range_cooldown": 4372,
+      "prey_fleeing": 43878,
+      "prey_faster": 50073,
+      "distance_sum": 843072,
+      "attacks": 1027,
+      "kills": 284
+    },
+    "Founder|warmup|Age": {
+      "individuals": 37,
+      "pursuit_ticks": 18035,
+      "target_lost": 8,
+      "in_range": 5847,
+      "in_range_cooldown": 5002,
+      "prey_fleeing": 14979,
+      "prey_faster": 14035,
+      "distance_sum": 205200,
+      "attacks": 845,
+      "kills": 262
+    },
+    "Founder|warmup|Starvation": {
+      "individuals": 8,
+      "pursuit_ticks": 5175,
+      "target_lost": 1,
+      "in_range": 768,
+      "in_range_cooldown": 662,
+      "prey_fleeing": 4194,
+      "prey_faster": 5174,
+      "distance_sum": 74518,
+      "attacks": 106,
+      "kills": 25
+    }
+  },
+  "stage": "Diagnostics only; R3 authority unchanged"
+}

@@ -34,7 +34,8 @@ fn run(seed: u64) -> Result<serde_json::Value, String> {
     world.validate()?;
     let report = predator_lifecycle::finish(&world);
     let hash = world.hash();
-    if hash != FROZEN[seed as usize] {
+    // Candidates are cross-checked against their own calibration world hashes instead.
+    if !std::env::args().any(|a| a == "--candidate") && hash != FROZEN[seed as usize] {
         return Err(format!("seed {seed} hash {hash} differs from frozen R3"));
     }
     let living = world
@@ -44,7 +45,7 @@ fn run(seed: u64) -> Result<serde_json::Value, String> {
         .filter(|o| predator_lifecycle::predator(o))
         .count();
     Ok(
-        serde_json::json!({"seed":seed,"world_hash":hash,"frozen_r3_hash_match":true,
+        serde_json::json!({"seed":seed,"world_hash":hash,"frozen_r3_hash_match":hash == FROZEN[seed as usize],
         "final_living_predators":living,"lifecycle":report}),
     )
 }
@@ -114,6 +115,7 @@ fn main() -> Result<(), String> {
                 "deaths":period(&worlds,"deaths",from,to),"presence":period(&worlds,"presence",from,to)}),
         );
     }
+    let candidate = std::env::args().any(|a| a == "--candidate");
     let mut lifetimes: BTreeMap<String, serde_json::Value> = BTreeMap::new();
     for w in &worlds {
         for row in w["lifecycle"]["lifetime_energy"]
@@ -140,9 +142,9 @@ fn main() -> Result<(), String> {
     }
     println!(
         "{}",
-        serde_json::json!({"scenario":"phase2-r4-predator-lifecycle-unchanged-r3","simulation_version":5,"rules_revision":3,
+        serde_json::json!({"scenario":"phase2-r4-predator-lifecycle","simulation_version":5,"rules_revision":sim_core::model::SIMULATION_RULES_REVISION,"candidate":candidate,
             "seeds":8,"ticks_per_seed":TICKS,"population":50,"limit":2000,"size":512,"regeneration":4,"mutation":100,"temperature":2000,
-            "warmup_ticks":WARMUP_WINDOWS*1000,"all_hashes_match_frozen_r3":true,
+            "warmup_ticks":WARMUP_WINDOWS*1000,"all_hashes_match_frozen_r3":worlds.iter().all(|w|w["frozen_r3_hash_match"]==true),
             "predator_founders":worlds.iter().map(|w|w["lifecycle"]["predator_founders"].as_u64().unwrap()).sum::<u64>(),
             "summary":summary,"lifetime_energy":lifetimes,"worlds":worlds})
     );

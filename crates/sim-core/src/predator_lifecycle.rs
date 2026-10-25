@@ -66,6 +66,14 @@ pub struct Budget {
     pub(crate) matings: u64,
     pub(crate) offspring: u64,
     pub(crate) final_energy: u64,
+    /// Hunt-intent resolution after movement, one per committed Hunt tick.
+    pub(crate) pursuit_ticks: u64,
+    pub(crate) pursuit_target_lost: u64,
+    pub(crate) pursuit_in_range: u64,
+    pub(crate) pursuit_in_range_cooldown: u64,
+    pub(crate) pursuit_prey_fleeing: u64,
+    pub(crate) pursuit_prey_faster: u64,
+    pub(crate) pursuit_distance_sum: u64,
 }
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 enum Origin {
@@ -113,7 +121,14 @@ fn add(total: &mut Budget, b: &Budget) {
         reproduction_cost,
         matings,
         offspring,
-        final_energy
+        final_energy,
+        pursuit_ticks,
+        pursuit_target_lost,
+        pursuit_in_range,
+        pursuit_in_range_cooldown,
+        pursuit_prey_fleeing,
+        pursuit_prey_faster,
+        pursuit_distance_sum
     );
     for i in 0..6 {
         total.movement[i] += b.movement[i];
@@ -142,6 +157,24 @@ pub fn metabolism(o: &Organism, components: [i32; 4], actual: i32, starving: boo
         b.actual_metabolic += actual as u64;
         b.metabolic_shortfall += (components.iter().sum::<i32>() - actual) as u64;
         b.starving_ticks += u64::from(starving);
+    });
+}
+/// Post-movement state of one Hunt intent before attack resolution.
+pub fn pursuit(predator: &Organism, prey: &Organism, target_died: bool, tick: u64) {
+    energy(predator, |b| {
+        b.pursuit_ticks += 1;
+        if target_died {
+            b.pursuit_target_lost += 1;
+            return;
+        }
+        let d = crate::spatial::distance_squared(predator.x, predator.y, prey.x, prey.y);
+        b.pursuit_distance_sum += (d as u64).isqrt();
+        if d <= 64 {
+            b.pursuit_in_range += 1;
+            b.pursuit_in_range_cooldown += u64::from(tick - predator.last_attack < 10);
+        }
+        b.pursuit_prey_fleeing += u64::from(prey.behavior == crate::Behavior::Flee);
+        b.pursuit_prey_faster += u64::from(prey.phenotype.speed >= predator.phenotype.speed);
     });
 }
 fn close(c: &mut Collector, o: &Organism, outcome: &'static str) {
@@ -387,6 +420,12 @@ mod tests {
             p["predator_founders"].as_u64().unwrap() + born
         );
         assert!(life("prey_income") > 0 && life("kills") > 0);
+        // Every committed Hunt tick resolves exactly one pursuit; attacks need range.
+        assert_eq!(
+            life("pursuit_ticks"),
+            sum(&p["lifetime_energy"], "/behavior_ticks/3")
+        );
+        assert!(life("pursuit_in_range") - life("pursuit_in_range_cooldown") >= life("attacks"));
         let all: u64 = (0..3)
             .map(|i| sum(&p["births"], &format!("/children/{i}")))
             .sum();

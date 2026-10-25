@@ -248,3 +248,33 @@ node scripts/window-profitability.mjs benchmarks/phase2-r4-control-temporal-summ
 假說 A（同類聚集移動）**維持 deferred**：暖機期的 predators 已經能夠繁殖，暖機後同時存活的 predator 最多 1 隻，聚集無法產生不存在的配偶。只有當未來某個候選讓多隻 predator 同時存活、卻因空間分離而無法相遇交配時，A 才需要重新檢討。
 
 本次驗證：Rust normal **75 PASS**、all-features **87 PASS**，rustfmt check 與 all-target all-feature clippy（`-D warnings`）通過。
+
+**2026-10-26 R4 續作：追捕失敗模式（Stage 2 前的診斷）**
+
+Step 1 已排除追捕移動成本是主因，但留下一個問題：為什麼餓死的 predator 需要多 2.3 倍的 Hunt ticks 才出手一次？`predator_lifecycle` 因此新增一個唯讀的 pursuit 記錄：每個已提交的 Hunt intent，在移動之後、攻擊結算之前記錄一次——目標是否已死、移動後與目標的距離、是否在攻擊距離（8）內、在距離內時是否被 10-tick 攻擊冷卻擋住、目標當 tick 是否在 Flee、目標的表型速度是否 ≥ 自己的速度。測試證明每個 Hunt tick 剛好對應一筆 pursuit 記錄，而且「在距離內且不在冷卻」的次數 ≥ 實際攻擊次數。R3 對照 8/8 雜湊一致；證據見 [summary](../benchmarks/phase2-r4-predator-pursuit-summary.json) 與 [壓縮檔](../benchmarks/phase2-r4-predator-pursuit.json.gz)。
+
+| Founder 系暖機期 | Pursuit ticks | 移動後在攻擊距離內 | 距離內但在冷卻中 | 目標正在逃 | **目標速度 ≥ 自己** | 平均距離 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 子代，老死（n = 88） | 62,984 | 27.3% | 83.8% | 87.5% | 77.1% | 12.3 |
+| 子代，餓死（n = 99） | 53,784 | **10.2%** | 81.0% | 82.8% | **94.5%** | 15.9 |
+| Founder，老死（n = 37） | 18,035 | 32.4% | 85.5% | 83.1% | 77.9% | 11.4 |
+| Founder，餓死（n = 8） | 5,175 | 14.8% | 86.2% | 81.1% | **100.0%** | 14.4 |
+
+目標在途中死亡的比例 ≤ 1.5%，所以不是主要因素。進入攻擊距離後，大多數 tick 被冷卻擋住，這是 10-tick 冷卻在連續攻擊之間的正常結果，兩組幾乎相同（81–86%），因此也不能拿來區分兩組。**能區分兩組的是速度**：餓死組有 94.5–100% 的追捕目標不比自己慢，只有 10–15% 的 tick 追進攻擊距離。現行 Hunt 效用 `hunger + 300 + aggression / 4` 只看飢餓與攻擊性，**完全不考慮追不追得上**；只要看見可攻擊的獵物就投入追捕，而追捕期間不能進食環境資源。
+
+**假說 H1：Catchable pursuit**
+
+- 觀察到的失敗：founder 系的 187 隻 predator 子代中有 99 隻（53%）餓死，整個 cohort 的子代數低於替換水準（約 0.81）。
+- 推測機制：Hunt 效用沒有反映雙方速度比，因此 predator 把大量時間耗在追不上的獵物上，basal 持續消耗，同時錯過進食。
+- 可量測的預測：無效追捕減少，每個 Hunt tick 的 kill 數上升，餓死比例下降，founder 系存活更久、終生子代更多；獵物收入仍是 predator 的主要收入。
+- 最小權威改動（只動一個變數）：在 perception 中，Hunt 效用乘上一個由表型連續推導的權重：
+
+```text
+catch  = min(1000, predator.speed × 1000 / prey.speed)        // 千分比，兩者皆為表型速度
+weight = W + (1000 − W) × catch / 1000
+hunt_utility = (hunger + 300 + aggression / 4) × weight / 1000
+```
+
+  `W = 750 / 500 / 0` 分別對應 **Catch25 / Catch50 / Catch100**（速度比的影響強度 25% / 50% / 100%）。只要獵物比較慢（catch = 1000），效用就和原本完全相同；不使用 predator 布林、SpeciesId、LineageId 或 founder 狀態；不新增任何能量；不改變捕殺報酬、攻擊、代謝、交配或突變。使用表型速度，而非依地形調整後的速度。
+
+本次診斷驗證：Rust normal **75 PASS**、all-features **87 PASS**（pursuit 斷言併入既有 lifecycle 測試），rustfmt check 與 clippy（`-D warnings`）通過。`scripts/archive-r4-probe.mjs` 改為從 receipt 讀取候選的 source base（舊候選沒有這個欄位時，沿用原本的 `321ab99`）。`predator-lifecycle` example 新增 `--candidate` 模式：此模式下不比對凍結的 R3 雜湊，改為與同一候選的 calibration world hash 交叉比對。
