@@ -338,3 +338,33 @@ hunt_utility = (hunger + 300 + aggression / 4) × (W + (1000 − W) × catch / 1
 要取得完整的 Hunt 效用，必須有至少一個整數單位的速度優勢；速度相同時效用乘以 `s/(s+1)`（例如 4 對 4 為 0.8，2 對 2 為 0.67）。仍然是連續、由表型推導、沒有 predator 布林，也不增加任何能量。因為 8 seeds 對 MC 的檢定力不足，候選 **CatchAdv100（W = 0）** 與 **CatchAdv50（W = 500）** 直接以 24 個配對 seeds 執行。
 
 本輪驗證：Rust normal **75 PASS**、all-features **87 PASS**（新增速度相同 ≤ 不比自己慢的斷言），rustfmt check 與 clippy（`-D warnings`）通過。
+
+**2026-10-26 R4 候選：CatchAdv50／CatchAdv100（假說 H1b）— 24 個配對 seeds**
+
+從 `4b165a0` 建立隔離候選，只修正 catchability：分母改為 `prey.speed + 1`。兩者都直接以 seed 0..23 × 50000 執行，並與上一節保存的 24-seed R3 對照比較。證據保存於 `benchmarks/phase2-r4-catchadv{50,100}-*`。JSONL journal 在歸檔前已逐列驗證與最終 JSON 相同，因此只保留其 SHA256，不重複提交。
+
+| 24 seeds × 50k | R3 對照 | Catch100 | CatchAdv50 | CatchAdv100 |
+| --- | ---: | ---: | ---: | ---: |
+| 技術失敗／collapse／cap | 0/0/0 | 0/0/0 | 0/0/0 | 0/0/0 |
+| save/load/replay | 24/24 | 24/24 | 24/24 | 24/24 |
+| Persistent MC | 4 | 2 | 3 | **4** |
+| Persistent high-C worlds | 6 | 4 | 4 | **8** |
+| >1 persistent morphology／niche | 0/0 | 0/0 | 0/0 | 0/0 |
+| >1 persistent realized feeding role | 0 | 1 | 0 | 0 |
+| Persistent prey-income | 0 | 1 | 0 | 0 |
+
+| Seed 0..7 predator 明細 | R3 對照 | Catch100 | CatchAdv50 | CatchAdv100 |
+| --- | ---: | ---: | ---: | ---: |
+| 每個 Hunt tick 的 kill（×10⁻³） | 10.5 | 12.0 | 12.0 | **16.1** |
+| Hunt tick 占比 | 57% | 55% | 51% | **31%** |
+| Predator 出生 | 203 | **524** | 166 | 184 |
+| 每隻 predator 的子代參與數（替換 = 2.00） | 1.51 | **1.76** | 1.39 | 1.39 |
+| 餓死比例 | 46.0% | 52.9% | 37.4% | 50.7% |
+| 每 tick 淨收支 | 0.37 | **0.63** | 0.40 | 0.22 |
+| tick 50000 時存活 predator 的世界 | 0/8 | 0/8 | 0/8 | 1/8 |
+
+**H1b 的結論。** CatchAdv100 讓每次追捕**更有效率**（每 Hunt tick 的 kill +53%），也保留了複雜度（MC 4/24 與對照相同，high-C 8/24 高於對照的 6/24）。但 predator 因此**更少狩獵**，改去吃自己處理效率很差的環境資源（Piercer／Crusher 口器），結果每 tick 淨收支**下降**、繁殖減少。三個 Catch 系列候選中，最接近替換水準的是 Catch100；它的捕獵次數比其他 Catch 候選**更多**，而不是捕獵決策更好。所有變體都低於替換水準，predator 最終都滅絕。
+
+**Predator energetic viability 這條線在允許的變數內已經用盡。** 已排除的有：追捕移動成本（8%）、attack 成本（每次 kill 約 120，對比約 1,000 的收益）、捕殺報酬（predator60 已拒絕，而且不允許再增加）、狩獵目標選擇（H1／H1b）。Stage 3（配偶稀缺）與 Stage 4（子代表型延續）都不是瓶頸：Catch100 暖機後出現 140 個雙 predator 親代的子代，雙 predator 親代的表型延續率是 100%。剩下的赤字來自 predator 表型本身的能量速率權衡：bite 能力需要較大的體型與 mass，因而 basal 較高，而 Piercer 處理環境資源的效率只有 35。要改變這點，就必須給予 predator 能量優惠（禁止）或改動通用的代謝式（會同時改變整個生態，不是單一變數測試）。**沒有候選晉升**；CatchAdv100 作為 complexity-neutral 的已知變體記錄下來，但它不改善任何生態 gate，依規則不能只因為 predator 存活或複雜度沒變差就選取。
+
+**轉向佇列項目 6 的前置檢查（唯讀）。** 「棲地存在但 lineage 沒有留在棲地」是 movement preference 假說的前提。從已保存的 R3 對照 raw journal（每 100 ticks 的 lineage 位置和與平方和）計算暖機後 ≥8 成員 lineage 的徑向空間標準差：8 個世界的中位數為 112–163，整體中位數 **147**；若均勻分布在 512² 世界上會是 209。對比之下，productivity 的相關長度是 **48（soft）／64（hard）**，交配半徑是 16。也就是說，可持續的生產性棲地確實存在（productivity mask 完全靜態），但 lineage 的分布範圍是棲地尺度的 2–3 倍，並沒有和特定棲地綁在一起。下一步依循環步驟 A，先量化「個體實際進食的位置是否落在自己口器對應通道的高生產力棲地」，再決定是否需要測試 movement preference 候選。

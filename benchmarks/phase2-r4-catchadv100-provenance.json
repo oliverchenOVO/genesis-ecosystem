@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "stage": "Isolated R4 exploratory candidate, not selected authority or100-seed formal acceptance",
+  "source_base": "4b165a0e1d1f66a39f3fc17e4ffe753ec353d222",
+  "source_patch_sha256": "cb7f99370853dead1b5ac6582bf1f2130b0636682a7d9f06c9d1672e56eacfc5",
+  "executable_sha256": "8ce43457a145d798b972e79d80a3538db76e84a69bf703052824528d6d2523af",
+  "elapsed_seconds": 1188.0408331,
+  "workers": 10,
+  "seeds": 24,
+  "ticks_per_seed": 50000,
+  "jsonl_equals_final": true,
+  "full_replay_save_load_continuations": 24,
+  "normal_performance_claim": false,
+  "files": [
+    {
+      "destination": "benchmarks/phase2-r4-catchadv100.json.gz",
+      "raw_bytes": 363404272,
+      "gzip_bytes": 50893339,
+      "raw_sha256": "d2f5c744d973b302b65d4e691bf9fa99679410d6dd87dfcd393de7c3b22e787b",
+      "gzip_sha256": "50a7f143c70a4d732923f92937a134bcdb7239a0de95b3e9ecdade7f8d0ad3a4"
+    },
+    {
+      "destination": "benchmarks/phase2-r4-catchadv100.jsonl.gz",
+      "raw_bytes": 363403703,
+      "gzip_bytes": 50893481,
+      "raw_sha256": "7bbc1f06917c73de849c5e169d53c252913b230547139c42d64eb100e605d6e4",
+      "gzip_sha256": "ebe9a13a3ad3124fa61640b3e773f5d808303188cac05f54340f85e1c85ddbb4"
+    },
+    {
+      "destination": "benchmarks/phase2-r4-catchadv100-temporal-summary.json.gz",
+      "raw_bytes": 350734801,
+      "gzip_bytes": 34554484,
+      "raw_sha256": "7c80a5ec1dc68fdf9c11eecb351829b7b4d2f0669537c95597fa5b5afb2afbc8",
+      "gzip_sha256": "adbf749ac2e973acda5a43b4d3203c4696714d446a81227d0a0bd75a97dc5be6"
+    }
+  ],
+  "world_hashes": [
+    {
+      "seed": 0,
+      "hash": "b5feb2960757ec1b228aad9860bf1b5a8a2cef1b79948894a4024da9c2fcf330"
+    },
+    {
+      "seed": 1,
+      "hash": "7a5c6923da33be802ff0233830bc7b4eaf0e3ffc1c6403ba8dca23cccf76bfb7"
+    },
+    {
+      "seed": 2,
+      "hash": "34bbd54f6b55fea34ad04c500e2d6bccb93279bf3a271f0b6385756cb28f72ef"
+    },
+    {
+      "seed": 3,
+      "hash": "4cf6a899b95aa2bd7c1211d2b6d409370e28713f1324f5aa8ee2753e8dfdf1f7"
+    },
+    {
+      "seed": 4,
+      "hash": "5b294d57cf3d717262acc55fdf79b4a874bb28ae5748a63183ce0032ccd079a4"
+    },
+    {
+      "seed": 5,
+      "hash": "006eae24f1410bdd5e61b0173d5a2e7bef9c2788fbc3ff1665b129f33a84e265"
+    },
+    {
+      "seed": 6,
+      "hash": "f703b6ab1d31def12c6583a897f2b23ae6ea2553c4c645f8e71912d52598b572"
+    },
+    {
+      "seed": 7,
+      "hash": "4266261143d38da82a3ecae967e05968d68f52522ffa1a634093974cb3ee441f"
+    },
+    {
+      "seed": 8,
+      "hash": "f4d39909f545810d42105c6505c82a9394048ad06450d3b8d47564fcb431bcf8"
+    },
+    {
+      "seed": 9,
+      "hash": "f5ca4f195aabb7688db49c0b8263e2f20dd549f842c9822ec11572860b64daf7"
+    },
+    {
+      "seed": 10,
+      "hash": "1c730269c6edf78ad025e2b8c15f12a104bbea1619be1126cb5681fb78568086"
+    },
+    {
+      "seed": 11,
+      "hash": "3c4d00002eea8780ed7a4fa88d6d102b8a24833bfd2a3f6b2270637440bae953"
+    },
+    {
+      "seed": 12,
+      "hash": "d2342c21f415d5db30b269738d647ff42f3a2ac0b9bc2bd23300abfe0e2a8e85"
+    },
+    {
+      "seed": 13,
+      "hash": "a61e573e49e15af39a04cd7fb0a779db13e8ed2b6f8e286fe85f7961b95950fe"
+    },
+    {
+      "seed": 14,
+      "hash": "ce0dd3b537ccafb0a8b382f793ad30bdac161f99ef6e1b27d02c576a15778dab"
+    },
+    {
+      "seed": 15,
+      "hash": "f73dd53f766cfa2101bf9fe7c13feddfb5e9ef814d0c79cbdb540f8b8a5b6b63"
+    },
+    {
+      "seed": 16,
+      "hash": "0fc65ad2f4691a560308e60456d7d94cef9af032143213342344df2912241e11"
+    },
+    {
+      "seed": 17,
+      "hash": "a5eeccf03d0dc55ae1fd637506df22989b42f927181b0831be852f409c2fdef6"
+    },
+    {
+      "seed": 18,
+      "hash": "bd6ce0addc8ef622611afecbd3a62e04e615b5ba111b975c6bccda232a708214"
+    },
+    {
+      "seed": 19,
+      "hash": "8a11f2d2ddac8cdafb6edb52078ecd64a30e991ca48536d7f061fa0182ec8bd3"
+    },
+    {
+      "seed": 20,
+      "hash": "1de5c913f32fbce3b7ec39f530f772bf8d3f8edd9c56f9bc0f1c36e9d4e8532e"
+    },
+    {
+      "seed": 21,
+      "hash": "f15c48839233b77ee63ab5cefac63ec9b4360be13fd444b6f9fa358fd784d19c"
+    },
+    {
+      "seed": 22,
+      "hash": "f4f17768edcb4e46ce01748eda3e16fe6aa012edccfcfcda5b4d9c3248feb515"
+    },
+    {
+      "seed": 23,
+      "hash": "96d826b84d33125f690e5910f23a33fc4d95a1ddaa7c234a0bb3cdb23943b3ee"
+    }
+  ],
+  "jsonl_committed": false,
+  "jsonl_note": "The JSONL journal was verified row-for-row equal to the final JSON results before archiving; only its SHA256 is kept to avoid committing a duplicate.",
+  "lifecycle": {
+    "path": "benchmarks/phase2-r4-catchadv100-lifecycle.json.gz",
+    "seeds": "0..7",
+    "uncompressed_sha256": "07369d1338d989834023bb1c07e45e06e7a4c782ec38d7a438e8c8d574827560",
+    "gzip_sha256": "4cf6d289a98ed9b022c1997e47cc3fe78557d4e09af1096180962bed33062739",
+    "executable_sha256": "5e297602b6ba1e6dbf964ce982d5b965150314b7459580c072e862074dde8e24",
+    "world_hashes_equal_calibration": true
+  },
+  "hunt_weight_W": 0,
+  "prey_speed_offset": 1
+}
