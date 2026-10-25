@@ -17,3 +17,7 @@ viability = ["sim-core/viability", "dep:flate2", "dep:sha2"]
 [[example]]
 name = "mating-decomposition"
 required-features = ["viability"]
+
+[[example]]
+name = "predator-lifecycle"
+required-features = ["viability"]

@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "scenario": "phase2-r4-predator-lifecycle-unchanged-r3",
+  "base_head": "3f7bacc",
+  "authority_source": "831f8617d19714d856d653278e244e1f9becaa28",
+  "command": "cargo build --release -p sim-benchmark --features viability --example predator-lifecycle; target/release/examples/predator-lifecycle.exe",
+  "executable_sha256": "9ee49e9a13fb75f429a9aa6c72d6c3c1effdd794f0fdfe7908add1fe7b9351df",
+  "elapsed_seconds": 108.55,
+  "workers": 8,
+  "seeds": 8,
+  "ticks_per_seed": 50000,
+  "warmup_ticks": 5000,
+  "all_eight_hashes_match_frozen_R3": true,
+  "world_hashes": [
+    {
+      "seed": 0,
+      "hash": "741738ae7550d269e59e4f39106557cef283e0150a974cb309bf2f37cb92768f",
+      "final_living_predators": 0,
+      "predator_founders": 5
+    },
+    {
+      "seed": 1,
+      "hash": "bdbabeda1113836f07ef9348d439d2051a131e28313d7657624cce48258a0b62",
+      "final_living_predators": 0,
+      "predator_founders": 8
+    },
+    {
+      "seed": 2,
+      "hash": "8dde43491e172545dbbe50b25de49731fde1f3a21591f77132b026c27b26f9e0",
+      "final_living_predators": 0,
+      "predator_founders": 2
+    },
+    {
+      "seed": 3,
+      "hash": "366f3ea5aa6c2f2be90599ce1d0707edc53d01e6e2a026ce7c216c84a0c3c1ea",
+      "final_living_predators": 0,
+      "predator_founders": 4
+    },
+    {
+      "seed": 4,
+      "hash": "e7a4d727f03e84c6481a45b54b7c5fb4fabf9b62f23f13620b6198cd9c6a9ac4",
+      "final_living_predators": 0,
+      "predator_founders": 3
+    },
+    {
+      "seed": 5,
+      "hash": "aefe58b7e1a54cf7676c0216e1f9ca73208712f22cbc1a1fe72fd46ef422ccd3",
+      "final_living_predators": 0,
+      "predator_founders": 12
+    },
+    {
+      "seed": 6,
+      "hash": "4abc090d21f782578a9d7769e95b3a17fc3226d4f1e8d0572e3e777ae1abbb8a",
+      "final_living_predators": 0,
+      "predator_founders": 4
+    },
+    {
+      "seed": 7,
+      "hash": "314ebcc777a23132004f3005f3aae60d748629e12be48b77f7b74a329e2bfca9",
+      "final_living_predators": 0,
+      "predator_founders": 7
+    }
+  ],
+  "archive": {
+    "path": "benchmarks/phase2-r4-predator-lifecycle.json.gz",
+    "uncompressed_bytes": 161621,
+    "uncompressed_sha256": "f6c3c7b04418a76a57369cc1321e6d230247d34ace5d3f49a7107c470d40729c",
+    "gzip_sha256": "f46d5a9d3bf02782b2511900fd6e8cdc9504da3c9fffc0e058720522797d2b06"
+  },
+  "predator_founders": 45,
+  "summary": {
+    "post_warmup": {
+      "births": {
+        "children": [
+          236542,
+          0,
+          0
+        ],
+        "de_novo_parent_both": 3,
+        "de_novo_parent_grazer": 0,
+        "de_novo_parent_low_carnivory": 23,
+        "predator_child_carnivory_sum": 10926,
+        "predator_child_energy_sum": 20166,
+        "predator_child_threshold_sum": 36591,
+        "predator_children": [
+          13,
+          0,
+          0
+        ]
+      },
+      "deaths": {
+        "age": 7,
+        "before_maturity": 0,
+        "deaths": 14,
+        "environment": 0,
+        "lifespan_sum": 19162,
+        "offspring_sum": 0,
+        "predation": 0,
+        "starvation": 7,
+        "without_offspring": 14
+      },
+      "presence": {
+        "peak_living": 1,
+        "predator_organism_ticks": 19045,
+        "ticks_with_predator": 19045,
+        "ticks_with_two_or_more": 0
+      }
+    },
+    "warmup": {
+      "births": {
+        "children": [
+          17201,
+          1,
+          187
+        ],
+        "de_novo_parent_both": 1,
+        "de_novo_parent_grazer": 0,
+        "de_novo_parent_low_carnivory": 5,
+        "predator_child_carnivory_sum": 152980,
+        "predator_child_energy_sum": 282798,
+        "predator_child_threshold_sum": 551475,
+        "predator_children": [
+          3,
+          0,
+          187
+        ]
+      },
+      "deaths": {
+        "age": 127,
+        "before_maturity": 0,
+        "deaths": 234,
+        "environment": 0,
+        "lifespan_sum": 250213,
+        "offspring_sum": 375,
+        "predation": 0,
+        "starvation": 107,
+        "without_offspring": 124
+      },
+      "presence": {
+        "peak_living": 85,
+        "predator_organism_ticks": 250285,
+        "ticks_with_predator": 19758,
+        "ticks_with_two_or_more": 16165
+      }
+    }
+  },
+  "stage": "Diagnostics only; R3 authority unchanged; not a candidate selector or rules4 acceptance"
+}

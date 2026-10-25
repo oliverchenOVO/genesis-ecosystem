@@ -586,6 +586,8 @@ impl World {
         for (&i, &cause) in &deaths {
             #[cfg(feature = "viability")]
             crate::viability::death(&s.organisms[i], s.tick, cause);
+            #[cfg(feature = "viability")]
+            crate::predator_lifecycle::death(&s.organisms[i], s.tick, cause);
             if cause == DeathCause::Starvation
                 && s.organisms[i].phenotype.carnivory > 650
                 && s.organisms[i].phenotype.morphology.mouth != crate::morphology::Mouth::Grazer
@@ -799,6 +801,7 @@ impl World {
                     );
                     crate::viability::parent_child(&a, child);
                     crate::viability::parent_child(&b, child);
+                    crate::predator_lifecycle::birth(child, &a, &b, s.tick);
                 }
                 s.organisms[i].offspring += 1;
                 s.organisms[j].offspring += 1;
@@ -865,6 +868,8 @@ impl World {
         }
         #[cfg(feature = "profile")]
         crate::profile::mark("population accounting", &mut profile_stamp);
+        #[cfg(feature = "viability")]
+        crate::predator_lifecycle::census(self);
         if self.state.tick.is_multiple_of(TELEMETRY_INTERVAL) {
             self.detect_species();
             self.sample();

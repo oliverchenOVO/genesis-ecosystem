@@ -7,6 +7,8 @@ pub mod mating_decomposition;
 pub mod model;
 pub mod morphology;
 pub mod persistence;
+#[cfg(feature = "viability")]
+pub mod predator_lifecycle;
 #[cfg(feature = "profile")]
 pub mod profile;
 pub mod replay;

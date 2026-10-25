@@ -180,3 +180,30 @@ node scripts/window-profitability.mjs benchmarks/phase2-r4-control-temporal-summ
 限制：這些是描述性的重複觀測計數，不是唯一個體，也不是因果估計。Start-of-tick 的 readiness 與 matching 時的 eligibility 取樣時點不同。本次只有 R3 對照，未對 patch／predator60 重跑。資料不支持放寬 compatibility（唯一的跨群組 eligible 觀測只有 1 次），也不支持以加入配偶吸引移動作為第一個假說，因為暖機後沒有任何 predator 能同時看到另一隻 predator。下一步較合理的是追蹤 predator 在暖機期如何出現與消失（來自哪些親代 lineage、子代是否仍是 predator、死因），再決定要測試的單一可逆假說。本次未選出候選、未改模擬規則；rules4、formal R4、native／installer UAT、merge、tag／release 仍未進行。
 
 本次驗證：Rust normal **75 PASS**、all-features **86 PASS**（原 84 + 新增 2），rustfmt check、all-target all-feature clippy（`-D warnings`）通過。前端未改動，未重跑。
+
+**2026-10-26 R4 續作：捕食者來源與去向**
+
+狀態仍為 **PHASE 2 INCOMPLETE**。起始 head `3f7bacc`。上一節顯示暖機後捕食者從未兩兩相遇，本節追問牠們從哪裡來、為什麼消失。新增獨立的選用觀測器 [`predator_lifecycle`](../crates/sim-core/src/predator_lifecycle.rs)（僅 `viability` feature），記錄三件事：每個子代有幾個捕食者親代、該子代是不是捕食者；捕食者的死因、壽命與子代數；每 tick 結束時存活的捕食者數。同樣以 [example](../crates/sim-benchmark/examples/predator-lifecycle.rs) 重跑未改動的 R3 對照（seed 0..7 × 50000）：**8/8 雜湊與凍結 R3 一致**，耗時 108.55 秒。執行檔在 rustfmt 之後才建置，SHA256 與 [summary](../benchmarks/phase2-r4-predator-lifecycle-summary.json) 中記錄的原始碼一致；完整逐視窗資料見 [壓縮檔](../benchmarks/phase2-r4-predator-lifecycle.json.gz)。新增測試證明出生、死亡、餓死、壽命總和與 viability `predator-like` cohort 完全一致，且「founders + 出生 = 死亡 + 存活」與「census organism-ticks = 起始 tick 計數 − 初始 + 最終」都精確閉合，不影響 world hash。
+
+| 8 世界合計 | 暖機（tick < 5000） | 暖機後 |
+| --- | ---: | ---: |
+| 初始 predator founders | 45 | — |
+| 雙 predator 親代的子代／其中為 predator | 187 / 187 | 0 / 0 |
+| 單 predator 親代的子代／其中為 predator | 1 / 0 | 0 / 0 |
+| 雙非 predator 親代產生的 predator（de novo） | 3 | 13 |
+| Predator 死亡／餓死／老死 | 234 / 107 / 127 | 14 / 7 / 7 |
+| 死亡時沒有子代的 predator | 124 | 14 |
+| 同時存活 predator 峰值 | 85 | **1** |
+| 有 ≥2 隻 predator 同時存活的 tick | 16,165 | **0** |
+
+主要發現：
+
+1. **R3 的捕食者全部是初始 founders 的殘留族群，沒有任何一個世界維持住它們。** 隨機初始基因組中有 45 個 predator founders；暖機期它們彼此交配，產出 187 個子代，而且 100% 仍是 predator。之後 8 個世界最後一次出現 predator 的視窗在第 6 到 47 個之間，tick 50000 時全部為 0。
+2. **暖機後只剩 de novo 突變體，而且全部孤立。** 236,542 次出生中只有 13 個（0.0055%）新生 predator，全部來自兩個非 predator 親代。親代不是 predator 的原因，幾乎都是 carnivory ≤ 650 但口器已經不是 Grazer（23 次），沒有一次是只因為口器是 Grazer。這些突變體同時最多只有 1 隻，死前都沒有留下子代（餓死 7、老死 7）。它們出生時的能量平均只有自身繁殖門檻的 55%（1551 / 2815）。
+3. **因此「捕食者繁殖瓶頸」實際上是兩段式問題**：(a) founder 族群在暖機期無法自我維持，死亡中 46% 是餓死，53% 沒有子代就死亡；(b) 捕食表型是 carnivory > 650 且非 Grazer 的門檻性狀，一旦 founder 族群消失，罕見的 de novo 突變體身邊沒有同類，無法重新建立族群。單一 predator 親代的子代只有 1 例，而且不是 predator，表示目前的規則下幾乎沒有「與非 predator 交配後仍延續表型」的路徑。
+
+限制：暖機後 census 是 19,045 organism-ticks，上一節的 start-of-tick 計數是 19,046，差 1 來自取樣時點（tick 結束 vs. tick 開始），符合兩者的定義。這些都是描述性計數，不是因果估計；只量了 R3 對照組，候選世界未重跑。Predator 是以繼承表型定義，不是實際飲食角色。
+
+對下一步的意涵：資料指出應優先處理 **founder 期 predator 的能量與存活**，以及 **門檻性狀在小族群中的延續**，而不是暖機後的交配規則或 kill credit（predator60 已被拒絕）。依 §73 的規則，下一步要先定義一個有界、可逆的候選並用配對 seed 比較；本次未選出候選，也未改動模擬規則。rules4、formal R4、native／installer UAT、merge、tag／release 仍未進行。
+
+本次驗證：Rust normal **75 PASS**、all-features **87 PASS**（前節 86 + 新增 1），rustfmt check、all-target all-feature clippy（`-D warnings`）通過。前節 commit `3f7bacc` 的 [CI 40226289401](https://github.com/oliverchenOVO/genesis-ecosystem/actions/runs/40226289401) core、windows、legacy-v4 皆實際成功。前端未改動。
