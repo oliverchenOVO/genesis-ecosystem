@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "scenario": "phase2-r4-mating-spatial-overlap-unchanged-r3",
+  "sources": [
+    "benchmarks/phase2-r4-control.jsonl.gz (r4_temporal 100-tick samples)",
+    "benchmarks/phase2-r4-mate-ecology.json.gz (chosen mating pairs)"
+  ],
+  "seeds": "0..7",
+  "post_warmup_from_tick": 5000,
+  "worlds": [
+    {
+      "seed": 0,
+      "random_mixing_cross_mouth": 0.47722283637801555,
+      "random_mixing_cross_lineage": 0.6167619809347809,
+      "observed_cross_mouth": 0.3108384458077709,
+      "observed_cross_lineage": 0.5495085427798667,
+      "sampled_ticks": 451,
+      "mating_pairs": 15159
+    },
+    {
+      "seed": 1,
+      "random_mixing_cross_mouth": 0.4022971842603487,
+      "random_mixing_cross_lineage": 0.7055831304301299,
+      "observed_cross_mouth": 0.3140535372848948,
+      "observed_cross_lineage": 0.5942160611854684,
+      "sampled_ticks": 451,
+      "mating_pairs": 20920
+    },
+    {
+      "seed": 2,
+      "random_mixing_cross_mouth": 0.36180966614614996,
+      "random_mixing_cross_lineage": 0.666304092719628,
+      "observed_cross_mouth": 0.23701683051109165,
+      "observed_cross_lineage": 0.5733182356271553,
+      "sampled_ticks": 451,
+      "mating_pairs": 19429
+    },
+    {
+      "seed": 3,
+      "random_mixing_cross_mouth": 0.37689651929754175,
+      "random_mixing_cross_lineage": 0.5010448872160411,
+      "observed_cross_mouth": 0.22111029179395345,
+      "observed_cross_lineage": 0.4261034446434215,
+      "sampled_ticks": 451,
+      "mating_pairs": 18986
+    },
+    {
+      "seed": 4,
+      "random_mixing_cross_mouth": 0.40577744311993375,
+      "random_mixing_cross_lineage": 0.5720735305525485,
+      "observed_cross_mouth": 0.26082515180750243,
+      "observed_cross_lineage": 0.5260200896657398,
+      "sampled_ticks": 451,
+      "mating_pairs": 17621
+    },
+    {
+      "seed": 5,
+      "random_mixing_cross_mouth": 0.4668497020452746,
+      "random_mixing_cross_lineage": 0.6574983885031371,
+      "observed_cross_mouth": 0.3268256162174614,
+      "observed_cross_lineage": 0.5881133379405666,
+      "sampled_ticks": 451,
+      "mating_pairs": 17364
+    },
+    {
+      "seed": 6,
+      "random_mixing_cross_mouth": 0.4444848231489239,
+      "random_mixing_cross_lineage": 0.615460851161324,
+      "observed_cross_mouth": 0.3272106732857586,
+      "observed_cross_lineage": 0.5627055538318336,
+      "sampled_ticks": 451,
+      "mating_pairs": 16115
+    },
+    {
+      "seed": 7,
+      "random_mixing_cross_mouth": 0.47168277306653894,
+      "random_mixing_cross_lineage": 0.7177301713390363,
+      "observed_cross_mouth": 0.3371068412678987,
+      "observed_cross_lineage": 0.6464936972218822,
+      "sampled_ticks": 451,
+      "mating_pairs": 16342
+    }
+  ],
+  "means": {
+    "random_mixing_cross_mouth": 0.4258776184328409,
+    "observed_cross_mouth": 0.29187342349704154,
+    "random_mixing_cross_lineage": 0.6315571291070783,
+    "observed_cross_lineage": 0.5583098703619918,
+    "observed_over_random_mouth": 0.6853457680426771,
+    "observed_over_random_lineage": 0.8840211670975093
+  },
+  "definitions": "Random-mixing expectation is 1 - sum p_i^2 over current mouth (or lineage) frequencies at each 100-tick post-warmup sample, averaged over samples. Observed is the fraction of chosen post-warmup mating pairs with different mouth (or lineage). Species isolation requires cross-lineage births <= 20% for the candidate lineage. Offline analysis of archived evidence; no simulation rerun."
+}

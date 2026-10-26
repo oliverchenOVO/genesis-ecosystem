@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "stage": "Isolated R4 exploratory candidate, not selected authority or100-seed formal acceptance",
+  "source_base": "db113e7c0b41f43329d2c8dbda7c4d44846420ed",
+  "source_patch_sha256": "6d89bb33b5b8d672a1867288112c33a785d8977c4794eb488ddfcc5fe8985888",
+  "executable_sha256": "6a13d332674aabce36649bdd652c673dea8cb2704cfe165d1d7a1f59c2655c40",
+  "elapsed_seconds": 2541.9870338,
+  "workers": 6,
+  "seeds": 24,
+  "ticks_per_seed": 50000,
+  "jsonl_equals_final": true,
+  "full_replay_save_load_continuations": 24,
+  "normal_performance_claim": false,
+  "files": [
+    {
+      "destination": "benchmarks/phase2-r4-ecomate90.json.gz",
+      "raw_bytes": 335651769,
+      "gzip_bytes": 47089323,
+      "raw_sha256": "6370a9222fa1d6a8e005ebeeafd2ec7c4a8a13a6718d843334e79c47f3ae098f",
+      "gzip_sha256": "dfc588d37598840f931bc9fe0c7445f6fd3839dcc3fdb595ba4a636d0501e41b"
+    },
+    {
+      "destination": "benchmarks/phase2-r4-ecomate90.jsonl.gz",
+      "raw_bytes": 335651206,
+      "gzip_bytes": 47090092,
+      "raw_sha256": "242e9b1790d6923dd6aabf25b458f71fd2bea23da2413637304a989c93082c1f",
+      "gzip_sha256": "c31b1815d47a2f9d4768616441cd428c9682a0177331d7afa2311e249d1af2a4"
+    },
+    {
+      "destination": "benchmarks/phase2-r4-ecomate90-temporal-summary.json.gz",
+      "raw_bytes": 326389976,
+      "gzip_bytes": 32050052,
+      "raw_sha256": "f1169ffb15f4a356ccfaab06baad5ec0c538675702eb96402289d9bebf58475d",
+      "gzip_sha256": "a53cd526ad294778008338cc4d02f1d93b7db58f38a00801507d51d51c8d383b"
+    }
+  ],
+  "world_hashes": [
+    {
+      "seed": 0,
+      "hash": "15643ded30c1a0fceb84b50b05ea5973489cde3ef80db732b03d53c4a6535d0e"
+    },
+    {
+      "seed": 1,
+      "hash": "2f7b38b65caf1b9a2878d19b2591b32f4895abfc50fe1216d3a9d927661a4ebf"
+    },
+    {
+      "seed": 2,
+      "hash": "9b28dc9c63a96fa803395ec4fc25f4962e955bb273eafec05a4ab00b106a5af0"
+    },
+    {
+      "seed": 3,
+      "hash": "a5a265e5ab3f3822db221c4b6ae4647f5a3c1d82b55c82f78b50f6e81fd2e92b"
+    },
+    {
+      "seed": 4,
+      "hash": "8f7500d08289d5df4675b04fe4541e5e70edf4c5716eb47798b8b8a1d5e0c33c"
+    },
+    {
+      "seed": 5,
+      "hash": "ca5186d6a92389d9106a325eee9bfe0ea7092e3a87e7918bae6c92c99c35364e"
+    },
+    {
+      "seed": 6,
+      "hash": "70e0f1a1c38af3096c4ac961e50cc3c041bd64bf062387ae0f150de1e883e566"
+    },
+    {
+      "seed": 7,
+      "hash": "d7b000b27803799b19e07432e59907ba714792f4d26b3a1a1f35b9ba97c82899"
+    },
+    {
+      "seed": 8,
+      "hash": "f94b72a3fc5810dad0cf2787d309c2832a59bf1863a311618f45fee312d7549c"
+    },
+    {
+      "seed": 9,
+      "hash": "537c16088e40cb08cde808bd9d8bb3d76fe895bfcb185825e7c36ad5fd84610a"
+    },
+    {
+      "seed": 10,
+      "hash": "b8ba8942f068a248d042a299ad05a90c8f3f6eef6a12c35e88727400c40aec4b"
+    },
+    {
+      "seed": 11,
+      "hash": "7a8c44b15cbf089586d57d39445f18227a657d1111fc1def4a514bc309a84400"
+    },
+    {
+      "seed": 12,
+      "hash": "2ec19847a546c04206a293e6422101adcafa34f11cde6dd0deb4a90972a21b76"
+    },
+    {
+      "seed": 13,
+      "hash": "879ca57940eb797679a5a8d9494e2119504f0b227c0844c1095dc1a940f4dd14"
+    },
+    {
+      "seed": 14,
+      "hash": "63f9e85fcd0c7dd194fa51573619bd62cd71a50b3c4f8b732c6641aa808907be"
+    },
+    {
+      "seed": 15,
+      "hash": "5bc35dc0b40706e88daf3e08f7b0daba298bdaf6bd4d22c1454d48c37af66ca7"
+    },
+    {
+      "seed": 16,
+      "hash": "4c7939c66b659a9f495f4fa2d3d9080efe6636609af5e3ef1b022244dded5c9c"
+    },
+    {
+      "seed": 17,
+      "hash": "48a03a470de9a9431c132404b39d902b03051282450f5cb92d1c243686c6a547"
+    },
+    {
+      "seed": 18,
+      "hash": "1faf5128f79099a9d49097440a6511b5142b14329925c45a0ee14b17e11546d7"
+    },
+    {
+      "seed": 19,
+      "hash": "a98f6279810b901e782dfbc8c1782ba33e7cd7c6aea1f522c435fe79b1337aeb"
+    },
+    {
+      "seed": 20,
+      "hash": "7355f003f55baae55358da2433e6b93c7bbd47bb5624c127c24fddb1480fdfe0"
+    },
+    {
+      "seed": 21,
+      "hash": "b5630c2479676a3a18d72d65ffd5474ac332dab3c89791a1c687a22e994e11e1"
+    },
+    {
+      "seed": 22,
+      "hash": "aa0c2117dd0430f77b13932a4151a09d450166f81d38c5ced585dc8434899cff"
+    },
+    {
+      "seed": 23,
+      "hash": "159209571f45bd6bee9c3d54a30e63245fec11ffcfca2895140720043d35d799"
+    }
+  ],
+  "jsonl_committed": false,
+  "jsonl_note": "The JSONL journal was verified row-for-row equal to the final JSON results before archiving; only its SHA256 is kept to avoid committing a duplicate.",
+  "acceptance_floor_permille": 900,
+  "mate_ecology": {
+    "path": "benchmarks/phase2-r4-ecomate90-mate-ecology.json.gz",
+    "seeds": "0..23",
+    "uncompressed_sha256": "c9cffcec9eaaa0837f52398eea4b81d27416339e0b91048cc5fe3185d37f6fe7",
+    "gzip_sha256": "816a7784c5a1a82d920c13a1f76329129e39bb63ec660afa36a2d7f494bb3294",
+    "executable_sha256": "8fae71f139418e47b8470daf384413a245fc1be25aa05412fa8e2039b77093a7",
+    "world_hashes_equal_calibration": true
+  }
+}

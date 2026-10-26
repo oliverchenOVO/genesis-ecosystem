@@ -1,0 +1,371 @@
+{
+  "scenario": "phase2-r4-ecomate50",
+  "simulation_version": 5,
+  "rules_revision": 4,
+  "analysis_version": 5,
+  "seeds": 24,
+  "ticks_per_seed": 50000,
+  "technical_failures": 0,
+  "verified_save_load_replay_continuations": 24,
+  "survival": 23,
+  "natural_collapse": 1,
+  "collapse_classifications": 1,
+  "safety_ceiling_worlds": 0,
+  "maximum_safety_ceiling_fraction": 0,
+  "persistent_multicellular_worlds": 3,
+  "persistent_high_C_worlds": 6,
+  "persistent_high_C_lineages": 13,
+  "multiple_persistent_morphology_worlds": 0,
+  "multiple_persistent_niche_worlds": 0,
+  "multiple_persistent_realized_feeding_worlds": 0,
+  "persistent_prey_income_worlds": 0,
+  "speciation_worlds": 0,
+  "new_species": 0,
+  "extinction_worlds": 1,
+  "extinct_species": 1,
+  "mean_population_CV": 0.25970338530299514,
+  "mean_resource_CV": 0.7712236333686339,
+  "cross_lineage": {
+    "min": 0,
+    "median": 0.5215210801873794,
+    "max": 0.6528635597978664,
+    "mean": 0.4969896061103074
+  },
+  "cross_habitat": {
+    "min": 0.32786885245901637,
+    "median": 0.47468650570840354,
+    "max": 0.5025015009005404,
+    "mean": 0.4663685307476418
+  },
+  "mating_distance_by_seed": [
+    {
+      "seed": 0,
+      "mean": 11.967777602274522,
+      "p90": 15,
+      "samples": 18993
+    },
+    {
+      "seed": 1,
+      "mean": 11.943995720780958,
+      "p90": 15,
+      "samples": 18695
+    },
+    {
+      "seed": 2,
+      "mean": 11.307737491322689,
+      "p90": 15,
+      "samples": 18727
+    },
+    {
+      "seed": 3,
+      "mean": 12.33549515001128,
+      "p90": 15,
+      "samples": 17732
+    },
+    {
+      "seed": 4,
+      "mean": 12.809558401835213,
+      "p90": 15,
+      "samples": 26155
+    },
+    {
+      "seed": 5,
+      "mean": 12.342959492973272,
+      "p90": 15,
+      "samples": 18145
+    },
+    {
+      "seed": 6,
+      "mean": 12.275132275132275,
+      "p90": 15,
+      "samples": 18711
+    },
+    {
+      "seed": 7,
+      "mean": 12.52039811310974,
+      "p90": 15,
+      "samples": 19291
+    },
+    {
+      "seed": 8,
+      "mean": 11.249921654653713,
+      "p90": 15,
+      "samples": 19146
+    },
+    {
+      "seed": 9,
+      "mean": 11.498054008741992,
+      "p90": 15,
+      "samples": 16701
+    },
+    {
+      "seed": 10,
+      "mean": 12.205340544194692,
+      "p90": 15,
+      "samples": 17751
+    },
+    {
+      "seed": 11,
+      "mean": 12.484444207268265,
+      "p90": 15,
+      "samples": 18739
+    },
+    {
+      "seed": 12,
+      "mean": 12.533579932955728,
+      "p90": 15,
+      "samples": 17302
+    },
+    {
+      "seed": 13,
+      "mean": 12.432411461508618,
+      "p90": 15,
+      "samples": 18043
+    },
+    {
+      "seed": 14,
+      "mean": 11.305851389398947,
+      "p90": 15,
+      "samples": 16338
+    },
+    {
+      "seed": 15,
+      "mean": 7.058743169398907,
+      "p90": 14,
+      "samples": 732
+    },
+    {
+      "seed": 16,
+      "mean": 11.972674527419054,
+      "p90": 15,
+      "samples": 21372
+    },
+    {
+      "seed": 17,
+      "mean": 11.899368772497262,
+      "p90": 15,
+      "samples": 19169
+    },
+    {
+      "seed": 18,
+      "mean": 12.758053126188278,
+      "p90": 15,
+      "samples": 18409
+    },
+    {
+      "seed": 19,
+      "mean": 11.8797247044458,
+      "p90": 15,
+      "samples": 18017
+    },
+    {
+      "seed": 20,
+      "mean": 12.136273228391204,
+      "p90": 15,
+      "samples": 17597
+    },
+    {
+      "seed": 21,
+      "mean": 12.495576736487644,
+      "p90": 15,
+      "samples": 17521
+    },
+    {
+      "seed": 22,
+      "mean": 12.34915949569742,
+      "p90": 15,
+      "samples": 19988
+    },
+    {
+      "seed": 23,
+      "mean": 12.279131590607001,
+      "p90": 15,
+      "samples": 20313
+    }
+  ],
+  "actual_mouth_diets": [
+    {
+      "mouth": 0,
+      "food_events": 235852264,
+      "prey_events": 0,
+      "food_energy": 1617579315,
+      "prey_energy": 0,
+      "hardness": 30717139197,
+      "productivity": 19908802412,
+      "starvation_deaths": 59456,
+      "offspring": 473614,
+      "organism_ticks": 321918370,
+      "channels": [
+        1422013817,
+        195565498,
+        0
+      ],
+      "mean_food_hardness": 130.2388990296061,
+      "mean_productivity": 84.41217427533364,
+      "mean_food_energy": 6.858443025164261,
+      "mean_prey_energy": null,
+      "prey_energy_fraction": 0,
+      "starvation_deaths_per_organism_tick": 0.00018469278407442233,
+      "offspring_per_organism_tick": 0.0014712239006428867
+    },
+    {
+      "mouth": 1,
+      "food_events": 529757971,
+      "prey_events": 940,
+      "food_energy": 3415056642,
+      "prey_energy": 616280,
+      "hardness": 150534997101,
+      "productivity": 33061723195,
+      "starvation_deaths": 86377,
+      "offspring": 938698,
+      "organism_ticks": 667307618,
+      "channels": [
+        1328152556,
+        2086904086,
+        616280
+      ],
+      "mean_food_hardness": 284.1580596075637,
+      "mean_productivity": 62.408998713378885,
+      "mean_food_energy": 6.446446922834503,
+      "mean_prey_energy": 655.6170212765958,
+      "prey_energy_fraction": 0.00018042711175025088,
+      "starvation_deaths_per_organism_tick": 0.00012944105187781628,
+      "offspring_per_organism_tick": 0.0014066945658636255
+    },
+    {
+      "mouth": 2,
+      "food_events": 493533,
+      "prey_events": 3184,
+      "food_energy": 966485,
+      "prey_energy": 3508457,
+      "hardness": 113381948,
+      "productivity": 37056106,
+      "starvation_deaths": 852,
+      "offspring": 1078,
+      "organism_ticks": 998566,
+      "channels": [
+        461914,
+        504571,
+        3508457
+      ],
+      "mean_food_hardness": 229.73529227022306,
+      "mean_productivity": 74.60204905408915,
+      "mean_food_energy": 1.9582986345391291,
+      "mean_prey_energy": 1101.902324120603,
+      "prey_energy_fraction": 0.7840228990677421,
+      "starvation_deaths_per_organism_tick": 0.0008532235225313098,
+      "offspring_per_organism_tick": 0.001079548071935155
+    }
+  ],
+  "final_environmental_channel_income": [
+    [
+      13256539,
+      9118972
+    ],
+    [
+      13448753,
+      12002028
+    ],
+    [
+      12977391,
+      13494837
+    ],
+    [
+      13517285,
+      12481207
+    ],
+    [
+      13711898,
+      11354551
+    ],
+    [
+      13245452,
+      9660006
+    ],
+    [
+      13378515,
+      11634398
+    ],
+    [
+      13582926,
+      9819158
+    ],
+    [
+      13257520,
+      11477273
+    ],
+    [
+      12361620,
+      11789121
+    ],
+    [
+      13598682,
+      12645753
+    ],
+    [
+      13572710,
+      10925182
+    ],
+    [
+      13686176,
+      9675303
+    ],
+    [
+      13212612,
+      11763581
+    ],
+    [
+      13507306,
+      9892695
+    ],
+    null,
+    [
+      13260552,
+      13570743
+    ],
+    [
+      13533552,
+      12320091
+    ],
+    [
+      13865503,
+      11467222
+    ],
+    [
+      13849862,
+      10010856
+    ],
+    [
+      13189813,
+      11027992
+    ],
+    [
+      13620980,
+      9981318
+    ],
+    [
+      13205562,
+      12035871
+    ],
+    [
+      13161374,
+      13343638
+    ]
+  ],
+  "resource_channel_review": {
+    "worlds": 24,
+    "worlds_with_windows": 23,
+    "unused_worlds": [
+      0,
+      0
+    ],
+    "majority_unused": [
+      false,
+      false
+    ]
+  },
+  "rejection_reasons": [],
+  "requires_cap_dominance_review": false,
+  "required_complexity_and_differentiation_nonzero": false,
+  "definitions": "Paired configurations/seeds and unchanged analytical gates. No new acceptance threshold. Cap fractions reported for independent persistence review; natural collapse and isolated cap contacts are not automatically classified as technical or biological gate failures. Rejection flags exact total loss of previously nonzero complex cohorts or a persistently unused resource channel. For rules4+, strict-majority unused worlds are also rejected; zero sampled windows are unknown, not unused. No complexity incidence quota. Natural collapse is reported separately. Prey persistence uses unchanged observed-income >=50%, members >=8, post-warmup 1000 sampled ticks. Resource windows follow diagnostic schema; compare habitat definitions only when compatible."
+}

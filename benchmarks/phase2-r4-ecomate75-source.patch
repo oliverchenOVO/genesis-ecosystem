@@ -1,0 +1,111 @@
+diff --git a/crates/sim-core/src/model.rs b/crates/sim-core/src/model.rs
+index bfbcc4c..69afd12 100644
+--- a/crates/sim-core/src/model.rs
++++ b/crates/sim-core/src/model.rs
+@@ -7,7 +7,7 @@ use std::collections::BTreeMap;
+ 
+ pub const SIMULATION_VERSION: u32 = 5;
+ /// Unreleased v5 revisions are isolated; published v4 remains immutable.
+-pub const SIMULATION_RULES_REVISION: u32 = 3;
++pub const SIMULATION_RULES_REVISION: u32 = 4;
+ pub const TELEMETRY_INTERVAL: u64 = 100;
+ macro_rules! id {
+     ($name:ident) => {
+diff --git a/crates/sim-core/src/persistence.rs b/crates/sim-core/src/persistence.rs
+index e1f88b1..abd8ad6 100644
+--- a/crates/sim-core/src/persistence.rs
++++ b/crates/sim-core/src/persistence.rs
+@@ -15,7 +15,7 @@ pub const MAX_SAVE_BYTES: u64 = 128 * 1024 * 1024;
+ const MAGIC: &[u8; 8] = b"GENESIS1";
+ const HEADER: usize = 60;
+ // This cannot alias an old valid State: its bytes8..12 are not a valid world size.
+-const PAYLOAD_TAG: &[u8; 16] = b"GENESIS5RULES003";
++const PAYLOAD_TAG: &[u8; 16] = b"GENESIS5R4EM75__";
+ 
+ pub fn encode(world: &World) -> Result<Vec<u8>, String> {
+     world.validate()?;
+diff --git a/crates/sim-core/src/world.rs b/crates/sim-core/src/world.rs
+index 43fac69..bd61207 100644
+--- a/crates/sim-core/src/world.rs
++++ b/crates/sim-core/src/world.rs
+@@ -651,7 +651,7 @@ impl World {
+             if deaths.contains_key(&i) || paired.contains(&i) || !eligible(a, s.tick) {
+                 continue;
+             }
+-            let mate = mating_spatial
++            let mut ordered: Vec<usize> = mating_spatial
+                 .nearby(a.x, a.y, 16)
+                 .filter(|j| *j != i && !deaths.contains_key(j) && !paired.contains(j))
+                 .filter(|j| {
+@@ -660,12 +660,23 @@ impl World {
+                         && distance_squared(a.x, a.y, b.x, b.y) <= 16 * 16
+                         && a.genome.compatible(&b.genome)
+                 })
+-                .min_by_key(|j| {
+-                    (
+-                        distance_squared(a.x, a.y, s.organisms[*j].x, s.organisms[*j].y),
+-                        s.organisms[*j].id,
+-                    )
+-                });
++                .collect();
++            ordered.sort_by_key(|j| {
++                (
++                    distance_squared(a.x, a.y, s.organisms[*j].x, s.organisms[*j].y),
++                    s.organisms[*j].id,
++                )
++            });
++            // R4 candidate EcoMate: each candidate, in the original nearest/ID order, is
++            // accepted with a phenotype-similarity probability that never falls below the floor.
++            let mut mate = None;
++            for j in ordered {
++                let factor = eco_mate_factor(a, &s.organisms[j], 750);
++                if (s.rng.reproduction.below(1000) as i32) < factor {
++                    mate = Some(j);
++                    break;
++                }
++            }
+             #[cfg(feature = "viability")]
+             {
+                 let mut candidates = [0; 9];
+@@ -1342,6 +1353,41 @@ impl World {
+     }
+ }
+ 
++/// R4 candidate: permille mate-acceptance factor from phenotype ecology only. Mean of four
++/// terms in [0, 1000]: mouth differs, bite capacity (30 units = 1000), temperature optimum
++/// (1000 = 10 degrees), and the nine-trait gate morphology profile distance (150 = 1000).
++fn eco_mate_factor(a: &Organism, b: &Organism, floor: i32) -> i32 {
++    let (ma, mb) = (&a.phenotype.morphology, &b.phenotype.morphology);
++    let profile = |o: &Organism| {
++        let m = &o.phenotype.morphology;
++        crate::analysis::morphology_profile([
++            m.segment_count * 1000,
++            m.mass,
++            m.armor,
++            m.bite_capacity,
++            m.locomotion_efficiency,
++            m.sensory_investment,
++            m.complexity,
++            o.phenotype.speed,
++            if m.mouth == crate::morphology::Mouth::Piercer { 1000 } else { 0 },
++        ])
++    };
++    let morphology = profile(a)
++        .iter()
++        .zip(profile(b))
++        .map(|(x, y)| (x - y).abs())
++        .sum::<i32>()
++        / 9;
++    let distance = (if ma.mouth == mb.mouth { 0 } else { 1000 }
++        + ((ma.bite_capacity - mb.bite_capacity).abs() * 1000 / 30).min(1000)
++        + (a.phenotype.temperature_optimum - b.phenotype.temperature_optimum)
++            .abs()
++            .min(1000)
++        + (morphology * 1000 / 150).min(1000))
++        / 4;
++    floor + (1000 - floor) * (1000 - distance) / 1000
++}
++
+ pub(crate) fn eligible(o: &Organism, tick: u64) -> bool {
+     tick - o.birth_tick >= 60 + o.phenotype.morphology.complexity as u64 / 4
+         && tick - o.last_mating >= 80 + o.phenotype.morphology.complexity as u64 / 4
