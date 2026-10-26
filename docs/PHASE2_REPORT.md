@@ -416,3 +416,45 @@ hunt_utility = (hunger + 300 + aggression / 4) × (W + (1000 − W) × catch / 1
 未選出任何候選，rules revision 保持 3，未凍結 rules4。100 × 100k formal calibration、native／installer UAT、merge main、v0.2.0 tag／release 都沒有執行。
 
 本輪驗證：Rust normal **75 PASS**、all-features **88 PASS**（新增 habitat association 閉合測試），rustfmt check 與 clippy（`-D warnings`）通過。前端未改動。
+
+**2026-10-26 Phase 2.x：Ecological Assortative Mating — 診斷**
+
+依使用者決定，研究方向轉為「soft ecological assortative mating」：只測試交配模型，不改任何物種、morphology、niche 或 feeding-role gate。Predator 能量研究暫時封存。
+
+**診斷先行。** 新增唯讀觀測器 [`mate_ecology`](../crates/sim-core/src/mate_ecology.rs)，在兩個真正發生選擇的地方，比較「被選中的配偶」與「可選的候選池」：
+
+1. **Matching**：每次實際 matching search 的候選池，是 16 單位內 eligible、compatible、未配對且存活的鄰居。測試證明池的總數與 viability 的 compatible candidates 完全相等；在 R3 規則下，非空的池一定會產生配對。
+2. **Perception（SeekMate 目標選擇）**：可繁殖的個體在視野內、通過既有 SeekMate 條件的候選，以及既有規則選出的最近目標。
+
+量測的距離項目：mouth 是否不同、gate 使用的九項 morphology profile 距離、終生實際飲食（soft／hard／prey）分布距離、進食棲地類別分布距離、溫度最適值差、mass 差、`Genome::distance`、是否不同 lineage、終生飲食 role 是否不同。R3 對照 **seed 0..23 全部與已保存的雜湊一致**（seed 8..23 對照 `phase2-r4-controlext`）。證據見 [summary](../benchmarks/phase2-r4-mate-ecology-summary.json)。
+
+| 暖機後，24 seeds | Matching：被選中 | Matching：池平均 | 比值 | Perception：最近目標 | Perception：池平均 | 比值 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Mouth 不同（×1000） | 288.0 | 288.0 | 1.000 | 289.4 | 290.1 | 0.997 |
+| Morphology 距離 | 31.8 | 31.8 | 1.000 | 28.8 | 28.8 | 0.999 |
+| 飲食距離 | 374.5 | 374.5 | 1.000 | 404.5 | 406.3 | 0.995 |
+| 棲地距離 | 939.3 | 939.2 | 1.000 | 1023.0 | 1029.2 | 0.994 |
+| 不同 lineage（×1000） | 534.7 | 534.6 | 1.000 | 571.3 | 575.0 | 0.994 |
+| 不同飲食 role（×1000） | 431.9 | 431.9 | 1.000 | 457.9 | 459.7 | 0.996 |
+
+在有 2 個以上候選的 search 中，被選中者比池平均更相似的比例在每一項都是 46–53%。**目前的配偶選擇在生態上完全是隨機的**；它本來就只看距離，沒有任何生態項，也沒有因空間棲地關聯而產生可測的相似性偏好。因此不符合「配偶選擇已經強烈偏好生態相似」的停止條件。
+
+**更關鍵的是幾乎沒有選擇空間。** Matching 階段 422,844 次 search 的平均池大小是 **1.003**，只有 0.3% 有 2 個以上的候選。Perception 階段 4,153,521 次中，平均池大小是 **1.12**，88.9% 只看得到 1 個候選。只「重新排序」候選的乘數，最多只能影響約 11% 的決策；而在約 89% 的情況下，附近唯一的伴侶來自另一個生態位時，這種乘數完全無法降低基因流。
+
+**假說與最小權威改動。** 目前的局部交配只限制距離，不考慮生態相容性，所以只要空間上接近，不同資源生態位的個體就會頻繁交配，導致重組子代、lineage 同質化，無法跨過物種隔離門檻。可量測的預測：溫和的生態配偶偏好能減少跨生態位基因流，但不會消除生態位之間的交配。
+
+既然候選池幾乎總是只有 1 個，能作用的最小連續機制，就是 `mate_score × ecological_similarity_factor` 的**機率形式**：在 matching 時以既有順序（最近、ID）逐一嘗試候選，每個候選以 `factor` 的機率被接受。亂數來自既有、已保存的 deterministic reproduction RNG stream。
+
+```text
+eco_distance = 以下四項的平均，每項 ∈ [0, 1000]，全部只用表型：
+  mouth       : 同 mouth 為 0，否則 1000
+  processing  : min(1000, |Δ bite_capacity| × 1000 / 30)
+  temperature : min(1000, |Δ temperature_optimum|)              （1000 = 10°C）
+  morphology  : min(1000, 九項 profile 距離 × 1000 / 150)       （150 = 既有 cluster 門檻）
+factor = floor + (1000 − floor) × (1000 − eco_distance) / 1000
+EcoMate90 / EcoMate75 / EcoMate50：floor = 900 / 750 / 500（千分比）
+```
+
+表型完全相同時一定接受；即使差異最大，接受機率也至少是 90%／75%／50%。不使用 SpeciesId、LineageId 或任何硬性生態位規則，不改交配半徑、相容性、資格條件或任何 gate。
+
+本輪診斷驗證：Rust all-features **89 PASS**、rustfmt check 與 clippy（`-D warnings`）通過。第一次 normal 測試有 1 項失敗：`sim-app` 的 autosave 測試有 120 秒的實際時間期限，而該 suite 正好在 120.11 秒結束，當時 24 執行緒的診斷正在同時執行、CPU 滿載。在沒有負載下重跑，normal **75 PASS** 全數通過。判定為負載造成的逾時，不是程式迴歸；之後的驗證不會再和長時間模擬並行執行。

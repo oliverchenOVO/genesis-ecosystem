@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "scenario": "phase2-r4-mate-ecology-unchanged-r3",
+  "base_head": "0dc57ee",
+  "executable_sha256": "bfae5de555e514835989b9916d69240c5b76247c270f673e3f71d3c77ce899d1",
+  "seeds": "0..23",
+  "ticks_per_seed": 50000,
+  "all_24_hashes_match_archived_R3": true,
+  "post_warmup_from_tick": 5000,
+  "archive": {
+    "path": "benchmarks/phase2-r4-mate-ecology.json.gz",
+    "uncompressed_bytes": 257058,
+    "uncompressed_sha256": "f4908a1a4f80e918f3f359a55801bf2341479349a0773c2afaa7c4565590ec1c",
+    "gzip_sha256": "091340bae63e5b0d95ae143ee0c4a6a4da270545b494d779c9b5e015185ec04c"
+  },
+  "matching_stage": {
+    "searches": 422844,
+    "searches_with_two_or_more": 1202,
+    "searches_without_pair": 0,
+    "mean_pool_size": 1.0028450208587565,
+    "pool_size_bins_1_2to3_4to7_8plus": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "metrics": {
+      "mouth_differs": {
+        "chosen_mean": 287.9998297244374,
+        "pool_mean": 287.99166130169533,
+        "ratio": 1.000028363400194,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.463768115942029
+      },
+      "morphology_distance": {
+        "chosen_mean": 31.82298199808913,
+        "pool_mean": 31.834051414112114,
+        "ratio": 0.9996522774974825,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.5025641025641026
+      },
+      "diet_distance": {
+        "chosen_mean": 374.5264210914664,
+        "pool_mean": 374.50634953200944,
+        "ratio": 1.0000535947106959,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.4928989139515455
+      },
+      "habitat_distance": {
+        "chosen_mean": 939.3453874242038,
+        "pool_mean": 939.2113845870858,
+        "ratio": 1.0001426759080192,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.5143338954468802
+      },
+      "temperature_optimum_difference": {
+        "chosen_mean": 140.13285041291823,
+        "pool_mean": 140.1416140192007,
+        "ratio": 0.9999374660671365,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.5183752417794971
+      },
+      "mass_difference": {
+        "chosen_mean": 66.28399125918779,
+        "pool_mean": 66.3181864274479,
+        "ratio": 0.9994843772108044,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.5125
+      },
+      "genome_distance": {
+        "chosen_mean": 59.795037886312684,
+        "pool_mean": 59.80165170370265,
+        "ratio": 0.9998894041017005,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.5139949109414759
+      },
+      "different_lineage": {
+        "chosen_mean": 534.696010821958,
+        "pool_mean": 534.6459236829879,
+        "ratio": 1.0000936828221285,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.4909560723514212
+      },
+      "different_diet_role": {
+        "chosen_mean": 431.93707371985886,
+        "pool_mean": 431.9214615361033,
+        "ratio": 1.0000361458856433,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.47639484978540775
+      }
+    }
+  },
+  "perception_stage": {
+    "searches": 4153521,
+    "searches_with_two_or_more": 460640,
+    "searches_without_pair": 0,
+    "mean_pool_size": 1.1226070603711886,
+    "pool_size_bins_1_2to3_4to7_8plus": [
+      3692881,
+      456922,
+      3718,
+      0
+    ],
+    "metrics": {
+      "mouth_differs": {
+        "chosen_mean": 289.37376264619826,
+        "pool_mean": 290.1364252852166,
+        "ratio": 0.997371365424839,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.5287367945580432
+      },
+      "morphology_distance": {
+        "chosen_mean": 28.795532031738855,
+        "pool_mean": 28.824776763693357,
+        "ratio": 0.9989854307565241,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.5149861140304195
+      },
+      "diet_distance": {
+        "chosen_mean": 404.48165640669686,
+        "pool_mean": 406.3339586409115,
+        "ratio": 0.9954414289162291,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.5059801417450507
+      },
+      "habitat_distance": {
+        "chosen_mean": 1022.96995850027,
+        "pool_mean": 1029.1686749856094,
+        "ratio": 0.9939769673951394,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.5251852735158244
+      },
+      "temperature_optimum_difference": {
+        "chosen_mean": 143.1621472480818,
+        "pool_mean": 143.27586444286788,
+        "ratio": 0.9992063059941863,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.5030173996397356
+      },
+      "mass_difference": {
+        "chosen_mean": 61.010175222419726,
+        "pool_mean": 61.162012210762185,
+        "ratio": 0.9975174625089306,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.5067014110081711
+      },
+      "genome_distance": {
+        "chosen_mean": 60.5818802890367,
+        "pool_mean": 60.866788253854146,
+        "ratio": 0.9953191556020797,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.5146280947874006
+      },
+      "different_lineage": {
+        "chosen_mean": 571.2878302529348,
+        "pool_mean": 574.987582493847,
+        "ratio": 0.993565509319583,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.5128133686686408
+      },
+      "different_diet_role": {
+        "chosen_mean": 457.9249749790599,
+        "pool_mean": 459.67270113142996,
+        "ratio": 0.9961978900463999,
+        "chosen_closer_than_pool_mean_fraction_of_non_ties": 0.5019122738414291
+      }
+    }
+  },
+  "stage": "Diagnostics only; R3 authority unchanged"
+}

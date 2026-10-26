@@ -199,6 +199,7 @@ pub fn feeding(
         return;
     }
     crate::temporal_ecology::feeding(o, channel, energy);
+    crate::mate_ecology::feeding(o, terrain, channel, energy);
     ACTIVE.with(|a| {
         if let Some(c) = a.borrow_mut().as_mut() {
             c.windows

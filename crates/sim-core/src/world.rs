@@ -213,6 +213,8 @@ impl World {
         #[cfg(feature = "viability")]
         crate::habitat_association::tick(s.tick);
         #[cfg(feature = "viability")]
+        crate::mate_ecology::tick(s.tick);
+        #[cfg(feature = "viability")]
         for o in &s.organisms {
             crate::viability::tick(o, eligible(o, s.tick));
             crate::mating_decomposition::readiness(o, s.tick);
@@ -267,6 +269,27 @@ impl World {
                 }
                 #[cfg(feature = "viability")]
                 crate::viability::perception(o, best_mate.is_some(), best_prey.is_some());
+                #[cfg(feature = "viability")]
+                if o.energy >= p.reproduction_threshold
+                    && s.tick - o.birth_tick >= 60 + p.morphology.complexity as u64 / 4
+                    && s.tick - o.last_mating >= 80 + p.morphology.complexity as u64 / 4
+                {
+                    crate::mate_ecology::targeting(
+                        o,
+                        spatial
+                            .nearby(o.x, o.y, p.vision)
+                            .filter(|j| {
+                                let other = &s.organisms[*j];
+                                *j != i
+                                    && distance_squared(o.x, o.y, other.x, other.y)
+                                        <= p.vision.pow(2)
+                                    && other.energy >= other.phenotype.reproduction_threshold
+                                    && o.genome.compatible(&other.genome)
+                            })
+                            .map(|j| &s.organisms[j]),
+                        best_mate.map(|(_, _, j)| &s.organisms[j]),
+                    );
+                }
                 let mut choices = vec![(
                     10,
                     5,
@@ -687,6 +710,22 @@ impl World {
                                     <= 16 * 16
                         })
                         .map(|j| &s.organisms[j]),
+                );
+                crate::mate_ecology::search(
+                    a,
+                    mating_spatial
+                        .nearby(a.x, a.y, 16)
+                        .filter(|j| {
+                            let b = &s.organisms[*j];
+                            *j != i
+                                && !deaths.contains_key(j)
+                                && !paired.contains(j)
+                                && distance_squared(a.x, a.y, b.x, b.y) <= 16 * 16
+                                && eligible(b, s.tick)
+                                && a.genome.compatible(&b.genome)
+                        })
+                        .map(|j| &s.organisms[j]),
+                    mate.map(|j| &s.organisms[j]),
                 );
             }
             #[cfg(feature = "viability")]

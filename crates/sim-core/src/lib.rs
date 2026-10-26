@@ -5,6 +5,8 @@ pub mod genetics;
 #[cfg(feature = "viability")]
 pub mod habitat_association;
 #[cfg(feature = "viability")]
+pub mod mate_ecology;
+#[cfg(feature = "viability")]
 pub mod mating_decomposition;
 pub mod model;
 pub mod morphology;

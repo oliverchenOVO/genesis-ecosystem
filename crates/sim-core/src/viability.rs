@@ -214,6 +214,7 @@ pub fn metabolism(o: &Organism, components: [i32; 4], actual: i32, starving: boo
 }
 pub fn death(o: &Organism, tick: u64, cause: DeathCause) {
     crate::ecological_diagnostics::death(o);
+    crate::mate_ecology::death(o);
     update(o, |c| {
         c.deaths += 1;
         c.removed_death_energy += o.energy as u64;
