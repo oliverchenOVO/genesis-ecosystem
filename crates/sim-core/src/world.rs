@@ -215,6 +215,8 @@ impl World {
         #[cfg(feature = "viability")]
         crate::mate_ecology::tick(s.tick);
         #[cfg(feature = "viability")]
+        crate::population_semantics::tick(s.tick);
+        #[cfg(feature = "viability")]
         for o in &s.organisms {
             crate::viability::tick(o, eligible(o, s.tick));
             crate::mating_decomposition::readiness(o, s.tick);
@@ -859,6 +861,7 @@ impl World {
                     crate::viability::parent_child(&a, child);
                     crate::viability::parent_child(&b, child);
                     crate::predator_lifecycle::birth(child, &a, &b, s.tick);
+                    crate::population_semantics::birth(&a, &b);
                 }
                 s.organisms[i].offspring += 1;
                 s.organisms[j].offspring += 1;
@@ -932,6 +935,8 @@ impl World {
             self.sample();
             #[cfg(feature = "viability")]
             crate::ecological_diagnostics::sample(self);
+            #[cfg(feature = "viability")]
+            crate::population_semantics::sample(self);
         }
         #[cfg(feature = "profile")]
         crate::profile::mark("species and telemetry", &mut profile_stamp);

@@ -12,6 +12,8 @@ pub mod model;
 pub mod morphology;
 pub mod persistence;
 #[cfg(feature = "viability")]
+pub mod population_semantics;
+#[cfg(feature = "viability")]
 pub mod predator_lifecycle;
 #[cfg(feature = "profile")]
 pub mod profile;

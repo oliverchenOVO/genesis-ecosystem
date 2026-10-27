@@ -1,0 +1,1624 @@
+{
+  "version": 1,
+  "scenario": "phase2-r4-species-gate-semantic-review-unchanged-r3",
+  "base_head": "99ed7ab",
+  "executable_sha256": "4325f5fd904803aa407e8bb327848f0d18c9d396421c225169d5505cb5d5d714",
+  "seeds": "0..23",
+  "ticks_per_seed": 50000,
+  "all_24_hashes_match_archived_R3": true,
+  "command": "cargo build --release -p sim-benchmark --features viability --example population-semantics; target/release/examples/population-semantics.exe; node scripts/population-semantics.mjs <output>",
+  "archive": {
+    "path": "benchmarks/phase2-r4-population-semantics.json.gz",
+    "uncompressed_bytes": 11627555,
+    "uncompressed_sha256": "1ee41f153657afd111c95d780403f527e13b07f5470dd3a0988028141a4b0e9d",
+    "gzip_sha256": "4360fe24cb6c9f036f6c3e6ed8da02ef67f6ce07dd0322cc633992e060e2b159"
+  },
+  "review": {
+    "version": 1,
+    "worlds": 24,
+    "post_warmup_from_window": 5,
+    "rule": {
+      "min_members": 8,
+      "min_births": 8,
+      "isolation_permille": 200,
+      "divergence": 100,
+      "persist_windows": 2
+    },
+    "births": {
+      "total": 702962,
+      "cross_lineage_fraction": 0.5316204858868616,
+      "same_niche_share_of_cross_lineage": 0.5221549387357542,
+      "cross_ecotype_share_of_cross_lineage": 0.46549320460572263,
+      "cross_ecotype_fraction": 0.44411219952145353,
+      "cross_mouth_fraction": 0.28606667216720105
+    },
+    "summary": {
+      "A_lineage": {
+        "worlds_with_candidate": 0,
+        "total_candidates": 0,
+        "max_candidates_in_one_world": 0,
+        "median_groups_per_window": 11,
+        "median_group_members": 31,
+        "median_lineages_per_group": 1,
+        "median_external_birth_fraction": 0.8833333333333333,
+        "median_group_survival_to_next_window": 0.9496124031007752
+      },
+      "B_genetic": {
+        "worlds_with_candidate": 0,
+        "total_candidates": 0,
+        "max_candidates_in_one_world": 0,
+        "median_groups_per_window": 2,
+        "median_group_members": 414,
+        "median_lineages_per_group": 16,
+        "median_external_birth_fraction": 0.5891089108910891,
+        "median_group_survival_to_next_window": 1
+      },
+      "C_genetic_mouth": {
+        "worlds_with_candidate": 0,
+        "total_candidates": 0,
+        "max_candidates_in_one_world": 0,
+        "median_groups_per_window": 4,
+        "median_group_members": 199,
+        "median_lineages_per_group": 11,
+        "median_external_birth_fraction": 0.7292225201072386,
+        "median_group_survival_to_next_window": 0.9783950617283951
+      },
+      "D_community": {
+        "worlds_with_candidate": 0,
+        "total_candidates": 0,
+        "max_candidates_in_one_world": 0,
+        "median_groups_per_window": 1,
+        "median_group_members": 924,
+        "median_lineages_per_group": 12,
+        "median_external_birth_fraction": 0.011204481792717087,
+        "median_group_survival_to_next_window": 0.8913043478260869
+      },
+      "D_strict_community": {
+        "worlds_with_candidate": 0,
+        "total_candidates": 0,
+        "max_candidates_in_one_world": 0,
+        "median_groups_per_window": 10,
+        "median_group_members": 31,
+        "median_lineages_per_group": 1,
+        "median_external_birth_fraction": 0.8888888888888888,
+        "median_group_survival_to_next_window": 0.9148580968280468
+      }
+    },
+    "per_world": [
+      {
+        "seed": 0,
+        "births": 27404,
+        "cross_lineage": 15406,
+        "cross_lineage_same_niche": 8224,
+        "cross_lineage_cross_ecotype": 7021,
+        "cross_ecotype": 11881,
+        "cross_mouth": 8473,
+        "graph": {
+          "median_lineages_with_births": 21,
+          "median_communities": 1,
+          "median_strict_communities": 20,
+          "within_lineage_birth_fraction": 0.43781929645307255
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 20,
+            "median_groups_per_window": 12,
+            "median_group_members": 25,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8775510204081632,
+            "group_survival_to_next_window": 0.9463220675944334
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 5,
+            "median_groups_per_window": 5,
+            "median_group_members": 247,
+            "median_lineages_per_group": 13,
+            "median_external_birth_fraction": 0.7307692307692307,
+            "group_survival_to_next_window": 0.9942196531791907
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 9,
+            "median_groups_per_window": 7,
+            "median_group_members": 58,
+            "median_lineages_per_group": 9,
+            "median_external_birth_fraction": 0.835820895522388,
+            "group_survival_to_next_window": 0.9626865671641791
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 3,
+            "median_groups_per_window": 1,
+            "median_group_members": 846,
+            "median_lineages_per_group": 17,
+            "median_external_birth_fraction": 0.010596026490066225,
+            "group_survival_to_next_window": 0.8490566037735849
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 20,
+            "median_groups_per_window": 12,
+            "median_group_members": 24,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8785046728971962,
+            "group_survival_to_next_window": 0.911578947368421
+          }
+        }
+      },
+      {
+        "seed": 1,
+        "births": 27717,
+        "cross_lineage": 16365,
+        "cross_lineage_same_niche": 7729,
+        "cross_lineage_cross_ecotype": 8044,
+        "cross_ecotype": 13068,
+        "cross_mouth": 8595,
+        "graph": {
+          "median_lineages_with_births": 41,
+          "median_communities": 1,
+          "median_strict_communities": 38,
+          "within_lineage_birth_fraction": 0.4095681350795541
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 26,
+            "median_groups_per_window": 19,
+            "median_group_members": 26,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8833333333333333,
+            "group_survival_to_next_window": 0.9323308270676691
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 6,
+            "median_groups_per_window": 4,
+            "median_group_members": 252,
+            "median_lineages_per_group": 23,
+            "median_external_birth_fraction": 0.7310344827586207,
+            "group_survival_to_next_window": 0.9880952380952381
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 11,
+            "median_groups_per_window": 7,
+            "median_group_members": 118,
+            "median_lineages_per_group": 16,
+            "median_external_birth_fraction": 0.819327731092437,
+            "group_survival_to_next_window": 0.9680851063829787
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 4,
+            "median_groups_per_window": 1,
+            "median_group_members": 614,
+            "median_lineages_per_group": 10,
+            "median_external_birth_fraction": 0.042666666666666665,
+            "group_survival_to_next_window": 0.6363636363636364
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 24,
+            "median_groups_per_window": 18,
+            "median_group_members": 26,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8846153846153846,
+            "group_survival_to_next_window": 0.8809523809523809
+          }
+        }
+      },
+      {
+        "seed": 2,
+        "births": 31711,
+        "cross_lineage": 18173,
+        "cross_lineage_same_niche": 9436,
+        "cross_lineage_cross_ecotype": 8517,
+        "cross_ecotype": 13814,
+        "cross_mouth": 7712,
+        "graph": {
+          "median_lineages_with_births": 28,
+          "median_communities": 1,
+          "median_strict_communities": 26,
+          "within_lineage_birth_fraction": 0.42691810412790515
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 23,
+            "median_groups_per_window": 16,
+            "median_group_members": 31,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8688524590163934,
+            "group_survival_to_next_window": 0.9371900826446281
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 7,
+            "median_groups_per_window": 3,
+            "median_group_members": 223,
+            "median_lineages_per_group": 16,
+            "median_external_birth_fraction": 0.5889464594127807,
+            "group_survival_to_next_window": 1
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 11,
+            "median_groups_per_window": 5,
+            "median_group_members": 156,
+            "median_lineages_per_group": 14,
+            "median_external_birth_fraction": 0.678125,
+            "group_survival_to_next_window": 0.9850746268656716
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 3,
+            "median_groups_per_window": 1,
+            "median_group_members": 924,
+            "median_lineages_per_group": 12,
+            "median_external_birth_fraction": 0.02518891687657431,
+            "group_survival_to_next_window": 0.7213114754098361
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 23,
+            "median_groups_per_window": 16,
+            "median_group_members": 31,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8688524590163934,
+            "group_survival_to_next_window": 0.9148580968280468
+          }
+        }
+      },
+      {
+        "seed": 3,
+        "births": 31277,
+        "cross_lineage": 12854,
+        "cross_lineage_same_niche": 7210,
+        "cross_lineage_cross_ecotype": 5605,
+        "cross_ecotype": 13118,
+        "cross_mouth": 6902,
+        "graph": {
+          "median_lineages_with_births": 11,
+          "median_communities": 1,
+          "median_strict_communities": 11,
+          "within_lineage_birth_fraction": 0.5890270806023595
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 26,
+            "median_groups_per_window": 7,
+            "median_group_members": 37,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8888888888888888,
+            "group_survival_to_next_window": 0.9592326139088729
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 3,
+            "median_groups_per_window": 1,
+            "median_group_members": 726,
+            "median_lineages_per_group": 21,
+            "median_external_birth_fraction": 0.1590909090909091,
+            "group_survival_to_next_window": 0.9850746268656716
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 6,
+            "median_groups_per_window": 2,
+            "median_group_members": 270,
+            "median_lineages_per_group": 13,
+            "median_external_birth_fraction": 0.604,
+            "group_survival_to_next_window": 1
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 5,
+            "median_groups_per_window": 1,
+            "median_group_members": 918,
+            "median_lineages_per_group": 4,
+            "median_external_birth_fraction": 0.02180232558139535,
+            "group_survival_to_next_window": 0.7313432835820896
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 26,
+            "median_groups_per_window": 7,
+            "median_group_members": 37,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8888888888888888,
+            "group_survival_to_next_window": 0.9493975903614458
+          }
+        }
+      },
+      {
+        "seed": 4,
+        "births": 30141,
+        "cross_lineage": 16050,
+        "cross_lineage_same_niche": 8839,
+        "cross_lineage_cross_ecotype": 7134,
+        "cross_ecotype": 12627,
+        "cross_mouth": 7852,
+        "graph": {
+          "median_lineages_with_births": 23,
+          "median_communities": 1,
+          "median_strict_communities": 22,
+          "within_lineage_birth_fraction": 0.4675027371354633
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 19,
+            "median_groups_per_window": 12,
+            "median_group_members": 24,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8923076923076924,
+            "group_survival_to_next_window": 0.9272727272727272
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 5,
+            "median_groups_per_window": 1,
+            "median_group_members": 526,
+            "median_lineages_per_group": 20,
+            "median_external_birth_fraction": 0.3864628820960699,
+            "group_survival_to_next_window": 1
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 7,
+            "median_groups_per_window": 2,
+            "median_group_members": 227,
+            "median_lineages_per_group": 15,
+            "median_external_birth_fraction": 0.6243386243386243,
+            "group_survival_to_next_window": 0.9855072463768116
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 2,
+            "median_groups_per_window": 1,
+            "median_group_members": 1079,
+            "median_lineages_per_group": 21,
+            "median_external_birth_fraction": 0.008905852417302799,
+            "group_survival_to_next_window": 0.9782608695652174
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 18,
+            "median_groups_per_window": 11,
+            "median_group_members": 22,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.9,
+            "group_survival_to_next_window": 0.8930348258706468
+          }
+        }
+      },
+      {
+        "seed": 5,
+        "births": 29696,
+        "cross_lineage": 17461,
+        "cross_lineage_same_niche": 9211,
+        "cross_lineage_cross_ecotype": 8083,
+        "cross_ecotype": 13268,
+        "cross_mouth": 9709,
+        "graph": {
+          "median_lineages_with_births": 14,
+          "median_communities": 1,
+          "median_strict_communities": 13,
+          "within_lineage_birth_fraction": 0.4120083512931034
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 19,
+            "median_groups_per_window": 8,
+            "median_group_members": 72,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8773584905660378,
+            "group_survival_to_next_window": 0.9665738161559888
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 4,
+            "median_groups_per_window": 2,
+            "median_group_members": 373,
+            "median_lineages_per_group": 13,
+            "median_external_birth_fraction": 0.643312101910828,
+            "group_survival_to_next_window": 0.9894736842105263
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 8,
+            "median_groups_per_window": 4,
+            "median_group_members": 189,
+            "median_lineages_per_group": 10,
+            "median_external_birth_fraction": 0.7597173144876325,
+            "group_survival_to_next_window": 0.9944444444444445
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 2,
+            "median_groups_per_window": 1,
+            "median_group_members": 1034,
+            "median_lineages_per_group": 13,
+            "median_external_birth_fraction": 0.011204481792717087,
+            "group_survival_to_next_window": 0.9148936170212766
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 19,
+            "median_groups_per_window": 7,
+            "median_group_members": 58,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8888888888888888,
+            "group_survival_to_next_window": 0.9090909090909091
+          }
+        }
+      },
+      {
+        "seed": 6,
+        "births": 29296,
+        "cross_lineage": 16302,
+        "cross_lineage_same_niche": 8269,
+        "cross_lineage_cross_ecotype": 7924,
+        "cross_ecotype": 13875,
+        "cross_mouth": 9533,
+        "graph": {
+          "median_lineages_with_births": 26,
+          "median_communities": 1,
+          "median_strict_communities": 26,
+          "within_lineage_birth_fraction": 0.4435417804478427
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 21,
+            "median_groups_per_window": 16,
+            "median_group_members": 31,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.9139784946236559,
+            "group_survival_to_next_window": 0.9496124031007752
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 4,
+            "median_groups_per_window": 4,
+            "median_group_members": 210,
+            "median_lineages_per_group": 18,
+            "median_external_birth_fraction": 0.7044025157232704,
+            "group_survival_to_next_window": 1
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 8,
+            "median_groups_per_window": 7,
+            "median_group_members": 116,
+            "median_lineages_per_group": 13,
+            "median_external_birth_fraction": 0.8263888888888888,
+            "group_survival_to_next_window": 0.9747899159663865
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 6,
+            "median_groups_per_window": 1,
+            "median_group_members": 763,
+            "median_lineages_per_group": 8,
+            "median_external_birth_fraction": 0.016971279373368148,
+            "group_survival_to_next_window": 0.6610169491525424
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 21,
+            "median_groups_per_window": 16,
+            "median_group_members": 30,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.9120879120879121,
+            "group_survival_to_next_window": 0.9227722772277228
+          }
+        }
+      },
+      {
+        "seed": 7,
+        "births": 29300,
+        "cross_lineage": 18862,
+        "cross_lineage_same_niche": 9297,
+        "cross_lineage_cross_ecotype": 9264,
+        "cross_ecotype": 13708,
+        "cross_mouth": 9753,
+        "graph": {
+          "median_lineages_with_births": 24,
+          "median_communities": 1,
+          "median_strict_communities": 21,
+          "within_lineage_birth_fraction": 0.3562457337883959
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 15,
+            "median_groups_per_window": 11,
+            "median_group_members": 30,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.9090909090909091,
+            "group_survival_to_next_window": 0.92
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 2,
+            "median_groups_per_window": 2,
+            "median_group_members": 423,
+            "median_lineages_per_group": 12,
+            "median_external_birth_fraction": 0.5287356321839081,
+            "group_survival_to_next_window": 1
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 4,
+            "median_groups_per_window": 4,
+            "median_group_members": 208,
+            "median_lineages_per_group": 11,
+            "median_external_birth_fraction": 0.7275132275132276,
+            "group_survival_to_next_window": 0.967741935483871
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 3,
+            "median_groups_per_window": 1,
+            "median_group_members": 929,
+            "median_lineages_per_group": 21,
+            "median_external_birth_fraction": 0.01637107776261937,
+            "group_survival_to_next_window": 0.8461538461538461
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 15,
+            "median_groups_per_window": 10,
+            "median_group_members": 20,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.9259259259259259,
+            "group_survival_to_next_window": 0.8304668304668305
+          }
+        }
+      },
+      {
+        "seed": 8,
+        "births": 30799,
+        "cross_lineage": 15535,
+        "cross_lineage_same_niche": 7832,
+        "cross_lineage_cross_ecotype": 7662,
+        "cross_ecotype": 14638,
+        "cross_mouth": 9643,
+        "graph": {
+          "median_lineages_with_births": 13,
+          "median_communities": 1,
+          "median_strict_communities": 12,
+          "within_lineage_birth_fraction": 0.49560050650995163
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 12,
+            "median_groups_per_window": 9,
+            "median_group_members": 48,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.863905325443787,
+            "group_survival_to_next_window": 0.963076923076923
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 3,
+            "median_groups_per_window": 2,
+            "median_group_members": 630,
+            "median_lineages_per_group": 13,
+            "median_external_birth_fraction": 0.42492917847025496,
+            "group_survival_to_next_window": 1
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 5,
+            "median_groups_per_window": 4,
+            "median_group_members": 245,
+            "median_lineages_per_group": 11,
+            "median_external_birth_fraction": 0.7296296296296296,
+            "group_survival_to_next_window": 1
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 1,
+            "median_groups_per_window": 1,
+            "median_group_members": 1096,
+            "median_lineages_per_group": 13,
+            "median_external_birth_fraction": 0.00517464424320828,
+            "group_survival_to_next_window": 0.9777777777777777
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 13,
+            "median_groups_per_window": 7,
+            "median_group_members": 44,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8666666666666667,
+            "group_survival_to_next_window": 0.933993399339934
+          }
+        }
+      },
+      {
+        "seed": 9,
+        "births": 28412,
+        "cross_lineage": 19079,
+        "cross_lineage_same_niche": 9780,
+        "cross_lineage_cross_ecotype": 8649,
+        "cross_ecotype": 12685,
+        "cross_mouth": 7777,
+        "graph": {
+          "median_lineages_with_births": 32,
+          "median_communities": 2,
+          "median_strict_communities": 32,
+          "within_lineage_birth_fraction": 0.32848796283260595
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 29,
+            "median_groups_per_window": 17,
+            "median_group_members": 27,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.89375,
+            "group_survival_to_next_window": 0.9262048192771084
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 8,
+            "median_groups_per_window": 3,
+            "median_group_members": 191,
+            "median_lineages_per_group": 23,
+            "median_external_birth_fraction": 0.7730061349693251,
+            "group_survival_to_next_window": 0.9934640522875817
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 12,
+            "median_groups_per_window": 5,
+            "median_group_members": 95,
+            "median_lineages_per_group": 14,
+            "median_external_birth_fraction": 0.8529411764705882,
+            "group_survival_to_next_window": 0.9688715953307393
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 4,
+            "median_groups_per_window": 1,
+            "median_group_members": 484,
+            "median_lineages_per_group": 6,
+            "median_external_birth_fraction": 0.07524271844660194,
+            "group_survival_to_next_window": 0.5866666666666667
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 29,
+            "median_groups_per_window": 17,
+            "median_group_members": 25,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8985507246376812,
+            "group_survival_to_next_window": 0.8861154446177847
+          }
+        }
+      },
+      {
+        "seed": 10,
+        "births": 31723,
+        "cross_lineage": 19839,
+        "cross_lineage_same_niche": 10138,
+        "cross_lineage_cross_ecotype": 9331,
+        "cross_ecotype": 13867,
+        "cross_mouth": 8117,
+        "graph": {
+          "median_lineages_with_births": 27,
+          "median_communities": 1,
+          "median_strict_communities": 25,
+          "within_lineage_birth_fraction": 0.3746177852031649
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 19,
+            "median_groups_per_window": 15,
+            "median_group_members": 36,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8888888888888888,
+            "group_survival_to_next_window": 0.9423791821561338
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 3,
+            "median_groups_per_window": 3,
+            "median_group_members": 389,
+            "median_lineages_per_group": 20,
+            "median_external_birth_fraction": 0.52046783625731,
+            "group_survival_to_next_window": 0.9907407407407407
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 4,
+            "median_groups_per_window": 3,
+            "median_group_members": 369,
+            "median_lineages_per_group": 13,
+            "median_external_birth_fraction": 0.543859649122807,
+            "group_survival_to_next_window": 0.9754098360655737
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 5,
+            "median_groups_per_window": 1,
+            "median_group_members": 850,
+            "median_lineages_per_group": 15,
+            "median_external_birth_fraction": 0.01951219512195122,
+            "group_survival_to_next_window": 0.7704918032786885
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 19,
+            "median_groups_per_window": 15,
+            "median_group_members": 32,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8918918918918919,
+            "group_survival_to_next_window": 0.907843137254902
+          }
+        }
+      },
+      {
+        "seed": 11,
+        "births": 33435,
+        "cross_lineage": 12790,
+        "cross_lineage_same_niche": 6802,
+        "cross_lineage_cross_ecotype": 5895,
+        "cross_ecotype": 15092,
+        "cross_mouth": 9720,
+        "graph": {
+          "median_lineages_with_births": 13,
+          "median_communities": 1,
+          "median_strict_communities": 12,
+          "within_lineage_birth_fraction": 0.6174667264842231
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 10,
+            "median_groups_per_window": 7,
+            "median_group_members": 36,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8771929824561403,
+            "group_survival_to_next_window": 0.9342560553633218
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 3,
+            "median_groups_per_window": 3,
+            "median_group_members": 461,
+            "median_lineages_per_group": 11,
+            "median_external_birth_fraction": 0.6308851224105462,
+            "group_survival_to_next_window": 1
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 6,
+            "median_groups_per_window": 4,
+            "median_group_members": 242,
+            "median_lineages_per_group": 8,
+            "median_external_birth_fraction": 0.7292225201072386,
+            "group_survival_to_next_window": 0.9714285714285714
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 2,
+            "median_groups_per_window": 1,
+            "median_group_members": 1146,
+            "median_lineages_per_group": 12,
+            "median_external_birth_fraction": 0.0066815144766146995,
+            "group_survival_to_next_window": 0.8913043478260869
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 10,
+            "median_groups_per_window": 7,
+            "median_group_members": 32,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8787878787878788,
+            "group_survival_to_next_window": 0.9033457249070632
+          }
+        }
+      },
+      {
+        "seed": 12,
+        "births": 28653,
+        "cross_lineage": 11012,
+        "cross_lineage_same_niche": 5855,
+        "cross_lineage_cross_ecotype": 5102,
+        "cross_ecotype": 12259,
+        "cross_mouth": 8656,
+        "graph": {
+          "median_lineages_with_births": 8,
+          "median_communities": 1,
+          "median_strict_communities": 6,
+          "within_lineage_birth_fraction": 0.6156772414755872
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 13,
+            "median_groups_per_window": 4,
+            "median_group_members": 29,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8366533864541833,
+            "group_survival_to_next_window": 0.9794238683127572
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 6,
+            "median_groups_per_window": 2,
+            "median_group_members": 432,
+            "median_lineages_per_group": 10,
+            "median_external_birth_fraction": 0.559322033898305,
+            "group_survival_to_next_window": 1
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 7,
+            "median_groups_per_window": 3,
+            "median_group_members": 346,
+            "median_lineages_per_group": 6,
+            "median_external_birth_fraction": 0.5699208443271768,
+            "group_survival_to_next_window": 0.9777777777777777
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 1,
+            "median_groups_per_window": 1,
+            "median_group_members": 1022,
+            "median_lineages_per_group": 8,
+            "median_external_birth_fraction": 0.0026845637583892616,
+            "group_survival_to_next_window": 1
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 13,
+            "median_groups_per_window": 3,
+            "median_group_members": 24,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8607594936708861,
+            "group_survival_to_next_window": 0.9471153846153846
+          }
+        }
+      },
+      {
+        "seed": 13,
+        "births": 25730,
+        "cross_lineage": 17068,
+        "cross_lineage_same_niche": 8148,
+        "cross_lineage_cross_ecotype": 8306,
+        "cross_ecotype": 12181,
+        "cross_mouth": 8503,
+        "graph": {
+          "median_lineages_with_births": 39,
+          "median_communities": 1,
+          "median_strict_communities": 38,
+          "within_lineage_birth_fraction": 0.33664982510687913
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 36,
+            "median_groups_per_window": 15,
+            "median_group_members": 18,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.9259259259259259,
+            "group_survival_to_next_window": 0.9004329004329005
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 7,
+            "median_groups_per_window": 6,
+            "median_group_members": 164,
+            "median_lineages_per_group": 20,
+            "median_external_birth_fraction": 0.7951807228915663,
+            "group_survival_to_next_window": 0.9954337899543378
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 10,
+            "median_groups_per_window": 8,
+            "median_group_members": 101,
+            "median_lineages_per_group": 13,
+            "median_external_birth_fraction": 0.847682119205298,
+            "group_survival_to_next_window": 0.9783950617283951
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 5,
+            "median_groups_per_window": 1,
+            "median_group_members": 780,
+            "median_lineages_per_group": 24,
+            "median_external_birth_fraction": 0.028409090909090908,
+            "group_survival_to_next_window": 0.75
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 35,
+            "median_groups_per_window": 14,
+            "median_group_members": 17,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.9259259259259259,
+            "group_survival_to_next_window": 0.8445121951219512
+          }
+        }
+      },
+      {
+        "seed": 14,
+        "births": 26459,
+        "cross_lineage": 13094,
+        "cross_lineage_same_niche": 6966,
+        "cross_lineage_cross_ecotype": 6048,
+        "cross_ecotype": 11890,
+        "cross_mouth": 8348,
+        "graph": {
+          "median_lineages_with_births": 13,
+          "median_communities": 1,
+          "median_strict_communities": 12,
+          "within_lineage_birth_fraction": 0.505121130806153
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 18,
+            "median_groups_per_window": 7,
+            "median_group_members": 42,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8787878787878788,
+            "group_survival_to_next_window": 0.9450867052023122
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 6,
+            "median_groups_per_window": 2,
+            "median_group_members": 280,
+            "median_lineages_per_group": 17,
+            "median_external_birth_fraction": 0.6967930029154519,
+            "group_survival_to_next_window": 1
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 8,
+            "median_groups_per_window": 4,
+            "median_group_members": 190,
+            "median_lineages_per_group": 11,
+            "median_external_birth_fraction": 0.75,
+            "group_survival_to_next_window": 0.9837837837837838
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 2,
+            "median_groups_per_window": 1,
+            "median_group_members": 895,
+            "median_lineages_per_group": 12,
+            "median_external_birth_fraction": 0.005434782608695652,
+            "group_survival_to_next_window": 0.9782608695652174
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 18,
+            "median_groups_per_window": 6,
+            "median_group_members": 33,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8846153846153846,
+            "group_survival_to_next_window": 0.9096209912536443
+          }
+        }
+      },
+      {
+        "seed": 15,
+        "births": 29942,
+        "cross_lineage": 13727,
+        "cross_lineage_same_niche": 6704,
+        "cross_lineage_cross_ecotype": 6887,
+        "cross_ecotype": 14586,
+        "cross_mouth": 10228,
+        "graph": {
+          "median_lineages_with_births": 10,
+          "median_communities": 1,
+          "median_strict_communities": 9,
+          "within_lineage_birth_fraction": 0.5415469908489747
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 10,
+            "median_groups_per_window": 7,
+            "median_group_members": 50,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8823529411764706,
+            "group_survival_to_next_window": 0.966789667896679
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 4,
+            "median_groups_per_window": 3,
+            "median_group_members": 338,
+            "median_lineages_per_group": 7,
+            "median_external_birth_fraction": 0.7090909090909091,
+            "group_survival_to_next_window": 0.9915254237288136
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 7,
+            "median_groups_per_window": 6,
+            "median_group_members": 183,
+            "median_lineages_per_group": 6,
+            "median_external_birth_fraction": 0.8178807947019867,
+            "group_survival_to_next_window": 0.967741935483871
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 2,
+            "median_groups_per_window": 1,
+            "median_group_members": 1099,
+            "median_lineages_per_group": 10,
+            "median_external_birth_fraction": 0.0025,
+            "group_survival_to_next_window": 0.9361702127659575
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 9,
+            "median_groups_per_window": 6,
+            "median_group_members": 36,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8987341772151899,
+            "group_survival_to_next_window": 0.9247787610619469
+          }
+        }
+      },
+      {
+        "seed": 16,
+        "births": 30347,
+        "cross_lineage": 15253,
+        "cross_lineage_same_niche": 8608,
+        "cross_lineage_cross_ecotype": 6594,
+        "cross_ecotype": 12651,
+        "cross_mouth": 6264,
+        "graph": {
+          "median_lineages_with_births": 16,
+          "median_communities": 1,
+          "median_strict_communities": 15,
+          "within_lineage_birth_fraction": 0.4973803011829835
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 13,
+            "median_groups_per_window": 9,
+            "median_group_members": 53,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8734693877551021,
+            "group_survival_to_next_window": 0.9662576687116564
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 3,
+            "median_groups_per_window": 1,
+            "median_group_members": 931,
+            "median_lineages_per_group": 15,
+            "median_external_birth_fraction": 0,
+            "group_survival_to_next_window": 1
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 6,
+            "median_groups_per_window": 2,
+            "median_group_members": 199,
+            "median_lineages_per_group": 10,
+            "median_external_birth_fraction": 0.6558441558441559,
+            "group_survival_to_next_window": 0.9814814814814815
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 2,
+            "median_groups_per_window": 1,
+            "median_group_members": 1076,
+            "median_lineages_per_group": 15,
+            "median_external_birth_fraction": 0.0047169811320754715,
+            "group_survival_to_next_window": 0.9361702127659575
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 12,
+            "median_groups_per_window": 8,
+            "median_group_members": 42,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8888888888888888,
+            "group_survival_to_next_window": 0.925531914893617
+          }
+        }
+      },
+      {
+        "seed": 17,
+        "births": 31312,
+        "cross_lineage": 11215,
+        "cross_lineage_same_niche": 6252,
+        "cross_lineage_cross_ecotype": 4939,
+        "cross_ecotype": 12807,
+        "cross_mouth": 6094,
+        "graph": {
+          "median_lineages_with_births": 10,
+          "median_communities": 1,
+          "median_strict_communities": 9,
+          "within_lineage_birth_fraction": 0.641830608073582
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 8,
+            "median_groups_per_window": 6,
+            "median_group_members": 64,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.7248677248677249,
+            "group_survival_to_next_window": 0.9588477366255144
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 3,
+            "median_groups_per_window": 1,
+            "median_group_members": 898,
+            "median_lineages_per_group": 11,
+            "median_external_birth_fraction": 0,
+            "group_survival_to_next_window": 1
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 6,
+            "median_groups_per_window": 2,
+            "median_group_members": 262,
+            "median_lineages_per_group": 8,
+            "median_external_birth_fraction": 0.5142857142857142,
+            "group_survival_to_next_window": 1
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 1,
+            "median_groups_per_window": 1,
+            "median_group_members": 1119,
+            "median_lineages_per_group": 10,
+            "median_external_birth_fraction": 0.0048367593712212815,
+            "group_survival_to_next_window": 0.9333333333333333
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 8,
+            "median_groups_per_window": 5,
+            "median_group_members": 38,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.75,
+            "group_survival_to_next_window": 0.9227053140096618
+          }
+        }
+      },
+      {
+        "seed": 18,
+        "births": 28794,
+        "cross_lineage": 14139,
+        "cross_lineage_same_niche": 8044,
+        "cross_lineage_cross_ecotype": 6047,
+        "cross_ecotype": 11683,
+        "cross_mouth": 7265,
+        "graph": {
+          "median_lineages_with_births": 12,
+          "median_communities": 1,
+          "median_strict_communities": 10,
+          "within_lineage_birth_fraction": 0.5089602000416753
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 13,
+            "median_groups_per_window": 8,
+            "median_group_members": 46,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8543689320388349,
+            "group_survival_to_next_window": 0.9511400651465798
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 4,
+            "median_groups_per_window": 1,
+            "median_group_members": 638,
+            "median_lineages_per_group": 16,
+            "median_external_birth_fraction": 0.002894356005788712,
+            "group_survival_to_next_window": 1
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 6,
+            "median_groups_per_window": 2,
+            "median_group_members": 374,
+            "median_lineages_per_group": 11,
+            "median_external_birth_fraction": 0.4752475247524752,
+            "group_survival_to_next_window": 0.9915254237288136
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 1,
+            "median_groups_per_window": 1,
+            "median_group_members": 1023,
+            "median_lineages_per_group": 11,
+            "median_external_birth_fraction": 0.005788712011577424,
+            "group_survival_to_next_window": 0.9777777777777777
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 14,
+            "median_groups_per_window": 6,
+            "median_group_members": 37,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.875,
+            "group_survival_to_next_window": 0.9350180505415162
+          }
+        }
+      },
+      {
+        "seed": 19,
+        "births": 26985,
+        "cross_lineage": 18092,
+        "cross_lineage_same_niche": 8989,
+        "cross_lineage_cross_ecotype": 8781,
+        "cross_ecotype": 12335,
+        "cross_mouth": 9086,
+        "graph": {
+          "median_lineages_with_births": 30,
+          "median_communities": 1,
+          "median_strict_communities": 27,
+          "within_lineage_birth_fraction": 0.32955345562349453
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 23,
+            "median_groups_per_window": 17,
+            "median_group_members": 30,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8888888888888888,
+            "group_survival_to_next_window": 0.9535603715170279
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 5,
+            "median_groups_per_window": 4,
+            "median_group_members": 190,
+            "median_lineages_per_group": 13,
+            "median_external_birth_fraction": 0.7058823529411765,
+            "group_survival_to_next_window": 0.9874213836477987
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 8,
+            "median_groups_per_window": 6,
+            "median_group_members": 103,
+            "median_lineages_per_group": 9,
+            "median_external_birth_fraction": 0.8222222222222222,
+            "group_survival_to_next_window": 0.9504132231404959
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 4,
+            "median_groups_per_window": 1,
+            "median_group_members": 588,
+            "median_lineages_per_group": 12,
+            "median_external_birth_fraction": 0.06675938803894298,
+            "group_survival_to_next_window": 0.6811594202898551
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 23,
+            "median_groups_per_window": 18,
+            "median_group_members": 29,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8904109589041096,
+            "group_survival_to_next_window": 0.9246794871794872
+          }
+        }
+      },
+      {
+        "seed": 20,
+        "births": 30088,
+        "cross_lineage": 18223,
+        "cross_lineage_same_niche": 9620,
+        "cross_lineage_cross_ecotype": 8491,
+        "cross_ecotype": 13794,
+        "cross_mouth": 9406,
+        "graph": {
+          "median_lineages_with_births": 28,
+          "median_communities": 1,
+          "median_strict_communities": 25,
+          "within_lineage_birth_fraction": 0.3943432597713374
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 24,
+            "median_groups_per_window": 18,
+            "median_group_members": 24,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.9,
+            "group_survival_to_next_window": 0.9475357710651828
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 4,
+            "median_groups_per_window": 1,
+            "median_group_members": 481,
+            "median_lineages_per_group": 26,
+            "median_external_birth_fraction": 0.5891089108910891,
+            "group_survival_to_next_window": 0.9873417721518988
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 7,
+            "median_groups_per_window": 2,
+            "median_group_members": 265,
+            "median_lineages_per_group": 19,
+            "median_external_birth_fraction": 0.7096774193548387,
+            "group_survival_to_next_window": 0.9790209790209791
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 5,
+            "median_groups_per_window": 1,
+            "median_group_members": 786,
+            "median_lineages_per_group": 6,
+            "median_external_birth_fraction": 0.058902275769745646,
+            "group_survival_to_next_window": 0.6301369863013698
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 24,
+            "median_groups_per_window": 17,
+            "median_group_members": 23,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.9,
+            "group_survival_to_next_window": 0.9203980099502488
+          }
+        }
+      },
+      {
+        "seed": 21,
+        "births": 27028,
+        "cross_lineage": 10029,
+        "cross_lineage_same_niche": 5319,
+        "cross_lineage_cross_ecotype": 4684,
+        "cross_ecotype": 11506,
+        "cross_mouth": 7840,
+        "graph": {
+          "median_lineages_with_births": 11,
+          "median_communities": 1,
+          "median_strict_communities": 10,
+          "within_lineage_birth_fraction": 0.6289403581471067
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 15,
+            "median_groups_per_window": 8,
+            "median_group_members": 34,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8333333333333334,
+            "group_survival_to_next_window": 0.9711538461538461
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 4,
+            "median_groups_per_window": 1,
+            "median_group_members": 555,
+            "median_lineages_per_group": 16,
+            "median_external_birth_fraction": 0.34724540901502504,
+            "group_survival_to_next_window": 1
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 6,
+            "median_groups_per_window": 2,
+            "median_group_members": 326,
+            "median_lineages_per_group": 9,
+            "median_external_birth_fraction": 0.5419664268585132,
+            "group_survival_to_next_window": 0.9814814814814815
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 2,
+            "median_groups_per_window": 1,
+            "median_group_members": 862,
+            "median_lineages_per_group": 11,
+            "median_external_birth_fraction": 0.00663716814159292,
+            "group_survival_to_next_window": 0.8979591836734694
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 15,
+            "median_groups_per_window": 7,
+            "median_group_members": 34,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8351648351648352,
+            "group_survival_to_next_window": 0.9364548494983278
+          }
+        }
+      },
+      {
+        "seed": 22,
+        "births": 28404,
+        "cross_lineage": 18282,
+        "cross_lineage_same_niche": 9347,
+        "cross_lineage_cross_ecotype": 8692,
+        "cross_ecotype": 13198,
+        "cross_mouth": 8975,
+        "graph": {
+          "median_lineages_with_births": 30,
+          "median_communities": 1,
+          "median_strict_communities": 29,
+          "within_lineage_birth_fraction": 0.3563582594000845
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 27,
+            "median_groups_per_window": 14,
+            "median_group_members": 29,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8958333333333334,
+            "group_survival_to_next_window": 0.96
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 6,
+            "median_groups_per_window": 3,
+            "median_group_members": 241,
+            "median_lineages_per_group": 19,
+            "median_external_birth_fraction": 0.6314285714285715,
+            "group_survival_to_next_window": 1
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 10,
+            "median_groups_per_window": 6,
+            "median_group_members": 100,
+            "median_lineages_per_group": 13,
+            "median_external_birth_fraction": 0.7755102040816326,
+            "group_survival_to_next_window": 0.9698275862068966
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 4,
+            "median_groups_per_window": 1,
+            "median_group_members": 651,
+            "median_lineages_per_group": 8,
+            "median_external_birth_fraction": 0.03389830508474576,
+            "group_survival_to_next_window": 0.703125
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 27,
+            "median_groups_per_window": 14,
+            "median_group_members": 29,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.8947368421052632,
+            "group_survival_to_next_window": 0.9107142857142857
+          }
+        }
+      },
+      {
+        "seed": 23,
+        "births": 28309,
+        "cross_lineage": 14859,
+        "cross_lineage_same_niche": 8515,
+        "cross_lineage_cross_ecotype": 6259,
+        "cross_ecotype": 11663,
+        "cross_mouth": 6643,
+        "graph": {
+          "median_lineages_with_births": 17,
+          "median_communities": 1,
+          "median_strict_communities": 14,
+          "within_lineage_birth_fraction": 0.4751139213677629
+        },
+        "semantics": {
+          "A_lineage": {
+            "candidates": 0,
+            "max_concurrent_groups": 18,
+            "median_groups_per_window": 8,
+            "median_group_members": 26,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.9047619047619048,
+            "group_survival_to_next_window": 0.9389671361502347
+          },
+          "B_genetic": {
+            "candidates": 0,
+            "max_concurrent_groups": 2,
+            "median_groups_per_window": 2,
+            "median_group_members": 414,
+            "median_lineages_per_group": 14,
+            "median_external_birth_fraction": 0.3194444444444444,
+            "group_survival_to_next_window": 1
+          },
+          "C_genetic_mouth": {
+            "candidates": 0,
+            "max_concurrent_groups": 4,
+            "median_groups_per_window": 3,
+            "median_group_members": 189,
+            "median_lineages_per_group": 7,
+            "median_external_birth_fraction": 0.7106598984771574,
+            "group_survival_to_next_window": 0.9647887323943662
+          },
+          "D_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 2,
+            "median_groups_per_window": 1,
+            "median_group_members": 1021,
+            "median_lineages_per_group": 14,
+            "median_external_birth_fraction": 0.007374631268436578,
+            "group_survival_to_next_window": 0.9148936170212766
+          },
+          "D_strict_community": {
+            "candidates": 0,
+            "max_concurrent_groups": 17,
+            "median_groups_per_window": 8,
+            "median_group_members": 25,
+            "median_lineages_per_group": 1,
+            "median_external_birth_fraction": 0.9090909090909091,
+            "group_survival_to_next_window": 0.9116161616161617
+          }
+        }
+      }
+    ],
+    "definitions": "Post-warmup windows only. A counterfactual species candidate is a group with >=8 members and >=8 births involving it whose cross-group births are <=20% (unchanged threshold), whose centroid is >=100 genome distance from another concurrent group with >=8 members, in >=2 consecutive 1000-tick windows under the same group id. The same rule is applied to every semantic; no species are created. Same-niche: same mouth and lifetime diet role, morphology distance <150, genome distance <100."
+  },
+  "single_window_isolation_without_persistence": {
+    "A_lineage": {
+      "group_windows": 10451,
+      "isolated": 175,
+      "isolated_and_divergent": 0,
+      "external_p5": 0.535483870967742,
+      "external_p25": 0.7914438502673797,
+      "external_median": 0.8875
+    },
+    "B_genetic": {
+      "group_windows": 2579,
+      "isolated": 533,
+      "isolated_and_divergent": 0,
+      "external_p5": 0,
+      "external_p25": 0.3142857142857143,
+      "external_median": 0.65625
+    },
+    "C_genetic_mouth": {
+      "group_windows": 4308,
+      "isolated": 21,
+      "isolated_and_divergent": 0,
+      "external_p5": 0.3320079522862823,
+      "external_p25": 0.5869565217391305,
+      "external_median": 0.7463768115942029
+    },
+    "D_community": {
+      "group_windows": 1301,
+      "isolated": 1066,
+      "isolated_and_divergent": 0,
+      "external_p5": 0,
+      "external_p25": 0.0035087719298245615,
+      "external_median": 0.012129380053908356
+    },
+    "D_strict_community": {
+      "group_windows": 9798,
+      "isolated": 281,
+      "isolated_and_divergent": 0,
+      "external_p5": 0.3710801393728223,
+      "external_p25": 0.7945205479452054,
+      "external_median": 0.8904109589041096
+    }
+  },
+  "decision": "No grouping semantic yields an isolated, divergent population; current species gate kept unchanged; no authoritative candidate run.",
+  "stage": "Diagnostics only; R3 authority unchanged",
+  "executable_note": "Rebuilt after a type-alias-only clippy fix; its output is byte-identical to the archived JSON."
+}

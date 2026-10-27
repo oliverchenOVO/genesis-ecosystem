@@ -29,3 +29,7 @@ required-features = ["viability"]
 [[example]]
 name = "mate-ecology"
 required-features = ["viability"]
+
+[[example]]
+name = "population-semantics"
+required-features = ["viability"]
